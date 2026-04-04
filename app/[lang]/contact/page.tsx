@@ -1,3 +1,5 @@
+import ContactForm from './ContactForm';
+
 export default async function Contact({ params }: { params: Promise<{ lang: string }> }) {
   const lang = (await params).lang as 'zh' | 'en' | 'ja';
   
@@ -13,21 +15,7 @@ export default async function Contact({ params }: { params: Promise<{ lang: stri
       <h2 className="section-title">{t.title}</h2>
       <div className="contact-card">
         <h3 className="service-title">{t.desc}</h3>
-        <form className="contact-form" style={{ marginTop: '2rem' }}>
-          <div className="form-group">
-            <label htmlFor="name">{t.name}</label>
-            <input type="text" id="name" required />
-          </div>
-          <div className="form-group">
-            <label htmlFor="email">{t.email}</label>
-            <input type="email" id="email" required />
-          </div>
-          <div className="form-group">
-            <label htmlFor="message">{t.msg}</label>
-            <textarea id="message" rows={5} required></textarea>
-          </div>
-          <button type="submit" className="submit-btn">{t.send}</button>
-        </form>
+        <ContactForm t={t} />
       </div>
     </section>
   );

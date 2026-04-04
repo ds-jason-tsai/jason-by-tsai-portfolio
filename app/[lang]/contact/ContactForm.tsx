@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { useRouter, useParams } from 'next/navigation';
 
 interface ContactFormProps {
   t: {
@@ -13,6 +14,9 @@ interface ContactFormProps {
 
 export default function ContactForm({ t }: ContactFormProps) {
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
+  const router = useRouter();
+  const params = useParams();
+  const lang = params.lang as string;
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -33,6 +37,11 @@ export default function ContactForm({ t }: ContactFormProps) {
       if (response.ok) {
         setStatus('success');
         form.reset();
+        
+        // 成功後延遲 2 秒跳轉回首頁，讓使用者看到成功訊息
+        setTimeout(() => {
+          router.push(`/${lang}`);
+        }, 2000);
       } else {
         setStatus('error');
       }

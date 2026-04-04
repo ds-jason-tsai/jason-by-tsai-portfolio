@@ -20,6 +20,8 @@ export async function generateStaticParams() {
    return [{ lang: 'zh' }, { lang: 'en' }, { lang: 'ja' }];
 }
 
+import NavLink from './components/NavLink';
+
 export default async function RootLayout({
   children,
   params,
@@ -49,12 +51,12 @@ export default async function RootLayout({
               <Link href={`/${lang}`}>Jason Tsai.</Link>
             </div>
             <div className="nav-links" style={{ display: 'flex', alignItems: 'center', position: 'relative' }}>
-              <Link href={`/${lang}`}>{dict.nav.home}</Link>
-              <Link href={`/${lang}/services`}>{dict.nav.services}</Link>
-              <Link href={`/${lang}/portfolio`}>{dict.nav.portfolio}</Link>
-              <Link href={`/${lang}/articles`}>{dict.nav.articles}</Link>
-              <Link href={`/${lang}/experience`}>{dict.nav.experience}</Link>
-              <Link href={`/${lang}/contact`}>{dict.nav.contact}</Link>
+              <NavLink lang={lang} href={`/${lang}`}>{dict.nav.home}</NavLink>
+              <NavLink lang={lang} href={`/${lang}/services`}>{dict.nav.services}</NavLink>
+              <NavLink lang={lang} href={`/${lang}/portfolio`}>{dict.nav.portfolio}</NavLink>
+              <NavLink lang={lang} href={`/${lang}/articles`}>{dict.nav.articles}</NavLink>
+              <NavLink lang={lang} href={`/${lang}/experience`}>{dict.nav.experience}</NavLink>
+              <NavLink lang={lang} href={`/${lang}/contact`}>{dict.nav.contact}</NavLink>
               
               {/* Language Switcher */}
               <details 

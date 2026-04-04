@@ -1,3 +1,5 @@
+import Link from 'next/link';
+
 export default async function Services({ params }: { params: Promise<{ lang: string }> }) {
   const lang = (await params).lang as 'zh' | 'en' | 'ja';
   
@@ -38,11 +40,13 @@ export default async function Services({ params }: { params: Promise<{ lang: str
       <h2 className="section-title">{t.title}</h2>
       <div className="services-grid" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))' }}>
         {t.services.map((svc, idx) => (
-          <div className="service-card" key={idx}>
-            <div className="service-icon">{svc.icon}</div>
-            <h3 className="service-title">{svc.name}</h3>
-            <p className="service-desc">{svc.desc}</p>
-          </div>
+          <Link href={`/${lang}/contact`} key={idx} style={{ textDecoration: 'none', color: 'inherit' }}>
+            <div className="service-card" style={{ cursor: 'pointer', height: '100%' }}>
+              <div className="service-icon">{svc.icon}</div>
+              <h3 className="service-title">{svc.name}</h3>
+              <p className="service-desc">{svc.desc}</p>
+            </div>
+          </Link>
         ))}
       </div>
     </section>

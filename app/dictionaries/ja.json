@@ -1,0 +1,14 @@
+{
+  "nav": {
+    "services": "サービス",
+    "portfolio": "ポートフォリオ",
+    "experience": "職歴(経験)",
+    "contact": "お問い合わせ"
+  },
+  "home": {
+    "title": "こんにちは、Jasonです",
+    "subtitle": "データアナリスト / MarTech 専門家",
+    "description": "複雑なデータを実用的なインサイトに変換します。CDP、データ視覚化(Tableau)、MarTechの専門知識を活かし、企業の確かな成長を促進します。",
+    "cta": "お問い合わせ"
+  }
+}

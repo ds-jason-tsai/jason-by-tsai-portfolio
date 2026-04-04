@@ -1,0 +1,14 @@
+{
+  "nav": {
+    "services": "四大服務",
+    "portfolio": "作品集",
+    "experience": "完整經歷",
+    "contact": "聯絡我"
+  },
+  "home": {
+    "title": "Hi, 我是 Jason",
+    "subtitle": "資料分析師 / MarTech 專家",
+    "description": "將複雜數據轉化為具體行動方案。專精於顧客資料平台 (CDP)、數據視覺化 (Tableau) 與數位行銷科技，為企業驅動實質成長。",
+    "cta": "與我合作"
+  }
+}

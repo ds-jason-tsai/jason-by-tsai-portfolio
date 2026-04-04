@@ -10,6 +10,9 @@ const geistMono = Geist_Mono({ variable: "--font-geist-mono", subsets: ["latin"]
 export const metadata: Metadata = {
   title: "Jason Tsai | Data Analyst",
   description: "Portfolio of Jason Tsai",
+  verification: {
+    google: "QTIRGrJx67BIEr6FwZpodhAMNjYA01zw2g5-zE7GzNQ",
+  },
 };
 
 export async function generateStaticParams() {

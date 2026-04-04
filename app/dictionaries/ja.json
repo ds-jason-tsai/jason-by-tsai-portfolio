@@ -1,14 +1,17 @@
 {
   "nav": {
+    "home": "ホーム",
     "services": "サービス",
     "portfolio": "ポートフォリオ",
-    "experience": "職歴(経験)",
+    "articles": "記事一覧",
+    "experience": "経験",
     "contact": "お問い合わせ"
   },
   "home": {
-    "title": "こんにちは、Jasonです",
-    "subtitle": "データアナリスト / MarTech 専門家",
-    "description": "複雑なデータを実用的なインサイトに変換します。CDP、データ視覚化(Tableau)、MarTechの専門知識を活かし、企業の確かな成長を促進します。",
-    "cta": "お問い合わせ"
+    "title": "百聞は一見に如かず (一図千言)",
+    "subtitle": "データと視覚化の通訳者、Jason Tsai です",
+    "description": "國泰人寿 (Cathay Life) のデータアナリストとして、InsurTech、FinTech、自動化クローリング分析を専門としています。「Chart Bar (視吧)」を運営し、データ視覚化を通じて時事問題を解釈し、複雑な情報を直感的な洞察に変えることに尽力しています。",
+    "cta": "プロジェクトを見る",
+    "contact_cta": "お問い合わせ"
   }
 }

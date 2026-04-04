@@ -1,14 +1,17 @@
 {
   "nav": {
-    "services": "四大服務",
+    "home": "首頁",
+    "services": "服務項目",
     "portfolio": "作品集",
-    "experience": "完整經歷",
+    "articles": "文章專區",
+    "experience": "經歷",
     "contact": "聯絡我"
   },
   "home": {
-    "title": "Hi, 我是 Jason",
-    "subtitle": "資料分析師 / MarTech 專家",
-    "description": "將複雜數據轉化為具體行動方案。專精於顧客資料平台 (CDP)、數據視覺化 (Tableau) 與數位行銷科技，為企業驅動實質成長。",
-    "cta": "與我合作"
+    "title": "一張圖勝過千言萬語",
+    "subtitle": "我是 Jason Tsai，數據與視覺的譯者",
+    "description": "目前於國泰人壽 (Cathay Life) 擔任數據分析師，專精於 InsurTech、FinTech 與自動化爬蟲分析。同時經營「Chart Bar 視吧」，致力於用數據看時事，將複雜資訊轉化為直覺的洞察。",
+    "cta": "探索專案作品",
+    "contact_cta": "立即聯絡"
   }
 }

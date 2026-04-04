@@ -19,9 +19,9 @@ export default async function Portfolio({ params }: { params: Promise<{ lang: st
         ja: "グローバル補完的健康・生命保険市場におけるAflacの成功要因の徹底研究。独自の代理店モデルと、NAYYA（AIレコメンデーション）、SKYGEN、EmpathyなどのInsurTechパートナーとの統合によるデジタルトランスフォーメーションを分析。"
       },
       tags: {
-        zh: ["#保險分析", "#InsurTech", "#財務建模", "#策略研究", "#案例分析"],
-        en: ["#Aflac", "#InsurTech", "#FinancialModeling", "#Strategy", "#CaseStudy"],
-        ja: ["#保険分析", "#インシュアテック", "#財務モデリング", "#戦略研究", "#ケーススタディ"]
+        zh: ["#國泰人壽", "#InsurTech", "#保險科技", "#財務建模", "#CDP"],
+        en: ["#CathayLife", "#InsurTech", "#InsuranceTech", "#FinancialModeling", "#CDP"],
+        ja: ["#國泰人寿", "#インシュアテック", "#保険テック", "#財務モデリング", "#CDP"]
       }
     },
     { 
@@ -34,9 +34,9 @@ export default async function Portfolio({ params }: { params: Promise<{ lang: st
         ja: "ビジネス分析に不可欠な40以上のチャートを厳選。基本的なトレンドから高度な技術的管理図まで、データ分析者が即座に最適な視覚化ツールを選択するための明確な基準を提供します。"
       },
       tags: {
-        zh: ["#數據視覺化", "#商業智慧", "#圖表選擇", "#視覺敘事", "#分析工具"],
-        en: ["#DataViz", "#BI", "#DataStorytelling", "#ChartSelection", "#Analytics"],
-        ja: ["#データ可視化", "#BI", "#チャート選択", "#ストーリーテリング", "#分析ツール"]
+        zh: ["#ChartBar", "#數據視覺化", "#Tableau", "#視覺敘事", "#分析工具"],
+        en: ["#ChartBar", "#DataViz", "#Tableau", "#VisualStorytelling", "#AnalyticsTool"],
+        ja: ["#ChartBar", "#データ可視化", "#Tableau", "#ストーリーテリング", "#分析ツール"]
       }
     }
   ];

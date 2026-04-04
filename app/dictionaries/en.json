@@ -1,14 +1,17 @@
 {
   "nav": {
+    "home": "Home",
     "services": "Services",
     "portfolio": "Portfolio",
+    "articles": "Articles",
     "experience": "Experience",
     "contact": "Contact"
   },
   "home": {
-    "title": "Hi, I'm Jason",
-    "subtitle": "Data Analyst / MarTech Expert",
-    "description": "Transforming complex data into actionable insights. Expert in Customer Data Platforms (CDP), data visualization (Tableau), and MarTech to drive real business growth.",
-    "cta": "Let's Work Together"
+    "title": "A Picture is Worth a Thousand Words",
+    "subtitle": "I'm Jason Tsai, Data & Visualization Interpreter",
+    "description": "Data Analyst at Cathay Life Insurance, specializing in FinTech, InsurTech, and web automation. Founder of 'Chart Bar', dedicated to interpreting social trends through data visualization and intuitive insights.",
+    "cta": "Explore Projects",
+    "contact_cta": "Get in Touch"
   }
 }

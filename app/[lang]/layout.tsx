@@ -49,8 +49,10 @@ export default async function RootLayout({
               <Link href={`/${lang}`}>Jason Tsai.</Link>
             </div>
             <div className="nav-links" style={{ display: 'flex', alignItems: 'center', position: 'relative' }}>
+              <Link href={`/${lang}`}>{dict.nav.home}</Link>
               <Link href={`/${lang}/services`}>{dict.nav.services}</Link>
               <Link href={`/${lang}/portfolio`}>{dict.nav.portfolio}</Link>
+              <Link href={`/${lang}/articles`}>{dict.nav.articles}</Link>
               <Link href={`/${lang}/experience`}>{dict.nav.experience}</Link>
               <Link href={`/${lang}/contact`}>{dict.nav.contact}</Link>
               

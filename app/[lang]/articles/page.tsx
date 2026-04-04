@@ -42,7 +42,7 @@ export default async function Articles({ params }: { params: Promise<{ lang: str
         en: ["#DataViz", "#Tableau", "#Storytelling"],
         ja: ["#データ視覚化", "#Tableau", "#ストーリーテリング"]
       },
-      link: "https://www.instagram.com/chartbar0713/" // Updated to Instagram
+      link: "https://www.instagram.com/p/CiPrb9nLhXF/" // Specific post: Chart Selection Guide
     },
     {
       id: "insurtech-transformation",
@@ -62,7 +62,7 @@ export default async function Articles({ params }: { params: Promise<{ lang: str
         en: ["#InsurTech", "#DigitalTransformation", "#BigData"],
         ja: ["#インシュアテック", "#デジタルトランスフォーメーション", "#ビッグデータ"]
       },
-      link: "https://www.instagram.com/chartbar0713/" // Updated to Instagram
+      link: "https://www.instagram.com/p/CgMT-RbJOM9/" // Specific post: Industry Analysis
     }
   ];
 

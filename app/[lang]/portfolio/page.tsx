@@ -10,14 +10,34 @@ export default async function Portfolio({ params }: { params: Promise<{ lang: st
 
   const projects = [
     { 
-      title: { zh: "保險公司研究(AFLAC)", en: "AFLAC Insurance Research", ja: "AFLAC保険会社研究" }, 
+      title: { zh: "保險公司研究 (Aflac)", en: "Aflac Insurance Research", ja: "Aflac 保険会社戦略研究" }, 
       type: 2, 
-      url: "https://drive.google.com/file/d/1EQiMMQfrRplLjNljCLiQWHUxQ121xxDL/view?usp=drive_link" 
+      url: "https://drive.google.com/file/d/1EQiMMQfrRplLjNljCLiQWHUxQ121xxDL/view?usp=drive_link",
+      description: {
+        zh: "深入研究 Aflac 在全球意外與健康險市場的成功要素。分析其獨特的代理商模式，並探討如何透過整合 NAYYA (AI 推薦)、SKYGEN 與 Empathy 等 InsurTech 合作夥伴來強化數位轉型與客戶體驗。",
+        en: "In-depth research on Aflac's success in the global supplemental health insurance market. Analyzes its unique agency model and explores digital transformation through InsurTech partnerships like NAYYA (AI), SKYGEN, and Empathy.",
+        ja: "グローバル補完的健康・生命保険市場におけるAflacの成功要因の徹底研究。独自の代理店モデルと、NAYYA（AIレコメンデーション）、SKYGEN、EmpathyなどのInsurTechパートナーとの統合によるデジタルトランスフォーメーションを分析。"
+      },
+      tags: {
+        zh: ["#保險分析", "#InsurTech", "#財務建模", "#策略研究", "#案例分析"],
+        en: ["#Aflac", "#InsurTech", "#FinancialModeling", "#Strategy", "#CaseStudy"],
+        ja: ["#保険分析", "#インシュアテック", "#財務モデリング", "#戦略研究", "#ケーススタディ"]
+      }
     },
     { 
-      title: { zh: "ChartBar 圖表分析懶人包", en: "ChartBar Analysis Guide", ja: "ChartBar分析ガイド" }, 
+      title: { zh: "ChartBar 圖表分析懶人包", en: "ChartBar Analysis Cheat Sheet", ja: "ChartBar 分析チートシート" }, 
       type: 1, 
-      url: "https://drive.google.com/file/d/1T2UfuswNYamtVFWASDgXwYsdXAQs8Uhl/view?usp=drive_link" 
+      url: "https://drive.google.com/file/d/1T2UfuswNYamtVFWASDgXwYsdXAQs8Uhl/view?usp=drive_link",
+      description: {
+        zh: "精選 40+ 款必學商業圖表，提供從基礎趨勢到進階技術控制圖的完整選擇標準。旨在優化視覺傳達效率，幫助數據分析師快速為特定商業情境選擇最合適的視覺化工具。",
+        en: "A selected collection of 40+ essential business charts, providing clear selection criteria from basic trends to advanced technical control charts. Designed to optimize visual communication efficiency for data analysts.",
+        ja: "ビジネス分析に不可欠な40以上のチャートを厳選。基本的なトレンドから高度な技術的管理図まで、データ分析者が即座に最適な視覚化ツールを選択するための明確な基準を提供します。"
+      },
+      tags: {
+        zh: ["#數據視覺化", "#商業智慧", "#圖表選擇", "#視覺敘事", "#分析工具"],
+        en: ["#DataViz", "#BI", "#DataStorytelling", "#ChartSelection", "#Analytics"],
+        ja: ["#データ可視化", "#BI", "#チャート選択", "#ストーリーテリング", "#分析ツール"]
+      }
     }
   ];
 
@@ -25,21 +45,34 @@ export default async function Portfolio({ params }: { params: Promise<{ lang: st
     <section className="portfolio fade-in" style={{ padding: '0 2rem' }}>
       <h2 className="section-title">{t.title}</h2>
       <p style={{ textAlign: 'center', marginBottom: '3rem', color: 'var(--text-secondary)' }}>{t.desc}</p>
-      <div className="services-grid" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))' }}>
+      <div className="services-grid" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))' }}>
         {projects.map((proj, idx) => (
           <div className="service-card" key={idx} style={{ display: 'flex', flexDirection: 'column' }}>
             <span style={{ fontSize: '0.8rem', color: 'var(--accent-color)', fontWeight: 'bold' }}>{t.type[proj.type]}</span>
-            <h3 className="service-title" style={{ marginTop: '0.5rem', flex: 1, fontSize: '1.2rem' }}>{proj.title[lang]}</h3>
+            <h3 className="service-title" style={{ marginTop: '0.5rem', marginBottom: '1rem', fontSize: '1.3rem' }}>{proj.title[lang]}</h3>
+            
+            <p style={{ color: 'var(--text-secondary)', fontSize: '0.9rem', lineHeight: '1.6', flex: 1, marginBottom: '1.5rem' }}>
+              {proj.description[lang]}
+            </p>
+
+            <div className="tags-container">
+              {proj.tags[lang].map((tag, tIdx) => (
+                <span key={tIdx} className="tag">{tag}</span>
+              ))}
+            </div>
+
             {/* Download Link pointing to Google Drive */}
-            {proj.url ? (
-              <a href={proj.url} target="_blank" rel="noopener noreferrer" className="btn-primary" style={{ textAlign: 'center', padding: '0.5rem 1rem', marginTop: '1.5rem', fontSize: '0.9rem' }}>
-                {t.btn}
-              </a>
-            ) : (
-               <button className="btn-primary" style={{ textAlign: 'center', padding: '0.5rem 1rem', marginTop: '1.5rem', fontSize: '0.9rem', opacity: 0.5, cursor: 'not-allowed' }} disabled>
-                 {t.pending}
-               </button>
-            )}
+            <div style={{ marginTop: '2rem' }}>
+              {proj.url ? (
+                <a href={proj.url} target="_blank" rel="noopener noreferrer" className="btn-primary" style={{ display: 'block', textAlign: 'center', padding: '0.75rem 1rem', fontSize: '0.9rem' }}>
+                  {t.btn}
+                </a>
+              ) : (
+                <button className="btn-primary" style={{ display: 'block', width: '100%', textAlign: 'center', padding: '0.75rem 1rem', fontSize: '0.9rem', opacity: 0.5, cursor: 'not-allowed' }} disabled>
+                  {t.pending}
+                </button>
+              )}
+            </div>
           </div>
         ))}
       </div>

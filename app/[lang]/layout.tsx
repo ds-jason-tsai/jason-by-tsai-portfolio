@@ -55,29 +55,29 @@ export default async function RootLayout({
               <Link href={`/${lang}/contact`}>{dict.nav.contact}</Link>
               
               {/* Language Switcher */}
-              <div 
-                className="lang-switcher cursor-pointer ml-4 flex items-center bg-zinc-800 px-3 py-1 rounded"
-                style={{ position: 'relative' }}
+              <details 
+                className="lang-switcher ml-4"
+                style={{ position: 'relative', cursor: 'pointer' }}
               >
-                <div style={{ padding: '0 5px' }}>🌐 {lang.toUpperCase()} ▼</div>
+                <summary className="bg-zinc-800 px-3 py-1 rounded flex items-center" style={{ listStyle: 'none', outline: 'none' }}>
+                  <div style={{ padding: '0 5px' }}>🌐 {lang.toUpperCase()} ▼</div>
+                </summary>
                 <div 
                    className="lang-dropdown"
                    style={{
                      position: 'absolute', top: '100%', right: 0, marginTop: '10px',
-                     display: 'flex', flexDirection: 'column',
                      background: '#1a1a1a', border: '1px solid #333', borderRadius: '8px',
                      width: '120px', zIndex: 50, overflow: 'hidden'
                    }}
                 >
-                  <a href="/zh" style={{ padding: '10px', color: '#fff', textDecoration: 'none' }}>繁體中文</a>
-                  <a href="/en" style={{ padding: '10px', color: '#fff', textDecoration: 'none' }}>English</a>
-                  <a href="/ja" style={{ padding: '10px', color: '#fff', textDecoration: 'none' }}>日本語</a>
+                  <a href="/zh" style={{ display: 'block', padding: '10px', color: '#fff', textDecoration: 'none' }}>繁體中文</a>
+                  <a href="/en" style={{ display: 'block', padding: '10px', color: '#fff', textDecoration: 'none' }}>English</a>
+                  <a href="/ja" style={{ display: 'block', padding: '10px', color: '#fff', textDecoration: 'none' }}>日本語</a>
                 </div>
-              </div>
+              </details>
 
               <style dangerouslySetInnerHTML={{__html: `
-                .lang-switcher .lang-dropdown { display: none; }
-                .lang-switcher:hover .lang-dropdown { display: flex; }
+                details.lang-switcher > summary::-webkit-details-marker { display: none; }
                 .lang-dropdown a:hover { background: #333; }
               `}}/>
 

@@ -9,12 +9,16 @@ export default async function Portfolio({ params }: { params: Promise<{ lang: st
   const t = content[lang];
 
   const projects = [
-    { title: "KOL Radar Dashboard", type: 0, url: "" },
-    { title: "Shopee Performance Dashboard", type: 0, url: "" },
-    { title: "Carrefour Forecasting Champion (家樂福)", type: 1, url: "" },
-    { title: "Cloud CDP Selection Strategy", type: 2, url: "" },
-    { title: "Cross-platform Digital Footprint", type: 2, url: "" },
-    { title: "MarTech Business Strategy", type: 1, url: "" }
+    { 
+      title: { zh: "保險公司研究(AFLAC)", en: "AFLAC Insurance Research", ja: "AFLAC保険会社研究" }, 
+      type: 2, 
+      url: "https://drive.google.com/file/d/1EQiMMQfrRplLjNljCLiQWHUxQ121xxDL/view?usp=drive_link" 
+    },
+    { 
+      title: { zh: "ChartBar 圖表分析懶人包", en: "ChartBar Analysis Guide", ja: "ChartBar分析ガイド" }, 
+      type: 1, 
+      url: "https://drive.google.com/file/d/1T2UfuswNYamtVFWASDgXwYsdXAQs8Uhl/view?usp=drive_link" 
+    }
   ];
 
   return (
@@ -25,7 +29,7 @@ export default async function Portfolio({ params }: { params: Promise<{ lang: st
         {projects.map((proj, idx) => (
           <div className="service-card" key={idx} style={{ display: 'flex', flexDirection: 'column' }}>
             <span style={{ fontSize: '0.8rem', color: 'var(--accent-color)', fontWeight: 'bold' }}>{t.type[proj.type]}</span>
-            <h3 className="service-title" style={{ marginTop: '0.5rem', flex: 1, fontSize: '1.2rem' }}>{proj.title}</h3>
+            <h3 className="service-title" style={{ marginTop: '0.5rem', flex: 1, fontSize: '1.2rem' }}>{proj.title[lang]}</h3>
             {/* Download Link pointing to Google Drive */}
             {proj.url ? (
               <a href={proj.url} target="_blank" rel="noopener noreferrer" className="btn-primary" style={{ textAlign: 'center', padding: '0.5rem 1rem', marginTop: '1.5rem', fontSize: '0.9rem' }}>

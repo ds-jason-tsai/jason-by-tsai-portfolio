@@ -26,7 +26,7 @@ export default function ContactForm({ t }: ContactFormProps) {
     const formData = new FormData(form);
     
     // Google Apps Script Web App URL
-    const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzA1L7bmxwj1Grs9VRvT8kzfAUvzZceRfaku_7b8dsWhGVusv1k4-MwWrP42AnaapaaYg/exec"; 
+    const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxfP0mi7gJBrWLauKpn0jpDHnz04GG3KuP9s8M8bgg8My54fci13pffXKjlQBrsbKQknw/exec"; 
 
     try {
       const response = await fetch(GOOGLE_SCRIPT_URL, {

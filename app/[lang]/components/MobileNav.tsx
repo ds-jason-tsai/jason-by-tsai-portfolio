@@ -141,9 +141,9 @@ export default function MobileNav({
           right: -300px;
           width: 300px;
           height: 100%;
-          background: #0a0a0a;
+          background: #050505; /* Deep solid black */
           border-left: 1px solid var(--glass-border);
-          padding: 2rem;
+          padding: 2.5rem 1.5rem; /* Better internal padding */
           transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
           z-index: 1000;
           display: flex;

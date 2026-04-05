@@ -59,7 +59,7 @@ h1, h2, h3, h4 {
   position: sticky;
   top: 0;
   z-index: 100;
-  background: rgba(5, 5, 5, 0.96); /* Increased opacity to prevent text clashing */
+  background: #050505; /* Solid background for readability */
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   margin-left: -2rem;
@@ -409,8 +409,10 @@ h1, h2, h3, h4 {
   }
 
   .nav {
-    padding: 1rem 2rem; /* Restore side padding in mobile */
-    background: rgba(5, 5, 5, 0.98); /* Almost solid on mobile for readability */
+    padding: 1rem 1.5rem 1rem 1.5rem; /* Match container padding */
+    margin-left: -1.5rem;
+    margin-right: -1.5rem;
+    background: #050505; /* Fully solid on mobile */
   }
 
   .hero {

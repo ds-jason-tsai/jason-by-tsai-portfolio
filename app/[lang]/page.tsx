@@ -8,8 +8,8 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
   const featuredPosts = [
     {
       type: 'youtube',
-      label: 'YouTube 演講教學',
-      title: '台大資料分析社 演講紀錄',
+      label: 'YouTube 企業研討會',
+      title: '零壹科技：敏捷自助BI分析',
       src: 'https://www.youtube.com/embed/hyVawV_2lkg',
       link: 'https://www.youtube.com/watch?v=hyVawV_2lkg'
     },
@@ -29,8 +29,8 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
     },
     {
       type: 'instagram',
-      label: 'Instagram 分析洞察',
-      title: '電商數據：RFM 模型實戰',
+      label: 'Instagram 社課分享',
+      title: 'Tableau視覺化：清大資料科學社',
       src: 'https://www.instagram.com/p/DOSypNMEicE/embed',
       link: 'https://www.instagram.com/p/DOSypNMEicE/'
     },
@@ -43,8 +43,8 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
     },
     {
       type: 'instagram',
-      label: 'Instagram 入門教學',
-      title: '數據分析師：必學三大心法',
+      label: 'Instagram 工作坊',
+      title: 'Tableau特訓：清大管顧社',
       src: 'https://www.instagram.com/p/CtjZ0K7rEqT/embed',
       link: 'https://www.instagram.com/p/CtjZ0K7rEqT/'
     }
@@ -107,7 +107,7 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
       </section>
 
       <section className="featured-media" style={{ padding: '2rem 0 5rem 0', textAlign: 'center', width: '100%', overflow: 'hidden' }}>
-        <h2 className="section-title">Featured Highlights</h2>
+        <h2 className="section-title">{lang === 'zh' ? '精選特輯' : 'Featured Highlights'}</h2>
         <div className="carousel-container">
           <div className="carousel-track">
             {/* Map the array twice for seamless infinite scrolling */}

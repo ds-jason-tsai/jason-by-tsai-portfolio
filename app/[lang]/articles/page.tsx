@@ -48,7 +48,7 @@ export default async function Articles({ params }: { params: Promise<{ lang: str
             </p>
             
             <div className="tags-container" style={{ marginTop: 'auto', marginBottom: '2rem', justifyContent: 'center' }}>
-              {Array.from({ length: 3 }).map((_, tIdx) => {
+              {Array.from({ length: 2 }).map((_, tIdx) => {
                  const tag = art.tags[lang][tIdx];
                  return tag ? (
                    <span key={tIdx} className="tag" style={{ flex: '1 1 0', textAlign: 'center', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{tag}</span>

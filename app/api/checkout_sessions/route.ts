@@ -75,25 +75,34 @@ export async function POST(request: Request) {
     const timeStamp   = Math.floor(Date.now() / 1000).toString();
 
     // ─────────────────────────────────────────────
-    // 重要：AES 加密前的字串不可進行 URL Encoding
+    // 藍新 MPG 規格：參數需依照 A-Z 排序，且不進行 URL Encoding
     // ─────────────────────────────────────────────
-    const tradeParams = [
-      `MerchantID=${merchantId}`,
-      `RespondType=JSON`,
-      `TimeStamp=${timeStamp}`,
-      `Version=2.0`,
-      `MerchantOrderNo=${orderNo}`,
-      `Amt=${amount}`, // 藍新 2.0 使用 Amt 做為金額欄位
-      `ItemDesc=${itemName.slice(0, 50)}`,
-      `ReturnURL=${baseUrl}/${lang}/success?product=${reportId}`,
-      `NotifyURL=${baseUrl}/api/newebpay/callback`,
-      `ClientBackURL=${baseUrl}/${lang}/reports`,
-      `LoginType=0`,
-      `CREDIT=1`,
-    ].join('&');
+    const tradeParamsObj: Record<string, string> = {
+      MerchantID:      merchantId,
+      RespondType:     'JSON',
+      TimeStamp:       timeStamp,
+      Version:         '2.0',
+      MerchantOrderNo: orderNo,
+      Amt:             String(amount),      // 2.0 規格
+      TransAmt:        String(amount),      // 1.5/1.6 規格
+      ItemDesc:        itemName.slice(0, 50),
+      ReturnURL:       `${baseUrl}/${lang}/success?product=${reportId}`,
+      NotifyURL:       `${baseUrl}/api/newebpay/callback`,
+      ClientBackURL:   `${baseUrl}/${lang}/reports`,
+      LoginType:       '0',
+      CREDIT:          '1',
+    };
+
+    // 依照 KEY 排序並組合成字串
+    const tradeParams = Object.keys(tradeParamsObj)
+      .sort()
+      .map(key => `${key}=${tradeParamsObj[key]}`)
+      .join('&');
 
     // 決定閘道網址 (如果 MerchantID 是 MS 開頭則強制走測試環境)
     const finalGateway = merchantId.startsWith('MS') ? NEWEBPAY_STAGE_URL : NEWEBPAY_URL;
+    
+    console.log(`[Checkout] Merchant: ${merchantId}, Gateway: ${finalGateway}`);
 
     // Step 1: AES 加密 → TradeInfo
     const tradeInfo = aesEncrypt(tradeParams, hashKey, hashIV);

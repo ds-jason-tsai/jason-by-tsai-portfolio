@@ -9,7 +9,7 @@ const geistSans = Geist({ variable: "--font-geist-sans", subsets: ["latin"] });
 const geistMono = Geist_Mono({ variable: "--font-geist-mono", subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Jason Tsai | Data Analyst",
+  title: "傑森數據 | 數據分析",
   description: "Portfolio of Jason Tsai",
   verification: {
     google: "QTIRGrJx67BIEr6FwZpodhAMNjYA01zw2g5-zE7GzNQ",
@@ -98,6 +98,36 @@ export default async function RootLayout({
           <main className="page-content" style={{ minHeight: '80vh', paddingBottom: '5rem', paddingTop: '2rem' }}>
             {children}
           </main>
+
+          <footer className="footer" style={{ borderTop: '1px solid var(--glass-border)', padding: '4rem 2rem 2rem 2rem', background: '#0a0a0a', textAlign: 'center', marginTop: 'auto' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1rem', maxWidth: '800px', margin: '0 auto' }}>
+              <div style={{ fontSize: '1.5rem', fontWeight: 'bold', background: 'var(--accent-grad)', WebkitBackgroundClip: 'text', backgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
+                {dict.brand?.logo || '傑森數據 Jason Analytics'}
+              </div>
+              <p style={{ color: 'var(--text-secondary)', fontSize: '0.95rem', maxWidth: '400px', lineHeight: '1.6' }}>
+                 Empowering decisions through data. <br/> 結合商業思維與深厚技術底蘊，持續在第一線創造數據影響力。
+              </p>
+              <div style={{ display: 'flex', gap: '2rem', marginTop: '1.5rem' }} className="footer-links">
+                 <Link href={`/${lang}/portfolio`} className="footer-link">Portfolio</Link>
+                 <Link href={`/${lang}/services`} className="footer-link">Services</Link>
+                 <Link href={`/${lang}/experience`} className="footer-link">Experience</Link>
+                 <Link href={`/${lang}/contact`} className="footer-link">Contact</Link>
+              </div>
+              <div style={{ borderTop: '1px solid #222', width: '100%', marginTop: '2rem', paddingTop: '2rem', fontSize: '0.85rem', color: '#555', letterSpacing: '1px' }}>
+                © {new Date().getFullYear()} Jason Tsai. All rights reserved.
+              </div>
+            </div>
+            <style dangerouslySetInnerHTML={{__html: `
+              .footer-link {
+                color: var(--text-secondary);
+                text-decoration: none;
+                transition: color 0.3s ease;
+                font-size: 0.95rem;
+                font-weight: 600;
+              }
+              .footer-link:hover { color: var(--text-primary); }
+            `}} />
+          </footer>
         </div>
       </body>
     </html>

@@ -1,8 +1,9 @@
+import Image from 'next/image';
 import type { Metadata } from 'next';
 
 export async function generateMetadata({ params }: { params: Promise<{ lang: string }> }): Promise<Metadata> {
   const lang = (await params).lang;
-  const titles = { zh: "專案作品集 | Jason Tsai", en: "Portfolio | Jason Tsai", ja: "ポートフォリオ | Jason Tsai" };
+  const titles = { zh: "專案作品集 | 傑森數據", en: "Portfolio | Jason Tsai", ja: "ポートフォリオ | ジェイソン・アナリティクス" };
   return { title: titles[lang as 'zh'|'en'|'ja'] || titles['zh'] };
 }
 
@@ -20,6 +21,7 @@ export default async function Portfolio({ params }: { params: Promise<{ lang: st
     { 
       title: { zh: "保險公司研究 (Aflac)", en: "Aflac Insurance Research", ja: "Aflac 保険会社戦略研究" }, 
       type: 2, 
+      image: "/images/aflac_mockup.png",
       url: "https://drive.google.com/file/d/1EQiMMQfrRplLjNljCLiQWHUxQ121xxDL/view?usp=drive_link",
       description: {
         zh: "深入研究 Aflac 在全球意外與健康險市場的成功要素。分析其獨特的代理商模式，並探討如何透過整合 NAYYA (AI 推薦)、SKYGEN 與 Empathy 等 InsurTech 合作夥伴來強化數位轉型與客戶體驗。",
@@ -35,6 +37,7 @@ export default async function Portfolio({ params }: { params: Promise<{ lang: st
     { 
       title: { zh: "ChartBar 圖表分析懶人包", en: "ChartBar Analysis Cheat Sheet", ja: "ChartBar 分析チートシート" }, 
       type: 1, 
+      image: "/images/chartbar_mockup.png",
       url: "https://drive.google.com/file/d/1T2UfuswNYamtVFWASDgXwYsdXAQs8Uhl/view?usp=drive_link",
       description: {
         zh: "精選 40+ 款必學商業圖表，提供從基礎趨勢到進階技術控制圖的完整選擇標準。旨在優化視覺傳達效率，幫助數據分析師快速為特定商業情境選擇最合適的視覺化工具。",
@@ -55,13 +58,23 @@ export default async function Portfolio({ params }: { params: Promise<{ lang: st
       <p style={{ textAlign: 'center', marginBottom: '3rem', color: 'var(--text-secondary)' }}>{t.desc}</p>
       <div className="services-grid">
         {projects.map((proj, idx) => (
-          <div className="service-card" key={idx} style={{ display: 'flex', flexDirection: 'column' }}>
-            <span style={{ fontSize: '0.8rem', color: 'var(--accent-color)', fontWeight: 'bold' }}>{t.type[proj.type]}</span>
-            <h3 className="service-title" style={{ marginTop: '0.5rem', marginBottom: '1rem', fontSize: '1.3rem' }}>{proj.title[lang]}</h3>
+          <div className="service-card" key={idx} style={{ display: 'flex', flexDirection: 'column', padding: '0', overflow: 'hidden' }}>
+            {/* Image Preview Area */}
+            <div className="portfolio-image-wrapper" style={{ width: '100%', height: '220px', position: 'relative', overflow: 'hidden' }}>
+              {proj.image ? (
+                 <Image src={proj.image} alt={proj.title[lang]} fill style={{ objectFit: 'cover', transition: 'transform 0.5s ease', cursor: 'pointer' }} className="portfolio-img-hover" />
+              ) : (
+                 <div style={{ width: '100%', height: '100%', background: 'var(--glass-bg)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--text-secondary)' }}>No Preview Available</div>
+              )}
+            </div>
             
-            <p style={{ color: 'var(--text-secondary)', fontSize: '0.9rem', lineHeight: '1.6', flex: 1, marginBottom: '1.5rem' }}>
-              {proj.description[lang]}
-            </p>
+            <div style={{ padding: '1.5rem', display: 'flex', flexDirection: 'column', flex: 1 }}>
+              <span style={{ fontSize: '0.8rem', color: 'var(--accent-color)', fontWeight: 'bold' }}>{t.type[proj.type]}</span>
+              <h3 className="service-title" style={{ marginTop: '0.5rem', marginBottom: '1rem', fontSize: '1.3rem' }}>{proj.title[lang]}</h3>
+              
+              <p style={{ color: 'var(--text-secondary)', fontSize: '0.9rem', lineHeight: '1.6', flex: 1, marginBottom: '1.5rem' }}>
+                {proj.description[lang]}
+              </p>
 
             <div className="tags-container" style={{ justifyContent: 'center' }}>
               {proj.tags[lang].map((tag, tIdx) => (
@@ -81,9 +94,17 @@ export default async function Portfolio({ params }: { params: Promise<{ lang: st
                 </button>
               )}
             </div>
+            </div>
+            {/* End Content Wrapper */}
+            
           </div>
         ))}
       </div>
+      <style dangerouslySetInnerHTML={{__html: `
+        .service-card:hover .portfolio-img-hover {
+          transform: scale(1.05);
+        }
+      `}} />
     </section>
   );
 }

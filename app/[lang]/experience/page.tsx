@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 
 export async function generateMetadata({ params }: { params: Promise<{ lang: string }> }): Promise<Metadata> {
   const lang = (await params).lang;
-  const titles = { zh: "完整經歷 | Jason Tsai", en: "Experience | Jason Tsai", ja: "経歴 | Jason Tsai" };
+  const titles = { zh: "完整職涯經歷 | 傑森數據", en: "Experience | Jason Tsai", ja: "経歴 | ジェイソン・アナリティクス" };
   return { title: titles[lang as 'zh'|'en'|'ja'] || titles['zh'] };
 }
 
@@ -11,6 +11,7 @@ export default async function Experience({ params }: { params: Promise<{ lang: s
   
   const content = {
     zh: { title: "完整職涯經歷", 
+          desc: "從前端技術建置到高階戰略規劃，始終在第一線創造數據影響力。",
           exp: [
             { date: "2026.01 - Present", role: "特約講師 (Partner Instructor)", company: "X Platform", desc: "客製化設計 Python 與 AI 學習路徑，提供端到端專案實作的技術諮詢。首月即透過展現技術價值，成功招募 35+ 位付費學員。" },
             { date: "2024.08 - Present", role: "特約講師 (Partner Instructor)", company: "聯成電腦 (菜鳥救星)", desc: "開發從零到一的 Tableau 完整資料生命週期課程；累積 200+ 教學小時，培訓超過 150 位專業人士，獲得 4.8/5.0 的極高滿意度。同時建構基於 NotebookLM 的 AI 生產力工作流架構。" },
@@ -24,6 +25,7 @@ export default async function Experience({ params }: { params: Promise<{ lang: s
           ]
     },
     en: { title: "Complete Experience", 
+          desc: "From technical implementations to high-level strategic planning, continuously driving data impact.",
           exp: [
             { date: "2026.01 - Present", role: "Partner Instructor", company: "X Platform", desc: "Designed personalized Python and AI learning roadmaps, providing technical consulting for end-to-end project implementations. Attracted 35+ paid students within the first month by translating complex technical value into high-demand career solutions." },
             { date: "2024.08 - Present", role: "Partner Instructor", company: "Lien Cheng Computer Inc.", desc: "Developed a comprehensive 'Zero-to-One' Tableau curriculum. Accumulated 200+ teaching hours, empowering 150+ professionals with data-driven decision-making skills (4.8/5.0 rating). Architected 'AI Productivity Hacks' using NotebookLM." },
@@ -37,6 +39,7 @@ export default async function Experience({ params }: { params: Promise<{ lang: s
           ]
     },
     ja: { title: "完全な職歴", 
+          desc: "技術的な実装から高度な戦略立案まで、常にデータの価値を最大化し続けています。",
           exp: [
             { date: "2026.01 - 現在", role: "パートナー講師", company: "X Platform", desc: "個別化されたPython・AI学習ロードマップを設計し、プロジェクト実装の技術コンサルティングを提供。初月で35人以上の有料受講生を獲得。" },
             { date: "2024.08 - 現在", role: "パートナー講師", company: "Lien Cheng Computer Inc.", desc: "「ゼロからイチへ」のTableau総合カリキュラムを開発。200時間以上の指導を通じて150名以上の専門家を育成（満足度4.8/5.0）。また、NotebookLMベースの「AI生産性ハック」ワークフローを構築。" },
@@ -56,6 +59,7 @@ export default async function Experience({ params }: { params: Promise<{ lang: s
   return (
     <section className="experience fade-in" style={{ padding: '0 2rem' }}>
       <h2 className="section-title">{t.title}</h2>
+      <p style={{ textAlign: 'center', marginBottom: '4rem', color: 'var(--text-secondary)' }}>{t.desc}</p>
       <div className="timeline">
         {t.exp.map((item, idx) => (
           <div className="timeline-item" key={idx}>
@@ -71,17 +75,35 @@ export default async function Experience({ params }: { params: Promise<{ lang: s
       </div>
 
       <div className="trusted-by-section" style={{ marginTop: '5rem', marginBottom: '2rem', textAlign: 'center' }}>
-        <h3 style={{ fontSize: '1.1rem', color: 'var(--text-secondary)', marginBottom: '1.5rem', textTransform: 'uppercase', letterSpacing: '2px' }}>
-           Partner Platforms & Featured On
+        <h3 style={{ fontSize: '1.1rem', color: 'var(--text-secondary)', marginBottom: '2rem', textTransform: 'uppercase', letterSpacing: '2px' }}>
+           Trusted By & Featured On
         </h3>
-        <div style={{ display: 'flex', gap: '1.5rem', justifyContent: 'center', flexWrap: 'wrap' }}>
-          <a href="https://www.xplatform.world/" target="_blank" rel="noopener follow" className="btn-primary" style={{ background: 'var(--glass-bg)', border: '1px solid var(--accent-color)', color: 'var(--accent-color)', padding: '0.8rem 2rem', borderRadius: '30px', textDecoration: 'none', fontWeight: '800' }}>
+        <div style={{ display: 'flex', gap: '3rem', justifyContent: 'center', flexWrap: 'wrap', alignItems: 'center' }}>
+          <a href="https://www.xplatform.world/" target="_blank" rel="noopener follow" className="partner-logo">
              X Platform
           </a>
-          <a href="https://live.rookiesavior.net/" target="_blank" rel="noopener follow" className="btn-primary" style={{ background: 'var(--glass-bg)', border: '1px solid var(--accent-color)', color: 'var(--accent-color)', padding: '0.8rem 2rem', borderRadius: '30px', textDecoration: 'none', fontWeight: '800' }}>
-             菜鳥救星 Rookie Savior
+          <a href="https://live.rookiesavior.net/" target="_blank" rel="noopener follow" className="partner-logo">
+             菜鳥救星 <span style={{ fontWeight: 400, marginLeft: '0.2rem', fontSize: '1.1rem' }}>Rookie Savior</span>
           </a>
         </div>
+        <style dangerouslySetInnerHTML={{__html: `
+          .partner-logo {
+             font-size: 1.5rem;
+             font-weight: 900;
+             color: #fff;
+             opacity: 0.5;
+             text-decoration: none;
+             transition: all 0.3s ease;
+             letter-spacing: 1px;
+             font-family: var(--font-geist-sans), sans-serif;
+             display: flex;
+             align-items: center;
+          }
+          .partner-logo:hover {
+             opacity: 1;
+             transform: translateY(-2px);
+          }
+        `}} />
       </div>
     </section>
   );

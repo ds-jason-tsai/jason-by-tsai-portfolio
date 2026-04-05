@@ -3,7 +3,7 @@ import type { Metadata } from 'next';
 
 export async function generateMetadata({ params }: { params: Promise<{ lang: string }> }): Promise<Metadata> {
   const lang = (await params).lang;
-  const titles = { zh: "文章專區 | Jason Tsai", en: "Articles | Jason Tsai", ja: "記事一覧 | Jason Tsai" };
+  const titles = { zh: "文章專區 | 傑森數據", en: "Articles | Jason Tsai", ja: "記事一覧 | ジェイソン・アナリティクス" };
   return { title: titles[lang as 'zh'|'en'|'ja'] || titles['zh'] };
 }
 

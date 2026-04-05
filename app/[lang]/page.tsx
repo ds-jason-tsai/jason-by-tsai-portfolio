@@ -43,13 +43,13 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
             width={350} 
             height={350} 
             className="hero-image"
-            style={{ objectPosition: 'top', paddingTop: '15px', objectFit: 'cover', background: 'linear-gradient(to bottom, transparent, rgba(0,242,254,0.1))' }}
+            style={{ objectPosition: 'center top', objectFit: 'cover' }}
             priority
           />
         </div>
       </section>
 
-      <section className="featured-media" style={{ padding: '0 2rem 5rem 2rem', textAlign: 'center' }}>
+      <section className="featured-media" style={{ padding: '2rem 2rem 5rem 2rem', textAlign: 'center' }}>
         <h2 className="section-title">Featured Highlights</h2>
         <div className="media-grid">
           <div className="media-card">
@@ -65,9 +65,8 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
             ></iframe>
           </div>
           <div className="media-card" style={{ background: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-            {/* Facebook embed block needs white background for text legibility, height matching YT */}
             <iframe 
-              src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fshare%2Fp%2F1DGqGFGsi1%2F&show_text=true&width=500" 
+              src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2FNTUDAC%2Fposts%2Fpfbid024zWGDXEdUVaLHU24TymiTaFHfLQKPx2sMvFk9jxzSVKKaxeUnPDQuFmE2JBjAsTql&show_text=true&width=500" 
               width="100%" 
               height="400" 
               style={{ border: 'none', overflow: 'hidden', borderRadius: '15px' }} 
@@ -82,15 +81,18 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
 
       <style dangerouslySetInnerHTML={{__html: `
         .hero {
-          min-height: 80vh;
+          min-height: auto;
+          padding: 4rem 2rem;
           display: flex;
+          flex-direction: column;
           align-items: center;
-          justify-content: space-between;
-          padding: 0 2rem;
-          gap: 4rem;
+          justify-content: center;
+          gap: 3rem;
+          text-align: center;
         }
         .hero-content {
-          flex: 1;
+          max-width: 800px;
+          width: 100%;
         }
         .hero-title {
           font-size: 3.5rem;
@@ -109,11 +111,14 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
           color: var(--text-secondary);
           margin-bottom: 2.5rem;
           max-width: 600px;
+          margin-left: auto;
+          margin-right: auto;
         }
         .hero-btns {
           display: flex;
           gap: 1.5rem;
           margin-bottom: 3rem;
+          justify-content: center;
         }
         .btn-secondary {
           background: transparent !important;
@@ -134,6 +139,7 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
           display: flex;
           gap: 2rem;
           align-items: center;
+          justify-content: center;
         }
         .social-icon-link {
           color: var(--text-primary);
@@ -162,9 +168,9 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
         }
 
         .hero-image-container {
-          flex: 1;
           display: flex;
           justify-content: center;
+          margin-top: 1rem;
         }
 
         /* Responsive Media Grid Setup */

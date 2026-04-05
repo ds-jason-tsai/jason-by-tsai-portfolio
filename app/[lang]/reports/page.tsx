@@ -66,20 +66,21 @@ export default async function Reports({ params }: { params: Promise<{ lang: stri
         </p>
       </div>
 
-      <div className="services-grid">
+      {/* Reports grid — capped at 720px so cards don't stretch on wide screens */}
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 380px))', gap: '2rem', justifyContent: 'center', maxWidth: '1200px', margin: '0 auto' }}>
         {reports.map((report) => (
           <div
             key={report.id}
             className="service-card"
-            style={{ display: 'flex', flexDirection: 'column', padding: '0', overflow: 'hidden' }}
+            style={{ display: 'flex', flexDirection: 'column', padding: '0', overflow: 'hidden', maxWidth: '420px', width: '100%' }}
           >
-            {/* Cover Image */}
-            <div style={{ width: '100%', height: '220px', position: 'relative', overflow: 'hidden' }}>
+            {/* Cover Image — fixed aspect ratio, no stretching */}
+            <div style={{ width: '100%', aspectRatio: '16/9', position: 'relative', overflow: 'hidden', background: '#1a1a2e' }}>
               <Image
                 src={report.image}
                 alt={report.title[lang]}
                 fill
-                style={{ objectFit: 'cover', transition: 'transform 0.5s ease' }}
+                style={{ objectFit: 'contain', objectPosition: 'center', transition: 'transform 0.5s ease', padding: '0.5rem' }}
                 className="portfolio-img-hover"
               />
               {/* Exclusive Badge */}
@@ -145,7 +146,7 @@ export default async function Reports({ params }: { params: Promise<{ lang: stri
 
       <style dangerouslySetInnerHTML={{__html: `
         .service-card:hover .portfolio-img-hover {
-          transform: scale(1.05);
+          transform: scale(1.03);
         }
       `}} />
     </section>

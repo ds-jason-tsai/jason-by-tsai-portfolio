@@ -31,11 +31,11 @@ export default function BuyButton({ reportId, lang, buttonText, price, productNa
         return;
       }
 
-      if (data.ecpayUrl && data.params) {
-        // 動態建立隱藏 form，POST 到綠界金流頁面
+      if (data.newebpayUrl && data.params) {
+        // 動態建立隱藏 form，POST 到藍新金流頁面
         const form = document.createElement('form');
         form.method = 'POST';
-        form.action = data.ecpayUrl;
+        form.action = data.newebpayUrl;
 
         Object.entries(data.params as Record<string, string>).forEach(([key, val]) => {
           const input = document.createElement('input');

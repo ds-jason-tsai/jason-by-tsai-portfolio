@@ -69,6 +69,20 @@ export default async function Experience({ params }: { params: Promise<{ lang: s
           </div>
         ))}
       </div>
+
+      <div className="trusted-by-section" style={{ marginTop: '5rem', marginBottom: '2rem', textAlign: 'center' }}>
+        <h3 style={{ fontSize: '1.1rem', color: 'var(--text-secondary)', marginBottom: '1.5rem', textTransform: 'uppercase', letterSpacing: '2px' }}>
+           Partner Platforms & Featured On
+        </h3>
+        <div style={{ display: 'flex', gap: '1.5rem', justifyContent: 'center', flexWrap: 'wrap' }}>
+          <a href="https://www.xplatform.world/" target="_blank" rel="noopener follow" className="btn-primary" style={{ background: 'var(--glass-bg)', border: '1px solid var(--accent-color)', color: 'var(--accent-color)', padding: '0.8rem 2rem', borderRadius: '30px', textDecoration: 'none', fontWeight: '800' }}>
+             X Platform
+          </a>
+          <a href="https://live.rookiesavior.net/" target="_blank" rel="noopener follow" className="btn-primary" style={{ background: 'var(--glass-bg)', border: '1px solid var(--accent-color)', color: 'var(--accent-color)', padding: '0.8rem 2rem', borderRadius: '30px', textDecoration: 'none', fontWeight: '800' }}>
+             菜鳥救星 Rookie Savior
+          </a>
+        </div>
+      </div>
     </section>
   );
 }

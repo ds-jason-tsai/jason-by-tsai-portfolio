@@ -44,28 +44,28 @@ export default async function Services({ params }: { params: Promise<{ lang: str
     zh: {
       title: "專業服務",
       services: [
-        { icon: <DataIcon />, name: "資料與商業分析", desc: "以嚴謹的統計分析與大數據探勘，找出隱藏的商業模式與潛在機會。" },
-        { icon: <IntegrationIcon />, name: "MarTech 諮詢與技術導入", desc: "顧客資料平台 (CDP) 導入與數位行銷生態系 (GA4, Celebrus) 整合優化。" },
-        { icon: <ChartIcon />, name: "客製化儀表板建置", desc: "使用 Tableau 等工具建立互動式視覺化儀表板，將冰冷數據轉化為決策故事。" },
-        { icon: <EducationIcon />, name: "專案與自動化教學", desc: "提供 Tableau、Python 資料分析、自動化流程與 MarTech 工具的企業內訓或教學。" }
+        { icon: <DataIcon />, name: "資料與商業分析", desc: "以嚴謹的統計分析與大數據探勘，找出隱藏的商業模式與潛在機會。", price: "請聯絡討論" },
+        { icon: <IntegrationIcon />, name: "MarTech 諮詢與技術導入", desc: "顧客資料平台 (CDP) 導入與數位行銷生態系 (GA4, Celebrus) 整合優化。", price: "請聯絡討論" },
+        { icon: <ChartIcon />, name: "客製化儀表板建置", desc: "使用 Tableau 等工具建立互動式視覺化儀表板，將冰冷數據轉化為決策故事。", price: "請聯絡討論" },
+        { icon: <EducationIcon />, name: "專案與自動化教學", desc: "提供 Tableau、Python 資料分析、自動化流程與 MarTech 工具的企業內訓或教學。", price: "1200 TWD / hr" }
       ]
     },
     en: {
       title: "Professional Services",
       services: [
-        { icon: <DataIcon />, name: "Data & Business Analysis", desc: "Rigorous statistical analysis and data mining to uncover hidden business opportunities." },
-        { icon: <IntegrationIcon />, name: "MarTech Consultation", desc: "CDP implementation and digital marketing ecosystem (GA4, Celebrus) technical optimization." },
-        { icon: <ChartIcon />, name: "Dashboard Architecture", desc: "Interactive Tableau dashboards that turn raw data into strategic storytelling for decision makers." },
-        { icon: <EducationIcon />, name: "Training & Enablement", desc: "Corporate training and workflow automation for Tableau, Python data analysis, and MarTech." }
+        { icon: <DataIcon />, name: "Data & Business Analysis", desc: "Rigorous statistical analysis and data mining to uncover hidden business opportunities.", price: "Contact for Pricing" },
+        { icon: <IntegrationIcon />, name: "MarTech Consultation", desc: "CDP implementation and digital marketing ecosystem (GA4, Celebrus) technical optimization.", price: "Contact for Pricing" },
+        { icon: <ChartIcon />, name: "Dashboard Architecture", desc: "Interactive Tableau dashboards that turn raw data into strategic storytelling for decision makers.", price: "Contact for Pricing" },
+        { icon: <EducationIcon />, name: "Training & Enablement", desc: "Corporate training and workflow automation for Tableau, Python data analysis, and MarTech.", price: "1200 TWD / hr" }
       ]
     },
     ja: {
       title: "プロフェッショナルサービス",
       services: [
-        { icon: <DataIcon />, name: "データ＆ビジネス分析", desc: "厳密な統計分析とデータマイニングによる、隠れたビジネス機会の発掘。" },
-        { icon: <IntegrationIcon />, name: "MarTech 導入", desc: "CDPの導入及びデジタルマーケティング・エコシステム(GA4, Celebrus)の技術的最適化。" },
-        { icon: <ChartIcon />, name: "カスタムダッシュボード", desc: "Tableauなどを使用したダッシュボード環境構築とデータからストーリーへの変換。" },
-        { icon: <EducationIcon />, name: "トレーニング・自動化指導", desc: "Tableau、Python分析、自動化ワークフローなどの企業向け研修や教育支援。" }
+        { icon: <DataIcon />, name: "データ＆ビジネス分析", desc: "厳密な統計分析とデータマイニングによる、隠れたビジネス機会の発掘。", price: "要相談 (Contact)" },
+        { icon: <IntegrationIcon />, name: "MarTech 導入", desc: "CDPの導入及びデジタルマーケティング・エコシステム(GA4, Celebrus)の技術的最適化。", price: "要相談 (Contact)" },
+        { icon: <ChartIcon />, name: "カスタムダッシュボード", desc: "Tableauなどを使用したダッシュボード環境構築とデータからストーリーへの変換。", price: "要相談 (Contact)" },
+        { icon: <EducationIcon />, name: "トレーニング・自動化指導", desc: "Tableau、Python分析、自動化ワークフローなどの企業向け研修や教育支援。", price: "1200 TWD / hr" }
       ]
     }
   };
@@ -81,7 +81,17 @@ export default async function Services({ params }: { params: Promise<{ lang: str
             <div className="service-card" style={{ cursor: 'pointer', height: '100%' }}>
               <div className="service-icon">{svc.icon}</div>
               <h3 className="service-title">{svc.name}</h3>
-              <p className="service-desc">{svc.desc}</p>
+              <div className="service-price-tag" style={{
+                 background: 'rgba(0, 242, 254, 0.1)',
+                 color: 'var(--accent-color)',
+                 padding: '0.3rem 0.8rem',
+                 borderRadius: '20px',
+                 fontSize: '0.85rem',
+                 fontWeight: '800',
+                 marginBottom: '1rem',
+                 display: 'inline-block'
+              }}> 💲 {svc.price || 'Contact for Pricing'} </div>
+              <p className="service-desc" style={{ flexGrow: 1 }}>{svc.desc}</p>
             </div>
           </Link>
         ))}

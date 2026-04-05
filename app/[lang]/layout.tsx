@@ -49,7 +49,7 @@ export default async function RootLayout({
           {/* Global Navigation */}
           <nav className="nav">
             <div className="nav-logo">
-              <Link href={`/${lang}`}>{dict.brand?.logo || 'Jason Tsai'}</Link>
+              <Link href={`/${lang}`} style={{ textDecoration: 'none', borderBottom: 'none' }}>{dict.brand?.logo || 'Jason Tsai'}</Link>
             </div>
             
             <div className="desktop-only">

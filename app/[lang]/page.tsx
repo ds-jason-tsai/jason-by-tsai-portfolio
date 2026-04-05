@@ -106,32 +106,35 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
         </div>
       </section>
 
-      <section className="featured-media" style={{ padding: '2rem 2rem 5rem 2rem', textAlign: 'center', width: '100%', overflow: 'hidden' }}>
+      <section className="featured-media" style={{ padding: '2rem 0 5rem 0', textAlign: 'center', width: '100%', overflow: 'hidden' }}>
         <h2 className="section-title">Featured Highlights</h2>
-        <div className="media-grid">
-          {featuredPosts.map((post, index) => (
-            <div className="media-card" key={index}>
-              <div className="media-card-header">
-                <span className="media-badge">{post.label}</span>
-                <h3 className="media-title">{post.title}</h3>
+        <div className="carousel-container">
+          <div className="carousel-track">
+            {/* Map the array twice for seamless infinite scrolling */}
+            {[...featuredPosts, ...featuredPosts].map((post, index) => (
+              <div className="media-card" key={index}>
+                <div className="media-card-header">
+                  <span className="media-badge">{post.label}</span>
+                  <h3 className="media-title">{post.title}</h3>
+                </div>
+                <div className="media-iframe-wrapper" style={{ background: post.type === 'facebook' || post.type === 'instagram' ? '#fff' : 'transparent' }}>
+                  <iframe 
+                    src={post.src} 
+                    width="100%" 
+                    height={post.type === 'youtube' ? '315' : '480'} 
+                    style={{ border: 'none', overflow: 'hidden', borderRadius: '10px' }} 
+                    scrolling="no" 
+                    frameBorder="0" 
+                    allowFullScreen={true} 
+                    allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
+                  ></iframe>
+                </div>
+                <a href={post.link} target="_blank" rel="noopener noreferrer" className="media-action">
+                  前往原文觀看 ↗
+                </a>
               </div>
-              <div className="media-iframe-wrapper" style={{ background: post.type === 'facebook' || post.type === 'instagram' ? '#fff' : 'transparent' }}>
-                <iframe 
-                  src={post.src} 
-                  width="100%" 
-                  height={post.type === 'youtube' ? '315' : '480'} 
-                  style={{ border: 'none', overflow: 'hidden', borderRadius: '10px' }} 
-                  scrolling="no" 
-                  frameBorder="0" 
-                  allowFullScreen={true} 
-                  allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
-                ></iframe>
-              </div>
-              <a href={post.link} target="_blank" rel="noopener noreferrer" className="media-action">
-                前往原文觀看 ↗
-              </a>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </section>
 
@@ -229,16 +232,38 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
           margin-top: 1rem;
         }
 
-        /* Responsive Media Grid Setup */
-        .media-grid {
-          display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+        /* Infinite Carousel Setup */
+        .carousel-container {
+          width: 100%;
+          overflow: hidden;
+          position: relative;
+          padding: 1rem 0;
+        }
+        
+        .carousel-track {
+          display: flex;
+          width: max-content;
           gap: 2.5rem;
-          max-width: 1200px;
-          margin: 0 auto;
+          padding: 0 1.25rem;
+          animation: scroll 40s linear infinite;
+        }
+
+        .carousel-track:hover {
+          animation-play-state: paused;
+        }
+        
+        @keyframes scroll {
+          0% {
+            transform: translateX(0);
+          }
+          100% {
+            transform: translateX(calc(-50% - 1.25rem));
+          }
         }
         
         .media-card {
+          width: 380px;
+          flex-shrink: 0;
           background: var(--glass-bg);
           padding: 1.5rem;
           border-radius: 20px;
@@ -247,12 +272,12 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
           display: flex;
           flex-direction: column;
           gap: 1rem;
-          height: 100%;
         }
 
         .media-card:hover {
           transform: translateY(-5px);
           border-color: var(--accent-color);
+          box-shadow: 0 5px 15px rgba(0, 242, 254, 0.2);
         }
         
         .media-card-header {
@@ -327,8 +352,12 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
         }
 
         @media (max-width: 768px) {
-          .media-grid {
-            grid-template-columns: 1fr;
+          .media-card {
+            width: 320px;
+            padding: 1rem;
+          }
+          .carousel-track {
+            animation-duration: 25s; /* slightly faster on mobile */
           }
         }
 

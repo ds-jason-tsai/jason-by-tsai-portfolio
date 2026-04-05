@@ -105,7 +105,7 @@ export default async function RootLayout({
               <div style={{ fontSize: '1.5rem', fontWeight: 'bold', background: 'var(--accent-grad)', WebkitBackgroundClip: 'text', backgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
                 {dict.brand?.logo || '傑森數據 Jason Analytics'}
               </div>
-              <p style={{ color: 'var(--text-secondary)', fontSize: '0.95rem', maxWidth: '400px', lineHeight: '1.6' }}>
+              <p style={{ color: 'var(--text-secondary)', fontSize: '0.95rem', maxWidth: '600px', lineHeight: '1.6' }}>
                  Empowering decisions through data. <br/> 結合商業思維與深厚技術底蘊，持續在第一線創造數據影響力。
               </p>
               <div style={{ display: 'flex', gap: '2rem', marginTop: '1.5rem' }} className="footer-links">

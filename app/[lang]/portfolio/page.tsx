@@ -53,7 +53,7 @@ export default async function Portfolio({ params }: { params: Promise<{ lang: st
     <section className="portfolio fade-in" style={{ padding: '0 2rem' }}>
       <h2 className="section-title">{t.title}</h2>
       <p style={{ textAlign: 'center', marginBottom: '3rem', color: 'var(--text-secondary)' }}>{t.desc}</p>
-      <div className="services-grid" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))' }}>
+      <div className="services-grid">
         {projects.map((proj, idx) => (
           <div className="service-card" key={idx} style={{ display: 'flex', flexDirection: 'column' }}>
             <span style={{ fontSize: '0.8rem', color: 'var(--accent-color)', fontWeight: 'bold' }}>{t.type[proj.type]}</span>

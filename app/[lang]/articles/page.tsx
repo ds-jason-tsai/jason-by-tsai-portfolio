@@ -38,11 +38,7 @@ export default async function Articles({ params }: { params: Promise<{ lang: str
       <h2 className="section-title">{t.title}</h2>
       <p style={{ textAlign: 'center', marginBottom: '4rem', color: 'var(--text-secondary)' }}>{t.desc}</p>
       
-      <div className="articles-grid" style={{ 
-        display: 'grid', 
-        gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))',
-        gap: '3rem'
-      }}>
+      <div className="services-grid" style={{ gap: '3rem' }}>
         {articles.map((art) => (
           <article key={art.id} className="service-card" style={{ display: 'flex', flexDirection: 'column' }}>
             <p style={{ fontSize: '0.85rem', color: 'var(--accent-color)', marginBottom: '0.5rem' }}>{art.date}</p>

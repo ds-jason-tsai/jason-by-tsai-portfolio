@@ -6,8 +6,8 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
   const dict = await getDictionary(lang);
 
   return (
-    <section className="hero" style={{ minHeight: '80vh', display: 'flex', alignItems: 'center', justifyContent: 'center', textAlign: 'center' }}>
-      <div className="hero-content" style={{ maxWidth: '800px' }}>
+    <section className="hero">
+      <div className="hero-content">
         <h1 className="hero-title">
           {dict.home.title} <br />
           <span>{dict.home.subtitle}</span>
@@ -16,19 +16,19 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
           {dict.home.description}
         </p>
         
-        <div style={{ display: 'flex', gap: '1.5rem', justifyContent: 'center', marginTop: '2rem', marginBottom: '3rem' }}>
+        <div className="hero-btns">
           <a href={`/${lang}/portfolio`} className="btn-primary">{dict.home.cta}</a>
-          <a href={`/${lang}/contact`} className="btn-primary" style={{ background: 'transparent', border: '1px solid var(--accent-color)', color: 'var(--accent-color)' }}>
+          <a href={`/${lang}/contact`} className="btn-primary btn-secondary">
             {dict.home.contact_cta}
           </a>
         </div>
 
         {/* Social Presence / 導流區塊 */}
-        <div className="social-links" style={{ marginTop: '2rem' }}>
-          <p style={{ fontSize: '0.9rem', color: 'var(--text-secondary)', marginBottom: '1rem', textTransform: 'uppercase', letterSpacing: '2px' }}>
+        <div className="social-links-section">
+          <p className="social-label">
             Follow my Data Insights
           </p>
-          <div style={{ display: 'flex', gap: '2rem', justifyContent: 'center', alignItems: 'center' }}>
+          <div className="social-icons">
             <a href="https://tw.linkedin.com/in/jasonb0604" target="_blank" rel="noopener noreferrer" className="social-icon-link">LinkedIn</a>
             <a href="https://www.instagram.com/chartbar0713/" target="_blank" rel="noopener noreferrer" className="social-icon-link">Instagram</a>
             <a href="https://medium.com/@jasonb0604" target="_blank" rel="noopener noreferrer" className="social-icon-link">Medium</a>
@@ -36,6 +36,45 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
         </div>
 
         <style dangerouslySetInnerHTML={{__html: `
+          .hero {
+            min-height: 80vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+          }
+          .hero-content {
+            max-width: 800px;
+            width: 100%;
+          }
+          .hero-btns {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            margin-top: 2rem;
+            margin-bottom: 3rem;
+          }
+          .btn-secondary {
+            background: transparent !important;
+            border: 1px solid var(--accent-color) !important;
+            color: var(--accent-color) !important;
+          }
+          .social-links-section {
+            margin-top: 2rem;
+          }
+          .social-label {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            marginBottom: 1rem;
+            textTransform: uppercase;
+            letter-spacing: 2px;
+          }
+          .social-icons {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            align-items: center;
+          }
           .social-icon-link {
             color: var(--text-primary);
             text-decoration: none;
@@ -60,6 +99,18 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
           }
           .social-icon-link:hover::after {
             width: 100%;
+          }
+
+          @media (max-width: 640px) {
+            .hero-btns {
+              flex-direction: column;
+              gap: 1rem;
+              padding: 0 1rem;
+            }
+            .social-icons {
+              flex-direction: column;
+              gap: 1.5rem;
+            }
           }
         `}}/>
       </div>

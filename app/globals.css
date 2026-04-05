@@ -35,6 +35,14 @@ h1, h2, h3, h4 {
   padding: 0 2rem;
 }
 
+.desktop-only {
+  display: block;
+}
+
+.mobile-only {
+  display: none;
+}
+
 /* Navigation */
 .nav {
   display: flex;
@@ -371,4 +379,101 @@ h1, h2, h3, h4 {
   color: #000;
   transform: translateY(-2px);
   border-color: transparent;
+}
+
+/* --- Media Queries for Responsiveness --- */
+
+@media (max-width: 1024px) {
+  .desktop-only {
+    display: none;
+  }
+  
+  .mobile-only {
+    display: block;
+  }
+
+  .nav {
+    padding: 1rem 0;
+  }
+
+  .hero {
+    flex-direction: column-reverse;
+    text-align: center;
+    gap: 2rem;
+    padding: 4rem 0;
+    min-height: auto;
+  }
+
+  .hero-title {
+    font-size: 2.5rem;
+  }
+
+  .hero-desc {
+    font-size: 1rem;
+    margin-bottom: 2rem;
+  }
+
+  .hero-image {
+    width: 280px;
+    height: 280px;
+  }
+
+  .hero-image-container::before {
+    width: 200px;
+    height: 200px;
+  }
+}
+
+@media (max-width: 768px) {
+  .main-container {
+    padding: 0 1.5rem;
+  }
+
+  .section-title {
+    font-size: 2rem;
+  }
+
+  .services-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .service-card {
+    padding: 2rem 1.5rem;
+  }
+
+  .timeline-item {
+    padding-left: 2.5rem;
+    gap: 1.5rem;
+  }
+
+  .timeline::before {
+    left: 15px;
+  }
+
+  .timeline-dot {
+    left: 9px;
+  }
+
+  .contact-card {
+    padding: 3rem 1.5rem;
+  }
+
+  .submit-btn {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-title {
+    font-size: 2rem;
+  }
+
+  .btn-primary {
+    width: 100%;
+    text-align: center;
+  }
+
+  .nav-logo {
+    font-size: 1.25rem;
+  }
 }

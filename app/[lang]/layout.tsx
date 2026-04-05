@@ -21,6 +21,7 @@ export async function generateStaticParams() {
 }
 
 import NavLink from './components/NavLink';
+import MobileNav from './components/MobileNav';
 
 export default async function RootLayout({
   children,
@@ -50,41 +51,47 @@ export default async function RootLayout({
             <div className="nav-logo">
               <Link href={`/${lang}`}>Jason Tsai.</Link>
             </div>
-            <div className="nav-links" style={{ display: 'flex', alignItems: 'center', position: 'relative' }}>
-              <NavLink lang={lang} href={`/${lang}`}>{dict.nav.home}</NavLink>
-              <NavLink lang={lang} href={`/${lang}/services`}>{dict.nav.services}</NavLink>
-              <NavLink lang={lang} href={`/${lang}/portfolio`}>{dict.nav.portfolio}</NavLink>
-              <NavLink lang={lang} href={`/${lang}/articles`}>{dict.nav.articles}</NavLink>
-              <NavLink lang={lang} href={`/${lang}/experience`}>{dict.nav.experience}</NavLink>
-              <NavLink lang={lang} href={`/${lang}/contact`}>{dict.nav.contact}</NavLink>
-              
-              {/* Language Switcher */}
-              <details 
-                className="lang-switcher ml-4"
-                style={{ position: 'relative', cursor: 'pointer' }}
-              >
-                <summary className="bg-zinc-800 px-3 py-1 rounded flex items-center" style={{ listStyle: 'none', outline: 'none' }}>
-                  <div style={{ padding: '0 5px' }}>🌐 {lang.toUpperCase()} ▼</div>
-                </summary>
-                <div 
-                   className="lang-dropdown"
-                   style={{
-                     position: 'absolute', top: '100%', right: 0, marginTop: '10px',
-                     background: '#1a1a1a', border: '1px solid #333', borderRadius: '8px',
-                     width: '120px', zIndex: 50, overflow: 'hidden'
-                   }}
+            
+            <div className="desktop-only">
+              <div className="nav-links" style={{ display: 'flex', alignItems: 'center', position: 'relative' }}>
+                <NavLink lang={lang} href={`/${lang}`}>{dict.nav.home}</NavLink>
+                <NavLink lang={lang} href={`/${lang}/services`}>{dict.nav.services}</NavLink>
+                <NavLink lang={lang} href={`/${lang}/portfolio`}>{dict.nav.portfolio}</NavLink>
+                <NavLink lang={lang} href={`/${lang}/articles`}>{dict.nav.articles}</NavLink>
+                <NavLink lang={lang} href={`/${lang}/experience`}>{dict.nav.experience}</NavLink>
+                <NavLink lang={lang} href={`/${lang}/contact`}>{dict.nav.contact}</NavLink>
+                
+                {/* Language Switcher */}
+                <details 
+                  className="lang-switcher ml-4"
+                  style={{ position: 'relative', cursor: 'pointer' }}
                 >
-                  <a href="/zh" style={{ display: 'block', padding: '10px', color: '#fff', textDecoration: 'none' }}>繁體中文</a>
-                  <a href="/en" style={{ display: 'block', padding: '10px', color: '#fff', textDecoration: 'none' }}>English</a>
-                  <a href="/ja" style={{ display: 'block', padding: '10px', color: '#fff', textDecoration: 'none' }}>日本語</a>
-                </div>
-              </details>
+                  <summary className="bg-zinc-800 px-3 py-1 rounded flex items-center" style={{ listStyle: 'none', outline: 'none' }}>
+                    <div style={{ padding: '0 5px' }}>🌐 {lang.toUpperCase()} ▼</div>
+                  </summary>
+                  <div 
+                     className="lang-dropdown"
+                     style={{
+                       position: 'absolute', top: '100%', right: 0, marginTop: '10px',
+                       background: '#1a1a1a', border: '1px solid #333', borderRadius: '8px',
+                       width: '120px', zIndex: 50, overflow: 'hidden'
+                     }}
+                  >
+                    <a href="/zh" style={{ display: 'block', padding: '10px', color: '#fff', textDecoration: 'none' }}>繁體中文</a>
+                    <a href="/en" style={{ display: 'block', padding: '10px', color: '#fff', textDecoration: 'none' }}>English</a>
+                    <a href="/ja" style={{ display: 'block', padding: '10px', color: '#fff', textDecoration: 'none' }}>日本語</a>
+                  </div>
+                </details>
 
-              <style dangerouslySetInnerHTML={{__html: `
-                details.lang-switcher > summary::-webkit-details-marker { display: none; }
-                .lang-dropdown a:hover { background: #333; }
-              `}}/>
+                <style dangerouslySetInnerHTML={{__html: `
+                  details.lang-switcher > summary::-webkit-details-marker { display: none; }
+                  .lang-dropdown a:hover { background: #333; }
+                `}}/>
+              </div>
+            </div>
 
+            <div className="mobile-only">
+              <MobileNav lang={lang} dict={dict} />
             </div>
           </nav>
           

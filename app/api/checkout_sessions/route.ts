@@ -74,23 +74,26 @@ export async function POST(request: Request) {
     const orderNo     = generateOrderNo();
     const timeStamp   = Math.floor(Date.now() / 1000).toString();
 
-    // 組成要加密的 TradeInfo Query String（依藍新規範）
-    const tradeParams = new URLSearchParams({
-      MerchantID:      merchantId,
-      RespondType:     'JSON',
-      TimeStamp:       timeStamp,
-      TransAmt:        String(amount),
-      MerchantOrderNo: orderNo,
-      ItemDesc:        itemName.slice(0, 50),
-      ReturnURL:       `${baseUrl}/${lang}/success?product=${reportId}`,     // 前端跳轉（頁面）
-      NotifyURL:       `${baseUrl}/api/newebpay/callback`,                   // 後台通知（回調）
-      ClientBackURL:   `${baseUrl}/${lang}/reports`,                         // 取消後返回
-      Email:           '',      // 可填客戶 Email（可選）
-      LoginType:       '0',     // 0 = 不需登入藍新帳號
-      CREDIT:          '1',     // 啟用信用卡
-      VACC:            '1',     // 啟用 ATM 轉帳
-      CVS:             '1',     // 啟用超商代碼繳費
-    }).toString();
+    // ─────────────────────────────────────────────
+    // 重要：AES 加密前的字串不可進行 URL Encoding
+    // ─────────────────────────────────────────────
+    const tradeParams = [
+      `MerchantID=${merchantId}`,
+      `RespondType=JSON`,
+      `TimeStamp=${timeStamp}`,
+      `Version=2.0`,
+      `MerchantOrderNo=${orderNo}`,
+      `Amt=${amount}`, // 藍新 2.0 使用 Amt 做為金額欄位
+      `ItemDesc=${itemName.slice(0, 50)}`,
+      `ReturnURL=${baseUrl}/${lang}/success?product=${reportId}`,
+      `NotifyURL=${baseUrl}/api/newebpay/callback`,
+      `ClientBackURL=${baseUrl}/${lang}/reports`,
+      `LoginType=0`,
+      `CREDIT=1`,
+    ].join('&');
+
+    // 決定閘道網址 (如果 MerchantID 是 MS 開頭則強制走測試環境)
+    const finalGateway = merchantId.startsWith('MS') ? NEWEBPAY_STAGE_URL : NEWEBPAY_URL;
 
     // Step 1: AES 加密 → TradeInfo
     const tradeInfo = aesEncrypt(tradeParams, hashKey, hashIV);
@@ -99,7 +102,7 @@ export async function POST(request: Request) {
     const tradeSha = sha256Hash(`HashKey=${hashKey}&${tradeInfo}&HashIV=${hashIV}`);
 
     return NextResponse.json({
-      newebpayUrl: NEWEBPAY_URL,
+      newebpayUrl: finalGateway,
       params: {
         MerchantID: merchantId,
         TradeInfo:  tradeInfo,

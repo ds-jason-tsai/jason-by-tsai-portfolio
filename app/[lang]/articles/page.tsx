@@ -1,4 +1,11 @@
 import { getSortedArticlesData } from '../../../lib/markdown';
+import type { Metadata } from 'next';
+
+export async function generateMetadata({ params }: { params: Promise<{ lang: string }> }): Promise<Metadata> {
+  const lang = (await params).lang;
+  const titles = { zh: "文章專區 | Jason Tsai", en: "Articles | Jason Tsai", ja: "記事一覧 | Jason Tsai" };
+  return { title: titles[lang as 'zh'|'en'|'ja'] || titles['zh'] };
+}
 
 export default async function Articles({ params }: { params: Promise<{ lang: string }> }) {
   const lang = (await params).lang as 'zh' | 'en' | 'ja';

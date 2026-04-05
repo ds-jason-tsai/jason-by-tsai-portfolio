@@ -1,4 +1,11 @@
 import Link from 'next/link';
+import type { Metadata } from 'next';
+
+export async function generateMetadata({ params }: { params: Promise<{ lang: string }> }): Promise<Metadata> {
+  const lang = (await params).lang;
+  const titles = { zh: "專業服務 | Jason Tsai", en: "Services | Jason Tsai", ja: "サービス | Jason Tsai" };
+  return { title: titles[lang as 'zh'|'en'|'ja'] || titles['zh'] };
+}
 
 export default async function Services({ params }: { params: Promise<{ lang: string }> }) {
   const lang = (await params).lang as 'zh' | 'en' | 'ja';

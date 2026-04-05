@@ -1,5 +1,13 @@
 import ContactForm from './ContactForm';
 
+import type { Metadata } from 'next';
+
+export async function generateMetadata({ params }: { params: Promise<{ lang: string }> }): Promise<Metadata> {
+  const lang = (await params).lang;
+  const titles = { zh: "聯絡我 | Jason Tsai", en: "Contact | Jason Tsai", ja: "お問い合わせ | Jason Tsai" };
+  return { title: titles[lang as 'zh'|'en'|'ja'] || titles['zh'] };
+}
+
 export default async function Contact({ params }: { params: Promise<{ lang: string }> }) {
   const lang = (await params).lang as 'zh' | 'en' | 'ja';
   

@@ -8,10 +8,10 @@
     "contact": "聯絡我"
   },
   "home": {
-    "title": "一張圖勝過千言萬語",
-    "subtitle": "我是 Jason Tsai，數據與視覺的譯者",
-    "description": "目前於國泰人壽 (Cathay Life) 擔任數據分析師，專精於 InsurTech、FinTech 與自動化爬蟲分析。同時經營「Chart Bar 視吧」，致力於用數據看時事，將複雜資訊轉化為直覺的洞察。",
+    "title": "將複雜數據，轉化為直覺決策",
+    "subtitle": "我是 Jason Tsai，您的專屬 Data Analyst",
+    "description": "具備深厚的跨領域實務經驗。我不僅是數據分析師，更提供以下專業服務：【資料分析】、【商業分析】、【專案實作教學】、【自動化技術教學】及【企業專業諮詢】。為您從海量數據中挖掘最高商業價值。",
     "cta": "探索專案作品",
-    "contact_cta": "立即聯絡"
+    "contact_cta": "洽詢合作項目"
   }
 }

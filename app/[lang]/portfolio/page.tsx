@@ -1,3 +1,11 @@
+import type { Metadata } from 'next';
+
+export async function generateMetadata({ params }: { params: Promise<{ lang: string }> }): Promise<Metadata> {
+  const lang = (await params).lang;
+  const titles = { zh: "專案作品集 | Jason Tsai", en: "Portfolio | Jason Tsai", ja: "ポートフォリオ | Jason Tsai" };
+  return { title: titles[lang as 'zh'|'en'|'ja'] || titles['zh'] };
+}
+
 export default async function Portfolio({ params }: { params: Promise<{ lang: string }> }) {
   const lang = (await params).lang as 'zh' | 'en' | 'ja';
   
@@ -55,7 +63,7 @@ export default async function Portfolio({ params }: { params: Promise<{ lang: st
               {proj.description[lang]}
             </p>
 
-            <div className="tags-container">
+            <div className="tags-container" style={{ justifyContent: 'center' }}>
               {proj.tags[lang].map((tag, tIdx) => (
                 <span key={tIdx} className="tag">{tag}</span>
               ))}

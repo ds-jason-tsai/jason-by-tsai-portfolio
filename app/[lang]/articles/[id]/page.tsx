@@ -16,6 +16,16 @@ export async function generateStaticParams() {
   return params;
 }
 
+import type { Metadata } from 'next';
+
+export async function generateMetadata({ params }: { params: Promise<{ lang: string, id: string }> }): Promise<Metadata> {
+  const { lang, id } = await params;
+  const articleData = await getArticleData(id);
+  if (!articleData) return { title: "Not Found | Jason Tsai" };
+  const title = articleData.title[lang as 'zh'|'en'|'ja'] || articleData.title['zh'];
+  return { title: `${title} | Jason Tsai` };
+}
+
 export default async function ArticlePage({ params }: { params: Promise<{ lang: string, id: string }> }) {
   const { lang, id } = await params;
   const articleData = await getArticleData(id);

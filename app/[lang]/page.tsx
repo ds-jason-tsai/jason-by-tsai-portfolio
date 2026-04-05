@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { getDictionary } from '../dictionaries';
+import StatSection from './components/StatSection';
 
 export default async function Home({ params }: { params: Promise<{ lang: string }> }) {
   const lang = (await params).lang as 'zh' | 'en' | 'ja';
@@ -106,6 +107,8 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
           />
         </div>
       </section>
+
+      <StatSection dict={dict} />
 
       <section className="featured-media" style={{ padding: '2rem 0 5rem 0', textAlign: 'center', width: '100%', overflow: 'hidden' }}>
         <h2 className="section-title">{dict.home.featured_highlights || (lang === 'zh' ? '精選特輯' : 'Featured Highlights')}</h2>

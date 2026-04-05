@@ -19,6 +19,11 @@
     "contact_cta": "協力を相談する",
     "featured_courses": "おすすめ講座",
     "social_label": "データインサイトをフォロー",
-    "featured_highlights": "特集ハイライト"
+    "featured_highlights": "特集ハイライト",
+    "stats": {
+      "students": "学員数",
+      "projects": "指導プロジェクト数",
+      "hours": "講座時間"
+    }
   }
 }

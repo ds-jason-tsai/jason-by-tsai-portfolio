@@ -19,6 +19,11 @@
     "contact_cta": "洽詢合作項目",
     "featured_courses": "推薦熱門課程",
     "social_label": "追蹤我的數據洞察",
-    "featured_highlights": "精選特輯"
+    "featured_highlights": "精選特輯",
+    "stats": {
+      "students": "學員數",
+      "projects": "指導專案數",
+      "hours": "線上課程時數"
+    }
   }
 }

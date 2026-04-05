@@ -19,6 +19,11 @@
     "contact_cta": "Discuss Cooperation",
     "featured_courses": "Featured Courses",
     "social_label": "Follow my Data Insights",
-    "featured_highlights": "Featured Highlights"
+    "featured_highlights": "Featured Highlights",
+    "stats": {
+      "students": "Students",
+      "projects": "Guided Projects",
+      "hours": "Online Course Hours"
+    }
   }
 }

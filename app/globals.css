@@ -16,6 +16,12 @@
   padding: 0;
 }
 
+/* Global Reset for Link Colors to prevent Purple Visited states */
+a, a:link, a:visited {
+  color: inherit;
+  text-decoration: none;
+}
+
 body {
   font-family: 'Inter', sans-serif;
   background-color: var(--bg-color);
@@ -53,9 +59,9 @@ h1, h2, h3, h4 {
   position: sticky;
   top: 0;
   z-index: 100;
-  background: rgba(5, 5, 5, 0.85);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  background: rgba(5, 5, 5, 0.96); /* Increased opacity to prevent text clashing */
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
   margin-left: -2rem;
   margin-right: -2rem;
   padding-left: 2rem;
@@ -403,7 +409,8 @@ h1, h2, h3, h4 {
   }
 
   .nav {
-    padding: 1rem 0;
+    padding: 1rem 2rem; /* Restore side padding in mobile */
+    background: rgba(5, 5, 5, 0.98); /* Almost solid on mobile for readability */
   }
 
   .hero {

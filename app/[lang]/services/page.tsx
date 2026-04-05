@@ -126,7 +126,7 @@ export default async function Services({ params }: { params: Promise<{ lang: str
               <p className="service-desc" style={{ flexGrow: 1 }}>{svc.desc}</p>
               
               <div style={{ marginTop: '1.5rem', alignSelf: 'flex-start' }}>
-                 <span className="btn-primary" style={{ display: 'inline-block', padding: '0.6rem 1.5rem', fontSize: '0.9rem', background: 'transparent', border: '1px solid var(--accent-color)', color: 'var(--accent-color)', borderRadius: '30px' }}>
+                 <span className="btn-primary" style={{ display: 'inline-block', padding: '0.6rem 1.5rem', fontSize: '0.95rem', background: 'var(--accent-grad)', border: 'none', color: '#000', borderRadius: '30px', fontWeight: '800' }}>
                     {t.cta}
                  </span>
               </div>

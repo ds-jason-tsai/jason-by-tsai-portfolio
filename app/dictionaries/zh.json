@@ -1,4 +1,7 @@
 {
+  "brand": {
+    "logo": "傑森數據"
+  },
   "nav": {
     "home": "首頁",
     "services": "服務項目",
@@ -12,6 +15,7 @@
     "subtitle": "我是 Jason Tsai，您的專屬 Data Analyst",
     "description": "具備深厚的跨領域實務經驗。我不僅是數據分析師，更提供以下專業服務：【資料分析】、【商業分析】、【專案實作教學】、【自動化技術教學】及【企業專業諮詢】。為您從海量數據中挖掘最高商業價值。",
     "cta": "探索專案作品",
-    "contact_cta": "洽詢合作項目"
+    "contact_cta": "洽詢合作項目",
+    "featured_courses": "推薦熱門課程"
   }
 }

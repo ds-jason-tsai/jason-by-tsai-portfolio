@@ -1,4 +1,7 @@
 {
+  "brand": {
+    "logo": "Jason Analytics"
+  },
   "nav": {
     "home": "Home",
     "services": "Services",
@@ -12,6 +15,7 @@
     "subtitle": "I'm Jason Tsai, Your Dedicated Data Analyst",
     "description": "Offering deep cross-disciplinary expertise. I am more than a Data Analyst—I provide comprehensive services in [Data Analysis], [Business Analytics], [Project Teaching], [Technical Enablement], and [Professional Consulting] to uncover the highest commercial value from vast amounts of data.",
     "cta": "Explore Projects",
-    "contact_cta": "Discuss Cooperation"
+    "contact_cta": "Discuss Cooperation",
+    "featured_courses": "Featured Courses"
   }
 }

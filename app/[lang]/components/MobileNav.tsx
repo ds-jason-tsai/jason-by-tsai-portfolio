@@ -60,7 +60,7 @@ export default function MobileNav({
       <div className={`mobile-drawer ${isOpen ? 'open' : ''}`}>
         <div className="mobile-drawer-header">
           <div className="nav-logo">
-            <Link href={`/${lang}`} onClick={() => setIsOpen(false)}>Jason Tsai.</Link>
+            <Link href={`/${lang}`} onClick={() => setIsOpen(false)}>{dict.brand?.logo || 'Jason Tsai'}</Link>
           </div>
         </div>
 
@@ -166,16 +166,16 @@ export default function MobileNav({
           margin-bottom: 4rem;
         }
 
-        .mobile-nav-links a {
+        .mobile-nav-links a, .mobile-nav-links a:visited {
           font-size: 1.5rem;
           font-weight: 800;
-          color: var(--text-secondary);
+          color: var(--text-secondary) !important;
           text-decoration: none;
           transition: color 0.3s ease;
         }
 
-        .mobile-nav-links a.active {
-          color: var(--text-primary);
+        .mobile-nav-links a.active, .mobile-nav-links a.active:visited {
+          color: var(--text-primary) !important;
           background: var(--accent-grad);
           -webkit-background-clip: text;
           background-clip: text;

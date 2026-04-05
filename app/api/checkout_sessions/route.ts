@@ -56,10 +56,10 @@ export async function POST(request: Request) {
     const body = await request.json();
     const { reportId, lang = 'zh', price: customPrice, productName: customName } = body;
 
-    const merchantId = process.env.NEWEBPAY_MERCHANT_ID;
-    const hashKey    = process.env.NEWEBPAY_HASH_KEY;
-    const hashIV     = process.env.NEWEBPAY_HASH_IV;
-    const baseUrl    = process.env.NEXT_PUBLIC_BASE_URL;
+    const merchantId = (process.env.NEWEBPAY_MERCHANT_ID || '').trim();
+    const hashKey    = (process.env.NEWEBPAY_HASH_KEY || '').trim();
+    const hashIV     = (process.env.NEWEBPAY_HASH_IV || '').trim();
+    const baseUrl    = (process.env.NEXT_PUBLIC_BASE_URL || '').trim();
 
     if (!merchantId || !hashKey || !hashIV) {
       return NextResponse.json(

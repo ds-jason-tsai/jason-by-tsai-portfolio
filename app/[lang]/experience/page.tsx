@@ -59,13 +59,7 @@ export default async function Experience({ params }: { params: Promise<{ lang: s
               <div className="timeline-date">{item.date}</div>
               <h3 className="timeline-role">{item.role}</h3>
               <div className="timeline-company">
-                {item.url ? (
-                  <a href={item.url} target="_blank" rel="noopener noreferrer" style={{ color: 'var(--accent-color)', textDecoration: 'none', borderBottom: '1px dotted var(--accent-color)', paddingBottom: '1px' }}>
-                    {item.company} ↗
-                  </a>
-                ) : (
-                  item.company
-                )}
+                {item.company}
               </div>
               <p className="service-desc">{item.desc}</p>
             </div>
@@ -78,14 +72,14 @@ export default async function Experience({ params }: { params: Promise<{ lang: s
            Partner Platforms & Multi-Brand Collaboration
         </h3>
         <div style={{ display: 'flex', gap: '3rem', justifyContent: 'center', flexWrap: 'wrap', alignItems: 'center', maxWidth: '900px', margin: '0 auto' }}>
+          <a href="https://kkschool.kolable.app/" target="_blank" rel="noopener follow" className="partner-logo">
+             nSchool
+          </a>
           <a href="https://www.xplatform.world/" target="_blank" rel="noopener follow" className="partner-logo">
-             nSchool/X Platform/無限學院
+             X Platform
           </a>
-          <a href="https://www.ooschool.cc/" target="_blank" rel="noopener follow" className="partner-logo" style={{ fontSize: '1rem', opacity: 0.8 }}>
-             無限學院官網
-          </a>
-          <a href="https://kkschool.kolable.app/" target="_blank" rel="noopener follow" className="partner-logo" style={{ fontSize: '1rem', opacity: 0.8 }}>
-             OOSchool官網
+          <a href="https://www.ooschool.cc/" target="_blank" rel="noopener follow" className="partner-logo">
+             無限學院
           </a>
           <a href="https://live.rookiesavior.net/" target="_blank" rel="noopener follow" className="partner-logo">
              {lang === 'zh' ? '聯成電腦(菜鳥救星)' : (lang === 'ja' ? '聯成電腦' : 'Lien Cheng (Rookie Savior)')}

@@ -37,6 +37,24 @@ const EducationIcon = () => (
   </svg>
 );
 
+const ReportIcon = () => (
+  <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+    <polyline points="14 2 14 8 20 8"></polyline>
+    <line x1="16" y1="13" x2="8" y2="13"></line>
+    <line x1="16" y1="17" x2="8" y2="17"></line>
+    <polyline points="10 9 9 9 8 9"></polyline>
+  </svg>
+);
+
+const CartIcon = () => (
+  <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <circle cx="9" cy="21" r="1"></circle>
+    <circle cx="20" cy="21" r="1"></circle>
+    <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+  </svg>
+);
+
 export default async function Services({ params }: { params: Promise<{ lang: string }> }) {
   const lang = (await params).lang as 'zh' | 'en' | 'ja';
   
@@ -46,10 +64,12 @@ export default async function Services({ params }: { params: Promise<{ lang: str
       desc: "結合商業思維與深厚技術底蘊，為您提供專屬的數據驅動解決方案。",
       cta: "👉 立即預約諮詢",
       services: [
-        { icon: <DataIcon />, name: "資料與商業分析", desc: "以嚴謹的統計分析與大數據探勘，找出隱藏的商業模式與潛在機會。", price: "請聯絡討論" },
-        { icon: <IntegrationIcon />, name: "MarTech 技術導入", desc: "顧客資料平台 (CDP) 導入與數位行銷生態系 (GA4, Celebrus) 整合優化。", price: "請聯絡討論" },
-        { icon: <ChartIcon />, name: "客製化儀表板建置", desc: "使用 Tableau 等工具建立互動式視覺化儀表板，將冰冷數據轉化為決策故事。", price: "請聯絡討論" },
-        { icon: <EducationIcon />, name: "專案與自動化教學", desc: "提供 Tableau、Python 資料分析、自動化流程與 MarTech 工具的企業內訓或教學。", price: "1200 TWD / hr" }
+        { icon: <DataIcon />, name: "數據諮詢", desc: "2B2C 皆可，包含資料處理、專案製作、家教、企業軟體導入等。", price: "請聯絡討論" },
+        { icon: <ReportIcon />, name: "客製化分析報告", desc: "以嚴謹的商業思維，轉化冰冷數據為戰略級深入洞察報告。", price: "請聯絡討論" },
+        { icon: <ChartIcon />, name: "客製化儀表板", desc: "使用 Tableau、Looker Studio 建立互動式視覺化架構，輔助決策。", price: "請聯絡討論" },
+        { icon: <IntegrationIcon />, name: "MarTech 技術導入", desc: "包含 GA4 網站事件追蹤、CDP (如 Celebrus) 顧客數據平台生態組合。", price: "請聯絡討論" },
+        { icon: <EducationIcon />, name: "專案指導", desc: "大學、研究所求職作品集 (Focus: 數據/商業分析師、資料科學、AI)。", price: "1,200 TWD / hr" },
+        { icon: <CartIcon />, name: "數據與報告販售", desc: "爬蟲乾淨資料、市場報告，未來將上架串連金流提供線上自動購買。", price: "即將上線" }
       ]
     },
     en: {
@@ -57,10 +77,12 @@ export default async function Services({ params }: { params: Promise<{ lang: str
       desc: "Delivering data-driven solutions with a blend of business acumen and technical depth.",
       cta: "👉 Book a Consultation",
       services: [
-        { icon: <DataIcon />, name: "Data & Business Analysis", desc: "Rigorous statistical analysis and data mining to uncover hidden business opportunities.", price: "Contact for Pricing" },
-        { icon: <IntegrationIcon />, name: "MarTech Integration", desc: "CDP implementation and digital marketing ecosystem (GA4, Celebrus) technical optimization.", price: "Contact for Pricing" },
-        { icon: <ChartIcon />, name: "Dashboard Architecture", desc: "Interactive Tableau dashboards that turn raw data into strategic storytelling for decision makers.", price: "Contact for Pricing" },
-        { icon: <EducationIcon />, name: "Training & Enablement", desc: "Corporate training and workflow automation for Tableau, Python data analysis, and MarTech.", price: "1200 TWD / hr" }
+        { icon: <DataIcon />, name: "Data Consulting", desc: "B2B/B2C data processing, project creation, tutoring, and software integration.", price: "Contact for Pricing" },
+        { icon: <ReportIcon />, name: "Custom Analytics Reports", desc: "Transforming raw data into strategic, business-driven insight reports.", price: "Contact for Pricing" },
+        { icon: <ChartIcon />, name: "Custom Dashboards", desc: "Interactive visualization using Tableau and Looker Studio tailored to your needs.", price: "Contact for Pricing" },
+        { icon: <IntegrationIcon />, name: "MarTech Integration", desc: "Implementation of GA4 event tracking and CDP platforms (e.g. Celebrus).", price: "Contact for Pricing" },
+        { icon: <EducationIcon />, name: "Mentorship & Guidance", desc: "Portfolio guidance for college/grad students (DA/BA/DS/AI Engineer).", price: "1,200 TWD / hr" },
+        { icon: <CartIcon />, name: "Data & Reports Store", desc: "Clean scraped datasets and market reports. Online storefront coming soon.", price: "Coming Soon" }
       ]
     },
     ja: {
@@ -68,10 +90,12 @@ export default async function Services({ params }: { params: Promise<{ lang: str
       desc: "ビジネスの洞察力と深い技術力を融合させたデータ駆動型ソリューションを提供します。",
       cta: "👉 無料相談を予約",
       services: [
-        { icon: <DataIcon />, name: "データ＆ビジネス分析", desc: "厳密な統計分析とデータマイニングによる、隠れたビジネス機会の発掘。", price: "要相談 (Contact)" },
-        { icon: <IntegrationIcon />, name: "MarTech 導入", desc: "CDPの導入及びデジタルマーケティング・エコシステム(GA4, Celebrus)の技術的最適化。", price: "要相談 (Contact)" },
-        { icon: <ChartIcon />, name: "カスタムダッシュボード", desc: "Tableauなどを使用したダッシュボード環境構築とデータからストーリーへの変換。", price: "要相談 (Contact)" },
-        { icon: <EducationIcon />, name: "トレーニング・自動化指導", desc: "Tableau、Python分析、自動化ワークフローなどの企業向け研修や教育支援。", price: "1200 TWD / hr" }
+        { icon: <DataIcon />, name: "データコンサルティング", desc: "B2B/B2Cに対応。データ処理、プロジェクト制作、個別指導、導入支援等。", price: "要相談 (Contact)" },
+        { icon: <ReportIcon />, name: "カスタム分析レポート", desc: "独自のビジネス思考を活用し、データを戦略レベルの洞察レポートへ変換。", price: "要相談 (Contact)" },
+        { icon: <ChartIcon />, name: "カスタムダッシュボード", desc: "Tableau、Looker Studioを使用した対話型ダッシュボード環境の構築。", price: "要相談 (Contact)" },
+        { icon: <IntegrationIcon />, name: "MarTech 導入", desc: "GA4イベントトラッキング、CDPなどのマーケティングエコシステム統合。", price: "要相談 (Contact)" },
+        { icon: <EducationIcon />, name: "プロジェクトメンター", desc: "大学生・大学院生向けポートフォリオ作成指導（DA/BA/DS/AIエンジニア）。", price: "1,200 TWD / hr" },
+        { icon: <CartIcon />, name: "データ＆レポート販売", desc: "スクレイピングデータや市場レポート。オンライン決済ストア近日公開。", price: "まもなく公開" }
       ]
     }
   };

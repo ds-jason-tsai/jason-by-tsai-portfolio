@@ -7,7 +7,8 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
 }
 
 export default async function Experience({ params }: { params: Promise<{ lang: string }> }) {
-  const lan  const content = {
+  const lang = (await params).lang as 'zh' | 'en' | 'ja';
+  const content = {
     zh: { title: "完整職涯經歷", 
           desc: "從前端技術建置到高階戰略規劃，始終在第一線創造數據影響力。",
           exp: [
@@ -97,65 +98,6 @@ export default async function Experience({ params }: { params: Promise<{ lang: s
           .partner-logo:hover {
              opacity: 1;
              color: var(--accent-color);
-             transform: translateY(-2px);
-          }
-        `}} />
-      </div>
-    </section>
-  );
-}��通大學 (NYCU)", desc: "ビジネス管理、データ駆動型の意思決定、運用戦略分析を専攻。" },
-            { date: "2019.09 - 2021.06", role: "経営学士 (BBA)", company: "國立臺北商業大學 (NTUB)", desc: "ビジネス分析の基礎を構築。在学中にTOEIC金賞（860点）、JLPT N3、Google Analytics認定、ERP資格を取得。" }
-          ]
-    }
-  };
-
-  const t = content[lang];
-
-  return (
-    <section className="experience fade-in" style={{ padding: '0 2rem' }}>
-      <h2 className="section-title">{t.title}</h2>
-      <p style={{ textAlign: 'center', marginBottom: '4rem', color: 'var(--text-secondary)' }}>{t.desc}</p>
-      <div className="timeline">
-        {t.exp.map((item, idx) => (
-          <div className="timeline-item" key={idx}>
-            <div className="timeline-dot"></div>
-            <div className="timeline-content">
-              <div className="timeline-date">{item.date}</div>
-              <h3 className="timeline-role">{item.role}</h3>
-              <div className="timeline-company">{item.company}</div>
-              <p className="service-desc">{item.desc}</p>
-            </div>
-          </div>
-        ))}
-      </div>
-
-      <div className="trusted-by-section" style={{ marginTop: '5rem', marginBottom: '2rem', textAlign: 'center' }}>
-        <h3 style={{ fontSize: '1.1rem', color: 'var(--text-secondary)', marginBottom: '2rem', textTransform: 'uppercase', letterSpacing: '2px' }}>
-           Trusted By & Featured On
-        </h3>
-        <div style={{ display: 'flex', gap: '3rem', justifyContent: 'center', flexWrap: 'wrap', alignItems: 'center' }}>
-          <a href="https://www.xplatform.world/" target="_blank" rel="noopener follow" className="partner-logo">
-             X Platform
-          </a>
-          <a href="https://live.rookiesavior.net/" target="_blank" rel="noopener follow" className="partner-logo">
-             菜鳥救星 <span style={{ fontWeight: 400, marginLeft: '0.2rem', fontSize: '1.1rem' }}>Rookie Savior</span>
-          </a>
-        </div>
-        <style dangerouslySetInnerHTML={{__html: `
-          .partner-logo {
-             font-size: 1.5rem;
-             font-weight: 900;
-             color: #fff;
-             opacity: 0.5;
-             text-decoration: none;
-             transition: all 0.3s ease;
-             letter-spacing: 1px;
-             font-family: var(--font-geist-sans), sans-serif;
-             display: flex;
-             align-items: center;
-          }
-          .partner-logo:hover {
-             opacity: 1;
              transform: translateY(-2px);
           }
         `}} />

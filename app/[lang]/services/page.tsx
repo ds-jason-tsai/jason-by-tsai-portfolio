@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import type { Metadata } from 'next';
+import BuyButton from '../components/BuyButton';
 
 export async function generateMetadata({ params }: { params: Promise<{ lang: string }> }): Promise<Metadata> {
   const lang = (await params).lang;
@@ -107,9 +108,10 @@ export default async function Services({ params }: { params: Promise<{ lang: str
       <h2 className="section-title">{t.title}</h2>
       <p style={{ textAlign: 'center', marginBottom: '3rem', color: 'var(--text-secondary)' }}>{t.desc}</p>
       <div className="services-grid">
-        {t.services.map((svc, idx) => (
-          <Link href={`/${lang}/contact`} key={idx} style={{ textDecoration: 'none', color: 'inherit' }}>
-            <div className="service-card" style={{ cursor: 'pointer', height: '100%', display: 'flex', flexDirection: 'column' }}>
+        {t.services.map((svc, idx) => {
+          const isStore = idx === 5; // The 6th item is the data store
+          const cardContent = (
+            <div className="service-card" style={{ cursor: isStore ? 'default' : 'pointer', height: '100%', display: 'flex', flexDirection: 'column' }}>
               <div className="service-icon">{svc.icon}</div>
               <h3 className="service-title">{svc.name}</h3>
               <div className="service-price-tag" style={{
@@ -126,13 +128,27 @@ export default async function Services({ params }: { params: Promise<{ lang: str
               <p className="service-desc" style={{ flexGrow: 1 }}>{svc.desc}</p>
               
               <div style={{ marginTop: '1.5rem', alignSelf: 'flex-start' }}>
-                 <span className="btn-primary" style={{ display: 'inline-block', padding: '0.6rem 1.5rem', fontSize: '0.95rem', background: 'var(--accent-grad)', border: 'none', color: '#000', borderRadius: '30px', fontWeight: '800' }}>
-                    {t.cta}
-                 </span>
+                 {isStore ? (
+                   <BuyButton reportId="report_1" lang={lang} buttonText={lang === 'zh' ? '💳 立即購買 (500 TWD)' : '💳 Buy Now (500 TWD)'} />
+                 ) : (
+                   <span className="btn-primary" style={{ display: 'inline-block', padding: '0.6rem 1.5rem', fontSize: '0.95rem', background: 'var(--accent-grad)', border: 'none', color: '#000', borderRadius: '30px', fontWeight: '800' }}>
+                      {t.cta}
+                   </span>
+                 )}
               </div>
             </div>
-          </Link>
-        ))}
+          );
+
+          if (isStore) {
+            return <div key={idx} style={{ textDecoration: 'none', color: 'inherit' }}>{cardContent}</div>;
+          }
+
+          return (
+            <Link href={`/${lang}/contact`} key={idx} style={{ textDecoration: 'none', color: 'inherit' }}>
+              {cardContent}
+            </Link>
+          );
+        })}
       </div>
     </section>
   );

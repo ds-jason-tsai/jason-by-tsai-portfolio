@@ -58,78 +58,81 @@ export default async function Reports({ params }: { params: Promise<{ lang: stri
   ];
 
   return (
-    <section className="fade-in" style={{ padding: '0 2rem' }}>
+    <section className="fade-in" style={{ padding: '0 2rem', position: 'relative' }}>
+      {/* Background decoration */}
+      <div style={{
+        position: 'absolute', top: '-100px', left: '50%', transform: 'translateX(-50%)',
+        width: '600px', height: '600px', background: 'var(--accent-color)',
+        borderRadius: '50%', filter: 'blur(150px)', opacity: 0.1, zIndex: -1
+      }}></div>
+
       <div style={{ textAlign: 'center', marginBottom: '4rem' }}>
-        <h2 className="section-title">{t.title}</h2>
-        <p style={{ color: 'var(--text-secondary)', maxWidth: '680px', margin: '0 auto', lineHeight: '1.8' }}>
+        <h2 className="section-title" style={{ fontSize: '3rem', fontWeight: '900', letterSpacing: '-1px' }}>{t.title}</h2>
+        <p style={{ color: 'var(--text-secondary)', maxWidth: '680px', margin: '0 auto', lineHeight: '1.8', fontSize: '1.1rem' }}>
           {t.desc}
         </p>
       </div>
 
-      {/* Reports grid — capped at 720px so cards don't stretch on wide screens */}
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 380px))', gap: '2rem', justifyContent: 'center', maxWidth: '1200px', margin: '0 auto' }}>
-        {reports.map((report) => (
+      <div className="reports-grid" style={{ 
+        display: 'grid', 
+        gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 420px))', 
+        gap: '2.5rem', 
+        justifyContent: 'center', 
+        maxWidth: '1200px', 
+        margin: '0 auto' 
+      }}>
+        {reports.map((report, idx) => (
           <div
             key={report.id}
-            className="service-card"
-            style={{ display: 'flex', flexDirection: 'column', padding: '0', overflow: 'hidden', maxWidth: '420px', width: '100%' }}
+            className="report-card"
+            style={{ 
+              display: 'flex', 
+              flexDirection: 'column', 
+              padding: '0', 
+              overflow: 'hidden', 
+              animation: `slideUp 0.6s ease forwards ${idx * 0.1}s`,
+              opacity: 0,
+              transform: 'translateY(20px)'
+            }}
           >
             {/* Cover Image — fixed aspect ratio, no stretching */}
-            <div style={{ width: '100%', aspectRatio: '16/9', position: 'relative', overflow: 'hidden', background: '#1a1a2e' }}>
+            <div className="report-image-wrapper" style={{ width: '100%', aspectRatio: '16/9', position: 'relative', overflow: 'hidden', background: '#0a0a0f' }}>
               <Image
                 src={report.image}
                 alt={report.title[lang]}
                 fill
-                style={{ objectFit: 'contain', objectPosition: 'center', transition: 'transform 0.5s ease', padding: '0.5rem' }}
-                className="portfolio-img-hover"
+                style={{ objectFit: 'contain', objectPosition: 'center', transition: 'transform 0.6s cubic-bezier(0.33, 1, 0.68, 1)', padding: '0.75rem' }}
+                className="report-img"
               />
               {/* Exclusive Badge */}
-              <div style={{
-                position: 'absolute', top: '12px', right: '12px',
-                background: 'var(--accent-grad)', color: '#000',
-                padding: '0.25rem 0.75rem', borderRadius: '20px',
-                fontSize: '0.75rem', fontWeight: '800',
-              }}>
+              <div className="premium-badge">
                 {t.badge}
               </div>
+              <div className="image-overlay"></div>
             </div>
 
             {/* Content */}
-            <div style={{ padding: '1.5rem', display: 'flex', flexDirection: 'column', flex: 1, gap: '0.75rem' }}>
-              <h3 style={{ fontSize: '1.2rem', fontWeight: '800', lineHeight: '1.4' }}>
+            <div style={{ padding: '2rem', display: 'flex', flexDirection: 'column', flex: 1, gap: '1rem' }}>
+              <h3 style={{ fontSize: '1.35rem', fontWeight: '800', lineHeight: '1.3', background: 'linear-gradient(to right, #fff, #888)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
                 {report.title[lang]}
               </h3>
 
-              <p style={{ color: 'var(--text-secondary)', fontSize: '0.9rem', lineHeight: '1.7', flex: 1 }}>
+              <p style={{ color: 'var(--text-secondary)', fontSize: '0.95rem', lineHeight: '1.7', flex: 1 }}>
                 {report.description[lang]}
               </p>
 
-              <div className="tags-container" style={{ justifyContent: 'flex-start' }}>
+              <div className="tags-container" style={{ justifyContent: 'flex-start', flexWrap: 'wrap', gap: '0.5rem' }}>
                 {report.tags.map((tag, i) => (
-                  <span key={i} className="tag">{tag}</span>
+                  <span key={i} className="tag" style={{ fontSize: '0.75rem', padding: '0.2rem 0.6rem', background: 'rgba(255,255,255,0.05)', borderRadius: '4px', border: '1px solid rgba(255,255,255,0.1)' }}>{tag}</span>
                 ))}
               </div>
 
               {/* Price + Buy */}
-              <div style={{
-                marginTop: '1rem',
-                padding: '1rem',
-                background: 'rgba(0,242,254,0.05)',
-                borderRadius: '12px',
-                border: '1px solid rgba(0,242,254,0.15)',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'space-between',
-                gap: '1rem',
-                flexWrap: 'wrap',
-              }}>
-                <div>
-                  <div style={{ fontSize: '1.8rem', fontWeight: '900', color: 'var(--accent-color)' }}>
-                    NT${report.price}
-                  </div>
-                  <div style={{ fontSize: '0.8rem', color: 'var(--text-secondary)', marginTop: '0.2rem' }}>
-                    📥 {t.downloadLabel}
-                  </div>
+              <div className="price-action-container">
+                <div className="price-info">
+                  <div className="price-label">EST. VALUE</div>
+                  <div className="price-val">NT${report.price}</div>
+                  <div className="status-label">📥 {t.downloadLabel}</div>
                 </div>
                 <BuyButton
                   reportId={report.id}
@@ -145,8 +148,111 @@ export default async function Reports({ params }: { params: Promise<{ lang: stri
       </div>
 
       <style dangerouslySetInnerHTML={{__html: `
-        .service-card:hover .portfolio-img-hover {
-          transform: scale(1.03);
+        @keyframes slideUp {
+          to { opacity: 1; transform: translateY(0); }
+        }
+
+        .report-card {
+          background: rgba(255, 255, 255, 0.02);
+          border: 1px solid rgba(255, 255, 255, 0.05);
+          border-radius: 24px;
+          transition: all 0.4s cubic-bezier(0.33, 1, 0.68, 1);
+          position: relative;
+          z-index: 1;
+        }
+
+        .report-card:hover {
+          transform: translateY(-8px);
+          background: rgba(255, 255, 255, 0.04);
+          border-color: var(--accent-color);
+          box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), 0 0 20px rgba(0, 242, 254, 0.1);
+        }
+
+        .report-card::before {
+          content: '';
+          position: absolute;
+          inset: 0;
+          border-radius: 24px;
+          padding: 1px;
+          background: linear-gradient(45deg, transparent, rgba(0, 242, 254, 0.3), transparent);
+          mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+          mask-composite: exclude;
+          opacity: 0;
+          transition: opacity 0.4s;
+          pointer-events: none;
+        }
+
+        .report-card:hover::before {
+          opacity: 1;
+        }
+
+        .report-card:hover .report-img {
+          transform: scale(1.05);
+        }
+
+        .image-overlay {
+          position: absolute;
+          inset: 0;
+          background: linear-gradient(to top, #000, transparent);
+          opacity: 0.3;
+        }
+
+        .premium-badge {
+          position: absolute; 
+          top: 16px; 
+          right: 16px;
+          background: var(--accent-grad); 
+          color: #000;
+          padding: 0.35rem 1rem; 
+          border-radius: 50px;
+          font-size: 0.7rem; 
+          font-weight: 900;
+          z-index: 2;
+          box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+          text-transform: uppercase;
+        }
+
+        .price-action-container {
+          margin-top: 1.5rem;
+          padding: 1.25rem;
+          background: rgba(255, 255, 255, 0.03);
+          border-radius: 16px;
+          border: 1px solid rgba(255, 255, 255, 0.05);
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          gap: 1rem;
+          flex-wrap: wrap;
+        }
+
+        .price-label {
+          font-size: 0.6rem;
+          color: var(--text-secondary);
+          letter-spacing: 1px;
+          margin-bottom: 2px;
+        }
+
+        .price-val {
+          font-size: 1.7rem; 
+          font-weight: 900; 
+          color: var(--accent-color);
+          line-height: 1;
+        }
+
+        .status-label {
+          font-size: 0.7rem; 
+          color: var(--text-secondary); 
+          margin-top: 4px;
+        }
+
+        @media (max-width: 480px) {
+          .price-action-container {
+            flex-direction: column;
+            align-items: flex-start;
+          }
+          .price-action-container > div:last-child {
+            width: 100%;
+          }
         }
       `}} />
     </section>

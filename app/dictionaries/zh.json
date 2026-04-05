@@ -6,6 +6,7 @@
     "home": "首頁",
     "services": "服務項目",
     "portfolio": "作品集",
+    "reports": "💎 付費報告",
     "articles": "文章專區",
     "experience": "經歷",
     "contact": "聯絡我"
@@ -13,9 +14,11 @@
   "home": {
     "title": "將複雜數據，轉化為直覺決策",
     "subtitle": "我是 Jason Tsai，您的專屬 Data Analyst",
-    "description": "具備深厚的跨領域實務經驗。我不僅是數據分析師，更提供以下專業服務：【資料分析】、【商業分析】、【專案實作教學】、【自動化技術教學】及【企業專業諮詢】。為您從海量數據中挖掘最高商業價值。",
-    "cta": "探索專案作品",
+    "description": "具備深厚的跨領域實務經驗。我不僅是數據分析師，更提供以下專業服務：【資料分析】、【商業分析】、【專職作品集指導】及【自動化技術導入】。為您從海量數據中挖掘核心價值。",
+    "cta": "探索作品集",
     "contact_cta": "洽詢合作項目",
-    "featured_courses": "推薦熱門課程"
+    "featured_courses": "推薦熱門課程",
+    "social_label": "追蹤我的數據洞察",
+    "featured_highlights": "精選特輯"
   }
 }

@@ -54,7 +54,7 @@ h1, h2, h3, h4 {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1.5rem 0;
+  padding: 1.5rem 2rem;
   border-bottom: 1px solid var(--glass-border);
   position: sticky;
   top: 0;
@@ -62,10 +62,17 @@ h1, h2, h3, h4 {
   background: #050505; /* Solid background for readability */
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  margin-left: -2rem;
-  margin-right: -2rem;
-  padding-left: 2rem;
-  padding-right: 2rem;
+  /* Remove negative margins that cause clipping on mobile */
+  width: 100%;
+}
+
+@media (max-width: 768px) {
+  .nav {
+    padding: 1.2rem 1.5rem;
+  }
+  .nav-logo {
+    font-size: 1.2rem;
+  }
 }
 
 .nav-logo {

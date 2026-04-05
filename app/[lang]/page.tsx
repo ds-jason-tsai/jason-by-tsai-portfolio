@@ -71,7 +71,7 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
 
           <div className="social-links-section">
             <p className="social-label">
-              Follow my Data Insights
+              {dict.home.social_label || (lang === 'zh' ? '追蹤我的數據洞察' : 'Follow my Data Insights')}
             </p>
             <div className="social-icons">
               <a href="https://tw.linkedin.com/in/jasonb0604" target="_blank" rel="noopener noreferrer" className="social-icon-link">LinkedIn</a>
@@ -84,10 +84,10 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
              <p className="social-label">{dict.home.featured_courses || '推薦熱門課程'}</p>
              <div className="course-buttons" style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
                <a href="https://live.rookiesavior.net/course/tableau" target="_blank" rel="noopener noreferrer" className="btn-primary" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', padding: '0.6rem 1.5rem', fontSize: '0.95rem', borderRadius: '15px' }}>
-                 <span style={{ fontSize: '1.2rem' }}>📊</span> Tableau 商業視覺化實戰
+                 <span style={{ fontSize: '1.2rem' }}>📊</span> {lang === 'zh' ? 'Tableau 商業視覺化實戰' : 'Tableau Business Viz'}
                </a>
                <a href="https://live.rookiesavior.net/course/AI-NotubookLM" target="_blank" rel="noopener noreferrer" className="btn-primary" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', padding: '0.6rem 1.5rem', fontSize: '0.95rem', borderRadius: '15px' }}>
-                 <span style={{ fontSize: '1.2rem' }}>🤖</span> NotebookLM x AI 應用
+                 <span style={{ fontSize: '1.2rem' }}>🤖</span> {lang === 'zh' ? 'NotebookLM x AI 應用' : 'NotebookLM x AI Apps'}
                </a>
              </div>
           </div>
@@ -107,7 +107,7 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
       </section>
 
       <section className="featured-media" style={{ padding: '2rem 0 5rem 0', textAlign: 'center', width: '100%', overflow: 'hidden' }}>
-        <h2 className="section-title">{lang === 'zh' ? '精選特輯' : 'Featured Highlights'}</h2>
+        <h2 className="section-title">{dict.home.featured_highlights || (lang === 'zh' ? '精選特輯' : 'Featured Highlights')}</h2>
         <div className="carousel-container">
           <div className="carousel-track">
             {/* Map the array twice for seamless infinite scrolling */}
@@ -130,7 +130,7 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
                   ></iframe>
                 </div>
                 <a href={post.link} target="_blank" rel="noopener noreferrer" className="media-action">
-                  前往原文觀看 ↗
+                  {lang === 'zh' ? '前往原文觀看' : 'View Original Post'} ↗
                 </a>
               </div>
             ))}

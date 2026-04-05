@@ -6,9 +6,11 @@ interface BuyButtonProps {
   reportId: string;
   lang: string;
   buttonText: string;
+  price?: number;
+  productName?: string;
 }
 
-export default function BuyButton({ reportId, lang, buttonText }: BuyButtonProps) {
+export default function BuyButton({ reportId, lang, buttonText, price, productName }: BuyButtonProps) {
   const [loading, setLoading] = useState(false);
 
   const handleCheckout = async () => {
@@ -19,7 +21,7 @@ export default function BuyButton({ reportId, lang, buttonText }: BuyButtonProps
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ reportId, lang }),
+        body: JSON.stringify({ reportId, lang, price, productName }),
       });
       const data = await response.json();
       if (data.url) {

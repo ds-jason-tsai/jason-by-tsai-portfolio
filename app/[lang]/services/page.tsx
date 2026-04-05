@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import type { Metadata } from 'next';
-import BuyButton from '../components/BuyButton';
+// BuyButton is now on the /reports page itself
 
 export async function generateMetadata({ params }: { params: Promise<{ lang: string }> }): Promise<Metadata> {
   const lang = (await params).lang;
@@ -70,7 +70,7 @@ export default async function Services({ params }: { params: Promise<{ lang: str
         { icon: <ChartIcon />, name: "客製化儀表板", desc: "使用 Tableau、Looker Studio 建立互動式視覺化架構，輔助決策。", price: "請聯絡討論" },
         { icon: <IntegrationIcon />, name: "MarTech 技術導入", desc: "包含 GA4 網站事件追蹤、CDP (如 Celebrus) 顧客數據平台生態組合。", price: "請聯絡討論" },
         { icon: <EducationIcon />, name: "專案指導", desc: "大學、研究所求職作品集 (Focus: 數據/商業分析師、資料科學、AI)。", price: "1,200 TWD / hr" },
-        { icon: <CartIcon />, name: "數據與報告販售", desc: "爬蟲乾淨資料、市場報告，未來將上架串連金流提供線上自動購買。", price: "即將上線" }
+        { icon: <CartIcon />, name: lang === 'zh' ? '付費數據洞察報告' : lang === 'ja' ? 'データ＆レポート販売' : 'Data & Reports Store', desc: lang === 'zh' ? '爬蟲乾淨資料、市場報告及 Solution Engineer 簡報。購買後立即下載，無需等待。' : lang === 'ja' ? 'スクレイピングデータや市場レポート。購入後すぐにダウンロード可能。' : 'Clean datasets, market reports & SE pitch decks. Download instantly after purchase.', price: lang === 'zh' ? '立即選購 →' : 'Shop Now →' }
       ]
     },
     en: {
@@ -129,7 +129,9 @@ export default async function Services({ params }: { params: Promise<{ lang: str
               
               <div style={{ marginTop: '1.5rem', alignSelf: 'flex-start' }}>
                  {isStore ? (
-                   <BuyButton reportId="report_1" lang={lang} buttonText={lang === 'zh' ? '💳 立即購買 (500 TWD)' : '💳 Buy Now (500 TWD)'} />
+                   <Link href={`/${lang}/reports`} className="btn-primary" style={{ display: 'inline-block', padding: '0.6rem 1.5rem', fontSize: '0.95rem', borderRadius: '30px', fontWeight: '800', textAlign: 'center' }}>
+                      {lang === 'zh' ? '💎 前往報告區' : lang === 'ja' ? '💎 レポート一覧' : '💎 View Reports'}
+                   </Link>
                  ) : (
                    <span className="btn-primary" style={{ display: 'inline-block', padding: '0.6rem 1.5rem', fontSize: '0.95rem', background: 'var(--accent-grad)', border: 'none', color: '#000', borderRadius: '30px', fontWeight: '800' }}>
                       {t.cta}

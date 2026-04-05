@@ -21,7 +21,7 @@ export default async function Portfolio({ params }: { params: Promise<{ lang: st
     { 
       title: { zh: "保險公司研究 (Aflac)", en: "Aflac Insurance Research", ja: "Aflac 保険会社戦略研究" }, 
       type: 2, 
-      image: "/images/aflac_mockup.png",
+      image: "/images/aflac_cover.png",
       url: "https://drive.google.com/file/d/1EQiMMQfrRplLjNljCLiQWHUxQ121xxDL/view?usp=drive_link",
       description: {
         zh: "深入研究 Aflac 在全球意外與健康險市場的成功要素。分析其獨特的代理商模式，並探討如何透過整合 NAYYA (AI 推薦)、SKYGEN 與 Empathy 等 InsurTech 合作夥伴來強化數位轉型與客戶體驗。",
@@ -37,7 +37,7 @@ export default async function Portfolio({ params }: { params: Promise<{ lang: st
     { 
       title: { zh: "ChartBar 圖表分析懶人包", en: "ChartBar Analysis Cheat Sheet", ja: "ChartBar 分析チートシート" }, 
       type: 1, 
-      image: "/images/chartbar_mockup.png",
+      image: "/images/chartbar_cover.png",
       url: "https://drive.google.com/file/d/1T2UfuswNYamtVFWASDgXwYsdXAQs8Uhl/view?usp=drive_link",
       description: {
         zh: "精選 40+ 款必學商業圖表，提供從基礎趨勢到進階技術控制圖的完整選擇標準。旨在優化視覺傳達效率，幫助數據分析師快速為特定商業情境選擇最合適的視覺化工具。",

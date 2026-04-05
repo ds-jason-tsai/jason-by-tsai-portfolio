@@ -65,12 +65,12 @@ export default async function Services({ params }: { params: Promise<{ lang: str
       desc: "結合商業思維與深厚技術底蘊，為您提供專屬的數據驅動解決方案。",
       cta: "👉 立即預約諮詢",
       services: [
+        { icon: <CartIcon />, name: lang === 'zh' ? '付費數據洞察報告' : lang === 'ja' ? 'データ＆レポート販売' : 'Data & Reports Store', desc: lang === 'zh' ? '爬蟲乾淨資料、市場報告及 Solution Engineer 簡報。購買後立即下載，無需等待。' : lang === 'ja' ? 'スクレイピングデータや市場レポート。購入後すぐにダウンロード可能。' : 'Clean datasets, market reports & SE pitch decks. Download instantly after purchase.', price: lang === 'zh' ? '立即選購 →' : 'Shop Now →' },
         { icon: <DataIcon />, name: "數據諮詢", desc: "2B2C 皆可，包含資料處理、專案製作、家教、企業軟體導入等。", price: "請聯絡討論" },
         { icon: <ReportIcon />, name: "客製化分析報告", desc: "以嚴謹的商業思維，轉化冰冷數據為戰略級深入洞察報告。", price: "請聯絡討論" },
         { icon: <ChartIcon />, name: "客製化儀表板", desc: "使用 Tableau、Looker Studio 建立互動式視覺化架構，輔助決策。", price: "請聯絡討論" },
         { icon: <IntegrationIcon />, name: "MarTech 技術導入", desc: "包含 GA4 網站事件追蹤、CDP (如 Celebrus) 顧客數據平台生態組合。", price: "請聯絡討論" },
         { icon: <EducationIcon />, name: "專案指導", desc: "大學、研究所求職作品集 (Focus: 數據/商業分析師、資料科學、AI)。", price: "1,200 TWD / hr" },
-        { icon: <CartIcon />, name: lang === 'zh' ? '付費數據洞察報告' : lang === 'ja' ? 'データ＆レポート販売' : 'Data & Reports Store', desc: lang === 'zh' ? '爬蟲乾淨資料、市場報告及 Solution Engineer 簡報。購買後立即下載，無需等待。' : lang === 'ja' ? 'スクレイピングデータや市場レポート。購入後すぐにダウンロード可能。' : 'Clean datasets, market reports & SE pitch decks. Download instantly after purchase.', price: lang === 'zh' ? '立即選購 →' : 'Shop Now →' }
       ]
     },
     en: {
@@ -78,12 +78,12 @@ export default async function Services({ params }: { params: Promise<{ lang: str
       desc: "Delivering data-driven solutions with a blend of business acumen and technical depth.",
       cta: "👉 Book a Consultation",
       services: [
+        { icon: <CartIcon />, name: "Data & Reports Store", desc: "Clean scraped datasets and market reports. Online storefront coming soon.", price: "Coming Soon" },
         { icon: <DataIcon />, name: "Data Consulting", desc: "B2B/B2C data processing, project creation, tutoring, and software integration.", price: "Contact for Pricing" },
         { icon: <ReportIcon />, name: "Custom Analytics Reports", desc: "Transforming raw data into strategic, business-driven insight reports.", price: "Contact for Pricing" },
         { icon: <ChartIcon />, name: "Custom Dashboards", desc: "Interactive visualization using Tableau and Looker Studio tailored to your needs.", price: "Contact for Pricing" },
         { icon: <IntegrationIcon />, name: "MarTech Integration", desc: "Implementation of GA4 event tracking and CDP platforms (e.g. Celebrus).", price: "Contact for Pricing" },
         { icon: <EducationIcon />, name: "Mentorship & Guidance", desc: "Portfolio guidance for college/grad students (DA/BA/DS/AI Engineer).", price: "1,200 TWD / hr" },
-        { icon: <CartIcon />, name: "Data & Reports Store", desc: "Clean scraped datasets and market reports. Online storefront coming soon.", price: "Coming Soon" }
       ]
     },
     ja: {
@@ -91,12 +91,12 @@ export default async function Services({ params }: { params: Promise<{ lang: str
       desc: "ビジネスの洞察力と深い技術力を融合させたデータ駆動型ソリューションを提供します。",
       cta: "👉 無料相談を予約",
       services: [
+        { icon: <CartIcon />, name: "データ＆レポート販売", desc: "スクレイピングデータや市場レポート。オンライン決済ストア近日公開。", price: "まもなく公開" },
         { icon: <DataIcon />, name: "データコンサルティング", desc: "B2B/B2Cに対応。データ処理、プロジェクト制作、個別指導、導入支援等。", price: "要相談 (Contact)" },
         { icon: <ReportIcon />, name: "カスタム分析レポート", desc: "独自のビジネス思考を活用し、データを戦略レベルの洞察レポートへ変換。", price: "要相談 (Contact)" },
         { icon: <ChartIcon />, name: "カスタムダッシュボード", desc: "Tableau、Looker Studioを使用した対話型ダッシュボード環境の構築。", price: "要相談 (Contact)" },
         { icon: <IntegrationIcon />, name: "MarTech 導入", desc: "GA4イベントトラッキング、CDPなどのマーケティングエコシステム統合。", price: "要相談 (Contact)" },
-        { icon: <EducationIcon />, name: "プロジェクトメンター", desc: "大学生・大学院生向けポートフォリオ作成指導（DA/BA/DS/AIエンジニア）。", price: "1,200 TWD / hr" },
-        { icon: <CartIcon />, name: "データ＆レポート販売", desc: "スクレイピングデータや市場レポート。オンライン決済ストア近日公開。", price: "まもなく公開" }
+        { icon: <EducationIcon />, name: "プロジェクトメンター", desc: "大学生・大学院生向けポートフォリオ作成指導（DA/BA/DS/AIエンジニア）。", price: "1,200 TWD / hr" }
       ]
     }
   };
@@ -109,7 +109,7 @@ export default async function Services({ params }: { params: Promise<{ lang: str
       <p style={{ textAlign: 'center', marginBottom: '3rem', color: 'var(--text-secondary)' }}>{t.desc}</p>
       <div className="services-grid">
         {t.services.map((svc, idx) => {
-          const isStore = idx === 5; // The 6th item is the data store
+          const isStore = svc.name.includes('Store') || svc.name.includes('販売') || svc.name.includes('報告');
           const cardContent = (
             <div className="service-card" style={{ cursor: isStore ? 'default' : 'pointer', height: '100%', display: 'flex', flexDirection: 'column' }}>
               <div className="service-icon">{svc.icon}</div>

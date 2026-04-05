@@ -16,7 +16,7 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
     {
       type: 'facebook',
       label: 'Facebook 專家分享',
-      title: '專題演講：台大行銷管理顧問社',
+      title: '案例分享：台大行銷管理顧問社 (NTU SC)',
       src: 'https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fntuscmarketingclub%2Fposts%2Fpfbid0357pcq7YU5nsgWSkHhzAseDFLwqEFv8cWupFRCD5L3SLNCV6RJZBQf7U3cRd4P9d2l&show_text=true&width=500',
       link: 'https://www.facebook.com/ntuscmarketingclub/posts/pfbid0357pcq7YU5nsgWSkHhzAseDFLwqEFv8cWupFRCD5L3SLNCV6RJZBQf7U3cRd4P9d2l'
     },
@@ -50,18 +50,12 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
     },
     {
       type: 'facebook',
-      label: 'Facebook 粉絲專頁',
-      title: '職涯分享：台大 SC 創新創業',
+      label: 'Facebook 專家分享',
+      title: '專題演講：台大行銷管理顧問社 (NTU SC)',
       src: 'https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fntuscmarketingclub%2Fposts%2Fpfbid0zUWYsKdJKRZE1CdAKBGiEq5ciP5kAoiPNi8RqqUTkJkMrM3AyfNfSP4RKKSHoaVtl&show_text=true&width=500',
       link: 'https://www.facebook.com/ntuscmarketingclub/posts/pfbid0zUWYsKdJKRZE1CdAKBGiEq5ciP5kAoiPNi8RqqUTkJkMrM3AyfNfSP4RKKSHoaVtl'
     },
-    {
-      type: 'instagram',
-      label: 'Instagram 工作坊',
-      title: 'Tableau特訓：清大管顧社',
-      src: 'https://www.instagram.com/p/CtjZ0K7rEqT/embed',
-      link: 'https://www.instagram.com/p/CtjZ0K7rEqT/'
-    }
+
   ];
 
   return (
@@ -259,7 +253,7 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
           width: max-content;
           gap: 2.5rem;
           padding: 0 1.25rem;
-          animation: scroll 40s linear infinite;
+          animation: scroll 80s linear infinite;
         }
 
         .carousel-track:hover {

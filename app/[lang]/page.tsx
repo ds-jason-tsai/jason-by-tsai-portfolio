@@ -8,6 +8,20 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
   const featuredPosts = [
     {
       type: 'youtube',
+      label: 'YouTube 邀請專訪',
+      title: '傑森數據：資料分析師的轉職之路',
+      src: 'https://www.youtube.com/embed/Jci-U6_jRIw',
+      link: 'https://www.youtube.com/watch?v=Jci-U6_jRIw'
+    },
+    {
+      type: 'facebook',
+      label: 'Facebook 專家分享',
+      title: '專題演講：台大行銷管理顧問社',
+      src: 'https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fntuscmarketingclub%2Fposts%2Fpfbid0357pcq7YU5nsgWSkHhzAseDFLwqEFv8cWupFRCD5L3SLNCV6RJZBQf7U3cRd4P9d2l&show_text=true&width=500',
+      link: 'https://www.facebook.com/ntuscmarketingclub/posts/pfbid0357pcq7YU5nsgWSkHhzAseDFLwqEFv8cWupFRCD5L3SLNCV6RJZBQf7U3cRd4P9d2l'
+    },
+    {
+      type: 'youtube',
       label: 'YouTube 企業研討會',
       title: '零壹科技：敏捷自助BI分析',
       src: 'https://www.youtube.com/embed/hyVawV_2lkg',

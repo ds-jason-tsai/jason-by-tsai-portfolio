@@ -142,8 +142,8 @@ export default function MobileNav({
           right: -300px;
           width: 300px;
           height: 100%;
-          background: #050505 !important;
-          background-color: #050505 !important;
+          background: #000 !important;
+          background-color: #000 !important;
           border-left: 1px solid var(--glass-border);
           padding: 2.5rem 1.5rem;
           transition: right 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -153,10 +153,14 @@ export default function MobileNav({
           box-shadow: -10px 0 40px rgba(0,0,0,0.9);
           -webkit-backdrop-filter: none !important;
           backdrop-filter: none !important;
+          opacity: 1 !important;
+          visibility: visible !important;
         }
 
         .mobile-drawer.open {
-          right: 0;
+          right: 0 !important;
+          visibility: visible !important;
+          opacity: 1 !important;
         }
 
         .mobile-drawer-header {

@@ -4,10 +4,10 @@ import crypto from 'crypto';
 // 藍新金流付款完成後，會 POST 到這個 endpoint (NotifyURL)
 // 藍新要求不回傳特定格式，只需回 HTTP 200 即可
 
-const REPORT_DOWNLOAD_LINKS: Record<string, string> = {
-  salesforce_se: 'https://drive.google.com/file/d/1SCD4IGORxikCEXHALAP3zuUt5ArDnvkf/view?usp=sharing',
-  // 新增報告時在這裡加：
-  // new_report: 'https://drive.google.com/...',
+const REPORT_DOWNLOAD_LINKS: Record<string, string | undefined> = {
+  salesforce_se: process.env.DOWNLOAD_LINK_SALESFORCE_SE,
+  // 新增報告時在這裡加對應的環境變數：
+  // new_report: process.env.DOWNLOAD_LINK_NEW_REPORT,
 };
 
 /** AES-256-CBC 解密（藍新 TradeInfo）*/

@@ -8,13 +8,33 @@ import Script from 'next/script';
 const geistSans = Geist({ variable: "--font-geist-sans", subsets: ["latin"] });
 const geistMono = Geist_Mono({ variable: "--font-geist-mono", subsets: ["latin"] });
 
-export const metadata: Metadata = {
-  title: "傑森數據 | 數據分析",
-  description: "Portfolio of Jason Tsai",
-  verification: {
-    google: "QTIRGrJx67BIEr6FwZpodhAMNjYA01zw2g5-zE7GzNQ",
-  },
-};
+export async function generateMetadata({ params }: { params: Promise<{ lang: string }> }): Promise<Metadata> {
+  const lang = (await params).lang;
+  const baseUrl = 'https://jason-by-tsai-portfolio.vercel.app';
+  
+  const titles = {
+    zh: "傑森數據 | 數據分析",
+    en: "Jason Analytics | Data Analysis",
+    ja: "ジェイソン・アナリティクス | データ分析"
+  };
+
+  return {
+    title: titles[lang as keyof typeof titles] || titles.zh,
+    description: "Portfolio of Jason Tsai",
+    verification: {
+      google: "QTIRGrJx67BIEr6FwZpodhAMNjYA01zw2g5-zE7GzNQ",
+    },
+    alternates: {
+      canonical: `${baseUrl}/${lang}`,
+      languages: {
+        'zh-Hant': `${baseUrl}/zh`,
+        'en': `${baseUrl}/en`,
+        'ja': `${baseUrl}/ja`,
+        'x-default': `${baseUrl}/zh`,
+      },
+    },
+  };
+}
 
 export async function generateStaticParams() {
    return [{ lang: 'zh' }, { lang: 'en' }, { lang: 'ja' }];

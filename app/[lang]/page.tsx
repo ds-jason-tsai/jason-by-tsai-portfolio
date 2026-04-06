@@ -82,14 +82,14 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
             </div>
           </div>
 
-          <div className="hero-courses-section" style={{ marginTop: '3rem' }}>
-             <p className="social-label">{dict.home.featured_courses || '推薦熱門課程'}</p>
-             <div className="course-buttons" style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
-               <a href="https://live.rookiesavior.net/course/tableau" target="_blank" rel="noopener noreferrer" className="btn-primary" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', padding: '0.6rem 1.5rem', fontSize: '0.95rem', borderRadius: '15px' }}>
-                 <span style={{ fontSize: '1.2rem' }}>📊</span> {lang === 'zh' ? 'Tableau 商業視覺化實戰' : 'Tableau Business Viz'}
+          <div className="hero-courses-section" style={{ marginTop: '4rem' }}>
+             <p className="social-label" style={{ marginBottom: '2rem' }}>{dict.home.featured_courses || '推薦熱門課程'}</p>
+             <div className="course-buttons" style={{ display: 'flex', gap: '1.2rem', justifyContent: 'center', flexWrap: 'wrap' }}>
+               <a href="https://live.rookiesavior.net/course/tableau" target="_blank" rel="noopener noreferrer" className="btn-primary course-mini-btn">
+                 <span style={{ fontSize: '1rem' }}>📊</span> {lang === 'zh' ? 'Tableau 商業視覺化實戰' : 'Tableau Business Viz'}
                </a>
-               <a href="https://live.rookiesavior.net/course/AI-NotubookLM" target="_blank" rel="noopener noreferrer" className="btn-primary" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', padding: '0.6rem 1.5rem', fontSize: '0.95rem', borderRadius: '15px' }}>
-                 <span style={{ fontSize: '1.2rem' }}>🤖</span> {lang === 'zh' ? 'NotebookLM x AI 應用' : 'NotebookLM x AI Apps'}
+               <a href="https://live.rookiesavior.net/course/AI-NotubookLM" target="_blank" rel="noopener noreferrer" className="btn-primary course-mini-btn">
+                 <span style={{ fontSize: '1rem' }}>🤖</span> {lang === 'zh' ? 'NotebookLM x AI 應用' : 'NotebookLM x AI Apps'}
                </a>
              </div>
           </div>
@@ -157,6 +157,7 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
           justify-content: center;
           gap: 3rem;
           text-align: center;
+          overflow: hidden;
         }
         .hero-content {
           max-width: 800px;
@@ -207,11 +208,24 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
           font-size: 1rem;
           transition: all 0.3s ease;
         }
+
+        .course-mini-btn {
+          padding: 0.5rem 1.2rem !important;
+          font-size: 0.85rem !important;
+          border-radius: 12px !important;
+          display: flex;
+          align-items: center;
+          gap: 0.4rem;
+        }
         
         .hero-image-outer {
           position: relative;
-          width: 100%;
-          min-height: 500px;
+          width: 100vw;
+          left: 50%;
+          right: 50%;
+          margin-left: -50vw;
+          margin-right: -50vw;
+          min-height: 600px;
           display: flex;
           align-items: center;
           justify-content: center;
@@ -257,7 +271,7 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
 
         @media (max-width: 768px) {
           .hero-title { font-size: 2.5rem; }
-          .hero-image-outer { min-height: 400px; }
+          .hero-image-outer { min-height: 450px; }
         }
 
         @media (max-width: 640px) {

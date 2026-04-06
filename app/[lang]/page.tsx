@@ -115,7 +115,7 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
 
       <StatSection dict={dict} />
 
-      <section className="featured-media" style={{ padding: '2rem 0 5rem 0', textAlign: 'center', width: '100%', overflow: 'hidden' }}>
+      <section className="featured-media" style={{ padding: '6rem 0', textAlign: 'center', width: '100%', overflow: 'hidden' }}>
         <h2 className="section-title">{dict.home.featured_highlights || (lang === 'zh' ? '精選特輯' : 'Featured Highlights')}</h2>
         <div className="carousel-container">
           <div className="carousel-track">
@@ -253,13 +253,42 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
           z-index: -1;
         }
 
+        .carousel-container {
+          width: 100%;
+          overflow: hidden;
+          position: relative;
+          padding: 2rem 0;
+        }
+
+        .carousel-track {
+          display: flex;
+          width: max-content;
+          gap: 2.5rem;
+          animation: scroll 80s linear infinite;
+        }
+
+        .media-card {
+          width: 380px;
+          flex-shrink: 0;
+          background: var(--glass-bg);
+          padding: 1.5rem;
+          border-radius: 20px;
+          border: 1px solid var(--glass-border);
+          transition: transform 0.3s ease, border-color 0.3s ease;
+          display: flex;
+          flex-direction: column;
+          gap: 1rem;
+        }
+
+        @keyframes scroll {
+          0% { transform: translateX(0); }
+          100% { transform: translateX(calc(-50% - 1.25rem)); }
+        }
+
         @media (max-width: 768px) {
           .hero-title { font-size: 2.5rem; }
           .hero-image-outer { height: 400px; }
-        }
-
-        @media (max-width: 640px) {
-          .hero-btns { flex-direction: column; gap: 1rem; }
+          .media-card { width: 320px; }
         }
       `}}/>
     </>

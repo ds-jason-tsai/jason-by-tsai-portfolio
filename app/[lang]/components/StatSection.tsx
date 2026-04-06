@@ -9,7 +9,7 @@ interface CounterProps {
   duration?: number;
 }
 
-const Counter = ({ value, label, suffix = '', duration = 2000 }: CounterProps) => {
+const Counter = ({ value, label, suffix = '', duration = 800 }: CounterProps) => {
   const [count, setCount] = useState(0);
   const countRef = useRef<HTMLDivElement>(null);
   const [isVisible, setIsVisible] = useState(false);

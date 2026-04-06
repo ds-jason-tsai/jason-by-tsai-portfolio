@@ -11,7 +11,7 @@ export default async function Portfolio({ params }: { params: Promise<{ lang: st
   const lang = (await params).lang as 'zh' | 'en' | 'ja';
   
   const content = {
-    zh: { title: "專案作品集", desc: "點擊預覽或下載我的過往專案與簡報文件：", type: ["儀表板", "商業提案", "技術研究"], btn: "線上預覽 / 下載", pending: "資料準備中" },
+    zh: { title: "專案作品集", desc: "點擊預覽或下載我的過往專案與簡報文件：", type: ["數據分析", "商業提案", "技術研究"], btn: "線上預覽 / 下載", pending: "資料準備中" },
     en: { title: "Project Portfolio", desc: "Click to preview or download my past projects and presentation files:", type: ["Dashboard", "Business Proposal", "Tech Research"], btn: "Preview / Download", pending: "Coming Soon" },
     ja: { title: "ポートフォリオ", desc: "過去のプロジェクトやプレゼン資料をクリックしてプレビューまたはダウンロードできます：", type: ["ダッシュボード", "事業提案", "技術研究"], btn: "プレビュー / ダウンロード", pending: "準備中" }
   };

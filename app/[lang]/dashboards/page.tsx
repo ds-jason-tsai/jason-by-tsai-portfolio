@@ -226,7 +226,7 @@ export default function DashboardsPage({ params }: { params: Promise<{ lang: str
         }
         .carousel-btn {
           position: absolute;
-          top: 60%; /* Adjusted to center more on the iframe content */
+          top: 55%; /* Adjusted for better visual balance across sections */
           transform: translateY(-50%);
           width: 50px;
           height: 50px;

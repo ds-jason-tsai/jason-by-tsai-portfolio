@@ -103,7 +103,7 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
                 width={380} 
                 height={380} 
                 className="hero-image"
-                style={{ objectPosition: 'center top', objectFit: 'cover', borderRadius: '50%', border: '4px solid rgba(0, 242, 254, 0.3)', position: 'relative', zIndex: 1 }}
+                style={{ objectPosition: 'center top', objectFit: 'cover', borderRadius: '50%', border: '4px solid rgba(0, 242, 254, 0.3)', position: 'relative', zIndex: 1, transition: 'transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)' }}
                 priority
               />
             </div>
@@ -127,7 +127,7 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
             {[...featuredPosts, ...featuredPosts].map((post, index) => (
               <div className="media-card" key={index}>
                 <div className="media-card-header">
-                  <span className="media-badge">{post.label}</span>
+                  <span className="media-badge" style={{ color: 'var(--accent-color)', fontWeight: '900', border: '1px solid var(--accent-color)' }}>{post.label}</span>
                   <h3 className="media-title">{post.title}</h3>
                 </div>
                 <div className="media-iframe-wrapper" style={{ flex: 1, display: 'flex', alignItems: 'center', background: post.type === 'facebook' || post.type === 'instagram' ? '#fff' : 'transparent', borderRadius: '10px' }}>
@@ -142,9 +142,11 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
                     allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
                   ></iframe>
                 </div>
-                <a href={post.link} target="_blank" rel="noopener noreferrer" className="media-action">
-                  {lang === 'zh' ? '前往原文觀看' : 'View Original Post'} ↗
-                </a>
+                <div style={{ padding: '0 1.5rem 1.5rem' }}>
+                  <a href={post.link} target="_blank" rel="noopener noreferrer" className="btn-primary" style={{ display: 'block', fontSize: '0.9rem', padding: '0.8rem' }}>
+                    {lang === 'zh' ? '前往原文觀看' : 'View Original Post'} ↗
+                  </a>
+                </div>
               </div>
             ))}
           </div>
@@ -152,6 +154,11 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
       </section>
 
       <style dangerouslySetInnerHTML={{__html: `
+        .hero-image:hover {
+          transform: scale(1.08) rotate(1deg);
+          box-shadow: 0 0 40px rgba(0, 242, 254, 0.4);
+          border-color: rgba(0, 242, 254, 0.8) !important;
+        }
         .social-icon-link {
           transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), color 0.3s ease;
           display: inline-block;

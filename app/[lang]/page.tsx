@@ -59,9 +59,6 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
             {dict.home.title} <br />
             <span>{dict.home.subtitle}</span>
           </h1>
-          <p style={{ fontSize: '1.15rem', color: 'var(--text-secondary)', marginTop: '0.5rem', marginBottom: '2rem', fontWeight: 500, lineHeight: '1.6' }}>
-             {lang === 'zh' ? '金融業資料分析師、多個數位學習平台 AI/資料分析導師、臺清交政等社團資料視覺化講師' : (lang === 'ja' ? '金融データアナリスト / AI・データ分析講師 / トップ大学データ視覚化講師' : 'Financial Data Analyst / AI & Data Analysis Instructor / Top Universities Data Viz Lecturer')}
-          </p>
           <p className="hero-desc" style={{ whiteSpace: 'pre-wrap', lineHeight: '1.8' }}>
             {dict.home.description}
           </p>
@@ -113,9 +110,14 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
             <h2 style={{ marginTop: '1.5rem', fontSize: '2.5rem', fontWeight: 800, background: 'var(--accent-grad)', WebkitBackgroundClip: 'text', backgroundClip: 'text', WebkitTextFillColor: 'transparent', letterSpacing: '2px' }}>
               Jason Tsai
             </h2>
+            <p style={{ textAlign: 'center', fontSize: '1rem', color: 'var(--text-secondary)', marginTop: '1rem', fontWeight: 500, lineHeight: '1.6', maxWidth: '380px' }}>
+               {lang === 'zh' ? '金融業資料分析師、多個數位學習平台 AI/資料分析導師、臺清交政等社團資料視覺化講師' : (lang === 'ja' ? '金融データアナリスト / AI・データ分析講師 / トップ大学データ視覚化講師' : 'Financial Data Analyst / AI & Data Analysis Instructor / Top Universities Data Viz Lecturer')}
+            </p>
           </div>
         </div>
       </section>
+
+      <StatSection dict={dict} />
 
       <section className="featured-media" style={{ padding: '6rem 0', textAlign: 'center', width: '100%', overflow: 'hidden' }}>
         <h2 className="section-title">{dict.home.featured_highlights || (lang === 'zh' ? '精選特輯' : 'Featured Highlights')}</h2>
@@ -149,9 +151,16 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
         </div>
       </section>
 
-      <StatSection dict={dict} />
-
       <style dangerouslySetInnerHTML={{__html: `
+        .social-icon-link {
+          transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), color 0.3s ease;
+          display: inline-block;
+        }
+        .social-icon-link:hover {
+          transform: translateY(-5px) scale(1.1);
+          color: var(--accent-color) !important;
+          text-shadow: 0 0 15px rgba(0, 242, 254, 0.5);
+        }
         .hero {
           min-height: auto;
           padding: 4rem 2rem;

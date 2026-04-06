@@ -99,7 +99,7 @@ export default async function Experience({ params }: { params: Promise<{ lang: s
                 {item.companies ? (
                   item.companies.map((c: any, cIdx: number) => (
                     <span key={cIdx} style={{ display: 'inline-flex', alignItems: 'center', gap: '0.4rem' }}>
-                      {c.logo && <img src={c.logo} alt="logo" style={{ width: '20px', height: '20px', borderRadius: '4px', objectFit: 'contain', background: 'white', padding: '1px' }} onError={(e) => { e.currentTarget.style.display = 'none'; }} />}
+                      {c.logo && <img src={c.logo} alt="logo" style={{ width: '20px', height: '20px', borderRadius: '4px', objectFit: 'contain', background: 'white', padding: '1px' }} />}
                       <a href={c.url} target="_blank" rel="noopener noreferrer" style={{ color: 'var(--accent-color)', textDecoration: 'none', borderBottom: '1px dotted var(--accent-color)', paddingBottom: '1px' }}>
                         {c.name}
                       </a>
@@ -108,7 +108,7 @@ export default async function Experience({ params }: { params: Promise<{ lang: s
                   ))
                 ) : (
                   <span style={{ display: 'inline-flex', alignItems: 'center', gap: '0.4rem' }}>
-                    {item.logo && <img src={item.logo} alt="logo" style={{ width: '20px', height: '20px', borderRadius: '4px', objectFit: 'contain', background: 'white', padding: '1px' }} onError={(e) => { e.currentTarget.style.display = 'none'; }} />}
+                    {item.logo && <img src={item.logo} alt="logo" style={{ width: '20px', height: '20px', borderRadius: '4px', objectFit: 'contain', background: 'white', padding: '1px' }} />}
                     {item.url ? (
                       <a href={item.url} target="_blank" rel="noopener noreferrer" style={{ color: 'var(--accent-color)', textDecoration: 'none', borderBottom: '1px dotted var(--accent-color)', paddingBottom: '1px' }}>
                         {item.company} ↗
@@ -131,16 +131,16 @@ export default async function Experience({ params }: { params: Promise<{ lang: s
         </h3>
         <div style={{ display: 'flex', gap: '3rem', justifyContent: 'center', flexWrap: 'wrap', alignItems: 'center', maxWidth: '900px', margin: '0 auto' }}>
           <a href="https://kkschool.kolable.app/" target="_blank" rel="noopener follow" className="partner-logo">
-             <img src="https://logo.clearbit.com/kolable.app" alt="" style={{ width: 24, height: 24, marginRight: 8, borderRadius: 4, background: 'white', padding: 2 }} onError={(e) => e.currentTarget.style.display='none'} /> nSchool
+             <img src="https://logo.clearbit.com/kolable.app" alt="" style={{ width: 24, height: 24, marginRight: 8, borderRadius: 4, background: 'white', padding: 2 }} /> nSchool
           </a>
           <a href="https://www.xplatform.world/" target="_blank" rel="noopener follow" className="partner-logo">
-             <img src="https://logo.clearbit.com/xplatform.world" alt="" style={{ width: 24, height: 24, marginRight: 8, borderRadius: 4, background: 'white', padding: 2 }} onError={(e) => e.currentTarget.style.display='none'} /> X Platform
+             <img src="https://logo.clearbit.com/xplatform.world" alt="" style={{ width: 24, height: 24, marginRight: 8, borderRadius: 4, background: 'white', padding: 2 }} /> X Platform
           </a>
           <a href="https://www.ooschool.cc/" target="_blank" rel="noopener follow" className="partner-logo">
-             <img src="https://logo.clearbit.com/ooschool.cc" alt="" style={{ width: 24, height: 24, marginRight: 8, borderRadius: 4, background: 'white', padding: 2 }} onError={(e) => e.currentTarget.style.display='none'} /> 無限學院
+             <img src="https://logo.clearbit.com/ooschool.cc" alt="" style={{ width: 24, height: 24, marginRight: 8, borderRadius: 4, background: 'white', padding: 2 }} /> 無限學院
           </a>
           <a href="https://live.rookiesavior.net/" target="_blank" rel="noopener follow" className="partner-logo">
-             <img src="https://logo.clearbit.com/lccnet.com.tw" alt="" style={{ width: 24, height: 24, marginRight: 8, borderRadius: 4, background: 'white', padding: 2 }} onError={(e) => e.currentTarget.style.display='none'} />
+             <img src="https://logo.clearbit.com/lccnet.com.tw" alt="" style={{ width: 24, height: 24, marginRight: 8, borderRadius: 4, background: 'white', padding: 2 }} />
              {lang === 'zh' ? '聯成電腦(菜鳥救星)' : (lang === 'ja' ? '聯成電腦' : 'Lien Cheng (Rookie Savior)')}
           </a>
         </div>

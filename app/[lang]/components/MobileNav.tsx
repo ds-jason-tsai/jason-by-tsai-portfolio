@@ -73,7 +73,7 @@ export default function MobileNav({
       >
         <div className="mobile-drawer-header">
           <div className="nav-logo">
-            <Link href={`/${lang}`} onClick={() => setIsOpen(false)} style={{ color: '#00f2fe' }}>
+            <Link href={`/${lang}`} onClick={() => setIsOpen(false)} style={{ color: '#ffffff', fontWeight: '800' }}>
               {dict.brand?.logo || 'Jason Tsai'}
             </Link>
           </div>
@@ -87,12 +87,13 @@ export default function MobileNav({
               className={pathname === link.href ? 'active' : ''}
               onClick={() => setIsOpen(false)}
               style={{ 
-                color: '#00f2fe',
-                fontSize: '1.5rem',
-                fontWeight: '800',
+                color: '#ffffff',
+                fontSize: '1.1rem',
+                fontWeight: '600',
                 textDecoration: 'none',
                 display: 'block',
-                marginBottom: '1rem'
+                marginBottom: '1.2rem',
+                letterSpacing: '1px'
               }}
             >
               {link.label}
@@ -145,8 +146,9 @@ export default function MobileNav({
           left: 0;
           width: 100%;
           height: 100%;
-          background: rgba(0, 0, 0, 0.5);
-          backdrop-filter: blur(4px);
+          background: rgba(0, 0, 0, 0.85);
+          backdrop-filter: none !important;
+          -webkit-backdrop-filter: none !important;
           opacity: 0;
           visibility: hidden;
           transition: all 0.3s ease;
@@ -161,14 +163,16 @@ export default function MobileNav({
         .mobile-drawer {
           position: fixed;
           top: 0;
-          right: -300px;
-          width: 300px;
+          right: -320px;
+          width: min(320px, 80vw);
           height: 100%;
           border-left: 1px solid var(--glass-border);
           padding: 2.5rem 1.5rem;
           transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-          box-shadow: -20px 0 50px rgba(0,0,0,0.9);
-          transform: translateX(300px);
+          box-shadow: -20px 0 50px rgba(0,0,0,1);
+          transform: translateX(320px);
+          backdrop-filter: none !important;
+          -webkit-backdrop-filter: none !important;
         }
 
         .mobile-drawer.open {

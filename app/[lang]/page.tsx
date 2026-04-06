@@ -95,18 +95,20 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
           </div>
         </div>
 
-        <div className="hero-image-container">
+        <div className="hero-image-outer">
           <WorldMapCanvas />
-          <div className="image-wrapper-glow">
-            <Image 
-              src="/images/Jason6.jpg" 
-              alt="Jason Tsai" 
-              width={350} 
-              height={350} 
-              className="hero-image"
-              style={{ objectPosition: 'center top', objectFit: 'cover', borderRadius: '50%', border: '4px solid rgba(0, 242, 254, 0.3)', position: 'relative', zIndex: 1 }}
-              priority
-            />
+          <div className="hero-image-container">
+            <div className="image-wrapper-glow">
+              <Image 
+                src="/images/Jason6.jpg" 
+                alt="Jason Tsai" 
+                width={380} 
+                height={350} 
+                className="hero-image"
+                style={{ objectPosition: 'center top', objectFit: 'cover', borderRadius: '50%', border: '4px solid rgba(0, 242, 254, 0.3)', position: 'relative', zIndex: 1 }}
+                priority
+              />
+            </div>
           </div>
         </div>
       </section>
@@ -155,12 +157,10 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
           justify-content: center;
           gap: 3rem;
           text-align: center;
-          position: relative;
         }
         .hero-content {
           max-width: 800px;
           width: 100%;
-          position: relative;
           z-index: 2;
         }
         .hero-title {
@@ -208,20 +208,27 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
           transition: all 0.3s ease;
         }
         
+        .hero-image-outer {
+          position: relative;
+          width: 100%;
+          min-height: 500px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          margin-top: 2rem;
+        }
+
         .hero-image-container {
           display: flex;
           justify-content: center;
-          margin-top: 1rem;
-          width: 100%;
-          max-width: 800px;
-          height: 500px; /* Predefined height for map area */
           position: relative;
+          z-index: 10;
         }
 
         .image-wrapper-glow {
           position: relative;
-          z-index: 10;
-          align-self: center;
+          padding: 10px;
+          border-radius: 50%;
         }
 
         .image-wrapper-glow::after {
@@ -230,7 +237,7 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
           inset: -10px;
           border-radius: 50%;
           background: var(--accent-grad);
-          opacity: 0.1;
+          opacity: 0.15;
           filter: blur(20px);
           z-index: -1;
         }
@@ -250,7 +257,12 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
 
         @media (max-width: 768px) {
           .hero-title { font-size: 2.5rem; }
-          .hero-image-container { height: 400px; }
+          .hero-image-outer { min-height: 400px; }
+        }
+
+        @media (max-width: 640px) {
+          .hero-title { font-size: 2.2rem; }
+          .hero-btns { flex-direction: column; gap: 1rem; }
         }
       `}}/>
     </>

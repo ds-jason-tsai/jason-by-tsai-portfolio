@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { getDictionary } from '../dictionaries';
 import StatSection from './components/StatSection';
+import WorldMapCanvas from './components/WorldMapCanvas';
 
 export default async function Home({ params }: { params: Promise<{ lang: string }> }) {
   const lang = (await params).lang as 'zh' | 'en' | 'ja';
@@ -96,15 +97,19 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
         </div>
 
         <div className="hero-image-container">
-          <Image 
-            src="/images/Jason6.jpg" 
-            alt="Jason Tsai" 
-            width={350} 
-            height={350} 
-            className="hero-image"
-            style={{ objectPosition: 'center top', objectFit: 'cover' }}
-            priority
-          />
+          {/* Animated World Map Background for Image */}
+          <WorldMapCanvas />
+          <div className="image-wrapper-glow">
+            <Image 
+              src="/images/Jason6.jpg" 
+              alt="Jason Tsai" 
+              width={350} 
+              height={350} 
+              className="hero-image"
+              style={{ objectPosition: 'center top', objectFit: 'cover', borderRadius: '50%', border: '4px solid rgba(0, 242, 254, 0.3)', position: 'relative', zIndex: 1 }}
+              priority
+            />
+          </div>
         </div>
       </section>
 
@@ -144,21 +149,25 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
 
       <style dangerouslySetInnerHTML={{__html: `
         .hero {
-          min-height: auto;
-          padding: 4rem 2rem;
+          min-height: 100vh;
+          padding: 6rem 2rem;
           display: flex;
-          flex-direction: column;
+          flex-direction: row;
           align-items: center;
-          justify-content: center;
-          gap: 3rem;
-          text-align: center;
+          justify-content: space-between;
+          max-width: 1200px;
+          margin: 0 auto;
+          gap: 4rem;
+          text-align: left;
+          position: relative;
         }
         .hero-content {
-          max-width: 800px;
+          max-width: 600px;
           width: 100%;
+          z-index: 2;
         }
         .hero-title {
-          font-size: 3.5rem;
+          font-size: 4rem;
           font-weight: 800;
           line-height: 1.2;
           margin-bottom: 1.5rem;
@@ -174,14 +183,12 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
           color: var(--text-secondary);
           margin-bottom: 2.5rem;
           max-width: 600px;
-          margin-left: auto;
-          margin-right: auto;
         }
         .hero-btns {
           display: flex;
           gap: 1.5rem;
           margin-bottom: 3rem;
-          justify-content: center;
+          justify-content: flex-start;
         }
         .btn-secondary {
           background: transparent !important;
@@ -202,7 +209,7 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
           display: flex;
           gap: 2rem;
           align-items: center;
-          justify-content: center;
+          justify-content: flex-start;
         }
         .social-icon-link {
           color: var(--text-primary);
@@ -216,24 +223,32 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
           color: var(--accent-color);
           transform: translateY(-2px);
         }
-        .social-icon-link::after {
-          content: '';
-          position: absolute;
-          bottom: -5px;
-          left: 0;
-          width: 0;
-          height: 2px;
-          background: var(--accent-grad);
-          transition: width 0.3s ease;
-        }
-        .social-icon-link:hover::after {
-          width: 100%;
+        
+        .hero-image-container {
+          position: relative;
+          width: 500px;
+          height: 500px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          z-index: 1;
         }
 
-        .hero-image-container {
-          display: flex;
-          justify-content: center;
-          margin-top: 1rem;
+        .image-wrapper-glow {
+          position: relative;
+          padding: 10px;
+          border-radius: 50%;
+        }
+
+        .image-wrapper-glow::after {
+          content: '';
+          position: absolute;
+          inset: -10px;
+          border-radius: 50%;
+          background: var(--accent-grad);
+          opacity: 0.2;
+          filter: blur(20px);
+          z-index: -1;
         }
 
         /* Infinite Carousel Setup */
@@ -257,12 +272,8 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
         }
         
         @keyframes scroll {
-          0% {
-            transform: translateX(0);
-          }
-          100% {
-            transform: translateX(calc(-50% - 1.25rem));
-          }
+          0% { transform: translateX(0); }
+          100% { transform: translateX(calc(-50% - 1.25rem)); }
         }
         
         .media-card {
@@ -282,10 +293,6 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
           transform: translateY(-5px);
           border-color: var(--accent-color);
           box-shadow: 0 5px 15px rgba(0, 242, 254, 0.2);
-        }
-        
-        .media-card-header {
-          text-align: left;
         }
         
         .media-badge {
@@ -314,34 +321,15 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
           flex-grow: 1;
         }
 
-        .media-action {
-          display: block;
-          width: 100%;
-          text-align: center;
-          padding: 0.8rem 0;
-          margin-top: 0.5rem;
-          border-radius: 10px;
-          background: rgba(0, 242, 254, 0.1);
-          color: var(--accent-color);
-          text-decoration: none;
-          font-weight: 600;
-          border: 1px solid rgba(0, 242, 254, 0.2);
-          transition: all 0.3s ease;
-        }
-
-        .media-action:hover {
-          background: var(--accent-grad);
-          color: #000;
-        }
-
         @media (max-width: 1024px) {
           .hero {
             flex-direction: column-reverse;
             text-align: center;
             padding: 4rem 2rem;
           }
-          .hero-desc {
-            margin: 0 auto 2.5rem;
+          .hero-content {
+            text-align: center;
+            max-width: 800px;
           }
           .hero-btns {
             justify-content: center;
@@ -349,30 +337,20 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
           .social-icons {
             justify-content: center;
           }
+          .hero-image-container {
+            width: 300px;
+            height: 300px;
+          }
           .hero-image {
             width: 250px;
             height: 250px;
           }
-        }
-
-        @media (max-width: 768px) {
-          .media-card {
-            width: 320px;
-            padding: 1rem;
-          }
-          .carousel-track {
-            animation-duration: 25s; /* slightly faster on mobile */
-          }
+          .hero-title { font-size: 3rem; }
         }
 
         @media (max-width: 640px) {
-          .hero-title {
-            font-size: 2.2rem;
-          }
-          .hero-btns {
-            flex-direction: column;
-            gap: 1rem;
-          }
+          .hero-title { font-size: 2.2rem; }
+          .hero-btns { flex-direction: column; gap: 1rem; }
         }
       `}}/>
     </>

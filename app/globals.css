@@ -58,7 +58,7 @@ h1, h2, h3, h4 {
   border-bottom: 1px solid var(--glass-border);
   position: sticky;
   top: 0;
-  z-index: 100;
+  z-index: 1001;
   background: #050505; /* Solid background for readability */
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
@@ -432,9 +432,7 @@ h1, h2, h3, h4 {
   }
 
   .nav {
-    padding: 1rem 1.5rem 1rem 1.5rem; /* Match container padding */
-    margin-left: -1.5rem;
-    margin-right: -1.5rem;
+    padding: 1rem 1.5rem;
     background: #050505; /* Fully solid on mobile */
   }
 

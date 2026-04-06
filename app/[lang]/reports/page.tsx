@@ -13,31 +13,48 @@ export default async function Reports({ params }: { params: Promise<{ lang: stri
 
   const content = {
     zh: {
-      title: "付費數據洞察報告",
-      desc: "由資深數據分析師 Jason Tsai 操刀的獨家分析報告，提供高品質的商業洞察與策略框架，購買後可立即下載。",
+      title: "付費專區",
+      desc: "由資深數據分析師 Jason Tsai 操刀的獨家分析報告與實戰課程影片，提供高品質的商業洞察與策略框架。購買後可透過專屬連結下載或觀賞。",
       badge: "限量獨家",
       buyBtn: "💳 立即購買",
-      downloadLabel: "購買後可立即下載",
+      downloadLabel: "購買後可立即獲得存取權",
     },
     en: {
-      title: "Premium Data Reports",
-      desc: "Exclusive analytical reports by senior data analyst Jason Tsai. High-quality business insights and strategic frameworks ready to download after purchase.",
+      title: "Premium Section",
+      desc: "Exclusive analytical reports and hands-on video courses by senior analyst Jason Tsai. Get high-quality business insights and strategic frameworks via instant access after purchase.",
       badge: "Exclusive",
       buyBtn: "💳 Buy Now",
-      downloadLabel: "Instant download after purchase",
+      downloadLabel: "Instant access after purchase",
     },
     ja: {
-      title: "プレミアムデータレポート",
-      desc: "シニアデータアナリスト Jason Tsai による独占分析レポート。購入後すぐにダウンロード可能な高品質なビジネスインサイトと戦略フレームワーク。",
+      title: "プレミアム専有エリア",
+      desc: "シニアアナリスト Jason Tsai による独占分析レポートと実践的な動画講座。購入後、高品質なビジネスインサイトと戦略フレームワークにすぐにアクセスできます。",
       badge: "独占限定",
       buyBtn: "💳 今すぐ購入",
-      downloadLabel: "購入後すぐにダウンロード",
+      downloadLabel: "購入後に即座にアクセス可能",
     },
   };
 
   const t = content[lang];
 
   const reports = [
+    {
+      id: 'tableau_adv_video',
+      image: '/images/tableau_video_cover.png',
+      title: {
+        zh: 'Tableau 數據視覺化：不公開進階實戰 (影片課程)',
+        en: 'Tableau Data Viz: Advanced Private Course (Video)',
+        ja: 'Tableau データ可視化：高度な実践講座 (非公開動画)',
+      },
+      description: {
+        zh: '這是一份約 25 分鐘的不公開進階實戰教學影片。深度拆解複雜看板的建構邏輯、數據清洗技巧 (Data Prep) 以及如何透過 Tableau 講述具影響力的商業故事。適合已具備基礎、想跨入進階職能的分析師。',
+        en: 'A 25-minute exclusive advanced video course. Deep dive into complex dashboard construction, Data Prep techniques, and storytelling with Tableau. Perfect for analysts moving from basic to advanced skills.',
+        ja: '約25分の高度な実践解説動画。複雑なダッシュボードの構築ロジック、データクリーニング、Tableauによるストーリーテリングを深掘りします。スキルアップを目指すアナリストに最適。',
+      },
+      price: 498,
+      currency: 'TWD',
+      tags: ['#Tableau', '#AdvancedViz', '#VideoCourse', '#DataStorytelling', '#不公開影片'],
+    },
     {
       id: 'salesforce_se',
       image: '/images/salesforce_cover.png',

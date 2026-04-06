@@ -33,7 +33,7 @@ export default function MobileNav({
     { href: `/${lang}/services`, label: dict.nav.services },
     { href: `/${lang}/portfolio`, label: dict.nav.portfolio },
     { href: `/${lang}/dashboards`, label: dict.nav.dashboards || 'Dashboards' },
-    { href: `/${lang}/reports`, label: lang === 'zh' ? '💎 付費報告' : lang === 'ja' ? '💎 プレミアム' : '💎 Reports' },
+    { href: `/${lang}/reports`, label: lang === 'zh' ? '💎 付費專區' : lang === 'ja' ? '💎 プレミアム' : '💎 Premium Access' },
     { href: `/${lang}/articles`, label: dict.nav.articles },
     { href: `/${lang}/experience`, label: dict.nav.experience },
     { href: `/${lang}/contact`, label: dict.nav.contact },

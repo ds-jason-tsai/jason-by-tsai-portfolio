@@ -60,18 +60,18 @@ export default function PortfolioClient({ projects, lang, t }: { projects: any[]
     <div className="portfolio-client-container" style={{ maxWidth: '1400px', margin: '0 auto', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
       
       {/* Category Tabs */}
-      <div style={{ display: 'flex', justifyContent: 'center', gap: '1rem', marginBottom: '4rem', flexWrap: 'wrap' }}>
+      <div style={{ display: 'flex', justifyContent: 'center', gap: '0.8rem', marginBottom: isMobile ? '2rem' : '4rem', flexWrap: 'wrap' }}>
         {categories.map((cat) => (
           <button
             key={cat}
             onClick={() => handleCategoryClick(cat)}
             style={{
-              padding: '0.8rem 2.5rem',
+              padding: '0.8rem 2rem',
               borderRadius: '50px',
               border: '1px solid rgba(255,255,255,0.1)',
               background: activeCategory === cat ? 'var(--accent-color)' : 'rgba(255,255,255,0.05)',
               color: activeCategory === cat ? '#000' : '#fff',
-              fontSize: '1.05rem',
+              fontSize: '1rem',
               fontWeight: activeCategory === cat ? '800' : '500',
               cursor: 'pointer',
               transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)'
@@ -83,9 +83,17 @@ export default function PortfolioClient({ projects, lang, t }: { projects: any[]
         ))}
       </div>
 
-      <div style={{ position: 'relative', width: '100%', maxWidth: '1000px', padding: '0 2rem' }}>
-        {/* Navigation Buttons for Infinite Carousel */}
-        {filteredProjects.length > 1 && (
+      {/* Mobile Navigation Buttons Moved to Top Area */}
+      {isMobile && filteredProjects.length > 1 && (
+        <div style={{ display: 'flex', gap: '1rem', marginBottom: '2.5rem' }}>
+          <button onClick={handlePrev} className="carousel-nav-btn" style={{ position: 'static', transform: 'none', width: '50px', height: '50px' }}>‹</button>
+          <button onClick={handleNext} className="carousel-nav-btn" style={{ position: 'static', transform: 'none', width: '50px', height: '50px' }}>›</button>
+        </div>
+      )}
+
+      <div style={{ position: 'relative', width: '100%', maxWidth: '1000px', padding: isMobile ? '0' : '0 2rem' }}>
+        {/* Desktop Navigation Buttons */}
+        {!isMobile && filteredProjects.length > 1 && (
           <>
             <button onClick={handlePrev} className="carousel-nav-btn prev" aria-label="Previous">‹</button>
             <button onClick={handleNext} className="carousel-nav-btn next" aria-label="Next">›</button>
@@ -223,29 +231,28 @@ export default function PortfolioClient({ projects, lang, t }: { projects: any[]
         @media (max-width: 1024px) {
           .carousel-nav-btn { 
             display: flex !important; 
-            width: 45px !important;
-            height: 45px !important;
-            font-size: 1.5rem !important;
-            top: 30% !important;
-            background: rgba(0, 0, 0, 0.8) !important;
+            background: rgba(255, 255, 255, 0.1) !important;
+            border: 1px solid rgba(255, 255, 255, 0.2) !important;
+            color: #fff !important;
           }
-          .carousel-nav-btn.prev { left: -10px !important; }
-          .carousel-nav-btn.next { right: -10px !important; }
           
           .portfolio-image-wrapper { height: 180px !important; }
           .portfolio-carousel-wrapper { 
             flex-direction: column !important; 
             align-items: center !important; 
             gap: 1rem !important;
-            padding: 0 0.5rem;
+            padding: 0;
             min-height: auto !important;
           }
           .carousel-card { 
+            width: 98% !important;
             max-width: 100% !important; 
-            margin-bottom: 1rem;
+            margin-bottom: 0.5rem;
             padding: 0 !important;
+            border-radius: 16px !important;
           }
           .service-title { font-size: 1.2rem !important; }
+          .category-btn { padding: 0.6rem 1.5rem !important; font-size: 0.9rem !important; }
         }
         @keyframes pulse {
           0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(0, 242, 254, 0.4); }

@@ -91,12 +91,12 @@ export default async function RootLayout({
           <div className="desktop-only">
             <div className="nav-links" style={{ display: 'flex', alignItems: 'center', position: 'relative' }}>
               <NavLink lang={lang} href={`/${lang}`}>{dict.nav.home}</NavLink>
+              <NavLink lang={lang} href={`/${lang}/experience`}>{dict.nav.experience}</NavLink>
               <NavLink lang={lang} href={`/${lang}/portfolio`}>{dict.nav.portfolio}</NavLink>
-              <NavLink lang={lang} href={`/${lang}/experience`}>{lang === 'zh' ? '完整經歷' : dict.nav.experience}</NavLink>
-              <NavLink lang={lang} href={`/${lang}/dashboards`}>{lang === 'zh' ? '儀表板專區' : (dict.nav.dashboards || 'Dashboards')}</NavLink>
-              <NavLink lang={lang} href={`/${lang}/articles`}>{dict.nav.articles}</NavLink>
+              <NavLink lang={lang} href={`/${lang}/dashboards`}>{dict.nav.dashboards || 'Dashboards'}</NavLink>
               <NavLink lang={lang} href={`/${lang}/services`}>{dict.nav.services}</NavLink>
-              <NavLink lang={lang} href={`/${lang}/reports`}>💎 {lang === 'zh' ? '付費專區' : lang === 'ja' ? 'プレミアム' : 'Premium Access'}</NavLink>
+              <NavLink lang={lang} href={`/${lang}/articles`}>{dict.nav.articles}</NavLink>
+              <NavLink lang={lang} href={`/${lang}/reports`}>{dict.nav.reports || 'Premium Access'}</NavLink>
               <NavLink lang={lang} href={`/${lang}/contact`}>{dict.nav.contact}</NavLink>
               
               {/* Language Switcher */}

@@ -277,20 +277,23 @@ export default function DashboardsPage({ params }: { params: Promise<{ lang: str
         }
 
         @media (max-width: 1024px) {
-          .dashboard-carousel-wrapper { padding: 0; }
+          .dashboard-carousel-wrapper { padding: 0 !important; width: 100% !important; max-width: 100% !important; }
+          .dashboard-display-card { padding: 1rem !important; border-radius: 0 !important; border-left: none; border-right: none; }
           .carousel-btn {
             position: relative;
             top: auto;
             transform: none;
             display: inline-flex;
-            margin: 1rem 0.5rem;
+            margin: 0.5rem;
+            width: 44px;
+            height: 44px;
           }
           .dashboards-header { margin-bottom: 2rem; }
-          .iframe-container { height: 700px !important; }
+          .iframe-container { height: 50vh !important; border-radius: 8px !important; }
         }
         @media (max-width: 768px) {
-          .section-title { font-size: 2.2rem !important; }
-          .iframe-container { height: 65vh !important; }
+          .section-title { font-size: 2rem !important; }
+          .iframe-container { height: 45vh !important; }
           .partner-logo { font-size: 1.1rem; }
         }
         @keyframes pulse {

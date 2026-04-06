@@ -479,19 +479,20 @@ h1, h2, h3, h4 {
 
 @media (max-width: 768px) {
   .main-container {
-    padding: 0 1.5rem;
+    padding: 0 1rem;
   }
 
   .section-title {
-    font-size: 2rem;
+    font-size: 1.8rem !important;
   }
 
   .services-grid {
     grid-template-columns: 1fr;
+    gap: 1.5rem;
   }
 
   .service-card {
-    padding: 2rem 1.5rem;
+    padding: 1.5rem 1rem;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -499,16 +500,16 @@ h1, h2, h3, h4 {
   }
 
   .timeline-item {
-    padding-left: 2.5rem;
-    gap: 1.5rem;
+    padding-left: 2rem;
+    gap: 1rem;
   }
 
   .timeline::before {
-    left: 15px;
+    left: 12px;
   }
 
   .timeline-dot {
-    left: 9px;
+    left: 6px;
   }
 
   .timeline-content {
@@ -516,7 +517,7 @@ h1, h2, h3, h4 {
   }
 
   .contact-card {
-    padding: 2.5rem 1.2rem;
+    padding: 2rem 1rem;
   }
 
   .submit-btn {

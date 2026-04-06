@@ -41,9 +41,18 @@ export default function PortfolioClient({ projects, lang, t }: { projects: any[]
     setCurrentIndex((prev) => (prev === filteredProjects.length - 1 ? 0 : prev + 1));
   };
 
+  // Calculate the second item if there are enough projects & NOT on mobile
+  const [isMobile, setIsMobile] = useState(false);
+  useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth < 1024);
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
   const currentProj = filteredProjects[currentIndex];
-  // Calculate the second item if there are enough projects
-  const nextProj = filteredProjects.length > 1 
+  // Only show next if not mobile and not the only project
+  const nextProj = (!isMobile && filteredProjects.length > 1)
     ? filteredProjects[(currentIndex + 1) % filteredProjects.length] 
     : null;
 
@@ -212,18 +221,31 @@ export default function PortfolioClient({ projects, lang, t }: { projects: any[]
         .carousel-nav-btn.next { right: -60px; }
 
         @media (max-width: 1024px) {
-          .carousel-nav-btn { display: none; }
-          .portfolio-image-wrapper { height: 200px !important; }
+          .carousel-nav-btn { 
+            display: flex !important; 
+            width: 45px !important;
+            height: 45px !important;
+            font-size: 1.5rem !important;
+            top: 30% !important;
+            background: rgba(0, 0, 0, 0.8) !important;
+          }
+          .carousel-nav-btn.prev { left: -10px !important; }
+          .carousel-nav-btn.next { right: -10px !important; }
+          
+          .portfolio-image-wrapper { height: 180px !important; }
           .portfolio-carousel-wrapper { 
             flex-direction: column !important; 
             align-items: center !important; 
-            gap: 1.5rem !important;
-            padding: 0 1rem;
+            gap: 1rem !important;
+            padding: 0 0.5rem;
+            min-height: auto !important;
           }
           .carousel-card { 
             max-width: 100% !important; 
-            margin-bottom: 2rem;
+            margin-bottom: 1rem;
+            padding: 0 !important;
           }
+          .service-title { font-size: 1.2rem !important; }
         }
         @keyframes pulse {
           0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(0, 242, 254, 0.4); }

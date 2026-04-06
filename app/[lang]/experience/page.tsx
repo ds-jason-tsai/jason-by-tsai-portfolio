@@ -110,7 +110,7 @@ export default async function Experience({ params }: { params: Promise<{ lang: s
                     {item.logo && <img src={item.logo} alt="logo" style={{ width: '28px', height: '28px', borderRadius: '4px', objectFit: 'contain', background: 'white', padding: '1px' }} />}
                     {item.url ? (
                       <a href={item.url} target="_blank" rel="noopener noreferrer" style={{ color: 'var(--accent-color)', textDecoration: 'none', borderBottom: '1px dotted var(--accent-color)', paddingBottom: '1px' }}>
-                        {item.company} ↗
+                        {item.company}
                       </a>
                     ) : (
                       <span style={{ color: 'var(--accent-color)' }}>{item.company}</span>

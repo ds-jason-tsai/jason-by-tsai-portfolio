@@ -39,21 +39,21 @@ export default async function Reports({ params }: { params: Promise<{ lang: stri
 
   const reports = [
     {
-      id: 'tableau_adv_video',
-      image: '/images/tableau_video_cover.png',
+      id: 'notebooklm_intro',
+      image: '/images/notebooklm_cover.jpg',
       title: {
-        zh: 'Tableau 數據視覺化：不公開進階實戰 (影片課程)',
-        en: 'Tableau Data Viz: Advanced Private Course (Video)',
-        ja: 'Tableau データ可視化：高度な実践講座 (非公開動画)',
+        zh: 'Google NotebookLM：AI 個人筆記與介面教學 (影片課程)',
+        en: 'Google NotebookLM: AI Personal Notes & UI Tutorial (Video)',
+        ja: 'Google NotebookLM：AI個人ノート＆UI チュートリアル (動画)',
       },
       description: {
-        zh: '這是一份約 25 分鐘的不公開進階實戰教學影片。深度拆解複雜看板的建構邏輯、數據清洗技巧 (Data Prep) 以及如何透過 Tableau 講述具影響力的商業故事。適合已具備基礎、想跨入進階職能的分析師。',
-        en: 'A 25-minute exclusive advanced video course. Deep dive into complex dashboard construction, Data Prep techniques, and storytelling with Tableau. Perfect for analysts moving from basic to advanced skills.',
-        ja: '約25分の高度な実践解説動画。複雑なダッシュボードの構築ロジック、データクリーニング、Tableauによるストーリーテリングを深掘りします。スキルアップを目指すアナリストに最適。',
+        zh: '這是一份約 25 分鐘的 Google NotebookLM 深度介面教學影片。快速掌握如何運用 AI 整理個人知識庫、自動生成專屬摘要，以及高效管理複雜資訊的實戰技巧。適合所有高效筆記愛好者與分析師。',
+        en: 'A 25-minute deep dive into Google NotebookLM. Master how to organize personal knowledge bases, auto-generate summaries, and efficiently manage complex information using AI.',
+        ja: '約25分の Google NotebookLM 徹底解説動画。AIを活用した個人のナレッジベース構築、自動要約生成、複雑な情報の効率的な管理スキルを素早く習得できます。',
       },
-      price: 498,
+      price: 49,
       currency: 'TWD',
-      tags: ['#Tableau', '#AdvancedViz', '#VideoCourse', '#DataStorytelling', '#不公開影片'],
+      tags: ['#NotebookLM', '#GoogleAI', '#VideoCourse', '#Productivity', '#不公開影片'],
     },
     {
       id: 'salesforce_se',

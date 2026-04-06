@@ -1,3 +1,6 @@
+# 🛑 SEO CRITICAL - DO NOT MODIFY WITHOUT PERMISSION
+# Essential for Google Search Console indexing.
+# ⚠️ 未經使用者明確要求，請勿修改任何 Allow/Disallow/Sitemap 路徑。
 User-agent: *
 Allow: /
 Disallow: /api/

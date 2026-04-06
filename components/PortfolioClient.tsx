@@ -138,7 +138,7 @@ export default function PortfolioClient({ projects, lang, t }: { projects: any[]
                         {t.pending}
                       </button>
                     )}
-                    <a href={`/${lang}/reports#data`} className="btn-secondary" style={{ display: 'block', textAlign: 'center', padding: '0.8rem 1rem', fontSize: '1rem' }}>
+                    <a href={`/${lang}/reports#data`} className="btn-secondary pulse-animation" style={{ display: 'block', textAlign: 'center', padding: '0.8rem 1rem', fontSize: '1rem' }}>
                       {lang === 'zh' ? '🛒 購買資料' : (lang === 'ja' ? '🛒 データ購入' : '🛒 Buy Data')}
                     </a>
                   </div>
@@ -213,7 +213,26 @@ export default function PortfolioClient({ projects, lang, t }: { projects: any[]
 
         @media (max-width: 1024px) {
           .carousel-nav-btn { display: none; }
-          .portfolio-image-wrapper { height: 250px !important; }
+          .portfolio-image-wrapper { height: 200px !important; }
+          .portfolio-carousel-wrapper { 
+            flex-direction: column !important; 
+            align-items: center !important; 
+            gap: 1.5rem !important;
+            padding: 0 1rem;
+          }
+          .carousel-card { 
+            max-width: 100% !important; 
+            margin-bottom: 2rem;
+          }
+        }
+        @keyframes pulse {
+          0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(0, 242, 254, 0.4); }
+          70% { transform: scale(1.02); box-shadow: 0 0 0 10px rgba(0, 242, 254, 0); }
+          100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(0, 242, 254, 0); }
+        }
+        .pulse-animation {
+          animation: pulse 2s infinite;
+          border-color: var(--accent-color) !important;
         }
       `}} />
     </div>

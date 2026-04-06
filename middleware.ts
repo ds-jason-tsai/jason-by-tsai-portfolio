@@ -1,3 +1,9 @@
+/**
+ * 🛑 SEO CRITICAL - DO NOT MODIFY WITHOUT PERMISSION
+ * This middleware handles the root domain redirection (e.g., / -> /zh).
+ * It is essential for Google Search Console (GSC) indexing.
+ * ⚠️ 未經使用者明確要求，請勿修改此檔案的重定向邏輯。
+ */
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 

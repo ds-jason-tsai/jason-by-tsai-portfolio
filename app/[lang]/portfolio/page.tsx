@@ -20,7 +20,7 @@ export default async function Portfolio({ params }: { params: Promise<{ lang: st
   const projects = [
     { 
       title: { zh: "保險公司研究 (Aflac)", en: "Aflac Insurance Research", ja: "Aflac 保険会社戦略研究" }, 
-      type: 2, 
+      type: 1, 
       image: "/images/aflac_cover.png",
       url: "https://drive.google.com/file/d/1EQiMMQfrRplLjNljCLiQWHUxQ121xxDL/view?usp=drive_link",
       description: {
@@ -36,7 +36,7 @@ export default async function Portfolio({ params }: { params: Promise<{ lang: st
     },
     { 
       title: { zh: "ChartBar 圖表分析懶人包", en: "ChartBar Analysis Cheat Sheet", ja: "ChartBar 分析チートシート" }, 
-      type: 1, 
+      type: 2, 
       image: "/images/chartbar_cover.png",
       url: "https://drive.google.com/file/d/1T2UfuswNYamtVFWASDgXwYsdXAQs8Uhl/view?usp=drive_link",
       description: {
@@ -52,7 +52,7 @@ export default async function Portfolio({ params }: { params: Promise<{ lang: st
     },
     { 
       title: { zh: "商品組合與免運門檻分析 (鮮乳坊)", en: "Product Mix & Free-Shipping Threshold Analysis (Milkshop)", ja: "商品組み合わせと送料無料ライン分析（鮮乳坊）" }, 
-      type: 1, 
+      type: 0, 
       image: "/images/milkshop_cover.png",
       url: "https://drive.google.com/file/d/1cGR32HLVWr6BvoH2qHlXOpzP6tsFF5Gw/view?usp=sharing",
       description: {
@@ -68,7 +68,7 @@ export default async function Portfolio({ params }: { params: Promise<{ lang: st
     },
     { 
       title: { zh: "共享單車需求分析 (Bike Share)", en: "Bike Share Demand Analysis", ja: "シェアサイクル需要分析 (Bike Share)" }, 
-      type: 2, 
+      type: 0, 
       image: "/images/bike_share_cover.png",
       url: "https://drive.google.com/file/d/1D21Q1mPeowc0JAJsPZl9PGdTLxqxN_XD/view?usp=sharing",
       description: {

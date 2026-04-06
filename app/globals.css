@@ -431,6 +431,11 @@ h1, h2, h3, h4 {
 /* --- Media Queries for Responsiveness --- */
 
 @media (max-width: 1024px) {
+  .section-title { font-size: 2.2rem; margin-bottom: 2rem; }
+  .services, .experience, .contact { padding: 3rem 0; }
+}
+
+@media (max-width: 1024px) {
   .desktop-only {
     display: none;
   }
@@ -506,8 +511,12 @@ h1, h2, h3, h4 {
     left: 9px;
   }
 
+  .timeline-content {
+    padding: 1rem;
+  }
+
   .contact-card {
-    padding: 3rem 1.5rem;
+    padding: 2.5rem 1.2rem;
   }
 
   .submit-btn {

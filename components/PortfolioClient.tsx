@@ -1,10 +1,9 @@
 'use client';
 
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 
 export default function PortfolioClient({ projects, lang, t }: { projects: any[], lang: string, t: any }) {
-  // Extract categories dynamic mapping based on t.type
   const categories = ['all', '0', '1', '2'];
   const catLabels: Record<string, string> = {
     'all': lang === 'zh' ? '全部內容' : (lang === 'ja' ? 'すべて' : 'All'),
@@ -14,7 +13,7 @@ export default function PortfolioClient({ projects, lang, t }: { projects: any[]
   };
 
   const [activeCategory, setActiveCategory] = useState<string>('all');
-  const scrollRef = useRef<HTMLDivElement>(null);
+  const [currentIndex, setCurrentIndex] = useState(0);
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
@@ -27,45 +26,39 @@ export default function PortfolioClient({ projects, lang, t }: { projects: any[]
 
   const handleCategoryClick = (cat: string) => {
     setActiveCategory(cat);
+    setCurrentIndex(0);
     window.history.pushState(null, '', `#${cat}`);
-    // Auto scroll to start when switching categories safely
-    if (scrollRef.current) {
-        scrollRef.current.scrollTo({ left: 0, behavior: 'smooth' });
-    }
   };
 
   const filteredProjects = activeCategory === 'all' 
     ? projects 
-    : projects.filter(p => String(p.type) === activeCategory);
+    : projects.filter((p) => String(p.type) === activeCategory);
 
-  const scrollLeftBtn = () => {
-    if (scrollRef.current) {
-      scrollRef.current.scrollBy({ left: -420, behavior: 'smooth' });
-    }
+  const handlePrev = () => {
+    setCurrentIndex((prev) => (prev === 0 ? filteredProjects.length - 1 : prev - 1));
+  };
+  const handleNext = () => {
+    setCurrentIndex((prev) => (prev === filteredProjects.length - 1 ? 0 : prev + 1));
   };
 
-  const scrollRightBtn = () => {
-    if (scrollRef.current) {
-      scrollRef.current.scrollBy({ left: 420, behavior: 'smooth' });
-    }
-  };
+  const currentProj = filteredProjects[currentIndex];
 
   return (
-    <div className="portfolio-client-container" style={{ maxWidth: '1400px', margin: '0 auto' }}>
+    <div className="portfolio-client-container" style={{ maxWidth: '1400px', margin: '0 auto', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
       
       {/* Category Tabs */}
-      <div style={{ display: 'flex', justifyContent: 'center', gap: '1rem', marginBottom: '3rem', flexWrap: 'wrap' }}>
-        {categories.map((cat, idx) => (
+      <div style={{ display: 'flex', justifyContent: 'center', gap: '1rem', marginBottom: '4rem', flexWrap: 'wrap' }}>
+        {categories.map((cat) => (
           <button
             key={cat}
             onClick={() => handleCategoryClick(cat)}
             style={{
-              padding: '0.6rem 2rem',
+              padding: '0.8rem 2.5rem',
               borderRadius: '50px',
               border: '1px solid rgba(255,255,255,0.1)',
               background: activeCategory === cat ? 'var(--accent-color)' : 'rgba(255,255,255,0.05)',
               color: activeCategory === cat ? '#000' : '#fff',
-              fontSize: '1rem',
+              fontSize: '1.05rem',
               fontWeight: activeCategory === cat ? '800' : '500',
               cursor: 'pointer',
               transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)'
@@ -77,87 +70,97 @@ export default function PortfolioClient({ projects, lang, t }: { projects: any[]
         ))}
       </div>
 
-      <div style={{ position: 'relative', width: '100%', padding: '0 2rem' }}>
-        {/* Navigation Buttons */}
+      <div style={{ position: 'relative', width: '100%', maxWidth: '850px', padding: '0 2rem' }}>
+        {/* Navigation Buttons for Infinite Carousel */}
         {filteredProjects.length > 1 && (
           <>
-            <button onClick={scrollLeftBtn} className="carousel-nav-btn prev" aria-label="Previous">‹</button>
-            <button onClick={scrollRightBtn} className="carousel-nav-btn next" aria-label="Next">›</button>
+            <button onClick={handlePrev} className="carousel-nav-btn prev" aria-label="Previous">‹</button>
+            <button onClick={handleNext} className="carousel-nav-btn next" aria-label="Next">›</button>
           </>
         )}
 
-        <div className="carousel-grid" ref={scrollRef} style={{ 
-          display: 'flex', 
-          overflowX: 'auto', 
-          scrollSnapType: 'x mandatory', 
-          gap: '3rem', 
-          paddingBottom: '2rem',
-          WebkitOverflowScrolling: 'touch',
-          scrollbarWidth: 'none', 
-        }}>
-          {filteredProjects.map((proj, idx) => (
-            <div className="service-card carousel-card" key={`${activeCategory}-${idx}`} style={{ 
+        <div className="portfolio-carousel-wrapper" style={{ minHeight: '600px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+          {currentProj ? (
+            <div className="service-card carousel-card fade-in-fast" key={`${activeCategory}-${currentIndex}`} style={{ 
               display: 'flex', 
               flexDirection: 'column', 
               padding: '0', 
               overflow: 'hidden',
-              minWidth: '400px',
-              maxWidth: '460px',
-              flexShrink: 0,
-              scrollSnapAlign: 'center',
-              border: '1px solid rgba(255, 255, 255, 0.05)',
-              borderRadius: '24px',
-              animation: `slideUp 0.6s ease forwards ${idx * 0.1}s`,
-              opacity: 0,
+              width: '100%',
+              border: '1px solid rgba(255, 255, 255, 0.1)',
+              borderRadius: '28px',
+              boxShadow: '0 20px 40px rgba(0,0,0,0.4)',
+              animation: 'slideUp 0.4s ease forwards'
             }}>
-              <div className="portfolio-image-wrapper" style={{ width: '100%', height: '260px', position: 'relative', overflow: 'hidden' }}>
-                {proj.image ? (
-                   <Image src={proj.image} alt={proj.title[lang]} fill style={{ objectFit: 'cover', transition: 'transform 0.5s ease', cursor: 'pointer' }} className="portfolio-img-hover" />
+              <div className="portfolio-image-wrapper" style={{ width: '100%', height: '350px', position: 'relative', overflow: 'hidden' }}>
+                {currentProj.image ? (
+                   <Image src={currentProj.image} alt={currentProj.title[lang]} fill style={{ objectFit: 'cover', transition: 'transform 0.5s ease', cursor: 'pointer' }} className="portfolio-img-hover" />
                 ) : (
                    <div style={{ width: '100%', height: '100%', background: 'var(--glass-bg)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--text-secondary)' }}>No Preview Available</div>
                 )}
               </div>
               
-              <div style={{ padding: '2rem', display: 'flex', flexDirection: 'column', flex: 1, background: 'rgba(255,255,255,0.02)' }}>
-                <span style={{ fontSize: '0.9rem', color: 'var(--accent-color)', fontWeight: 'bold' }}>{t.type[proj.type]}</span>
-                <h3 className="service-title" style={{ marginTop: '0.5rem', marginBottom: '1.2rem', fontSize: '1.5rem', color: '#fff', fontWeight: '800' }}>{proj.title[lang]}</h3>
+              <div style={{ padding: '2.5rem', display: 'flex', flexDirection: 'column', flex: 1, background: 'rgba(255,255,255,0.02)' }}>
+                <span style={{ fontSize: '1rem', color: 'var(--accent-color)', fontWeight: 'bold' }}>{t.type[currentProj.type]}</span>
+                <h3 className="service-title" style={{ marginTop: '0.8rem', marginBottom: '1.5rem', fontSize: '1.8rem', color: '#fff', fontWeight: '800' }}>{currentProj.title[lang]}</h3>
                 
-                <p style={{ color: 'var(--text-secondary)', fontSize: '1rem', lineHeight: '1.8', flex: 1, marginBottom: '2rem', whiteSpace: 'normal' }}>
-                  {proj.description[lang]}
+                <p style={{ color: 'var(--text-secondary)', fontSize: '1.1rem', lineHeight: '1.8', flex: 1, marginBottom: '2rem', whiteSpace: 'normal' }}>
+                  {currentProj.description[lang]}
                 </p>
 
-                <div className="tags-container" style={{ justifyContent: 'center', marginBottom: '2rem' }}>
-                  {proj.tags[lang].map((tag: any, tIdx: number) => (
-                    <span key={tIdx} className="tag" style={{ border: '1px solid rgba(255,255,255,0.1)', background: 'rgba(0,0,0,0.3)', padding: '0.3rem 0.8rem', fontSize: '0.85rem', borderRadius: '6px' }}>{tag}</span>
+                <div className="tags-container" style={{ justifyContent: 'center', marginBottom: '2.5rem' }}>
+                  {currentProj.tags[lang].map((tag: any, tIdx: number) => (
+                    <span key={tIdx} className="tag" style={{ border: '1px solid rgba(255,255,255,0.1)', background: 'rgba(0,0,0,0.3)', padding: '0.4rem 1rem', fontSize: '0.9rem', borderRadius: '8px' }}>{tag}</span>
                   ))}
                 </div>
 
-                <div style={{ display: 'flex', gap: '1rem', flexDirection: 'column', marginTop: 'auto' }}>
-                  {proj.url ? (
-                    <a href={proj.url} target="_blank" rel="noopener noreferrer" className="btn-primary" style={{ display: 'block', textAlign: 'center', padding: '1rem 1.5rem', fontSize: '1rem' }}>
+                <div style={{ display: 'flex', gap: '1.2rem', justifyContent: 'center', flexWrap: 'wrap' }}>
+                  {currentProj.url ? (
+                    <a href={currentProj.url} target="_blank" rel="noopener noreferrer" className="btn-primary" style={{ padding: '1rem 2rem', fontSize: '1rem', minWidth: '200px', textAlign: 'center' }}>
                       {t.btn}
                     </a>
                   ) : (
-                    <button className="btn-primary" style={{ display: 'block', width: '100%', textAlign: 'center', padding: '1rem 1.5rem', fontSize: '1rem', opacity: 0.5, cursor: 'not-allowed' }} disabled>
+                    <button className="btn-primary" style={{ padding: '1rem 2rem', fontSize: '1rem', opacity: 0.5, cursor: 'not-allowed', minWidth: '200px' }} disabled>
                       {t.pending}
                     </button>
                   )}
-                  <a href={`/${lang}/reports#data`} className="btn-secondary" style={{ display: 'block', textAlign: 'center', padding: '1rem 1.5rem', fontSize: '1rem' }}>
+                  <a href={`/${lang}/reports#data`} className="btn-secondary" style={{ padding: '1rem 2rem', fontSize: '1rem', minWidth: '200px', textAlign: 'center' }}>
                     {lang === 'zh' ? '🛒 購買資料' : (lang === 'ja' ? '🛒 データ購入' : '🛒 Buy Data')}
                   </a>
                 </div>
               </div>
             </div>
-          ))}
-          {filteredProjects.length === 0 && (
-             <div style={{ width: '100%', padding: '4rem 0', textAlign: 'center', color: 'var(--text-secondary)' }}>
+          ) : (
+            <div style={{ width: '100%', padding: '4rem 0', textAlign: 'center', color: 'var(--text-secondary)' }}>
                 No projects matched this category.
-             </div>
+            </div>
           )}
         </div>
+
+        {/* Pagination Dots */}
+        {filteredProjects.length > 1 && (
+           <div style={{ display: 'flex', justifyContent: 'center', gap: '8px', marginTop: '2rem' }}>
+              {filteredProjects.map((_, i) => (
+                 <div 
+                   key={i} 
+                   onClick={() => setCurrentIndex(i)}
+                   style={{
+                     width: i === currentIndex ? '30px' : '10px',
+                     height: '10px',
+                     borderRadius: '5px',
+                     background: i === currentIndex ? 'var(--accent-color)' : 'rgba(255,255,255,0.2)',
+                     cursor: 'pointer',
+                     transition: 'all 0.3s'
+                   }}
+                 />
+              ))}
+           </div>
+        )}
       </div>
+
       <style dangerouslySetInnerHTML={{__html: `
         @keyframes slideUp {
+          from { opacity: 0; transform: translateY(20px); }
           to { opacity: 1; transform: translateY(0); }
         }
         .service-card:hover .portfolio-img-hover {
@@ -171,13 +174,13 @@ export default function PortfolioClient({ projects, lang, t }: { projects: any[]
           position: absolute;
           top: 50%;
           transform: translateY(-50%);
-          width: 55px;
-          height: 55px;
+          width: 60px;
+          height: 60px;
           border-radius: 50%;
           background: rgba(0, 0, 0, 0.7);
           border: 1px solid rgba(0, 242, 254, 0.3);
           color: #fff;
-          font-size: 2rem;
+          font-size: 2.2rem;
           display: flex;
           align-items: center;
           justify-content: center;
@@ -190,33 +193,12 @@ export default function PortfolioClient({ projects, lang, t }: { projects: any[]
           color: #000;
           box-shadow: 0 0 25px rgba(0, 242, 254, 0.6);
         }
-        .carousel-nav-btn.prev { left: -10px; }
-        .carousel-nav-btn.next { right: -10px; }
-
-        .carousel-grid::-webkit-scrollbar {
-          height: 10px;
-        }
-        .carousel-grid::-webkit-scrollbar-track {
-          background: rgba(255, 255, 255, 0.05);
-          border-radius: 5px;
-        }
-        .carousel-grid::-webkit-scrollbar-thumb {
-          background: var(--accent-color);
-          border-radius: 5px;
-        }
-        .carousel-grid::-webkit-scrollbar-thumb:hover {
-          background: #fff;
-        }
+        .carousel-nav-btn.prev { left: -60px; }
+        .carousel-nav-btn.next { right: -60px; }
 
         @media (max-width: 1024px) {
           .carousel-nav-btn { display: none; }
-          .carousel-card { 
-             min-width: 320px !important;
-             max-width: 380px !important;
-          }
-          .portfolio-image-wrapper {
-             height: 200px !important;
-          }
+          .portfolio-image-wrapper { height: 250px !important; }
         }
       `}} />
     </div>

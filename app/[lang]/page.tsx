@@ -71,17 +71,17 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
           </div>
 
           <div className="social-links-section">
-            <p className="social-label">
+            <p className="social-label" style={{ marginBottom: '2.5rem' }}>
               {dict.home.social_label || (lang === 'zh' ? '追蹤我的數據洞察' : 'Follow my Data Insights')}
             </p>
-            <div className="social-icons">
+            <div className="social-icons" style={{ gap: '3.5rem' }}>
               <a href="https://tw.linkedin.com/in/jasonb0604" target="_blank" rel="noopener noreferrer" className="social-icon-link">LinkedIn</a>
               <a href="https://www.instagram.com/chartbar0713/" target="_blank" rel="noopener noreferrer" className="social-icon-link">Instagram</a>
               <a href="https://medium.com/@jasonb0604" target="_blank" rel="noopener noreferrer" className="social-icon-link">Medium</a>
             </div>
           </div>
 
-          <div className="hero-courses-section" style={{ marginTop: '4rem' }}>
+          <div className="hero-courses-section" style={{ marginTop: '5rem' }}>
              <p className="social-label" style={{ marginBottom: '2rem' }}>{dict.home.featured_courses || '推薦熱門課程'}</p>
              <div className="course-buttons" style={{ display: 'flex', gap: '1.2rem', justifyContent: 'center', flexWrap: 'wrap' }}>
                <a href="https://live.rookiesavior.net/course/tableau" target="_blank" rel="noopener noreferrer" className="btn-outline-cyan">
@@ -127,7 +127,7 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
                   <span className="media-badge">{post.label}</span>
                   <h3 className="media-title">{post.title}</h3>
                 </div>
-                <div className="media-iframe-wrapper" style={{ background: post.type === 'facebook' || post.type === 'instagram' ? '#fff' : 'transparent' }}>
+                <div className="media-iframe-wrapper" style={{ flex: 1, display: 'flex', alignItems: 'center', background: post.type === 'facebook' || post.type === 'instagram' ? '#fff' : 'transparent', borderRadius: '10px' }}>
                   <iframe 
                     src={post.src} 
                     width="100%" 
@@ -280,7 +280,7 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
         }
 
         .media-card {
-          width: 380px;
+          width: 440px;
           flex-shrink: 0;
           background: var(--glass-bg);
           padding: 1.5rem;

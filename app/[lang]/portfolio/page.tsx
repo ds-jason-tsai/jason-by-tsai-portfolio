@@ -1,5 +1,5 @@
-import Image from 'next/image';
 import type { Metadata } from 'next';
+import PortfolioCarousel from '../../../components/PortfolioCarousel';
 
 export async function generateMetadata({ params }: { params: Promise<{ lang: string }> }): Promise<Metadata> {
   const lang = (await params).lang;
@@ -53,7 +53,7 @@ export default async function Portfolio({ params }: { params: Promise<{ lang: st
     { 
       title: { zh: "商品組合與免運門檻分析 (鮮乳坊)", en: "Product Mix & Free-Shipping Threshold Analysis (Milkshop)", ja: "商品組み合わせと送料無料ライン分析（鮮乳坊）" }, 
       type: 1, 
-      image: "",
+      image: "/images/milkshop_cover.png",
       url: "https://drive.google.com/file/d/1cGR32HLVWr6BvoH2qHlXOpzP6tsFF5Gw/view?usp=sharing",
       description: {
         zh: "透過機器學習與關聯規則探勘（Association Rules），分析鮮乳坊顧客購買行為與商品組合關係。進一步依據顧客終身價值（LTV）與利潤結構，精算並建議最佳的免運門檻，以極大化客單價與整體營收。",
@@ -69,7 +69,7 @@ export default async function Portfolio({ params }: { params: Promise<{ lang: st
     { 
       title: { zh: "共享單車需求分析 (Bike Share)", en: "Bike Share Demand Analysis", ja: "シェアサイクル需要分析 (Bike Share)" }, 
       type: 2, 
-      image: "",
+      image: "/images/bike_share_cover.png",
       url: "https://drive.google.com/file/d/1D21Q1mPeowc0JAJsPZl9PGdTLxqxN_XD/view?usp=sharing",
       description: {
         zh: "基於時空數據與天氣變數，建立共享單車的需求預測模型。深度剖析各站點的尖離峰借還車模式，為營運團隊提供精準的車輛調度策略（Rebalancing）與站點擴張建議。",
@@ -88,88 +88,9 @@ export default async function Portfolio({ params }: { params: Promise<{ lang: st
     <section className="portfolio fade-in" style={{ padding: '0 2rem' }}>
       <h2 className="section-title">{t.title}</h2>
       <p style={{ textAlign: 'center', marginBottom: '3rem', color: 'var(--text-secondary)' }}>{t.desc}</p>
-      <div className="carousel-grid" style={{ 
-        display: 'flex', 
-        overflowX: 'auto', 
-        scrollSnapType: 'x mandatory', 
-        gap: '2rem', 
-        paddingBottom: '2rem',
-        WebkitOverflowScrolling: 'touch' 
-      }}>
-        {projects.map((proj, idx) => (
-          <div className="service-card carousel-card" key={idx} style={{ 
-            display: 'flex', 
-            flexDirection: 'column', 
-            padding: '0', 
-            overflow: 'hidden',
-            minWidth: '320px',
-            maxWidth: '380px',
-            flexShrink: 0,
-            scrollSnapAlign: 'center',
-            margin: '0 auto'
-          }}>
-            {/* Image Preview Area */}
-            <div className="portfolio-image-wrapper" style={{ width: '100%', height: '220px', position: 'relative', overflow: 'hidden' }}>
-              {proj.image ? (
-                 <Image src={proj.image} alt={proj.title[lang]} fill style={{ objectFit: 'cover', transition: 'transform 0.5s ease', cursor: 'pointer' }} className="portfolio-img-hover" />
-              ) : (
-                 <div style={{ width: '100%', height: '100%', background: 'var(--glass-bg)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--text-secondary)' }}>No Preview Available</div>
-              )}
-            </div>
-            
-            <div style={{ padding: '1.5rem', display: 'flex', flexDirection: 'column', flex: 1 }}>
-              <span style={{ fontSize: '0.8rem', color: 'var(--accent-color)', fontWeight: 'bold' }}>{t.type[proj.type]}</span>
-              <h3 className="service-title" style={{ marginTop: '0.5rem', marginBottom: '1rem', fontSize: '1.3rem' }}>{proj.title[lang]}</h3>
-              
-              <p style={{ color: 'var(--text-secondary)', fontSize: '0.9rem', lineHeight: '1.6', flex: 1, marginBottom: '1.5rem' }}>
-                {proj.description[lang]}
-              </p>
-
-            <div className="tags-container" style={{ justifyContent: 'center' }}>
-              {proj.tags[lang].map((tag, tIdx) => (
-                <span key={tIdx} className="tag">{tag}</span>
-              ))}
-            </div>
-
-            {/* Action Buttons */}
-            <div style={{ marginTop: '2rem', display: 'flex', gap: '1rem', flexDirection: 'column' }}>
-              {proj.url ? (
-                <a href={proj.url} target="_blank" rel="noopener noreferrer" className="btn-primary" style={{ display: 'block', textAlign: 'center', padding: '0.75rem 1rem', fontSize: '0.9rem' }}>
-                  {t.btn}
-                </a>
-              ) : (
-                <button className="btn-primary" style={{ display: 'block', width: '100%', textAlign: 'center', padding: '0.75rem 1rem', fontSize: '0.9rem', opacity: 0.5, cursor: 'not-allowed' }} disabled>
-                  {t.pending}
-                </button>
-              )}
-              <a href={`/${lang}/reports#data`} className="btn-secondary" style={{ display: 'block', textAlign: 'center', padding: '0.75rem 1rem', fontSize: '0.9rem' }}>
-                {lang === 'zh' ? '🛒 購買資料' : (lang === 'ja' ? '🛒 データ購入' : '🛒 Buy Data')}
-              </a>
-            </div>
-            </div>
-            {/* End Content Wrapper */}
-          </div>
-        ))}
-      </div>
-      <style dangerouslySetInnerHTML={{__html: `
-        .service-card:hover .portfolio-img-hover {
-          transform: scale(1.05);
-        }
-        .carousel-grid::-webkit-scrollbar {
-          height: 10px;
-        }
-        .carousel-grid::-webkit-scrollbar-track {
-          background: rgba(255, 255, 255, 0.05);
-          border-radius: 5px;
-        }
-        .carousel-grid::-webkit-scrollbar-thumb {
-          background: var(--accent-color);
-          border-radius: 5px;
-        }
-        .carousel-grid::-webkit-scrollbar-thumb:hover {
-          background: #fff;
-        }
-      `}} />
+      
+      <PortfolioCarousel projects={projects} lang={lang} t={t} />
+      
     </section>
   );
 }

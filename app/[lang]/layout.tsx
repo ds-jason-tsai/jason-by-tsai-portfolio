@@ -93,6 +93,7 @@ export default async function RootLayout({
               <NavLink lang={lang} href={`/${lang}`}>{dict.nav.home}</NavLink>
               <NavLink lang={lang} href={`/${lang}/services`}>{dict.nav.services}</NavLink>
               <NavLink lang={lang} href={`/${lang}/portfolio`}>{dict.nav.portfolio}</NavLink>
+              <NavLink lang={lang} href={`/${lang}/dashboards`}>{dict.nav.dashboards || 'Dashboards'}</NavLink>
               <NavLink lang={lang} href={`/${lang}/reports`}>💎 {lang === 'zh' ? '付費報告' : lang === 'ja' ? 'プレミアム' : 'Reports'}</NavLink>
               <NavLink lang={lang} href={`/${lang}/articles`}>{dict.nav.articles}</NavLink>
               <NavLink lang={lang} href={`/${lang}/experience`}>{dict.nav.experience}</NavLink>

@@ -2,4 +2,4 @@ User-agent: *
 Allow: /
 Disallow: /api/
 
-Sitemap: https://jason-by-tsai-portfolio.vercel.app/sitemap_index.xml
+Sitemap: https://jason-by-tsai-portfolio.vercel.app/sitemap-master.xml

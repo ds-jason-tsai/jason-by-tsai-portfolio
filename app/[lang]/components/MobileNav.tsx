@@ -146,17 +146,19 @@ export default function MobileNav({
           background-color: #000000 !important;
           border-left: 1px solid var(--glass-border);
           padding: 2.5rem 1.5rem;
-          transition: right 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+          transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
           z-index: 1000;
           display: flex;
           flex-direction: column;
-          box-shadow: -10px 0 40px rgba(0,0,0,0.9);
+          box-shadow: -20px 0 50px rgba(0,0,0,0.9);
           visibility: hidden;
           opacity: 0;
+          transform: translateX(300px);
           backdrop-filter: none !important;
         }
 
         .mobile-drawer.open {
+          transform: translateX(0) !important;
           right: 0 !important;
           visibility: visible;
           opacity: 1;
@@ -176,7 +178,7 @@ export default function MobileNav({
         .mobile-nav-links a, .mobile-nav-links a:visited {
           font-size: 1.5rem;
           font-weight: 800;
-          color: var(--text-secondary) !important;
+          color: var(--accent-color) !important;
           text-decoration: none;
           transition: color 0.3s ease;
         }

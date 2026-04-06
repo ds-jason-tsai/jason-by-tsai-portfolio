@@ -10,7 +10,7 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
 export default async function Experience({ params }: { params: Promise<{ lang: string }> }) {
   const lang = (await params).lang as 'zh' | 'en' | 'ja';
   const content = {
-    zh: { title: "完整職涯經歷", 
+    zh: { title: "完整經歷", 
           desc: "從技術實作到高階戰略規劃，持續創造數據價值。",
           exp: [
             { 

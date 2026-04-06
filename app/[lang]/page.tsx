@@ -114,8 +114,6 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
         </div>
       </section>
 
-      <StatSection dict={dict} />
-
       <section className="featured-media" style={{ padding: '6rem 0', textAlign: 'center', width: '100%', overflow: 'hidden' }}>
         <h2 className="section-title">{dict.home.featured_highlights || (lang === 'zh' ? '精選特輯' : 'Featured Highlights')}</h2>
         <div className="carousel-container">
@@ -147,6 +145,8 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
           </div>
         </div>
       </section>
+
+      <StatSection dict={dict} />
 
       <style dangerouslySetInnerHTML={{__html: `
         .hero {
@@ -280,7 +280,7 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
         }
 
         .media-card {
-          width: 440px;
+          width: 500px;
           flex-shrink: 0;
           background: var(--glass-bg);
           padding: 1.5rem;

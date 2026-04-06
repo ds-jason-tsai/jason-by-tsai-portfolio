@@ -42,6 +42,10 @@ export default function PortfolioClient({ projects, lang, t }: { projects: any[]
   };
 
   const currentProj = filteredProjects[currentIndex];
+  // Calculate the second item if there are enough projects
+  const nextProj = filteredProjects.length > 1 
+    ? filteredProjects[(currentIndex + 1) % filteredProjects.length] 
+    : null;
 
   return (
     <div className="portfolio-client-container" style={{ maxWidth: '1400px', margin: '0 auto', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
@@ -70,7 +74,7 @@ export default function PortfolioClient({ projects, lang, t }: { projects: any[]
         ))}
       </div>
 
-      <div style={{ position: 'relative', width: '100%', maxWidth: '850px', padding: '0 2rem' }}>
+      <div style={{ position: 'relative', width: '100%', maxWidth: '1000px', padding: '0 2rem' }}>
         {/* Navigation Buttons for Infinite Carousel */}
         {filteredProjects.length > 1 && (
           <>
@@ -79,57 +83,61 @@ export default function PortfolioClient({ projects, lang, t }: { projects: any[]
           </>
         )}
 
-        <div className="portfolio-carousel-wrapper" style={{ minHeight: '600px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+        {/* Display Wrapper: Shows 2 projects side by side if possible */}
+        <div className="portfolio-carousel-wrapper" style={{ minHeight: '600px', display: 'flex', alignItems: 'stretch', justifyContent: 'center', gap: '2rem' }}>
           {currentProj ? (
-            <div className="service-card carousel-card fade-in-fast" key={`${activeCategory}-${currentIndex}`} style={{ 
-              display: 'flex', 
-              flexDirection: 'column', 
-              padding: '0', 
-              overflow: 'hidden',
-              width: '100%',
-              border: '1px solid rgba(255, 255, 255, 0.1)',
-              borderRadius: '28px',
-              boxShadow: '0 20px 40px rgba(0,0,0,0.4)',
-              animation: 'slideUp 0.4s ease forwards'
-            }}>
-              <div className="portfolio-image-wrapper" style={{ width: '100%', height: '350px', position: 'relative', overflow: 'hidden' }}>
-                {currentProj.image ? (
-                   <Image src={currentProj.image} alt={currentProj.title[lang]} fill style={{ objectFit: 'cover', transition: 'transform 0.5s ease', cursor: 'pointer' }} className="portfolio-img-hover" />
-                ) : (
-                   <div style={{ width: '100%', height: '100%', background: 'var(--glass-bg)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--text-secondary)' }}>No Preview Available</div>
-                )}
-              </div>
-              
-              <div style={{ padding: '2.5rem', display: 'flex', flexDirection: 'column', flex: 1, background: 'rgba(255,255,255,0.02)' }}>
-                <span style={{ fontSize: '1rem', color: 'var(--accent-color)', fontWeight: 'bold' }}>{t.type[currentProj.type]}</span>
-                <h3 className="service-title" style={{ marginTop: '0.8rem', marginBottom: '1.5rem', fontSize: '1.8rem', color: '#fff', fontWeight: '800' }}>{currentProj.title[lang]}</h3>
-                
-                <p style={{ color: 'var(--text-secondary)', fontSize: '1.1rem', lineHeight: '1.8', flex: 1, marginBottom: '2rem', whiteSpace: 'normal' }}>
-                  {currentProj.description[lang]}
-                </p>
-
-                <div className="tags-container" style={{ justifyContent: 'center', marginBottom: '2.5rem' }}>
-                  {currentProj.tags[lang].map((tag: any, tIdx: number) => (
-                    <span key={tIdx} className="tag" style={{ border: '1px solid rgba(255,255,255,0.1)', background: 'rgba(0,0,0,0.3)', padding: '0.4rem 1rem', fontSize: '0.9rem', borderRadius: '8px' }}>{tag}</span>
-                  ))}
-                </div>
-
-                <div style={{ display: 'flex', gap: '1.2rem', justifyContent: 'center', flexWrap: 'wrap' }}>
-                  {currentProj.url ? (
-                    <a href={currentProj.url} target="_blank" rel="noopener noreferrer" className="btn-primary" style={{ padding: '1rem 2rem', fontSize: '1rem', minWidth: '200px', textAlign: 'center' }}>
-                      {t.btn}
-                    </a>
+             [currentProj, nextProj].filter(Boolean).map((proj, arrIdx) => (
+              <div className="service-card carousel-card fade-in-fast" key={`${activeCategory}-${currentIndex}-${arrIdx}`} style={{ 
+                display: 'flex', 
+                flexDirection: 'column', 
+                padding: '0', 
+                overflow: 'hidden',
+                width: '100%',
+                maxWidth: '430px', 
+                border: '1px solid rgba(255, 255, 255, 0.1)',
+                borderRadius: '24px',
+                boxShadow: '0 15px 30px rgba(0,0,0,0.3)',
+                animation: 'slideUp 0.4s ease forwards'
+              }}>
+                <div className="portfolio-image-wrapper" style={{ width: '100%', height: '260px', position: 'relative', overflow: 'hidden' }}>
+                  {proj.image ? (
+                    <Image src={proj.image} alt={proj.title[lang]} fill style={{ objectFit: 'cover', transition: 'transform 0.5s ease', cursor: 'pointer' }} className="portfolio-img-hover" />
                   ) : (
-                    <button className="btn-primary" style={{ padding: '1rem 2rem', fontSize: '1rem', opacity: 0.5, cursor: 'not-allowed', minWidth: '200px' }} disabled>
-                      {t.pending}
-                    </button>
+                    <div style={{ width: '100%', height: '100%', background: 'var(--glass-bg)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--text-secondary)' }}>No Preview Available</div>
                   )}
-                  <a href={`/${lang}/reports#data`} className="btn-secondary" style={{ padding: '1rem 2rem', fontSize: '1rem', minWidth: '200px', textAlign: 'center' }}>
-                    {lang === 'zh' ? '🛒 購買資料' : (lang === 'ja' ? '🛒 データ購入' : '🛒 Buy Data')}
-                  </a>
+                </div>
+                
+                <div style={{ padding: '2rem', display: 'flex', flexDirection: 'column', flex: 1, background: 'rgba(255,255,255,0.02)' }}>
+                  <span style={{ fontSize: '0.9rem', color: 'var(--accent-color)', fontWeight: 'bold' }}>{t.type[proj.type]}</span>
+                  <h3 className="service-title" style={{ marginTop: '0.6rem', marginBottom: '1rem', fontSize: '1.4rem', color: '#fff', fontWeight: '800' }}>{proj.title[lang]}</h3>
+                  
+                  <p style={{ color: 'var(--text-secondary)', fontSize: '1rem', lineHeight: '1.7', flex: 1, marginBottom: '2rem', whiteSpace: 'normal' }}>
+                    {proj.description[lang]}
+                  </p>
+
+                  <div className="tags-container" style={{ justifyContent: 'flex-start', marginBottom: '2rem', flexWrap: 'wrap' }}>
+                    {proj.tags[lang].map((tag: any, tIdx: number) => (
+                      <span key={tIdx} className="tag" style={{ border: '1px solid rgba(255,255,255,0.1)', background: 'rgba(0,0,0,0.3)', padding: '0.3rem 0.8rem', fontSize: '0.85rem', borderRadius: '6px' }}>{tag}</span>
+                    ))}
+                  </div>
+
+                  <div style={{ display: 'flex', gap: '1rem', flexDirection: 'column', marginTop: 'auto' }}>
+                    {proj.url ? (
+                      <a href={proj.url} target="_blank" rel="noopener noreferrer" className="btn-primary" style={{ display: 'block', textAlign: 'center', padding: '0.8rem 1rem', fontSize: '1rem' }}>
+                        {t.btn}
+                      </a>
+                    ) : (
+                      <button className="btn-primary" style={{ display: 'block', width: '100%', textAlign: 'center', padding: '0.8rem 1rem', fontSize: '1rem', opacity: 0.5, cursor: 'not-allowed' }} disabled>
+                        {t.pending}
+                      </button>
+                    )}
+                    <a href={`/${lang}/reports#data`} className="btn-secondary" style={{ display: 'block', textAlign: 'center', padding: '0.8rem 1rem', fontSize: '1rem' }}>
+                      {lang === 'zh' ? '🛒 購買資料' : (lang === 'ja' ? '🛒 データ購入' : '🛒 Buy Data')}
+                    </a>
+                  </div>
                 </div>
               </div>
-            </div>
+            ))
           ) : (
             <div style={{ width: '100%', padding: '4rem 0', textAlign: 'center', color: 'var(--text-secondary)' }}>
                 No projects matched this category.

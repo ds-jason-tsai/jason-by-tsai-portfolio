@@ -1,4 +1,4 @@
-import { getDictionary } from '../dictionaries';
+import { getDictionary } from '../../dictionaries';
 
 export default async function DashboardsPage({ params }: { params: Promise<{ lang: string }> }) {
   const lang = (await params).lang as 'zh' | 'en' | 'ja';

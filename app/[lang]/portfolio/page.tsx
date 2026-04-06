@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import PortfolioCarousel from '../../../components/PortfolioCarousel';
+import PortfolioClient from '../../../components/PortfolioClient';
 
 export async function generateMetadata({ params }: { params: Promise<{ lang: string }> }): Promise<Metadata> {
   const lang = (await params).lang;
@@ -89,7 +89,7 @@ export default async function Portfolio({ params }: { params: Promise<{ lang: st
       <h2 className="section-title">{t.title}</h2>
       <p style={{ textAlign: 'center', marginBottom: '3rem', color: 'var(--text-secondary)' }}>{t.desc}</p>
       
-      <PortfolioCarousel projects={projects} lang={lang} t={t} />
+      <PortfolioClient projects={projects} lang={lang} t={t} />
       
     </section>
   );

@@ -1,7 +1,6 @@
 import Image from "next/image";
 import { getDictionary } from '../dictionaries';
 import StatSection from './components/StatSection';
-import WorldMapCanvas from './components/WorldMapCanvas';
 
 export default async function Home({ params }: { params: Promise<{ lang: string }> }) {
   const lang = (await params).lang as 'zh' | 'en' | 'ja';
@@ -96,8 +95,7 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
         </div>
 
         <div className="hero-image-outer">
-          <WorldMapCanvas />
-          <div className="hero-image-container">
+          <div className="hero-image-container" style={{ flexDirection: 'column', alignItems: 'center' }}>
             <div className="image-wrapper-glow">
               <Image 
                 src="/images/Jason6.jpg" 
@@ -109,6 +107,9 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
                 priority
               />
             </div>
+            <h2 style={{ marginTop: '1.5rem', fontSize: '2.5rem', fontWeight: 800, background: 'var(--accent-grad)', WebkitBackgroundClip: 'text', backgroundClip: 'text', WebkitTextFillColor: 'transparent', letterSpacing: '2px' }}>
+              Jason Tsai
+            </h2>
           </div>
         </div>
       </section>
@@ -233,7 +234,6 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
           position: relative;
           width: 100%;
           max-width: 1200px;
-          height: 600px;
           display: flex;
           align-items: center;
           justify-content: center;
@@ -299,7 +299,6 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
 
         @media (max-width: 768px) {
           .hero-title { font-size: 2.5rem; }
-          .hero-image-outer { height: 400px; }
           .media-card { width: 320px; }
         }
       `}}/>

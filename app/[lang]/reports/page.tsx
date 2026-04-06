@@ -90,10 +90,11 @@ export default function Reports({ params }: { params: Promise<{ lang: string }> 
         ja: 'プロのCレベル向けプレゼン。Einstein AIを中心とした技術アーキテクチャ、ビジネス上の課題、アクションプランを網羅したピッチデッキです。',
       },
       chapters: [
-        { id: '1', zh: '1 執行摘要與專案影響 (Executive Summary)', en: '1 Executive Summary', ja: '1 エグゼクティブサマリー' },
-        { id: '2', zh: '2 商業痛點剖析 (Pain Points Analysis)', en: '2 Pain Points Analysis', ja: '2 課題分析' },
-        { id: '3', zh: '3 技術架構與解決方案 (Einstein AI)', en: '3 Technical Architecture & Einstein AI', ja: '3 技術アーキテクチャ (Einstein AI)' },
-        { id: '4', zh: '4 導入途徑與行動計畫 (Roadmap & Action Plan)', en: '4 Roadmap & Action Plan', ja: '4 導入ロードマップ' }
+        { id: '1', zh: '執行摘要與專案影響 (Executive Summary)', en: 'Executive Summary', ja: 'エグゼクティブサマリー' },
+        { id: '2', zh: '商業痛點剖析 (Pain Points Analysis)', en: 'Pain Points Analysis', ja: '課題分析' },
+        { id: '3', zh: '技術架構與解決方案 (Einstein AI)', en: 'Technical Architecture & Einstein AI', ja: '技術アーキテクチャ (Einstein AI)' },
+        { id: '4', zh: '投資回報與財務效益分析 (ROI Justification)', en: 'Financial Justification & ROI', ja: '投資対効果分析 (ROI)' },
+        { id: '5', zh: '導入途徑與行動計畫 (Roadmap & Action Plan)', en: 'Roadmap & Action Plan', ja: '導入ロードマップ' }
       ],
       price: 498,
       tags: ['#Salesforce', '#SolutionEngineer', '#C-Level', '#BusinessPresentation'],

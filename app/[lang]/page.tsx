@@ -59,7 +59,10 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
             {dict.home.title} <br />
             <span>{dict.home.subtitle}</span>
           </h1>
-          <p className="hero-desc">
+          <p style={{ fontSize: '1.15rem', color: 'var(--text-secondary)', marginTop: '0.5rem', marginBottom: '2rem', fontWeight: 500, lineHeight: '1.6' }}>
+             {lang === 'zh' ? '金融業資料分析師、多個數位學習平台 AI/資料分析導師、臺清交政等社團資料視覺化講師' : (lang === 'ja' ? '金融データアナリスト / AI・データ分析講師 / トップ大学データ視覚化講師' : 'Financial Data Analyst / AI & Data Analysis Instructor / Top Universities Data Viz Lecturer')}
+          </p>
+          <p className="hero-desc" style={{ whiteSpace: 'pre-wrap', lineHeight: '1.8' }}>
             {dict.home.description}
           </p>
           
@@ -71,10 +74,10 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
           </div>
 
           <div className="social-links-section">
-            <p className="social-label" style={{ marginBottom: '2.5rem', color: '#00f2fe', fontSize: '1.4rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '1px' }}>
+            <p className="social-label" style={{ marginBottom: '1.2rem', color: '#00f2fe', fontSize: '1.4rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '1px' }}>
               {dict.home.social_label || (lang === 'zh' ? '追蹤我的數據洞察' : 'Follow my Data Insights')}
             </p>
-            <div className="social-icons" style={{ gap: '3.5rem' }}>
+            <div className="social-icons" style={{ gap: '2rem' }}>
               <a href="https://tw.linkedin.com/in/jasonb0604" target="_blank" rel="noopener noreferrer" className="social-icon-link">LinkedIn</a>
               <a href="https://www.instagram.com/chartbar0713/" target="_blank" rel="noopener noreferrer" className="social-icon-link">Instagram</a>
               <a href="https://medium.com/@jasonb0604" target="_blank" rel="noopener noreferrer" className="social-icon-link">Medium</a>

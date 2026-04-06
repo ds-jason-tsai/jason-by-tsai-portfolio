@@ -180,7 +180,7 @@ export default function PortfolioClient({ projects, lang, t }: { projects: any[]
         }
         .carousel-nav-btn {
           position: absolute;
-          top: 50%;
+          top: 40%;
           transform: translateY(-50%);
           width: 60px;
           height: 60px;

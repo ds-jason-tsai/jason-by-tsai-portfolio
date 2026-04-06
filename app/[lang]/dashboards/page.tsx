@@ -152,6 +152,12 @@ export default function DashboardsPage({ params }: { params: Promise<{ lang: str
                 <span key={i} className="dashboard-tag">#{tag}</span>
               ))}
             </div>
+            {/* Added Buy Data Button */}
+            <div style={{ marginTop: '2rem' }}>
+              <a href={`/${lang}/reports#data`} className="btn-secondary" style={{ display: 'inline-block', padding: '0.8rem 2.5rem', fontSize: '1rem' }}>
+                {lang === 'zh' ? '🛒 購買相關數據' : (lang === 'ja' ? '🛒 関連データを購入' : '🛒 Buy Layout / Data')}
+              </a>
+            </div>
           </div>
 
           {/* Iframe Area */}

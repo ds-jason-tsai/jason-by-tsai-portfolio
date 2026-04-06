@@ -93,8 +93,7 @@ export default async function Portfolio({ params }: { params: Promise<{ lang: st
         overflowX: 'auto', 
         scrollSnapType: 'x mandatory', 
         gap: '2rem', 
-        paddingBottom: '2rem', 
-        scrollbarWidth: 'none', 
+        paddingBottom: '2rem',
         WebkitOverflowScrolling: 'touch' 
       }}>
         {projects.map((proj, idx) => (
@@ -143,11 +142,9 @@ export default async function Portfolio({ params }: { params: Promise<{ lang: st
                   {t.pending}
                 </button>
               )}
-              {proj.type === 1 || proj.type === 0 ? (
-                <a href={`/${lang}/reports#data`} className="btn-secondary" style={{ display: 'block', textAlign: 'center', padding: '0.75rem 1rem', fontSize: '0.9rem' }}>
-                  {lang === 'zh' ? '🛒 購買資料' : (lang === 'ja' ? '🛒 データ購入' : '🛒 Buy Data')}
-                </a>
-              ) : null}
+              <a href={`/${lang}/reports#data`} className="btn-secondary" style={{ display: 'block', textAlign: 'center', padding: '0.75rem 1rem', fontSize: '0.9rem' }}>
+                {lang === 'zh' ? '🛒 購買資料' : (lang === 'ja' ? '🛒 データ購入' : '🛒 Buy Data')}
+              </a>
             </div>
             </div>
             {/* End Content Wrapper */}
@@ -159,7 +156,18 @@ export default async function Portfolio({ params }: { params: Promise<{ lang: st
           transform: scale(1.05);
         }
         .carousel-grid::-webkit-scrollbar {
-          display: none;
+          height: 10px;
+        }
+        .carousel-grid::-webkit-scrollbar-track {
+          background: rgba(255, 255, 255, 0.05);
+          border-radius: 5px;
+        }
+        .carousel-grid::-webkit-scrollbar-thumb {
+          background: var(--accent-color);
+          border-radius: 5px;
+        }
+        .carousel-grid::-webkit-scrollbar-thumb:hover {
+          background: #fff;
         }
       `}} />
     </section>

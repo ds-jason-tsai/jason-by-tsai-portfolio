@@ -103,7 +103,7 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
                 src="/images/Jason6.jpg" 
                 alt="Jason Tsai" 
                 width={380} 
-                height={350} 
+                height={380} 
                 className="hero-image"
                 style={{ objectPosition: 'center top', objectFit: 'cover', borderRadius: '50%', border: '4px solid rgba(0, 242, 254, 0.3)', position: 'relative', zIndex: 1 }}
                 priority
@@ -157,7 +157,6 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
           justify-content: center;
           gap: 3rem;
           text-align: center;
-          overflow: hidden;
         }
         .hero-content {
           max-width: 800px;
@@ -220,16 +219,14 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
         
         .hero-image-outer {
           position: relative;
-          width: 100vw;
-          left: 50%;
-          right: 50%;
-          margin-left: -50vw;
-          margin-right: -50vw;
-          min-height: 600px;
+          width: 100%;
+          max-width: 1200px;
+          height: 600px;
           display: flex;
           align-items: center;
           justify-content: center;
           margin-top: 2rem;
+          overflow: visible;
         }
 
         .hero-image-container {
@@ -256,26 +253,12 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
           z-index: -1;
         }
 
-        .carousel-track {
-          display: flex;
-          width: max-content;
-          gap: 2.5rem;
-          padding: 0 1.25rem;
-          animation: scroll 80s linear infinite;
-        }
-
-        @keyframes scroll {
-          0% { transform: translateX(0); }
-          100% { transform: translateX(calc(-50% - 1.25rem)); }
-        }
-
         @media (max-width: 768px) {
           .hero-title { font-size: 2.5rem; }
-          .hero-image-outer { min-height: 450px; }
+          .hero-image-outer { height: 400px; }
         }
 
         @media (max-width: 640px) {
-          .hero-title { font-size: 2.2rem; }
           .hero-btns { flex-direction: column; gap: 1rem; }
         }
       `}}/>

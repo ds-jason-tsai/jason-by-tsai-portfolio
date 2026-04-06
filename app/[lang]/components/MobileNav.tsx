@@ -151,16 +151,14 @@ export default function MobileNav({
           display: flex;
           flex-direction: column;
           box-shadow: -10px 0 40px rgba(0,0,0,0.9);
-          -webkit-backdrop-filter: none !important;
-          backdrop-filter: none !important;
-          opacity: 1 !important;
-          visibility: visible !important;
+          visibility: hidden;
+          opacity: 0;
         }
 
         .mobile-drawer.open {
           right: 0 !important;
-          visibility: visible !important;
-          opacity: 1 !important;
+          visibility: visible;
+          opacity: 1;
         }
 
         .mobile-drawer-header {

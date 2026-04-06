@@ -88,9 +88,27 @@ export default async function Portfolio({ params }: { params: Promise<{ lang: st
     <section className="portfolio fade-in" style={{ padding: '0 2rem' }}>
       <h2 className="section-title">{t.title}</h2>
       <p style={{ textAlign: 'center', marginBottom: '3rem', color: 'var(--text-secondary)' }}>{t.desc}</p>
-      <div className="services-grid">
+      <div className="carousel-grid" style={{ 
+        display: 'flex', 
+        overflowX: 'auto', 
+        scrollSnapType: 'x mandatory', 
+        gap: '2rem', 
+        paddingBottom: '2rem', 
+        scrollbarWidth: 'none', 
+        WebkitOverflowScrolling: 'touch' 
+      }}>
         {projects.map((proj, idx) => (
-          <div className="service-card" key={idx} style={{ display: 'flex', flexDirection: 'column', padding: '0', overflow: 'hidden' }}>
+          <div className="service-card carousel-card" key={idx} style={{ 
+            display: 'flex', 
+            flexDirection: 'column', 
+            padding: '0', 
+            overflow: 'hidden',
+            minWidth: '320px',
+            maxWidth: '380px',
+            flexShrink: 0,
+            scrollSnapAlign: 'center',
+            margin: '0 auto'
+          }}>
             {/* Image Preview Area */}
             <div className="portfolio-image-wrapper" style={{ width: '100%', height: '220px', position: 'relative', overflow: 'hidden' }}>
               {proj.image ? (
@@ -114,8 +132,8 @@ export default async function Portfolio({ params }: { params: Promise<{ lang: st
               ))}
             </div>
 
-            {/* Download Link pointing to Google Drive */}
-            <div style={{ marginTop: '2rem' }}>
+            {/* Action Buttons */}
+            <div style={{ marginTop: '2rem', display: 'flex', gap: '1rem', flexDirection: 'column' }}>
               {proj.url ? (
                 <a href={proj.url} target="_blank" rel="noopener noreferrer" className="btn-primary" style={{ display: 'block', textAlign: 'center', padding: '0.75rem 1rem', fontSize: '0.9rem' }}>
                   {t.btn}
@@ -125,16 +143,23 @@ export default async function Portfolio({ params }: { params: Promise<{ lang: st
                   {t.pending}
                 </button>
               )}
+              {proj.type === 1 || proj.type === 0 ? (
+                <a href={`/${lang}/reports#data`} className="btn-secondary" style={{ display: 'block', textAlign: 'center', padding: '0.75rem 1rem', fontSize: '0.9rem' }}>
+                  {lang === 'zh' ? '🛒 購買資料' : (lang === 'ja' ? '🛒 データ購入' : '🛒 Buy Data')}
+                </a>
+              ) : null}
             </div>
             </div>
             {/* End Content Wrapper */}
-            
           </div>
         ))}
       </div>
       <style dangerouslySetInnerHTML={{__html: `
         .service-card:hover .portfolio-img-hover {
           transform: scale(1.05);
+        }
+        .carousel-grid::-webkit-scrollbar {
+          display: none;
         }
       `}} />
     </section>

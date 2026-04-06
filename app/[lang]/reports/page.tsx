@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, use } from 'react';
+import { useState, use, useEffect } from 'react';
 import Image from 'next/image';
 import BuyButton from '../components/BuyButton';
 
@@ -8,6 +8,15 @@ export default function Reports({ params }: { params: Promise<{ lang: string }> 
   const resolvedParams = use(params);
   const lang = resolvedParams.lang as 'zh' | 'en' | 'ja';
   const [activeCategory, setActiveCategory] = useState<'all' | 'video' | 'report' | 'data'>('all');
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const hash = window.location.hash.replace('#', '') as any;
+      if (['all', 'video', 'report', 'data'].includes(hash)) {
+        setActiveCategory(hash);
+      }
+    }
+  }, []);
 
   const content = {
     zh: {
@@ -109,7 +118,10 @@ export default function Reports({ params }: { params: Promise<{ lang: string }> 
         {(['all', 'video', 'report', 'data'] as const).map(cat => (
           <button
             key={cat}
-            onClick={() => setActiveCategory(cat)}
+            onClick={() => {
+              setActiveCategory(cat);
+              window.history.pushState(null, '', `#${cat}`);
+            }}
             style={{
               padding: '0.6rem 2rem',
               borderRadius: '50px',

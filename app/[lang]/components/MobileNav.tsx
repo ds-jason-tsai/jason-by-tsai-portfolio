@@ -65,10 +65,14 @@ export default function MobileNav({
           background: '#000000',
           opacity: isOpen ? 1 : 0,
           visibility: isOpen ? 'visible' : 'hidden',
-          zIndex: 1000,
+          zIndex: 10000,
           display: 'flex',
           flexDirection: 'column',
-          position: 'fixed'
+          position: 'fixed',
+          WebkitTransform: 'translate3d(0,0,0)',
+          transform: isOpen ? 'translate3d(0,0,0)' : 'translate3d(320px,0,0)',
+          WebkitBackdropFilter: 'none',
+          transition: 'transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease'
         }}
       >
         <div className="mobile-drawer-header">
@@ -163,16 +167,18 @@ export default function MobileNav({
         .mobile-drawer {
           position: fixed;
           top: 0;
-          right: -320px;
+          right: 0;
           width: min(320px, 80vw);
           height: 100%;
           border-left: 1px solid var(--glass-border);
           padding: 2.5rem 1.5rem;
-          transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
           box-shadow: -20px 0 50px rgba(0,0,0,1);
-          transform: translateX(320px);
           backdrop-filter: none !important;
           -webkit-backdrop-filter: none !important;
+        }
+
+        .mobile-drawer:not(.open) {
+          pointer-events: none;
         }
 
         .mobile-drawer.open {

@@ -56,6 +56,24 @@ export default async function RootLayout({
   return (
     <html lang={lang} className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}>
       <body className="min-h-full flex flex-col">
+        <head>
+          <style dangerouslySetInnerHTML={{ __html: `
+            .mobile-drawer {
+              background-color: #000000 !important;
+              background: #000000 !important;
+              opacity: 1 !important;
+              -webkit-backdrop-filter: none !important;
+              backdrop-filter: none !important;
+              -webkit-transform: translate3d(0,0,0) !important;
+              box-shadow: -20px 0 50px rgba(0,0,0,1) !important;
+            }
+            .mobile-drawer-overlay {
+              background-color: rgba(0,0,0,0.9) !important;
+              -webkit-backdrop-filter: none !important;
+              backdrop-filter: none !important;
+            }
+          `}} />
+        </head>
         <Script src="https://www.googletagmanager.com/gtag/js?id=G-WH682R80NK" strategy="afterInteractive" />
         <Script id="google-analytics" strategy="afterInteractive">
           {`

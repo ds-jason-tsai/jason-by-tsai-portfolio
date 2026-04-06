@@ -60,8 +60,6 @@ h1, h2, h3, h4 {
   top: 0;
   z-index: 1001;
   background: #050505; /* Solid background for readability */
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
   /* Remove negative margins that cause clipping on mobile */
   width: 100%;
 }
@@ -183,7 +181,6 @@ h1, h2, h3, h4 {
   height: 300px;
   background: var(--accent-color);
   border-radius: 50%;
-  filter: blur(80px);
   opacity: 0.3;
   z-index: -1;
 }
@@ -218,7 +215,6 @@ h1, h2, h3, h4 {
   border: 1px solid var(--glass-border);
   border-radius: 20px;
   padding: 2.5rem;
-  backdrop-filter: blur(10px);
   transition: transform 0.3s ease, border-color 0.3s ease;
 }
 

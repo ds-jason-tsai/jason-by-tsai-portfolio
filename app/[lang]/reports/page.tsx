@@ -63,7 +63,7 @@ export default function Reports({ params }: { params: Promise<{ lang: string }> 
         { id: '1-4', zh: '1-4 對話與提示詞 (Prompt Engineering)', en: '1-4 Dialogue & Prompt Engineering', ja: '1-4 対話とプロンプト' },
         { id: '1-5', zh: '1-5 工作室 (語音/心智圖/報告生成)', en: '1-5 Creative Workshop', ja: '1-5 クリエイティブスタジオ' }
       ],
-      price: 49,
+      price: 898,
       tags: ['#NotebookLM', '#GoogleAI', '#VideoCourse', '#Productivity'],
     },
     {

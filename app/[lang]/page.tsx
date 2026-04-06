@@ -110,7 +110,7 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
             <h2 style={{ marginTop: '1.5rem', fontSize: '2.5rem', fontWeight: 800, background: 'var(--accent-grad)', WebkitBackgroundClip: 'text', backgroundClip: 'text', WebkitTextFillColor: 'transparent', letterSpacing: '2px' }}>
               Jason Tsai
             </h2>
-            <p style={{ textAlign: 'center', fontSize: '1rem', color: 'var(--text-secondary)', marginTop: '1rem', fontWeight: 500, lineHeight: '1.6', maxWidth: '380px' }}>
+            <p style={{ textAlign: 'center', fontSize: '1rem', color: 'var(--text-secondary)', marginTop: '1rem', fontWeight: 500, lineHeight: '1.6', maxWidth: '650px' }}>
                {lang === 'zh' ? '金融業資料分析師、多個數位學習平台 AI/資料分析導師、臺清交政等社團資料視覺化講師' : (lang === 'ja' ? '金融データアナリスト / AI・データ分析講師 / トップ大学データ視覚化講師' : 'Financial Data Analyst / AI & Data Analysis Instructor / Top Universities Data Viz Lecturer')}
             </p>
           </div>
@@ -192,7 +192,7 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
           font-size: 1.15rem;
           color: var(--text-secondary);
           margin-bottom: 2.5rem;
-          max-width: 600px;
+          max-width: 800px;
           margin-left: auto;
           margin-right: auto;
         }

@@ -101,7 +101,14 @@ export default function PortfolioClient({ projects, lang, t }: { projects: any[]
               }}>
                 <div className="portfolio-image-wrapper" style={{ width: '100%', height: '260px', position: 'relative', overflow: 'hidden' }}>
                   {proj.image ? (
-                    <Image src={proj.image} alt={proj.title[lang]} fill style={{ objectFit: 'cover', transition: 'transform 0.5s ease', cursor: 'pointer' }} className="portfolio-img-hover" />
+                    <Image 
+                      src={proj.image} 
+                      alt={proj.title[lang]} 
+                      fill 
+                      priority={arrIdx < 2}
+                      style={{ objectFit: 'cover', transition: 'transform 0.5s ease', cursor: 'pointer' }} 
+                      className="portfolio-img-hover" 
+                    />
                   ) : (
                     <div style={{ width: '100%', height: '100%', background: 'var(--glass-bg)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--text-secondary)' }}>No Preview Available</div>
                   )}

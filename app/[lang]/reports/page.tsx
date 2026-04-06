@@ -180,11 +180,11 @@ export default function Reports({ params }: { params: Promise<{ lang: string }> 
 
             {/* Content Body */}
             <div style={{ padding: '2.5rem', background: 'rgba(255,255,255,0.02)', borderRadius: '0 0 24px 24px', flex: 1, display: 'flex', flexDirection: 'column' }}>
-              <h3 style={{ fontSize: '1.4rem', fontWeight: '800', marginBottom: '1.2rem', color: '#fff' }}>
+              <h3 style={{ fontSize: '1.4rem', fontWeight: '800', marginBottom: '1.2rem', color: '#fff', minHeight: '3.5rem', display: 'flex', alignItems: 'center' }}>
                 {report.title[lang]}
               </h3>
 
-              <p style={{ color: 'var(--text-secondary)', fontSize: '0.95rem', lineHeight: '1.8', marginBottom: '2rem' }}>
+              <p style={{ color: 'var(--text-secondary)', fontSize: '0.95rem', lineHeight: '1.8', marginBottom: '2rem', minHeight: '6.5rem' }}>
                 {report.description[lang]}
               </p>
 

@@ -51,7 +51,7 @@ const Counter = ({ value, label, suffix = '', duration = 2000 }: CounterProps) =
         return x === 1 ? 1 : 1 - Math.pow(2, -10 * x);
       };
       
-      const currentCount = Math.floor(easeOutExpo(progress) * value);
+      const currentCount = Math.round(easeOutExpo(progress) * value);
       setCount(currentCount);
 
       if (progress < 1) {

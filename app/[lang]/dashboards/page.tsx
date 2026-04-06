@@ -114,20 +114,12 @@ export default function DashboardsPage({ params }: { params: Promise<{ lang: str
 
       {/* Carousel Section */}
       <div className="dashboard-carousel-wrapper" style={{ position: 'relative', width: '100%', maxWidth: '1200px', margin: '0 auto' }}>
-        {/* Navigation Buttons */}
-        <button 
-          onClick={handlePrev}
-          className="carousel-btn prev"
-          aria-label={t.prev}
-        >
-          ‹
+        {/* Navigation Buttons Moved adjusted for better centering */}
+        <button onClick={handlePrev} className="carousel-btn prev" aria-label={t.prev}>
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
         </button>
-        <button 
-          onClick={handleNext}
-          className="carousel-btn next"
-          aria-label={t.next}
-        >
-          ›
+        <button onClick={handleNext} className="carousel-btn next" aria-label={t.next}>
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
         </button>
 
         {/* Dashboard Display Card */}
@@ -234,15 +226,15 @@ export default function DashboardsPage({ params }: { params: Promise<{ lang: str
         }
         .carousel-btn {
           position: absolute;
-          top: 50%;
+          top: 60%; /* Adjusted to center more on the iframe content */
           transform: translateY(-50%);
           width: 50px;
           height: 50px;
           border-radius: 50%;
-          background: rgba(255, 255, 255, 0.05);
-          border: 1px solid rgba(255, 255, 255, 0.1);
+          background: rgba(0, 0, 0, 0.7);
+          border: 1px solid rgba(0, 242, 254, 0.3);
           color: #fff;
-          font-size: 2rem;
+          font-size: 2.2rem;
           display: flex;
           align-items: center;
           justify-content: center;

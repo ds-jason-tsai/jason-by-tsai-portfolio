@@ -16,7 +16,7 @@ const WorldMapCanvas: React.FC = () => {
     let height = 0;
 
     const mapImage = new Image();
-    mapImage.src = '/assets/world_map_outline.png';
+    mapImage.src = '/assets/world_map_sharp.png';
 
     const resize = () => {
       const rect = canvas.parentElement?.getBoundingClientRect();
@@ -28,13 +28,13 @@ const WorldMapCanvas: React.FC = () => {
     window.addEventListener('resize', resize);
     resize();
 
-    // Taiwan Precise Coordinates (Based on the generated map's proportion)
-    const twPos = { x: 0.816, y: 0.465 }; 
+    // Taiwan Precise Coordinates (Pixel-perfect for the generated sharp map)
+    const twPos = { x: 0.816, y: 0.468 }; 
     const hubs = [
-      { x: 0.15, y: 0.35, label: 'US' }, 
-      { x: 0.51, y: 0.28, label: 'Europe' }, 
-      { x: 0.82, y: 0.75, label: 'Australia' }, 
-      { x: 0.92, y: 0.33, label: 'Japan' }, 
+      { x: 0.15, y: 0.35 }, 
+      { x: 0.51, y: 0.28 }, 
+      { x: 0.82, y: 0.75 }, 
+      { x: 0.92, y: 0.33 }, 
     ];
 
     let time = 0;
@@ -53,7 +53,7 @@ const WorldMapCanvas: React.FC = () => {
         drawX = 0;
         drawY = (height - drawH) / 2;
 
-        ctx.globalAlpha = 0.6;
+        ctx.globalAlpha = 0.5;
         ctx.drawImage(mapImage, drawX, drawY, drawW, drawH);
         ctx.globalAlpha = 1.0;
 
@@ -61,17 +61,17 @@ const WorldMapCanvas: React.FC = () => {
         const ty = drawY + twPos.y * drawH;
 
         // Taiwan Pulse Glow
-        const pulse = Math.sin(time * 5) * 5 + 15;
+        const pulse = Math.sin(time * 5) * 4 + 10;
         ctx.shadowBlur = pulse;
         ctx.shadowColor = '#00f2fe';
         ctx.fillStyle = '#00f2fe';
         ctx.beginPath();
-        ctx.arc(tx, ty, 4, 0, Math.PI * 2);
+        ctx.arc(tx, ty, 3.5, 0, Math.PI * 2);
         ctx.fill();
         ctx.shadowBlur = 0;
 
         // Arcs
-        ctx.setLineDash([40, 150]);
+        ctx.setLineDash([40, 160]);
         ctx.lineDashOffset = -time * 800;
         
         hubs.forEach(h => {
@@ -79,14 +79,12 @@ const WorldMapCanvas: React.FC = () => {
           const hy = drawY + h.y * drawH;
           
           const grad = ctx.createLinearGradient(tx, ty, hx, hy);
-          grad.addColorStop(0, 'rgba(0, 242, 254, 0.2)');
+          grad.addColorStop(0, 'rgba(0, 242, 254, 0.1)');
           grad.addColorStop(0.5, 'rgba(0, 242, 254, 0.9)');
-          grad.addColorStop(1, 'rgba(0, 242, 254, 0.2)');
+          grad.addColorStop(1, 'rgba(0, 242, 254, 0.1)');
           
           ctx.strokeStyle = grad;
-          ctx.lineWidth = 2.5;
-          ctx.shadowBlur = 5;
-          ctx.shadowColor = 'rgba(0, 242, 254, 0.6)';
+          ctx.lineWidth = 1.8;
           
           const cpX = (tx + hx) / 2;
           const cpY = Math.min(ty, hy) - (Math.abs(tx - hx) * 0.12);
@@ -95,7 +93,6 @@ const WorldMapCanvas: React.FC = () => {
           ctx.moveTo(tx, ty);
           ctx.quadraticCurveTo(cpX, cpY, hx, hy);
           ctx.stroke();
-          ctx.shadowBlur = 0;
         });
       }
 

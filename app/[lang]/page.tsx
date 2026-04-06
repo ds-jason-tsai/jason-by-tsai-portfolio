@@ -85,11 +85,11 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
           <div className="hero-courses-section" style={{ marginTop: '4rem' }}>
              <p className="social-label" style={{ marginBottom: '2rem' }}>{dict.home.featured_courses || '推薦熱門課程'}</p>
              <div className="course-buttons" style={{ display: 'flex', gap: '1.2rem', justifyContent: 'center', flexWrap: 'wrap' }}>
-               <a href="https://live.rookiesavior.net/course/tableau" target="_blank" rel="noopener noreferrer" className="btn-primary course-mini-btn">
-                 <span style={{ fontSize: '1rem' }}>📊</span> {lang === 'zh' ? 'Tableau 商業視覺化實戰' : 'Tableau Business Viz'}
+               <a href="https://live.rookiesavior.net/course/tableau" target="_blank" rel="noopener noreferrer" className="btn-outline-cyan">
+                 📊 {lang === 'zh' ? 'Tableau 商業視覺化實戰' : 'Tableau Business Viz'}
                </a>
-               <a href="https://live.rookiesavior.net/course/AI-NotubookLM" target="_blank" rel="noopener noreferrer" className="btn-primary course-mini-btn">
-                 <span style={{ fontSize: '1rem' }}>🤖</span> {lang === 'zh' ? 'NotebookLM x AI 應用' : 'NotebookLM x AI Apps'}
+               <a href="https://live.rookiesavior.net/course/AI-NotubookLM" target="_blank" rel="noopener noreferrer" className="btn-outline-cyan">
+                 🤖 {lang === 'zh' ? 'NotebookLM x AI 應用' : 'NotebookLM x AI Apps'}
                </a>
              </div>
           </div>
@@ -208,13 +208,25 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
           transition: all 0.3s ease;
         }
 
-        .course-mini-btn {
-          padding: 0.5rem 1.2rem !important;
-          font-size: 0.85rem !important;
-          border-radius: 12px !important;
+        .btn-outline-cyan {
+          padding: 0.8rem 1.8rem;
+          font-size: 0.95rem;
+          font-weight: 700;
+          color: #00f2fe;
+          background: transparent;
+          border: 1px solid #00f2fe;
+          border-radius: 40px;
+          text-decoration: none;
+          transition: all 0.3s ease;
           display: flex;
           align-items: center;
-          gap: 0.4rem;
+          gap: 0.6rem;
+        }
+
+        .btn-outline-cyan:hover {
+          background: rgba(0, 242, 254, 0.1);
+          box-shadow: 0 0 15px rgba(0, 242, 254, 0.3);
+          transform: translateY(-2px);
         }
         
         .hero-image-outer {

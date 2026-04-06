@@ -1,36 +1,26 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Jason Tsai | Data Analyst Portfolio 📊
 
-## Getting Started
+Welcome to my professional Data Analyst portfolio. This project showcases my experience in data visualization, AI integration, and business intelligence strategy.
 
-First, run the development server:
+**🌐 Live Demo:** [https://jason-by-tsai-portfolio.vercel.app/](https://jason-by-tsai-portfolio.vercel.app/)
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## 🚀 Key Sections
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- **[Premium Section](https://jason-by-tsai-portfolio.vercel.app/zh/reports)**: Exclusive data insight reports and AI/Data visualization video courses (e.g., Google NotebookLM, Salesforce SE Case Study).
+- **[Data Dashboards](https://jason-by-tsai-portfolio.vercel.app/zh/dashboards)**: Interactive BI dashboards built with Looker Studio, featuring Social Listening and GEO (Generative Engine Optimization) monitoring.
+- **[Professional Services](https://jason-by-tsai-portfolio.vercel.app/zh/services)**: End-to-end data solutions including CDP implementation, Agentic AI, and corporate training.
+- **[Career Experience](https://jason-by-tsai-portfolio.vercel.app/zh/experience)**: Full timeline of my professional journey across insurance, e-commerce, and technical instruction roles.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 🛠️ Tech Stack
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- **Framework**: Next.js 15 (App Router)
+- **Styling**: Tailwind CSS & Vanilla CSS
+- **Visualization**: Looker Studio, Tableau, Power BI
+- **Deployment**: Vercel
 
-## Learn More
+## 📈 SEO & Performance
 
-To learn more about Next.js, take a look at the following resources:
+This portfolio is optimized for search engines with multi-language support (English, Traditional Chinese, Japanese) and follows modern web performance best practices.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+---
+© 2026 Jason Tsai - Driven by Data, Powered by AI.

@@ -154,14 +154,16 @@ export default function DashboardsPage({ params }: { params: Promise<{ lang: str
             </div>
           </div>
 
-          {/* Iframe Iframe Area */}
+          {/* Iframe Area */}
           <div className="iframe-container" style={{ 
             position: 'relative', 
             borderRadius: '16px', 
             overflow: 'hidden', 
-            background: '#000',
-            aspectRatio: '16/9',
-            minHeight: '600px'
+            background: '#0a0a0a',
+            width: '100%',
+            height: '1000px', // Increased height
+            maxHeight: '85vh',
+            boxShadow: 'inset 0 0 40px rgba(0,0,0,0.8)'
           }}>
             <iframe 
               key={current.id}
@@ -169,12 +171,12 @@ export default function DashboardsPage({ params }: { params: Promise<{ lang: str
               width="100%" 
               height="100%" 
               frameBorder="0" 
-              style={{ border: 0, position: 'absolute', inset: 0 }} 
+              style={{ border: 0, position: 'absolute', inset: 0, overflow: 'auto' }} 
               allowFullScreen 
               sandbox="allow-storage-access-by-user-activation allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox"
             ></iframe>
           </div>
-          
+
           {/* Pagination Dots */}
           <div style={{ display: 'flex', justifyContent: 'center', gap: '8px', marginTop: '1.5rem' }}>
             {dashboards.map((_, i) => (
@@ -195,8 +197,26 @@ export default function DashboardsPage({ params }: { params: Promise<{ lang: str
         </div>
       </div>
 
+      {/* Partner Platforms Section */}
+      <div className="trusted-by-section" style={{ marginTop: '5rem', marginBottom: '4rem', textAlign: 'center' }}>
+        <h3 style={{ fontSize: '1rem', color: 'var(--text-secondary)', marginBottom: '3.5rem', textTransform: 'uppercase', letterSpacing: '3px', fontWeight: '700', opacity: 0.8 }}>
+           Partner Platforms & Multi-Brand Collaboration
+        </h3>
+        <div style={{ display: 'flex', gap: '4rem', justifyContent: 'center', flexWrap: 'wrap', alignItems: 'center', maxWidth: '1000px', margin: '0 auto' }}>
+          <a href="https://lookerstudio.google.com/" target="_blank" rel="noopener follow" className="partner-logo">
+             Looker Studio
+          </a>
+          <a href="https://public.tableau.com/app/discover" target="_blank" rel="noopener follow" className="partner-logo">
+             Tableau Public
+          </a>
+          <a href="https://www.microsoft.com/en-us/power-platform/products/power-bi" target="_blank" rel="noopener follow" className="partner-logo">
+             Power BI 
+          </a>
+        </div>
+      </div>
+
       {/* Footer Back Button */}
-      <div style={{ marginTop: '4rem', textAlign: 'center' }}>
+      <div style={{ marginTop: '2rem', textAlign: 'center' }}>
         <Link href={`/${lang}`} className="btn-primary" style={{ padding: '0.8rem 2.5rem' }}>
           {t.backToHome}
         </Link>
@@ -241,6 +261,23 @@ export default function DashboardsPage({ params }: { params: Promise<{ lang: str
           border: 1px solid rgba(255, 255, 255, 0.05);
         }
 
+        .partner-logo {
+           font-size: 1.4rem;
+           font-weight: 900;
+           color: #fff;
+           opacity: 0.4;
+           text-decoration: none;
+           transition: all 0.4s ease;
+           letter-spacing: 1px;
+           font-family: inherit;
+        }
+        .partner-logo:hover {
+           opacity: 1;
+           color: var(--accent-color);
+           transform: translateY(-3px);
+           text-shadow: 0 0 15px rgba(0, 242, 254, 0.4);
+        }
+
         @media (max-width: 1024px) {
           .dashboard-carousel-wrapper { padding: 0; }
           .carousel-btn {
@@ -251,11 +288,12 @@ export default function DashboardsPage({ params }: { params: Promise<{ lang: str
             margin: 1rem 0.5rem;
           }
           .dashboards-header { margin-bottom: 2rem; }
-          .iframe-container { min-height: 400px; }
+          .iframe-container { height: 700px !important; }
         }
         @media (max-width: 768px) {
           .section-title { font-size: 2.2rem !important; }
-          .iframe-container { min-height: 300px; }
+          .iframe-container { height: 500px !important; }
+          .partner-logo { font-size: 1.1rem; }
         }
       `}}/>
     </div>

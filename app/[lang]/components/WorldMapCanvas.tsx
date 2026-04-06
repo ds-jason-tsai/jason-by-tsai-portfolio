@@ -15,38 +15,51 @@ const WorldMapCanvas: React.FC = () => {
     let width = canvas.offsetWidth;
     let height = canvas.offsetHeight;
 
-    // Simulation of world map points (Simplified dots)
+    // Simulation of world map points (More dense clusters to look like continents)
     const points: { x: number, y: number, alpha: number }[] = [];
-    const spawnPoints = () => {
+    const spawnWorldPoints = (w: number, h: number) => {
       points.length = 0;
-      // Define world map dot clusters (Rough coordinates for continents)
-      // Taiwan is roughly at 83%, 45% of the canvas height/width in standard projection
-      for (let i = 0; i < 600; i++) {
-        points.push({
-          x: Math.random() * width,
-          y: Math.random() * height,
-          alpha: Math.random() * 0.3 + 0.1
-        });
-      }
+      // Define continents (Normalized coordinates 0-1)
+      const continents = [
+        { x: 0.15, y: 0.35, w: 0.2, h: 0.3 }, // North America
+        { x: 0.25, y: 0.65, w: 0.15, h: 0.25 }, // South America
+        { x: 0.5, y: 0.3, w: 0.15, h: 0.2 }, // Europe
+        { x: 0.52, y: 0.6, w: 0.12, h: 0.25 }, // Africa
+        { x: 0.75, y: 0.4, w: 0.2, h: 0.3 }, // Asia
+        { x: 0.82, y: 0.75, w: 0.1, h: 0.15 }, // Australia
+        { x: 0.84, y: 0.45, w: 0.02, h: 0.03 } // Taiwan (Highlighted)
+      ];
+
+      continents.forEach(c => {
+        const numDots = 150; 
+        for (let i = 0; i < numDots; i++) {
+          points.push({
+            x: (c.x + Math.random() * c.w) * w,
+            y: (c.y + Math.random() * c.h) * h,
+            alpha: Math.random() * 0.4 + 0.2
+          });
+        }
+      });
     };
 
     const resize = () => {
       width = canvas.width = canvas.offsetWidth;
       height = canvas.height = canvas.offsetHeight;
-      spawnPoints();
+      spawnWorldPoints(width, height);
     };
 
     window.addEventListener('resize', resize);
     resize();
 
-    // Flight arcs from Taiwan
-    const taiwan = { x: width * 0.82, y: height * 0.45 };
-    const targets = [
-      { x: width * 0.2, y: height * 0.3, label: 'US' },      // US
-      { x: width * 0.5, y: height * 0.25, label: 'EU' },     // Europe
-      { x: width * 0.85, y: height * 0.7, label: 'AU' },     // Australia
-      { x: width * 0.15, y: height * 0.6, label: 'LATAM' },  // Latin America
-      { x: width * 0.55, y: height * 0.65, label: 'AF' }     // Africa
+    // Taiwan Start (Static normalized)
+    const getPos = (nx: number, ny: number) => ({ x: nx * width, y: ny * height });
+    
+    // Flight destinations
+    const destinations = [
+      { nx: 0.25, ny: 0.4, label: 'US' },
+      { nx: 0.55, ny: 0.35, label: 'EU' },
+      { nx: 0.85, ny: 0.75, label: 'AU' },
+      { nx: 0.88, ny: 0.42, label: 'JP' }
     ];
 
     let offset = 0;
@@ -54,61 +67,57 @@ const WorldMapCanvas: React.FC = () => {
     const draw = () => {
       ctx.clearRect(0, 0, width, height);
 
-      // 1. Draw World Dots (The Map)
-      ctx.fillStyle = 'rgba(255, 255, 255, 0.15)';
+      // 1. Draw Dotted World Map
+      ctx.fillStyle = 'rgba(255, 255, 255, 0.3)';
       points.forEach(p => {
         ctx.beginPath();
-        ctx.arc(p.x, p.y, 1, 0, Math.PI * 2);
+        ctx.arc(p.x, p.y, 1.2, 0, Math.PI * 2);
         ctx.fill();
       });
 
-      // 2. Draw Matrix numeric background (Very subtle)
-      ctx.font = '10px monospace';
-      ctx.fillStyle = 'rgba(0, 242, 254, 0.05)';
-      for (let i = 0; i < 15; i++) {
-          const char = Math.random() > 0.5 ? '1' : '0';
-          const x = (width / 15) * i;
-          const y = (offset * 100 + i * 50) % height;
-          ctx.fillText(char, x, y);
-      }
+      // 2. Taiwan Glow
+      const tw = getPos(0.85, 0.46);
+      ctx.shadowBlur = 15;
+      ctx.shadowColor = '#00F2FE';
+      ctx.fillStyle = '#00F2FE';
+      ctx.beginPath();
+      ctx.arc(tw.x, tw.y, 3, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.shadowBlur = 0;
 
-      // 3. Draw Flight Arcs from Taiwan
-      offset += 0.005;
+      // 3. Flight Arcs
+      offset += 0.003;
       if (offset > 1) offset = 0;
 
-      targets.forEach((target, i) => {
-        // Line styling
-        const gradient = ctx.createLinearGradient(taiwan.x, taiwan.y, target.x, target.y);
-        gradient.addColorStop(0, 'rgba(0, 242, 254, 0)');
-        gradient.addColorStop(0.5, 'rgba(0, 242, 254, 0.5)');
-        gradient.addColorStop(1, 'rgba(0, 242, 254, 0)');
-
-        ctx.strokeStyle = gradient;
-        ctx.lineWidth = 1.5;
-        ctx.setLineDash([20, 100]);
-        ctx.lineDashOffset = -offset * 300;
-
-        // Quadratic curve for arc
-        const cpX = (taiwan.x + target.x) / 2;
-        const cpY = Math.min(taiwan.y, target.y) - 100; // Control point for curve
-
+      destinations.forEach((dest) => {
+        const dPos = getPos(dest.nx, dest.ny);
+        
         ctx.beginPath();
-        ctx.moveTo(taiwan.x, taiwan.y);
-        ctx.quadraticCurveTo(cpX, cpY, target.x, target.y);
+        ctx.lineWidth = 1.5;
+        
+        const gradient = ctx.createLinearGradient(tw.x, tw.y, dPos.x, dPos.y);
+        gradient.addColorStop(0, 'rgba(0, 242, 254, 0.1)');
+        gradient.addColorStop(0.5, 'rgba(0, 242, 254, 0.6)');
+        gradient.addColorStop(1, 'rgba(0, 242, 254, 0.1)');
+        
+        ctx.strokeStyle = gradient;
+        ctx.setLineDash([30, 150]);
+        ctx.lineDashOffset = -offset * 800;
+
+        // Curve
+        const cpX = (tw.x + dPos.x) / 2;
+        const cpY = Math.min(tw.y, dPos.y) - 80;
+        
+        ctx.moveTo(tw.x, tw.y);
+        ctx.quadraticCurveTo(cpX, cpY, dPos.x, dPos.y);
         ctx.stroke();
 
-        // Target dot
-        ctx.fillStyle = 'rgba(0, 242, 254, 0.8)';
+        // Destination pulse
+        ctx.fillStyle = 'rgba(0, 242, 254, 0.4)';
         ctx.beginPath();
-        ctx.arc(target.x, target.y, 2, 0, Math.PI * 2);
+        ctx.arc(dPos.x, dPos.y, 2, 0, Math.PI * 2);
         ctx.fill();
-        
-        ctx.shadowBlur = 10;
-        ctx.shadowColor = 'rgba(0, 242, 254, 1)';
       });
-
-      // Reset shadows
-      ctx.shadowBlur = 0;
 
       animationFrameId = requestAnimationFrame(draw);
     };
@@ -131,8 +140,7 @@ const WorldMapCanvas: React.FC = () => {
         width: '100%', 
         height: '100%', 
         zIndex: 0,
-        pointerEvents: 'none',
-        opacity: 0.8
+        pointerEvents: 'none'
       }} 
     />
   );

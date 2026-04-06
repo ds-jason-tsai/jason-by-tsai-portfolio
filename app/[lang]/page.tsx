@@ -50,7 +50,6 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
       src: 'https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fntuscmarketingclub%2Fposts%2Fpfbid0zUWYsKdJKRZE1CdAKBGiEq5ciP5kAoiPNi8RqqUTkJkMrM3AyfNfSP4RKKSHoaVtl&show_text=true&width=500',
       link: 'https://www.facebook.com/ntuscmarketingclub/posts/pfbid0zUWYsKdJKRZE1CdAKBGiEq5ciP5kAoiPNi8RqqUTkJkMrM3AyfNfSP4RKKSHoaVtl'
     },
-
   ];
 
   return (
@@ -97,7 +96,6 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
         </div>
 
         <div className="hero-image-container">
-          {/* Animated World Map Background for Image */}
           <WorldMapCanvas />
           <div className="image-wrapper-glow">
             <Image 
@@ -149,25 +147,24 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
 
       <style dangerouslySetInnerHTML={{__html: `
         .hero {
-          min-height: 100vh;
-          padding: 6rem 2rem;
+          min-height: auto;
+          padding: 4rem 2rem;
           display: flex;
-          flex-direction: row;
+          flex-direction: column;
           align-items: center;
-          justify-content: space-between;
-          max-width: 1200px;
-          margin: 0 auto;
-          gap: 4rem;
-          text-align: left;
+          justify-content: center;
+          gap: 3rem;
+          text-align: center;
           position: relative;
         }
         .hero-content {
-          max-width: 600px;
+          max-width: 800px;
           width: 100%;
+          position: relative;
           z-index: 2;
         }
         .hero-title {
-          font-size: 4rem;
+          font-size: 3.5rem;
           font-weight: 800;
           line-height: 1.2;
           margin-bottom: 1.5rem;
@@ -183,33 +180,25 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
           color: var(--text-secondary);
           margin-bottom: 2.5rem;
           max-width: 600px;
+          margin-left: auto;
+          margin-right: auto;
         }
         .hero-btns {
           display: flex;
           gap: 1.5rem;
           margin-bottom: 3rem;
-          justify-content: flex-start;
+          justify-content: center;
         }
         .btn-secondary {
           background: transparent !important;
           border: 1px solid var(--accent-color) !important;
           color: var(--accent-color) !important;
         }
-        .social-links-section {
-          margin-top: 2rem;
-        }
-        .social-label {
-          font-size: 0.9rem;
-          color: var(--text-secondary);
-          margin-bottom: 1rem;
-          text-transform: uppercase;
-          letter-spacing: 2px;
-        }
         .social-icons {
           display: flex;
           gap: 2rem;
           align-items: center;
-          justify-content: flex-start;
+          justify-content: center;
         }
         .social-icon-link {
           color: var(--text-primary);
@@ -217,27 +206,22 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
           font-weight: 600;
           font-size: 1rem;
           transition: all 0.3s ease;
-          position: relative;
-        }
-        .social-icon-link:hover {
-          color: var(--accent-color);
-          transform: translateY(-2px);
         }
         
         .hero-image-container {
-          position: relative;
-          width: 500px;
-          height: 500px;
           display: flex;
-          align-items: center;
           justify-content: center;
-          z-index: 1;
+          margin-top: 1rem;
+          width: 100%;
+          max-width: 800px;
+          height: 500px; /* Predefined height for map area */
+          position: relative;
         }
 
         .image-wrapper-glow {
           position: relative;
-          padding: 10px;
-          border-radius: 50%;
+          z-index: 10;
+          align-self: center;
         }
 
         .image-wrapper-glow::after {
@@ -246,19 +230,11 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
           inset: -10px;
           border-radius: 50%;
           background: var(--accent-grad);
-          opacity: 0.2;
+          opacity: 0.1;
           filter: blur(20px);
           z-index: -1;
         }
 
-        /* Infinite Carousel Setup */
-        .carousel-container {
-          width: 100%;
-          overflow: hidden;
-          position: relative;
-          padding: 1rem 0;
-        }
-        
         .carousel-track {
           display: flex;
           width: max-content;
@@ -267,90 +243,14 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
           animation: scroll 80s linear infinite;
         }
 
-        .carousel-track:hover {
-          animation-play-state: paused;
-        }
-        
         @keyframes scroll {
           0% { transform: translateX(0); }
           100% { transform: translateX(calc(-50% - 1.25rem)); }
         }
-        
-        .media-card {
-          width: 380px;
-          flex-shrink: 0;
-          background: var(--glass-bg);
-          padding: 1.5rem;
-          border-radius: 20px;
-          border: 1px solid var(--glass-border);
-          transition: transform 0.3s ease, border-color 0.3s ease;
-          display: flex;
-          flex-direction: column;
-          gap: 1rem;
-        }
 
-        .media-card:hover {
-          transform: translateY(-5px);
-          border-color: var(--accent-color);
-          box-shadow: 0 5px 15px rgba(0, 242, 254, 0.2);
-        }
-        
-        .media-badge {
-          display: inline-block;
-          font-size: 0.75rem;
-          color: #000;
-          background: var(--accent-grad);
-          padding: 0.2rem 0.6rem;
-          border-radius: 4px;
-          font-weight: 800;
-          margin-bottom: 0.5rem;
-        }
-        
-        .media-title {
-          font-size: 1.2rem;
-          font-weight: 600;
-          margin: 0;
-        }
-        
-        .media-iframe-wrapper {
-          border-radius: 10px;
-          overflow: hidden;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          flex-grow: 1;
-        }
-
-        @media (max-width: 1024px) {
-          .hero {
-            flex-direction: column-reverse;
-            text-align: center;
-            padding: 4rem 2rem;
-          }
-          .hero-content {
-            text-align: center;
-            max-width: 800px;
-          }
-          .hero-btns {
-            justify-content: center;
-          }
-          .social-icons {
-            justify-content: center;
-          }
-          .hero-image-container {
-            width: 300px;
-            height: 300px;
-          }
-          .hero-image {
-            width: 250px;
-            height: 250px;
-          }
-          .hero-title { font-size: 3rem; }
-        }
-
-        @media (max-width: 640px) {
-          .hero-title { font-size: 2.2rem; }
-          .hero-btns { flex-direction: column; gap: 1rem; }
+        @media (max-width: 768px) {
+          .hero-title { font-size: 2.5rem; }
+          .hero-image-container { height: 400px; }
         }
       `}}/>
     </>

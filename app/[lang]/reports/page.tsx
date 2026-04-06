@@ -89,6 +89,12 @@ export default function Reports({ params }: { params: Promise<{ lang: string }> 
         en: 'A professional C-level pitch deck. Covers pain points, technical architecture (Einstein AI), and action plan. A perfect reference for business storytelling.',
         ja: 'プロのCレベル向けプレゼン。Einstein AIを中心とした技術アーキテクチャ、ビジネス上の課題、アクションプランを網羅したピッチデッキです。',
       },
+      chapters: [
+        { id: '1', zh: '1 執行摘要與專案影響 (Executive Summary)', en: '1 Executive Summary', ja: '1 エグゼクティブサマリー' },
+        { id: '2', zh: '2 商業痛點剖析 (Pain Points Analysis)', en: '2 Pain Points Analysis', ja: '2 課題分析' },
+        { id: '3', zh: '3 技術架構與解決方案 (Einstein AI)', en: '3 Technical Architecture & Einstein AI', ja: '3 技術アーキテクチャ (Einstein AI)' },
+        { id: '4', zh: '4 導入途徑與行動計畫 (Roadmap & Action Plan)', en: '4 Roadmap & Action Plan', ja: '4 導入ロードマップ' }
+      ],
       price: 498,
       tags: ['#Salesforce', '#SolutionEngineer', '#C-Level', '#BusinessPresentation'],
     },

@@ -71,7 +71,7 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
           </div>
 
           <div className="social-links-section">
-            <p className="social-label" style={{ marginBottom: '2.5rem' }}>
+            <p className="social-label" style={{ marginBottom: '2.5rem', color: '#00f2fe', fontSize: '1.4rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '1px' }}>
               {dict.home.social_label || (lang === 'zh' ? '追蹤我的數據洞察' : 'Follow my Data Insights')}
             </p>
             <div className="social-icons" style={{ gap: '3.5rem' }}>
@@ -82,7 +82,7 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
           </div>
 
           <div className="hero-courses-section" style={{ marginTop: '5rem' }}>
-             <p className="social-label" style={{ marginBottom: '2rem' }}>{dict.home.featured_courses || '推薦熱門課程'}</p>
+             <p className="social-label" style={{ marginBottom: '2rem', color: '#00f2fe', fontSize: '1.4rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '1px' }}>{dict.home.featured_courses || '推薦熱門課程'}</p>
              <div className="course-buttons" style={{ display: 'flex', gap: '1.2rem', justifyContent: 'center', flexWrap: 'wrap' }}>
                <a href="https://live.rookiesavior.net/course/tableau" target="_blank" rel="noopener noreferrer" className="btn-outline-cyan">
                  📊 {lang === 'zh' ? 'Tableau 商業視覺化實戰' : 'Tableau Business Viz'}

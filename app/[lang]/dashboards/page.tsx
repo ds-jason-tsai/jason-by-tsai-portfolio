@@ -154,7 +154,7 @@ export default function DashboardsPage({ params }: { params: Promise<{ lang: str
             </div>
             {/* Added Buy Data Button */}
             <div style={{ marginTop: '2rem' }}>
-              <a href={`/${lang}/reports#data`} className="btn-secondary" style={{ display: 'inline-block', padding: '0.8rem 2.5rem', fontSize: '1rem' }}>
+              <a href={`/${lang}/reports#data`} className="btn-secondary dashboard-buy-btn">
                 {lang === 'zh' ? '🛒 購買相關數據' : (lang === 'ja' ? '🛒 関連データを購入' : '🛒 Buy Layout / Data')}
               </a>
             </div>
@@ -300,6 +300,18 @@ export default function DashboardsPage({ params }: { params: Promise<{ lang: str
           .section-title { font-size: 2.2rem !important; }
           .iframe-container { height: 500px !important; }
           .partner-logo { font-size: 1.1rem; }
+        }
+        .dashboard-buy-btn {
+          display: inline-block;
+          padding: 0.8rem 2.5rem;
+          font-size: 1rem;
+          transition: all 0.3s;
+        }
+        .dashboard-buy-btn:hover {
+          background: var(--accent-color) !important;
+          color: #000 !important;
+          box-shadow: 0 0 20px rgba(0, 242, 254, 0.5);
+          transform: translateY(-2px);
         }
       `}}/>
     </div>

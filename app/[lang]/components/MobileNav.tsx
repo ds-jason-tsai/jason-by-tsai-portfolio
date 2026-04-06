@@ -31,7 +31,7 @@ export default function MobileNav({
   const navLinks = [
     { href: `/${lang}`, label: dict.nav.home },
     { href: `/${lang}/portfolio`, label: dict.nav.portfolio },
-    { href: `/${lang}/experience`, label: dict.nav.experience },
+    { href: `/${lang}/experience`, label: lang === 'zh' ? '完整經歷' : dict.nav.experience },
     { href: `/${lang}/dashboards`, label: lang === 'zh' ? '儀表板專區' : (dict.nav.dashboards || 'Dashboards') },
     { href: `/${lang}/articles`, label: dict.nav.articles },
     { href: `/${lang}/services`, label: dict.nav.services },

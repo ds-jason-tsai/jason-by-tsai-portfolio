@@ -98,7 +98,7 @@ export default async function Experience({ params }: { params: Promise<{ lang: s
                 {item.companies ? (
                   item.companies.map((c: any, cIdx: number) => (
                     <span key={cIdx} style={{ display: 'inline-flex', alignItems: 'center', gap: '0.4rem' }}>
-                      {c.logo && <img src={c.logo} alt="logo" style={{ width: '20px', height: '20px', borderRadius: '4px', objectFit: 'contain', background: 'white', padding: '1px' }} />}
+                      {c.logo && <img src={c.logo} alt="logo" style={{ width: '28px', height: '28px', borderRadius: '4px', objectFit: 'contain', background: 'white', padding: '1px' }} />}
                       <a href={c.url} target="_blank" rel="noopener noreferrer" style={{ color: 'var(--accent-color)', textDecoration: 'none', borderBottom: '1px dotted var(--accent-color)', paddingBottom: '1px' }}>
                         {c.name}
                       </a>
@@ -107,7 +107,7 @@ export default async function Experience({ params }: { params: Promise<{ lang: s
                   ))
                 ) : (
                   <span style={{ display: 'inline-flex', alignItems: 'center', gap: '0.4rem' }}>
-                    {item.logo && <img src={item.logo} alt="logo" style={{ width: '20px', height: '20px', borderRadius: '4px', objectFit: 'contain', background: 'white', padding: '1px' }} />}
+                    {item.logo && <img src={item.logo} alt="logo" style={{ width: '28px', height: '28px', borderRadius: '4px', objectFit: 'contain', background: 'white', padding: '1px' }} />}
                     {item.url ? (
                       <a href={item.url} target="_blank" rel="noopener noreferrer" style={{ color: 'var(--accent-color)', textDecoration: 'none', borderBottom: '1px dotted var(--accent-color)', paddingBottom: '1px' }}>
                         {item.company} ↗

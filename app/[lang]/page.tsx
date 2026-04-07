@@ -105,6 +105,7 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
                   width={380} 
                   height={380} 
                   className="hero-image"
+                  sizes="(max-width: 768px) 300px, 380px"
                   style={{ objectPosition: 'center top', objectFit: 'cover', borderRadius: '50%', border: '4px solid rgba(0, 242, 254, 0.3)', position: 'relative', zIndex: 1, transition: 'transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)', cursor: 'pointer' }}
                   priority
                 />
@@ -261,6 +262,7 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
           justify-content: center;
           margin-top: 2rem;
           overflow: visible;
+          min-height: 520px;
         }
 
         .hero-image-container {

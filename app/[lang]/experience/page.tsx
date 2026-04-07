@@ -23,7 +23,7 @@ export default async function Experience({ params }: { params: Promise<{ lang: s
               ],
               desc: "輔導學員完成Python視覺化、建模、資料分析、n8n自動化等專案。超過50位學員。" 
             },
-            { date: "2024.08 - 至今", role: "合作講師", company: "聯成電腦 (菜鳥救星)", url: "https://live.rookiesavior.net/", logo: "/assets/icons/菜鳥救星.png", desc: "開發從零到一的 Tableau 完整資料生命週期課程；累積 200+ 教學小時，培訓超過 150 位專業人士。成功協助多位學員轉職數據分析師，並獲得 4.8/5.0 的學員滿意度回饋。" },
+            { date: "2024.08 - 至今", role: "合作講師", company: "聯成電腦 (菜鳥救星)", url: "https://live.rookiesavior.net/", logo: "/assets/icons/菜鳥救星.png", desc: "開發從零到一的 Tableau 完整資料生命週期課程；累積 300+ 教學小時，培訓超過 150 位專業人士。成功協助多位學員轉職數據分析師(DA)，並獲得學員高滿意度回饋。" },
             { date: "2023.07 - 至今", role: "資料分析師", company: "國泰人壽 (Cathay Life Insurance)", url: "", logo: "/assets/icons/國泰人壽.png", desc: "負責 Cloud CDP 選商、建置與標籤工程 (Celebrus to GA4)。主導 Agentic AI 導入，將 29 個破碎資料表收斂為 10 個核心 Data Mart。幫助兩萬名業務員提升保單貸款表現，數位轉換率顯著提升。" },
             { date: "2023.03 - 2023.06", role: "資料分析師 (Data Analyst)", company: "iKala Interactive Media Inc.", url: "", logo: "/assets/icons/iKala.png", desc: "參與 KOL 網紅影響力分析專案，量化行銷效益並優化網紅選擇策略。優化內部儀表板並實作自動化排程派報系統，整體營運效率提升 5 倍。" },
             { date: "2023.02", role: "數發部 Data Station 數據競賽 | 冠軍", company: "家樂福 (Carrefour)", url: "", logo: "/assets/icons/Carrefour.png", desc: "運用集成分群分析與 XGBoost 等機器學習演算法開發顧客購買預測模型，並深入規劃商品搭售策略。在萬人規模的全國專案競賽中脫穎而出，最終贏得全國冠軍與最佳模型獎。" },
@@ -46,7 +46,7 @@ export default async function Experience({ params }: { params: Promise<{ lang: s
               ],
               desc: "Guided students to complete projects in Python visualization, modeling, data analysis, and n8n automation. Mentored over 50 students." 
             },
-            { date: "2024.08 - Present", role: "Partner Instructor", company: "Lien Cheng Computer", url: "https://live.rookiesavior.net/", logo: "/assets/icons/菜鳥救星.png", desc: "Developed comprehensive Tableau data lifecycle curriculum. Accumulated 200+ teaching hours, empowering 150+ professionals." },
+            { date: "2024.08 - Present", role: "Partner Instructor", company: "Lien Cheng Computer", url: "https://live.rookiesavior.net/", logo: "/assets/icons/菜鳥救星.png", desc: "Developed comprehensive Tableau data lifecycle curriculum. Accumulated 300+ teaching hours, empowering 150+ professionals to transition into Data Analyst (DA) roles with high satisfaction." },
             { date: "2023.07 - Present", role: "Data Analyst", company: "Cathay Life Insurance", url: "", logo: "/assets/icons/國泰人壽.png", desc: "Led Cloud CDP selection and tagging engineering. Orchestrated Agentic AI implementations and streamlined 29 legacy tables into 10 refined Data Marts." },
             { date: "2023.03 - 2023.06", role: "Data Analyst", company: "iKala Interactive Media Inc.", url: "", logo: "/assets/icons/iKala.png", desc: "Quantitative influencer marketing analysis. Built internal dashboards and automated email reports, boosting efficiency by 5x." },
             { date: "2023.02", role: "Data Station Data Competition | Champion", company: "Carrefour", url: "", logo: "/assets/icons/Carrefour.png", desc: "Developed a customer purchase prediction model using advanced ensemble learning. Secured the National Championship." },
@@ -69,7 +69,7 @@ export default async function Experience({ params }: { params: Promise<{ lang: s
               ],
               desc: "Pythonによる可視化、モデリング、データ分析、n8n自動化などのプロジェクトを指導。50名以上の受講生をサポートしました。" 
             },
-            { date: "2024.08 - 現在", role: "パートナー講師", company: "聯成電腦 (Rookie Savior)", url: "https://live.rookiesavior.net/", logo: "/assets/icons/菜鳥救星.png", desc: "Tableau総合カリキュラムを開発。200時間以上の指導を通じて150名以上の専門家を育成。" },
+            { date: "2024.08 - 現在", role: "パートナー講師", company: "聯成電腦 (Rookie Savior)", url: "https://live.rookiesavior.net/", logo: "/assets/icons/菜鳥救星.png", desc: "Tableau総合カリキュラムを開発。300時間以上の指導を通じて150名以上の専門家を育成し、データアナリスト(DA)への転職を支援。" },
             { date: "2023.07 - 現在", role: "資料分析師", company: "國泰人壽 (Cathay Life Insurance)", url: "", logo: "/assets/icons/國泰人壽.png", desc: "クラウドCDPの選定と導入を主導。AIエージェントの導入と2万人の営業員向けデータマート構築を支援。" },
             { date: "2023.03 - 2023.06", role: "データアナリスト", company: "iKala Interactive Media Inc.", url: "", logo: "/assets/icons/iKala.png", desc: "KOLインフルエンサーの影響力分析プロジェクトに参加。社内ダッシュボードと自動レポートシステムを構築し、運営効率を5倍向上。" },
             { date: "2023.02", role: "数位発展部 Data Station データコンテスト | 優勝", company: "Carrefour (家樂福)", url: "", logo: "/assets/icons/Carrefour.png", desc: "機械学習を用いた顧客購買予測モデルの開発。1万人規模の全国コンテストで優勝。" },

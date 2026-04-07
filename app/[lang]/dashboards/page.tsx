@@ -201,13 +201,13 @@ export default function DashboardsPage({ params }: { params: Promise<{ lang: str
            Partner Platforms & Multi-Brand Collaboration
         </h3>
         <div style={{ display: 'flex', gap: '4rem', justifyContent: 'center', flexWrap: 'wrap', alignItems: 'center', maxWidth: '1000px', margin: '0 auto' }}>
-          <a href="https://lookerstudio.google.com/?utm_source=jason-portfolio.vercel.app&utm_medium=referral&utm_campaign=dash_platform_looker" target="_blank" rel="noopener follow" className="partner-logo">
+          <a href="https://lookerstudio.google.com/?utm_source=jason-by-tsai-portfolio.vercel.app&utm_medium=referral&utm_campaign=dash_platform_looker" target="_blank" rel="noopener follow" className="partner-logo">
              Looker Studio
           </a>
-          <a href="https://public.tableau.com/app/discover?utm_source=jason-portfolio.vercel.app&utm_medium=referral&utm_campaign=dash_platform_tableau" target="_blank" rel="noopener follow" className="partner-logo">
+          <a href="https://public.tableau.com/app/discover?utm_source=jason-by-tsai-portfolio.vercel.app&utm_medium=referral&utm_campaign=dash_platform_tableau" target="_blank" rel="noopener follow" className="partner-logo">
              Tableau Public
           </a>
-          <a href="https://www.microsoft.com/en-us/power-platform/products/power-bi?utm_source=jason-portfolio.vercel.app&utm_medium=referral&utm_campaign=dash_platform_powerbi" target="_blank" rel="noopener follow" className="partner-logo">
+          <a href="https://www.microsoft.com/en-us/power-platform/products/power-bi?utm_source=jason-by-tsai-portfolio.vercel.app&utm_medium=referral&utm_campaign=dash_platform_powerbi" target="_blank" rel="noopener follow" className="partner-logo">
              Power BI 
           </a>
         </div>

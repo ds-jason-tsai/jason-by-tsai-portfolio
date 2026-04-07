@@ -75,9 +75,9 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
               {dict.home.social_label || (lang === 'zh' ? '追蹤我的數據洞察' : 'Follow my Data Insights')}
             </p>
             <div className="social-icons" style={{ gap: '2rem' }}>
-              <a href="https://tw.linkedin.com/in/jasonb0604?utm_source=jason-portfolio.vercel.app&utm_medium=referral&utm_campaign=home_social_linkedin" target="_blank" rel="noopener noreferrer" className="social-icon-link">LinkedIn</a>
-              <a href="https://www.instagram.com/chartbar0713/?utm_source=jason-portfolio.vercel.app&utm_medium=referral&utm_campaign=home_social_instagram" target="_blank" rel="noopener noreferrer" className="social-icon-link">Instagram</a>
-              <a href="https://medium.com/@jasonb0604?utm_source=jason-portfolio.vercel.app&utm_medium=referral&utm_campaign=home_social_medium" target="_blank" rel="noopener noreferrer" className="social-icon-link">Medium</a>
+              <a href="https://tw.linkedin.com/in/jasonb0604?utm_source=jason-by-tsai-portfolio.vercel.app&utm_medium=referral&utm_campaign=home_social_linkedin" target="_blank" rel="noopener noreferrer" className="social-icon-link">LinkedIn</a>
+              <a href="https://www.instagram.com/chartbar0713/?utm_source=jason-by-tsai-portfolio.vercel.app&utm_medium=referral&utm_campaign=home_social_instagram" target="_blank" rel="noopener noreferrer" className="social-icon-link">Instagram</a>
+              <a href="https://medium.com/@jasonb0604?utm_source=jason-by-tsai-portfolio.vercel.app&utm_medium=referral&utm_campaign=home_social_medium" target="_blank" rel="noopener noreferrer" className="social-icon-link">Medium</a>
             </div>
           </div>
 
@@ -143,7 +143,7 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
                   ></iframe>
                 </div>
                 <div style={{ padding: '0 1.5rem 1.5rem' }}>
-                  <a href={`${post.link}${post.link.includes('?') ? '&' : '?'}utm_source=jason-portfolio.vercel.app&utm_medium=referral&utm_campaign=home_featured_media`} target="_blank" rel="noopener noreferrer" className="btn-primary" style={{ display: 'block', fontSize: '0.9rem', padding: '0.8rem' }}>
+                  <a href={`${post.link}${post.link.includes('?') ? '&' : '?'}utm_source=jason-by-tsai-portfolio.vercel.app&utm_medium=referral&utm_campaign=home_featured_media`} target="_blank" rel="noopener noreferrer" className="btn-primary" style={{ display: 'block', fontSize: '0.9rem', padding: '0.8rem' }}>
                     {lang === 'zh' ? '前往原文觀看' : 'View Original Post'} ↗
                   </a>
                 </div>

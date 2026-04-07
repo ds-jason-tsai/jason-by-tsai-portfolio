@@ -130,16 +130,16 @@ export default async function Experience({ params }: { params: Promise<{ lang: s
         </h3>
         <div style={{ display: 'flex', gap: '3rem', justifyContent: 'center', flexWrap: 'wrap', alignItems: 'center', maxWidth: '900px', margin: '0 auto' }}>
           <a href="https://kkschool.kolable.app/?utm_source=jason-by-tsai-portfolio.vercel.app&utm_medium=referral&utm_campaign=exp_footer_partner" target="_blank" rel="noopener follow" className="partner-logo">
-             <img src="/assets/icons/nSchool.png" alt="" style={{ width: 24, height: 24, marginRight: 8, borderRadius: 4, background: 'transparent' }} /> nSchool
+             <img src="/assets/icons/nSchool.png" alt="" style={{ width: 48, height: 48, marginRight: 12, borderRadius: 8, background: 'transparent' }} /> nSchool
           </a>
           <a href="https://www.xplatform.world/?utm_source=jason-by-tsai-portfolio.vercel.app&utm_medium=referral&utm_campaign=exp_footer_partner" target="_blank" rel="noopener follow" className="partner-logo">
-             <img src="/assets/icons/XPlatform.png" alt="" style={{ width: 24, height: 24, marginRight: 8, borderRadius: 4, background: 'transparent' }} /> X Platform
+             <img src="/assets/icons/XPlatform.png" alt="" style={{ width: 48, height: 48, marginRight: 12, borderRadius: 8, background: 'transparent' }} /> X Platform
           </a>
           <a href="https://www.ooschool.cc/?utm_source=jason-by-tsai-portfolio.vercel.app&utm_medium=referral&utm_campaign=exp_footer_partner" target="_blank" rel="noopener follow" className="partner-logo">
-             <img src="/assets/icons/無限學院.png" alt="" style={{ width: 24, height: 24, marginRight: 8, borderRadius: 4, background: 'transparent' }} /> 無限學院
+             <img src="/assets/icons/無限學院.png" alt="" style={{ width: 48, height: 48, marginRight: 12, borderRadius: 8, background: 'transparent' }} /> 無限學院
           </a>
           <a href={`https://live.rookiesavior.net/?utm_source=jason-by-tsai-portfolio.vercel.app&utm_medium=referral&utm_campaign=exp_footer_partner`} target="_blank" rel="noopener follow" className="partner-logo">
-             <img src="/assets/icons/菜鳥救星.png" alt="" style={{ width: 24, height: 24, marginRight: 8, borderRadius: 4, background: 'transparent' }} />
+             <img src="/assets/icons/菜鳥救星.png" alt="" style={{ width: 48, height: 48, marginRight: 12, borderRadius: 8, background: 'transparent' }} />
              {lang === 'zh' ? '聯成電腦(菜鳥救星)' : (lang === 'ja' ? '聯成電腦' : 'Lien Cheng (Rookie Savior)')}
           </a>
         </div>

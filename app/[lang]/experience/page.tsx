@@ -17,9 +17,9 @@ export default async function Experience({ params }: { params: Promise<{ lang: s
               date: "2026.01 - 至今", 
               role: "合作講師", 
               companies: [
-                { name: "nSchool (Kolable)", url: "https://kkschool.kolable.app/", logo: "/assets/icons/nSchool.png" },
+                { name: "nSchool", url: "https://kkschool.kolable.app/", logo: "/assets/icons/nSchool.png" },
                 { name: "X Platform", url: "https://www.xplatform.world/", logo: "/assets/icons/XPlatform.png" },
-                { name: "無限學院 (OOSchool)", url: "https://www.ooschool.cc/", logo: "/assets/icons/無限學院.png" }
+                { name: "無限學院", url: "https://www.ooschool.cc/", logo: "/assets/icons/無限學院.png" }
               ],
               desc: "輔導學員完成Python視覺化、建模、資料分析、n8n自動化等專案。超過50位學員。" 
             },
@@ -40,9 +40,9 @@ export default async function Experience({ params }: { params: Promise<{ lang: s
               date: "2026.01 - Present", 
               role: "Partner Instructor", 
               companies: [
-                { name: "nSchool (Kolable)", url: "https://kkschool.kolable.app/", logo: "/assets/icons/nSchool.png" },
+                { name: "nSchool", url: "https://kkschool.kolable.app/", logo: "/assets/icons/nSchool.png" },
                 { name: "X Platform", url: "https://www.xplatform.world/", logo: "/assets/icons/XPlatform.png" },
-                { name: "OOSchool", url: "https://www.ooschool.cc/", logo: "/assets/icons/無限學院.png" }
+                { name: "無限學院", url: "https://www.ooschool.cc/", logo: "/assets/icons/無限學院.png" }
               ],
               desc: "Guided students to complete projects in Python visualization, modeling, data analysis, and n8n automation. Mentored over 50 students." 
             },
@@ -63,9 +63,9 @@ export default async function Experience({ params }: { params: Promise<{ lang: s
               date: "2026.01 - 現在", 
               role: "パートナー講師", 
               companies: [
-                { name: "nSchool (Kolable)", url: "https://kkschool.kolable.app/", logo: "/assets/icons/nSchool.png" },
+                { name: "nSchool", url: "https://kkschool.kolable.app/", logo: "/assets/icons/nSchool.png" },
                 { name: "X Platform", url: "https://www.xplatform.world/", logo: "/assets/icons/XPlatform.png" },
-                { name: "無限学院 (OOSchool)", url: "https://www.ooschool.cc/", logo: "/assets/icons/無限學院.png" }
+                { name: "無限學院", url: "https://www.ooschool.cc/", logo: "/assets/icons/無限學院.png" }
               ],
               desc: "Pythonによる可視化、モデリング、データ分析、n8n自動化などのプロジェクトを指導。50名以上の受講生をサポートしました。" 
             },
@@ -99,7 +99,7 @@ export default async function Experience({ params }: { params: Promise<{ lang: s
                   item.companies.map((c: any, cIdx: number) => (
                     <span key={cIdx} style={{ display: 'inline-flex', alignItems: 'center', gap: '0.4rem' }}>
                       {c.logo && <img src={c.logo} alt="logo" style={{ width: '28px', height: '28px', borderRadius: '4px', objectFit: 'contain', background: 'white', padding: '1px' }} />}
-                      <a href={c.url} target="_blank" rel="noopener noreferrer" style={{ color: 'var(--accent-color)', textDecoration: 'none', borderBottom: '1px dotted var(--accent-color)', paddingBottom: '1px' }}>
+                      <a href={`${c.url}${c.url.includes('?') ? '&' : '?'}utm_source=jason-portfolio.vercel.app&utm_medium=referral&utm_campaign=exp_timeline_partner`} target="_blank" rel="noopener noreferrer" style={{ color: 'var(--accent-color)', textDecoration: 'none', borderBottom: '1px dotted var(--accent-color)', paddingBottom: '1px' }}>
                         {c.name}
                       </a>
                       {cIdx < item.companies.length - 1 && " / "}
@@ -109,7 +109,7 @@ export default async function Experience({ params }: { params: Promise<{ lang: s
                   <span style={{ display: 'inline-flex', alignItems: 'center', gap: '0.4rem' }}>
                     {item.logo && <img src={item.logo} alt="logo" style={{ width: '28px', height: '28px', borderRadius: '4px', objectFit: 'contain', background: 'white', padding: '1px' }} />}
                     {item.url ? (
-                      <a href={item.url} target="_blank" rel="noopener noreferrer" style={{ color: 'var(--accent-color)', textDecoration: 'none', borderBottom: '1px dotted var(--accent-color)', paddingBottom: '1px' }}>
+                      <a href={`${item.url}${item.url.includes('?') ? '&' : '?'}utm_source=jason-portfolio.vercel.app&utm_medium=referral&utm_campaign=exp_timeline_partner`} target="_blank" rel="noopener noreferrer" style={{ color: 'var(--accent-color)', textDecoration: 'none', borderBottom: '1px dotted var(--accent-color)', paddingBottom: '1px' }}>
                         {item.company}
                       </a>
                     ) : (
@@ -129,16 +129,16 @@ export default async function Experience({ params }: { params: Promise<{ lang: s
            Partner Platforms & Multi-Brand Collaboration
         </h3>
         <div style={{ display: 'flex', gap: '3rem', justifyContent: 'center', flexWrap: 'wrap', alignItems: 'center', maxWidth: '900px', margin: '0 auto' }}>
-          <a href="https://kkschool.kolable.app/" target="_blank" rel="noopener follow" className="partner-logo">
+          <a href="https://kkschool.kolable.app/?utm_source=jason-portfolio.vercel.app&utm_medium=referral&utm_campaign=exp_footer_partner" target="_blank" rel="noopener follow" className="partner-logo">
              <img src="/assets/icons/nSchool.png" alt="" style={{ width: 24, height: 24, marginRight: 8, borderRadius: 4, background: 'transparent' }} /> nSchool
           </a>
-          <a href="https://www.xplatform.world/" target="_blank" rel="noopener follow" className="partner-logo">
+          <a href="https://www.xplatform.world/?utm_source=jason-portfolio.vercel.app&utm_medium=referral&utm_campaign=exp_footer_partner" target="_blank" rel="noopener follow" className="partner-logo">
              <img src="/assets/icons/XPlatform.png" alt="" style={{ width: 24, height: 24, marginRight: 8, borderRadius: 4, background: 'transparent' }} /> X Platform
           </a>
-          <a href="https://www.ooschool.cc/" target="_blank" rel="noopener follow" className="partner-logo">
+          <a href="https://www.ooschool.cc/?utm_source=jason-portfolio.vercel.app&utm_medium=referral&utm_campaign=exp_footer_partner" target="_blank" rel="noopener follow" className="partner-logo">
              <img src="/assets/icons/無限學院.png" alt="" style={{ width: 24, height: 24, marginRight: 8, borderRadius: 4, background: 'transparent' }} /> 無限學院
           </a>
-          <a href="https://live.rookiesavior.net/" target="_blank" rel="noopener follow" className="partner-logo">
+          <a href={`https://live.rookiesavior.net/?utm_source=jason-portfolio.vercel.app&utm_medium=referral&utm_campaign=exp_footer_partner`} target="_blank" rel="noopener follow" className="partner-logo">
              <img src="/assets/icons/菜鳥救星.png" alt="" style={{ width: 24, height: 24, marginRight: 8, borderRadius: 4, background: 'transparent' }} />
              {lang === 'zh' ? '聯成電腦(菜鳥救星)' : (lang === 'ja' ? '聯成電腦' : 'Lien Cheng (Rookie Savior)')}
           </a>

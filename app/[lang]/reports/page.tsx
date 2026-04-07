@@ -106,19 +106,11 @@ export default function Reports({ params }: { params: Promise<{ lang: string }> 
     : reports.filter(r => r.category === activeCategory);
 
   return (
-    <section className="fade-in" style={{ padding: '0 2rem', position: 'relative', minHeight: '100vh' }}>
-      <div style={{
-        position: 'absolute', top: '-100px', left: '50%', transform: 'translateX(-50%)',
-        width: '600px', height: '600px', background: 'var(--accent-color)',
-        borderRadius: '50%', filter: 'blur(150px)', opacity: 0.1, zIndex: -1
-      }}></div>
-
-      <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
-        <h2 className="section-title" style={{ fontSize: '3rem', fontWeight: '900' }}>{t.title}</h2>
-        <p style={{ color: 'var(--text-secondary)', maxWidth: '680px', margin: '0 auto', lineHeight: '1.8' }}>
-          {t.desc}
-        </p>
-      </div>
+    <section className="portfolio fade-in" style={{ padding: '0 2rem' }}>
+      <h2 className="section-title">{t.title}</h2>
+      <p style={{ textAlign: 'center', marginBottom: '3rem', color: 'var(--text-secondary)', maxWidth: '680px', margin: '0 auto 3rem', lineHeight: '1.8' }}>
+        {t.desc}
+      </p>
 
       {/* Category Tabs */}
       <div style={{ display: 'flex', justifyContent: 'center', gap: '1rem', marginBottom: '4rem', flexWrap: 'wrap' }}>

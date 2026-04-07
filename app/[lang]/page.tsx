@@ -144,6 +144,8 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
                     frameBorder="0" 
                     allowFullScreen={true} 
                     allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
+                    loading="lazy"
+                    title={post.title}
                   ></iframe>
                 </div>
                 <div style={{ padding: '0 1.5rem 1.5rem' }}>

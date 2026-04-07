@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import { getDictionary } from '../dictionaries';
 import StatSection from './components/StatSection';
 
@@ -97,15 +98,17 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
         <div className="hero-image-outer">
           <div className="hero-image-container" style={{ flexDirection: 'column', alignItems: 'center' }}>
             <div className="image-wrapper-glow">
-              <Image 
-                src="/images/Jason6.jpg" 
-                alt="Jason Tsai" 
-                width={380} 
-                height={380} 
-                className="hero-image"
-                style={{ objectPosition: 'center top', objectFit: 'cover', borderRadius: '50%', border: '4px solid rgba(0, 242, 254, 0.3)', position: 'relative', zIndex: 1, transition: 'transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)' }}
-                priority
-              />
+              <Link href={`/${lang}/experience?utm_source=internal&utm_medium=image&utm_campaign=home_profile_image`} style={{ display: 'block', borderRadius: '50%' }}>
+                <Image 
+                  src="/images/Jason6.jpg" 
+                  alt="Jason Tsai" 
+                  width={380} 
+                  height={380} 
+                  className="hero-image"
+                  style={{ objectPosition: 'center top', objectFit: 'cover', borderRadius: '50%', border: '4px solid rgba(0, 242, 254, 0.3)', position: 'relative', zIndex: 1, transition: 'transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)', cursor: 'pointer' }}
+                  priority
+                />
+              </Link>
             </div>
             <h2 style={{ marginTop: '1.5rem', fontSize: '2.5rem', fontWeight: 800, background: 'var(--accent-grad)', WebkitBackgroundClip: 'text', backgroundClip: 'text', WebkitTextFillColor: 'transparent', letterSpacing: '2px' }}>
               Jason Tsai

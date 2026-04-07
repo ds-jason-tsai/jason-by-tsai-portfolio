@@ -5,12 +5,12 @@
   "nav": {
     "home": "ホーム",
     "services": "サービス",
-    "portfolio": "ポートフォリオ",
-    "dashboards": "ダッシュボード",
-    "reports": "💎 プレミアム",
-    "articles": "記事一覧",
-    "experience": "経験",
-    "contact": "お問い合わせ"
+    "portfolio": "作品集",
+    "dashboards": "ボード",
+    "reports": "💎 有料",
+    "articles": "記事",
+    "experience": "経歴",
+    "contact": "連絡"
   },
   "home": {
     "title": "複雑なデータを直感的な意思決定に変える",

@@ -129,7 +129,7 @@ export default async function Services({ params }: { params: Promise<{ lang: str
               
               <div style={{ marginTop: '1.5rem', alignSelf: 'flex-start' }}>
                  {isStore ? (
-                   <Link href={`/${lang}/reports`} className="btn-primary" style={{ display: 'inline-block', padding: '0.6rem 1.5rem', fontSize: '0.95rem', borderRadius: '30px', fontWeight: '800', textAlign: 'center' }}>
+                   <Link href={`/${lang}/reports?utm_source=internal&utm_medium=button&utm_campaign=services_card_reports`} className="btn-primary" style={{ display: 'inline-block', padding: '0.6rem 1.5rem', fontSize: '0.95rem', borderRadius: '30px', fontWeight: '800', textAlign: 'center' }}>
                       {lang === 'zh' ? '💎 前往報告區' : lang === 'ja' ? '💎 レポート一覧' : '💎 View Reports'}
                    </Link>
                  ) : (
@@ -146,7 +146,7 @@ export default async function Services({ params }: { params: Promise<{ lang: str
           }
 
           return (
-            <Link href={`/${lang}/contact`} key={idx} style={{ textDecoration: 'none', color: 'inherit' }}>
+            <Link href={`/${lang}/contact?utm_source=internal&utm_medium=button&utm_campaign=services_card_contact`} key={idx} style={{ textDecoration: 'none', color: 'inherit' }}>
               {cardContent}
             </Link>
           );

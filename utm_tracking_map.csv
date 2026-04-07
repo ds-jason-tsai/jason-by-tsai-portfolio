@@ -7,9 +7,12 @@ Home,Social,LinkedIn,https://tw.linkedin.com/in/jasonb0604,home_social_linkedin,
 Home,Social,Instagram,https://www.instagram.com/chartbar0713/,home_social_instagram,?utm_source=jason-by-tsai-portfolio.vercel.app&utm_medium=referral&utm_campaign=home_social_instagram
 Home,Social,Medium,https://medium.com/@jasonb0604,home_social_medium,?utm_source=jason-by-tsai-portfolio.vercel.app&utm_medium=referral&utm_campaign=home_social_medium
 Home,Highlights,View Original,[Social Platforms],home_featured_media,?utm_source=jason-by-tsai-portfolio.vercel.app&utm_medium=referral&utm_campaign=home_featured_media
+Home,Highlights,Iframe Source,[YouTube/FB],home_featured_media_iframe,?utm_source=jason-by-tsai-portfolio.vercel.app&utm_medium=referral&utm_campaign=home_featured_media_iframe
+Portfolio,Tabs,Category Filter,[#dashboards/#proposals/#research],portfolio_filter_tabs,[Hash Update Only]
 Portfolio,Project Card,Online Preview / Download,[Variable],portfolio_card_external,?utm_source=jason-by-tsai-portfolio.vercel.app&utm_medium=referral&utm_campaign=portfolio_card_external
 Portfolio,Project Card,Buy Data,/zh/reports#data,portfolio_card_buy,?utm_source=internal&utm_medium=button&utm_campaign=portfolio_card_buy
 Dashboards,Display Card,Buy Related Data,/zh/reports#data,dashboard_card_buy,?utm_source=internal&utm_medium=button&utm_campaign=dashboard_card_buy
+Dashboards,Carousel,Iframe Source,[Dashboard Embed],dashboard_iframe_view,?utm_source=jason-by-tsai-portfolio.vercel.app&utm_medium=referral&utm_campaign=dashboard_iframe_view
 Dashboards,Footer,Back to Home,/zh,dashboard_footer_home,?utm_source=internal&utm_medium=button&utm_campaign=dashboard_footer_home
 Dashboards,Partner,Platform Logos,[Looker/Tableau/MS],dash_platform_[name],?utm_source=jason-by-tsai-portfolio.vercel.app&utm_medium=referral&utm_campaign=dash_platform_[name]
 Experience,Timeline,Partner Companies,[Multiple Platforms],exp_timeline_partner,?utm_source=jason-by-tsai-portfolio.vercel.app&utm_medium=referral&utm_campaign=exp_timeline_partner

@@ -165,7 +165,7 @@ export default function DashboardsPage({ params }: { params: Promise<{ lang: str
           }}>
             <iframe 
               key={current.id}
-              src={current.url}
+              src={`${current.url}${current.url.includes('?') ? '&' : '?'}utm_source=jason-by-tsai-portfolio.vercel.app&utm_medium=referral&utm_campaign=dashboard_iframe_view`}
               width="100%" 
               height="100%" 
               frameBorder="0" 
@@ -202,15 +202,24 @@ export default function DashboardsPage({ params }: { params: Promise<{ lang: str
         </h3>
         <div style={{ display: 'flex', gap: '4rem', justifyContent: 'center', flexWrap: 'wrap', alignItems: 'center', maxWidth: '1000px', margin: '0 auto' }}>
           <a href="https://lookerstudio.google.com/?utm_source=jason-by-tsai-portfolio.vercel.app&utm_medium=referral&utm_campaign=dash_platform_looker" target="_blank" rel="noopener follow" className="partner-logo">
-             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{marginRight: '8px', opacity: 0.8}}><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path></svg>
+             {/* Looker Studio Brand Colors: #4285F4 (Blue), #EA4335 (Red), #FBBC04 (Yellow), #34A853 (Green) */}
+             <svg width="24" height="24" viewBox="0 0 24 24" style={{marginRight: '10px'}}>
+               <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14.5v-9l6 4.5-6 4.5z" fill="#4285F4"/>
+             </svg>
              Looker Studio
           </a>
           <a href="https://public.tableau.com/app/discover?utm_source=jason-by-tsai-portfolio.vercel.app&utm_medium=referral&utm_campaign=dash_platform_tableau" target="_blank" rel="noopener follow" className="partner-logo">
-             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{marginRight: '8px', opacity: 0.8}}><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="3" y1="9" x2="21" y2="9"></line><line x1="9" y1="21" x2="9" y2="9"></line></svg>
+             {/* Tableau: #E8762D (Orange) */}
+             <svg width="24" height="24" viewBox="0 0 24 24" style={{marginRight: '10px'}}>
+                <path d="M10 21h4v-7h7v-4h-7V3h-4v7H3v4h7v7z" fill="#E8762D"/>
+             </svg>
              Tableau Public
           </a>
           <a href="https://www.microsoft.com/en-us/power-platform/products/power-bi?utm_source=jason-by-tsai-portfolio.vercel.app&utm_medium=referral&utm_campaign=dash_platform_powerbi" target="_blank" rel="noopener follow" className="partner-logo">
-             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{marginRight: '8px', opacity: 0.8}}><path d="M12 20v-6M6 20V10M18 20V4"></path></svg>
+             {/* Power BI: #F2C811 (Yellow) */}
+             <svg width="24" height="24" viewBox="0 0 24 24" style={{marginRight: '10px'}}>
+                <path d="M5 21h4V9H5v12zm7 0h4V3h-4v18zm7 0h4v-7h-4v7z" fill="#F2C811"/>
+             </svg>
              Power BI 
           </a>
         </div>

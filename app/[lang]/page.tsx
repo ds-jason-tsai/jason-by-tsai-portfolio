@@ -132,7 +132,7 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
                 </div>
                 <div className="media-iframe-wrapper" style={{ flex: 1, display: 'flex', alignItems: 'center', background: post.type === 'facebook' || post.type === 'instagram' ? '#fff' : 'transparent', borderRadius: '10px' }}>
                   <iframe 
-                    src={post.src} 
+                    src={`${post.src}${post.src.includes('?') ? '&' : '?'}utm_source=jason-by-tsai-portfolio.vercel.app&utm_medium=referral&utm_campaign=home_featured_media_iframe`} 
                     width="100%" 
                     height={post.type === 'youtube' ? '315' : '480'} 
                     style={{ border: 'none', overflow: 'hidden', borderRadius: '10px' }} 

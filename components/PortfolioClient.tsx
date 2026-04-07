@@ -4,12 +4,12 @@ import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 
 export default function PortfolioClient({ projects, lang, t }: { projects: any[], lang: string, t: any }) {
-  const categories = ['all', '0', '1', '2'];
+  const categories = ['all', 'dashboards', 'proposals', 'research'];
   const catLabels: Record<string, string> = {
     'all': lang === 'zh' ? '全部內容' : (lang === 'ja' ? 'すべて' : 'All'),
-    '0': t.type[0], // 儀表板
-    '1': t.type[1], // 商業提案
-    '2': t.type[2], // 技術研究
+    'dashboards': t.type[0], // 儀表板
+    'proposals': t.type[1], // 商業提案
+    'research': t.type[2], // 技術研究
   };
 
   const [activeCategory, setActiveCategory] = useState<string>('all');
@@ -18,7 +18,7 @@ export default function PortfolioClient({ projects, lang, t }: { projects: any[]
   useEffect(() => {
     if (typeof window !== 'undefined') {
       const hash = window.location.hash.replace('#', '');
-      if (['all', '0', '1', '2'].includes(hash)) {
+      if (['all', 'dashboards', 'proposals', 'research'].includes(hash)) {
         setActiveCategory(hash);
       }
     }
@@ -32,7 +32,10 @@ export default function PortfolioClient({ projects, lang, t }: { projects: any[]
 
   const filteredProjects = activeCategory === 'all' 
     ? projects 
-    : projects.filter((p) => String(p.type) === activeCategory);
+    : projects.filter((p) => {
+        const typeMap: Record<number, string> = { 0: 'dashboards', 1: 'proposals', 2: 'research' };
+        return typeMap[p.type as number] === activeCategory;
+      });
 
   const handlePrev = () => {
     setCurrentIndex((prev) => (prev === 0 ? filteredProjects.length - 1 : prev - 1));

@@ -64,8 +64,8 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
           </p>
           
           <div className="hero-btns">
-            <a href={`/${lang}/portfolio`} className="btn-primary">{dict.home.cta}</a>
-            <a href={`/${lang}/contact`} className="btn-primary btn-secondary">
+            <a href={`/${lang}/portfolio?utm_source=internal&utm_medium=button&utm_campaign=home_hero_portfolio`} className="btn-primary">{dict.home.cta}</a>
+            <a href={`/${lang}/contact?utm_source=internal&utm_medium=button&utm_campaign=home_hero_contact`} className="btn-primary btn-secondary">
               {dict.home.contact_cta}
             </a>
           </div>
@@ -84,12 +84,12 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
           <div className="hero-courses-section" style={{ marginTop: '5rem' }}>
              <p className="social-label" style={{ marginBottom: '2rem', color: '#00f2fe', fontSize: '1.4rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '1px' }}>{dict.home.featured_courses || '推薦熱門課程'}</p>
              <div className="course-buttons" style={{ display: 'flex', gap: '1.2rem', justifyContent: 'center', flexWrap: 'wrap' }}>
-               <a href="https://live.rookiesavior.net/course/tableau" target="_blank" rel="noopener noreferrer" className="btn-outline-cyan">
-                 📊 {lang === 'zh' ? 'Tableau 商業視覺化實戰' : 'Tableau Business Viz'}
-               </a>
-               <a href="https://live.rookiesavior.net/course/AI-NotubookLM" target="_blank" rel="noopener noreferrer" className="btn-outline-cyan">
-                 🤖 {lang === 'zh' ? 'NotebookLM x AI 應用' : 'NotebookLM x AI Apps'}
-               </a>
+                <a href="https://live.rookiesavior.net/course/tableau?utm_source=internal&utm_medium=button&utm_campaign=home_courses_tableau" target="_blank" rel="noopener noreferrer" className="btn-outline-cyan">
+                  📊 {lang === 'zh' ? 'Tableau 商業視覺化實戰' : 'Tableau Business Viz'}
+                </a>
+                <a href="https://live.rookiesavior.net/course/AI-NotubookLM?utm_source=internal&utm_medium=button&utm_campaign=home_courses_ai" target="_blank" rel="noopener noreferrer" className="btn-outline-cyan">
+                  🤖 {lang === 'zh' ? 'NotebookLM x AI 應用' : 'NotebookLM x AI Apps'}
+                </a>
              </div>
           </div>
         </div>

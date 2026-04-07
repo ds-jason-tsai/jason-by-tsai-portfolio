@@ -146,7 +146,7 @@ export default function DashboardsPage({ params }: { params: Promise<{ lang: str
             </div>
             {/* Added Buy Data Button */}
             <div style={{ marginTop: '2rem' }}>
-              <a href={`/${lang}/reports#data`} className="btn-primary dashboard-buy-btn pulse-animation">
+              <a href={`/${lang}/reports?utm_source=internal&utm_medium=button&utm_campaign=dashboard_card_buy#data`} className="btn-primary dashboard-buy-btn pulse-animation">
                 {lang === 'zh' ? '🛒 購買相關數據' : (lang === 'ja' ? '🛒 関連データを購入' : '🛒 Buy Layout / Data')}
               </a>
             </div>
@@ -215,7 +215,7 @@ export default function DashboardsPage({ params }: { params: Promise<{ lang: str
 
       {/* Footer Back Button */}
       <div style={{ marginTop: '2rem', textAlign: 'center' }}>
-        <Link href={`/${lang}`} className="btn-primary" style={{ padding: '0.8rem 2.5rem' }}>
+        <Link href={`/${lang}?utm_source=internal&utm_medium=button&utm_campaign=dashboard_footer_home`} className="btn-primary" style={{ padding: '0.8rem 2.5rem' }}>
           {t.backToHome}
         </Link>
       </div>

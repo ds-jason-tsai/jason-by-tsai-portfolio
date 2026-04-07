@@ -1,0 +1,14 @@
+Page,Section,Button Text,Target URL,UTM Campaign,Full UTM String
+Home,Hero,Explore Portfolio,/zh/portfolio,home_hero_portfolio,?utm_source=internal&utm_medium=button&utm_campaign=home_hero_portfolio
+Home,Hero,Contact,/zh/contact,home_hero_contact,?utm_source=internal&utm_medium=button&utm_campaign=home_hero_contact
+Home,Courses,Tableau Course,https://live.rookiesavior.net/course/tableau,home_courses_tableau,?utm_source=internal&utm_medium=button&utm_campaign=home_courses_tableau
+Home,Courses,AI Course,https://live.rookiesavior.net/course/AI-NotubookLM,home_courses_ai,?utm_source=internal&utm_medium=button&utm_campaign=home_courses_ai
+Portfolio,Project Card,Online Preview / Download,[Variable],portfolio_card_external,?utm_source=internal&utm_medium=button&utm_campaign=portfolio_card_external
+Portfolio,Project Card,Buy Data,/zh/reports#data,portfolio_card_buy,?utm_source=internal&utm_medium=button&utm_campaign=portfolio_card_buy
+Dashboards,Display Card,Buy Related Data,/zh/reports#data,dashboard_card_buy,?utm_source=internal&utm_medium=button&utm_campaign=dashboard_card_buy
+Dashboards,Footer,Back to Home,/zh,dashboard_footer_home,?utm_source=internal&utm_medium=button&utm_campaign=dashboard_footer_home
+Reports,Card,Unlock Now (Internal),[Internal Logic],reports_card_buy,?utm_source=internal&utm_medium=button&utm_campaign=reports_card_buy
+Footer,Navigation,Portfolio,/zh/portfolio,footer_nav_portfolio,?utm_source=internal&utm_medium=button&utm_campaign=footer_nav_portfolio
+Footer,Navigation,Services,/zh/services,footer_nav_services,?utm_source=internal&utm_medium=button&utm_campaign=footer_nav_services
+Footer,Navigation,Experience,/zh/experience,footer_nav_experience,?utm_source=internal&utm_medium=button&utm_campaign=footer_nav_experience
+Footer,Navigation,Contact,/zh/contact,footer_nav_contact,?utm_source=internal&utm_medium=button&utm_campaign=footer_nav_contact

@@ -147,7 +147,7 @@ export default function PortfolioClient({ projects, lang, t }: { projects: any[]
 
                   <div style={{ display: 'flex', gap: '1rem', flexDirection: 'column', marginTop: 'auto' }}>
                     {proj.url ? (
-                      <a href={proj.url} target="_blank" rel="noopener noreferrer" className="btn-primary" style={{ display: 'block', textAlign: 'center', padding: '0.8rem 1rem', fontSize: '1rem' }}>
+                      <a href={`${proj.url}${proj.url.includes('?') ? '&' : '?'}utm_source=internal&utm_medium=button&utm_campaign=portfolio_card_external`} target="_blank" rel="noopener noreferrer" className="btn-primary" style={{ display: 'block', textAlign: 'center', padding: '0.8rem 1rem', fontSize: '1rem' }}>
                         {t.btn}
                       </a>
                     ) : (
@@ -155,7 +155,7 @@ export default function PortfolioClient({ projects, lang, t }: { projects: any[]
                         {t.pending}
                       </button>
                     )}
-                    <a href={`/${lang}/reports#data`} className="btn-secondary pulse-animation" style={{ display: 'block', textAlign: 'center', padding: '0.8rem 1rem', fontSize: '1rem' }}>
+                    <a href={`/${lang}/reports?utm_source=internal&utm_medium=button&utm_campaign=portfolio_card_buy#data`} className="btn-secondary pulse-animation" style={{ display: 'block', textAlign: 'center', padding: '0.8rem 1rem', fontSize: '1rem' }}>
                       {lang === 'zh' ? '🛒 購買資料' : (lang === 'ja' ? '🛒 データ購入' : '🛒 Buy Data')}
                     </a>
                   </div>

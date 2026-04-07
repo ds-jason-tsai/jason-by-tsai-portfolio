@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import ShareButton from './ShareButton';
 
 export default function MobileNav({ 
   lang, 
@@ -106,7 +107,10 @@ export default function MobileNav({
           ))}
         </nav>
 
-        <div className="mobile-lang-switcher">
+        <div className="mobile-lang-switcher" style={{ marginTop: 'auto' }}>
+          <div style={{ marginBottom: '2rem' }}>
+            <ShareButton lang={lang} isMobile={true} />
+          </div>
           <p className="lang-title">Language</p>
           <div className="lang-options">
             <Link href="/zh" className={lang === 'zh' ? 'active' : ''}>繁體中文</Link>

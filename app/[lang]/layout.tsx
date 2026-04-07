@@ -42,6 +42,7 @@ export async function generateStaticParams() {
 
 import NavLink from './components/NavLink';
 import MobileNav from './components/MobileNav';
+import ShareButton from './components/ShareButton';
 
 export default async function RootLayout({
   children,
@@ -99,6 +100,11 @@ export default async function RootLayout({
               <NavLink lang={lang} href={`/${lang}/reports`}>{dict.nav.reports || 'Premium Access'}</NavLink>
               <NavLink lang={lang} href={`/${lang}/contact`}>{dict.nav.contact}</NavLink>
               
+              {/* Share Button */}
+              <div className="ml-4">
+                <ShareButton lang={lang} />
+              </div>
+              
               {/* Language Switcher */}
               <details 
                 className="lang-switcher ml-4"
@@ -149,10 +155,10 @@ export default async function RootLayout({
                  Empowering decisions through data. <br/> 結合商業思維與深厚技術底蘊，持續在第一線創造數據影響力。
               </p>
               <div style={{ display: 'flex', gap: '2rem', marginTop: '1.5rem' }} className="footer-links">
-                 <Link href={`/${lang}/portfolio`} className="footer-link">Portfolio</Link>
-                 <Link href={`/${lang}/services`} className="footer-link">Services</Link>
-                 <Link href={`/${lang}/experience`} className="footer-link">Experience</Link>
-                 <Link href={`/${lang}/contact`} className="footer-link">Contact</Link>
+                 <Link href={`/${lang}/portfolio?utm_source=internal&utm_medium=button&utm_campaign=footer_nav_portfolio`} className="footer-link">Portfolio</Link>
+                 <Link href={`/${lang}/services?utm_source=internal&utm_medium=button&utm_campaign=footer_nav_services`} className="footer-link">Services</Link>
+                 <Link href={`/${lang}/experience?utm_source=internal&utm_medium=button&utm_campaign=footer_nav_experience`} className="footer-link">Experience</Link>
+                 <Link href={`/${lang}/contact?utm_source=internal&utm_medium=button&utm_campaign=footer_nav_contact`} className="footer-link">Contact</Link>
               </div>
               <div style={{ borderTop: '1px solid #222', width: '100%', marginTop: '2rem', paddingTop: '2rem', fontSize: '0.85rem', color: '#555', letterSpacing: '1px' }}>
                 © {new Date().getFullYear()} Jason Tsai. All rights reserved.

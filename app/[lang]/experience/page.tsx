@@ -21,13 +21,13 @@ export default async function Experience({ params }: { params: Promise<{ lang: s
                 { name: "X Platform", url: "https://www.xplatform.world/", logo: "/assets/icons/XPlatform.png" },
                 { name: "無限學院", url: "https://www.ooschool.cc/", logo: "/assets/icons/無限學院.png" }
               ],
-              desc: "輔導學員完成Python視覺化、建模、資料分析、n8n自動化等專案。超過50位學員。" 
+              desc: "協助近100位學員完成Python資料分析、AI建模、n8n自動化等專案。" 
             },
-            { date: "2024.08 - 至今", role: "合作講師", company: "聯成電腦 (菜鳥救星)", url: "https://live.rookiesavior.net/", logo: "/assets/icons/菜鳥救星.png", desc: "開發從零到一的 Tableau 完整資料生命週期課程；累積 300+ 教學小時，培訓超過 150 位專業人士。成功協助多位學員轉職數據分析師(DA)，並獲得學員高滿意度回饋。" },
-            { date: "2023.07 - 至今", role: "資料分析師", company: "國泰人壽 (Cathay Life Insurance)", url: "", logo: "/assets/icons/國泰人壽.png", desc: "負責 Cloud CDP 選商、建置與標籤工程 (Celebrus to GA4)。主導 Agentic AI 導入，將 29 個破碎資料表收斂為 10 個核心 Data Mart。幫助兩萬名業務員提升保單貸款表現，數位轉換率顯著提升。" },
-            { date: "2023.03 - 2023.06", role: "資料分析師 (Data Analyst)", company: "iKala Interactive Media Inc.", url: "", logo: "/assets/icons/iKala.png", desc: "參與 KOL 網紅影響力分析專案，量化行銷效益並優化網紅選擇策略。優化內部儀表板並實作自動化排程派報系統，整體營運效率提升 5 倍。" },
-            { date: "2023.02", role: "數發部 Data Station 數據競賽 | 冠軍", company: "家樂福 (Carrefour)", url: "", logo: "/assets/icons/Carrefour.png", desc: "運用集成分群分析與 XGBoost 等機器學習演算法開發顧客購買預測模型，並深入規劃商品搭售策略。在萬人規模的全國專案競賽中脫穎而出，最終贏得全國冠軍與最佳模型獎。" },
+            { date: "2024.08 - 至今", role: "合作講師", company: "聯成電腦 (菜鳥救星)", url: "https://live.rookiesavior.net/", logo: "/assets/icons/菜鳥救星.png", desc: "開發從零到一的 Tableau 完整課程；累積 300+ 小時教學，培訓超過 150 位業界人士。成功協助多位學員轉職商業分析師(BA)、數據分析師(DA)，並獲得學員們的高滿意度回饋。" },
+            { date: "2023.07 - 至今", role: "資料分析師", company: "國泰人壽 (Cathay Life Insurance)", url: "", logo: "/assets/icons/國泰人壽.png", desc: "負責數位軌跡系統建置(GA4)、客戶標籤設計、客戶資料平台(CDP)評估、導入以及保單貸款資料分析等專案。" },
+            { date: "2023.03 - 2023.06", role: "資料分析師 (Data Analyst)", company: "iKala Interactive Media Inc.", url: "", logo: "/assets/icons/iKala.png", desc: "參與 KOL 網紅影響力分析專案，量化行銷效益並優化網紅選擇策略。優化 Tableau 儀表板並實作自動化排程寄送系統，提升整體營運效率 200% 以上。" },
             { date: "2023.01", role: "企業專案 | 蝦皮店到店擴張策略", company: "NTUDAC 臺大資料分析社 x 蝦皮 (Shopee Xpress)", url: "", logo: "/assets/icons/Shopee.png", desc: "負責空間智能與策略規劃，拆解物流痛點並追蹤設點關鍵指標。結合爬蟲、分群與地理空間分析建立互動式儀表板，優化整體營運網點評估規劃。" },
+            { date: "2022.10", role: "數發部 Data Station 數據競賽 | 冠軍", company: "家樂福 (Carrefour)", url: "", logo: "/assets/icons/Carrefour.png", desc: "透過分群、關聯式演算法和其他機器學習演算法開發顧客購買預測模型，並深入規劃商品搭售策略。在規模龐大的全國專案競賽中脫穎而出，贏得冠軍與最佳模型獎。" },
             { date: "2022.01 - 2023.01", role: "資料工程師 (Data Engineer)", company: "零壹科技 (Zero One Technology)", url: "", logo: "/assets/icons/zerone.png", desc: "擔任技術培訓講師，累積 30+ 場次企業授課。為財政部、台灣證交所等高階政經單位提供架構建議與數據視覺化儀表板設計。" },
             { date: "2021.09 - 2023.06", role: "企業管理碩士 (MBA)", company: "國立陽明交通大學 (NYCU)", url: "", logo: "/assets/icons/陽明交通大學.png", desc: "專注於商業管理、數據決策與營運策略分析等進階領域。" },
             { date: "2019.09 - 2021.06", role: "企業管理理學士 (BBA)", company: "國立臺北商業大學 (NTUB)", url: "", logo: "/assets/icons/NTUB.png", desc: "奠定商業分析基礎。期間取得 TOEIC 金色證書 (860)、JLPT N3 日語檢定、GA 認證以及 ERP 相關專業證照。" }
@@ -44,13 +44,13 @@ export default async function Experience({ params }: { params: Promise<{ lang: s
                 { name: "X Platform", url: "https://www.xplatform.world/", logo: "/assets/icons/XPlatform.png" },
                 { name: "無限學院", url: "https://www.ooschool.cc/", logo: "/assets/icons/無限學院.png" }
               ],
-              desc: "Guided students to complete projects in Python visualization, modeling, data analysis, and n8n automation. Mentored over 50 students." 
+              desc: "Assisted nearly 100 students in completing Python data analysis, AI modeling, and n8n automation projects." 
             },
-            { date: "2024.08 - Present", role: "Partner Instructor", company: "Lien Cheng Computer", url: "https://live.rookiesavior.net/", logo: "/assets/icons/菜鳥救星.png", desc: "Developed comprehensive Tableau data lifecycle curriculum. Accumulated 300+ teaching hours, empowering 150+ professionals to transition into Data Analyst (DA) roles with high satisfaction." },
-            { date: "2023.07 - Present", role: "Data Analyst", company: "Cathay Life Insurance", url: "", logo: "/assets/icons/國泰人壽.png", desc: "Led Cloud CDP selection and tagging engineering. Orchestrated Agentic AI implementations and streamlined 29 legacy tables into 10 refined Data Marts." },
-            { date: "2023.03 - 2023.06", role: "Data Analyst", company: "iKala Interactive Media Inc.", url: "", logo: "/assets/icons/iKala.png", desc: "Quantitative influencer marketing analysis. Built internal dashboards and automated email reports, boosting efficiency by 5x." },
-            { date: "2023.02", role: "Data Station Data Competition | Champion", company: "Carrefour", url: "", logo: "/assets/icons/Carrefour.png", desc: "Developed a customer purchase prediction model using advanced ensemble learning. Secured the National Championship." },
+            { date: "2024.08 - Present", role: "Partner Instructor", company: "Lien Cheng Computer", url: "https://live.rookiesavior.net/", logo: "/assets/icons/菜鳥救星.png", desc: "Developed end-to-end Tableau curriculum. Accumulated 300+ teaching hours, empowering 150+ professionals to transition into BA/DA roles." },
+            { date: "2023.07 - Present", role: "Data Analyst", company: "Cathay Life Insurance", url: "", logo: "/assets/icons/國泰人壽.png", desc: "Responsible for GA4 implementation, tag design, CDP evaluation/integration, and insurance loan data analysis projects." },
+            { date: "2023.03 - 2023.06", role: "Data Analyst", company: "iKala Interactive Media Inc.", url: "", logo: "/assets/icons/iKala.png", desc: "KOL influence analysis. Optimized Tableau dashboards and implemented automated scheduling systems, increasing operational efficiency by 200%." },
             { date: "2023.01", role: "Corporate Project | Shopee Xpress Expansion Strategy", company: "NTUDAC x Shopee Xpress", url: "", logo: "/assets/icons/Shopee.png", desc: "Specialized in Location Intelligence & Strategic Planning. Built interactive dashboards using scraping and geospatial analysis." },
+            { date: "2022.10", role: "Data Station Data Competition | Champion", company: "Carrefour", url: "", logo: "/assets/icons/Carrefour.png", desc: "Developed customer purchase prediction models using clustering and associative algorithms. Won National Championship." },
             { date: "2022.01 - 2023.01", role: "Data Engineer", company: "Zero One Technology", url: "", logo: "/assets/icons/zerone.png", desc: "Served as technical trainer for 30+ corporate sessions. Delivered architecture advice and dashboards for high-level government & financial institutions." },
             { date: "2021.09 - 2023.06", role: "Master of Business Administration (MBA)", company: "NYCU", url: "", logo: "/assets/icons/陽明交通大學.png", desc: "Focused on business management, data-driven decision making, and operational strategy analysis." },
             { date: "2019.09 - 2021.06", role: "Bachelor of Business Administration (BBA)", company: "NTUB", url: "", logo: "/assets/icons/NTUB.png", desc: "Obtained TOEIC Gold (860), JLPT N3, GA Certification, and ERP professional licenses." }
@@ -67,13 +67,13 @@ export default async function Experience({ params }: { params: Promise<{ lang: s
                 { name: "X Platform", url: "https://www.xplatform.world/", logo: "/assets/icons/XPlatform.png" },
                 { name: "無限學院", url: "https://www.ooschool.cc/", logo: "/assets/icons/無限學院.png" }
               ],
-              desc: "Pythonによる可視化、モデリング、データ分析、n8n自動化などのプロジェクトを指導。50名以上の受講生をサポートしました。" 
+              desc: "100名近い受講生のPythonデータ分析、AIモデリング、n8n自動化などのプロジェクトを支援。" 
             },
-            { date: "2024.08 - 現在", role: "パートナー講師", company: "聯成電腦 (Rookie Savior)", url: "https://live.rookiesavior.net/", logo: "/assets/icons/菜鳥救星.png", desc: "Tableau総合カリキュラムを開発。300時間以上の指導を通じて150名以上の専門家を育成し、データアナリスト(DA)への転職を支援。" },
-            { date: "2023.07 - 現在", role: "資料分析師", company: "國泰人壽 (Cathay Life Insurance)", url: "", logo: "/assets/icons/國泰人壽.png", desc: "クラウドCDPの選定と導入を主導。AIエージェントの導入と2万人の営業員向けデータマート構築を支援。" },
-            { date: "2023.03 - 2023.06", role: "データアナリスト", company: "iKala Interactive Media Inc.", url: "", logo: "/assets/icons/iKala.png", desc: "KOLインフルエンサーの影響力分析プロジェクトに参加。社内ダッシュボードと自動レポートシステムを構築し、運営効率を5倍向上。" },
-            { date: "2023.02", role: "数位発展部 Data Station データコンテスト | 優勝", company: "Carrefour (家樂福)", url: "", logo: "/assets/icons/Carrefour.png", desc: "機械学習を用いた顧客購買予測モデルの開発。1万人規模の全国コンテストで優勝。" },
+            { date: "2024.08 - 現在", role: "パートナー講師", company: "聯成電腦 (Rookie Savior)", url: "https://live.rookiesavior.net/", logo: "/assets/icons/菜鳥救星.png", desc: "Tableau総合カリキュラムを開発。300時間以上の指導を通じて150名以上の専門家を育成し、BA/DAへの転職を支援。" },
+            { date: "2023.07 - 現在", role: "資料分析師", company: "國泰人壽 (Cathay Life Insurance)", url: "", logo: "/assets/icons/國泰人壽.png", desc: "GA4導入、タグ設計、CDP評価・導入、および保険融資データ分析プロジェクトを担当。" },
+            { date: "2023.03 - 2023.06", role: "データアナリスト", company: "iKala Interactive Media Inc.", url: "", logo: "/assets/icons/iKala.png", desc: "KOLインフルエンサーの影響力分析。Tableauダッシュボードの最適化と自動レポート送信システムを構築し、運営効率を200%向上。" },
             { date: "2023.01", role: "企業プロジェクト | 蝦皮 (Shopee) 店舗拡大戦略", company: "NTUDAC x Shopee Xpress", url: "", logo: "/assets/icons/Shopee.png", desc: "位置情報インテリジェンスと戦略立案を担当。スクレイピングと空間分析でダッシュボードを構築。" },
+            { date: "2022.10", role: "数位発展部 Data Station データコンテスト | 優勝", company: "Carrefour (家樂福)", url: "", logo: "/assets/icons/Carrefour.png", desc: "クラスタリング、レコメンデーション、およびその他の機械学習アルゴリズムを用いた顧客購買予測モデルの開発。全国コンテストで優勝。" },
             { date: "2022.01 - 2023.01", role: "データエンジニア", company: "Zero One Technology (零壹科技)", url: "", logo: "/assets/icons/zerone.png", desc: "技術研修講師として30回以上の法人向けセッションを実施。政府機関等にアーキテクチャ提案を提供。" },
             { date: "2021.09 - 2023.06", role: "経営学修士 (MBA)", company: "国立陽明交通大学 (NYCU)", url: "", logo: "/assets/icons/陽明交通大學.png", desc: "経営管理、データドリブンな意思決定、運営戦略分析を専攻。" },
             { date: "2019.09 - 2021.06", role: "経営学学士 (BBA)", company: "国立台北商業大学 (NTUB)", url: "", logo: "/assets/icons/NTUB.png", desc: "TOEIC Gold (860)、JLPT N3、GA認定、ERP専門資格を取得。" }

@@ -4,8 +4,20 @@ import type { Metadata } from 'next';
 
 export async function generateMetadata({ params }: { params: Promise<{ lang: string }> }): Promise<Metadata> {
   const lang = (await params).lang;
-  const titles = { zh: "聯絡我 | 傑森數據", en: "Contact | Jason Tsai", ja: "お問い合わせ | ジェイソン・アナリティクス" };
-  return { title: titles[lang as 'zh'|'en'|'ja'] || titles['zh'] };
+  const titles = { 
+    zh: "預約顧問與聯絡傑森 | 傑森數據 Jason Analytics", 
+    en: "Consultation & Contact | Jason Analytics", 
+    ja: "お問い合わせ・無料相談 | ジェイソン・アナリティクス" 
+  };
+  const descriptions = {
+    zh: "準備好釋放數據潛力了嗎？立即與傑森數據聯絡，預約 AI 建模、MarTech 導入、數據分析專案諮詢或企業培訓報價。",
+    en: "Ready to unlock your data potential? Contact Jason Analytics today for AI modeling, MarTech integration, data analysis projects, or corporate training quotes.",
+    ja: "データの力を最大限に引き出す準備はできましたか？AI活用、MarTech導入、データ分析プロジェクト、法人研修のお見積りなど、お気軽にお問い合わせください。"
+  };
+  return { 
+    title: titles[lang as 'zh'|'en'|'ja'] || titles['zh'],
+    description: descriptions[lang as 'zh'|'en'|'ja'] || descriptions['zh']
+  };
 }
 
 export default async function Contact({ params }: { params: Promise<{ lang: string }> }) {

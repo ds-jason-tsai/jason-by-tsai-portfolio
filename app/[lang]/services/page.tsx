@@ -4,8 +4,20 @@ import type { Metadata } from 'next';
 
 export async function generateMetadata({ params }: { params: Promise<{ lang: string }> }): Promise<Metadata> {
   const lang = (await params).lang;
-  const titles = { zh: "專業服務 | 傑森數據", en: "Services | Jason Tsai", ja: "サービス | ジェイソン・アナリティクス" };
-  return { title: titles[lang as 'zh'|'en'|'ja'] || titles['zh'] };
+  const titles = { 
+    zh: "數據分析諮詢、MarTech 導入與自動化顧問 | 傑森數據", 
+    en: "Consulting Services | Data, MarTech & Automation | Jason Analytics", 
+    ja: "データ分析コンサルティング・MarTech導入・自動化支援 | ジェイソン・アナリティクス" 
+  };
+  const descriptions = {
+    zh: "提供從數據視覺化 (Tableau/Looker Studio)、MarTech 導入 (GA4/CDP)、AI 解決方案到流程自動化 (n8n) 的全方位顧問服務。協助企業將數據轉化為決策力與自動化生產力。",
+    en: "Comprehensive services in data visualization, MarTech implementation (GA4/CDP), AI solutions, and workflow automation. Transforming raw data into strategic decisions and automated efficiency.",
+    ja: "データの可視化、MarTechの導入、AIソリューション、業務の自動化まで、包括的なコンサルティングを提供。データを戦略的決定と自動化された生産性に変換します。"
+  };
+  return { 
+    title: titles[lang as 'zh'|'en'|'ja'] || titles['zh'],
+    description: descriptions[lang as 'zh'|'en'|'ja'] || descriptions['zh']
+  };
 }
 
 const DataIcon = () => (

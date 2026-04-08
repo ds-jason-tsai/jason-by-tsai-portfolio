@@ -21,9 +21,16 @@ import type { Metadata } from 'next';
 export async function generateMetadata({ params }: { params: Promise<{ lang: string, id: string }> }): Promise<Metadata> {
   const { lang, id } = await params;
   const articleData = await getArticleData(id);
-  if (!articleData) return { title: "Not Found | Jason Tsai" };
+  
+  if (!articleData) return { title: "Article Not Found | Jason Analytics" };
+  
   const title = articleData.title[lang as 'zh'|'en'|'ja'] || articleData.title['zh'];
-  return { title: `${title} | Jason Tsai` };
+  const desc = articleData.description ? (articleData.description[lang as 'zh'|'en'|'ja'] || articleData.description['zh']) : "";
+  
+  return { 
+    title: `${title} | 傑森數據 Jason Analytics`,
+    description: desc || `${title} - 數據分析、AI 與 MarTech 深度探討。`,
+  };
 }
 
 export default async function ArticlePage({ params }: { params: Promise<{ lang: string, id: string }> }) {

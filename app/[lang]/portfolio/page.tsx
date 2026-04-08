@@ -3,8 +3,20 @@ import PortfolioClient from '../../../components/PortfolioClient';
 
 export async function generateMetadata({ params }: { params: Promise<{ lang: string }> }): Promise<Metadata> {
   const lang = (await params).lang;
-  const titles = { zh: "專案作品集 | 傑森數據", en: "Portfolio | Jason Tsai", ja: "ポートフォリオ | ジェイソン・アナリティクス" };
-  return { title: titles[lang as 'zh'|'en'|'ja'] || titles['zh'] };
+  const titles = { 
+    zh: "數據分析、FinTech 專案與商業簡報作品集 | 傑森數據", 
+    en: "Project Portfolio | Data Analytics, AI & FinTech | Jason Analytics", 
+    ja: "分析プロジェクト集 | データアナリティクス・AI・FinTech | ジェイソン・アナリティクス" 
+  };
+  const descriptions = {
+    zh: "傑森數據 Jason Tsai 的精選專案彙整。涵蓋 FinTech 保險科技、AI 知識庫研究、KOL 影響力分析等實戰案例。提供專業商業分析簡報與技術解決方案框架。",
+    en: "A collection of key projects by Jason Tsai. Highlights include FinTech insurance research, AI knowledge base studies, and KOL influence analysis with downloadable strategic frameworks.",
+    ja: "Jason Tsai による主要プロジェクト集。FinTech、AI研究、KOL影響力評価など、実務に即した分析事例と戦略的なフレームワークを公開しています。"
+  };
+  return { 
+    title: titles[lang as 'zh'|'en'|'ja'] || titles['zh'],
+    description: descriptions[lang as 'zh'|'en'|'ja'] || descriptions['zh']
+  };
 }
 
 export default async function Portfolio({ params }: { params: Promise<{ lang: string }> }) {

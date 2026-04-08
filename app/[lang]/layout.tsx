@@ -15,14 +15,20 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
   const baseUrl = 'https://jason-by-tsai-portfolio.vercel.app';
   
   const titles = {
-    zh: "傑森數據 | 數據分析",
-    en: "Jason Analytics | Data Analysis",
-    ja: "ジェイソン・アナリティクス | データ分析"
+    zh: "傑森數據 Jason Analytics | 數據分析、AI 與 MarTech 專家",
+    en: "Jason Analytics | Data Analysis, AI & MarTech Expert",
+    ja: "ジェイソン・アナリティクス | データ分析・AI・MarTech エキスパート"
+  };
+
+  const descriptions = {
+    zh: "傑森數據 Jason Tsai 的官方作品集。提供專業數據分析、AI 建模、MarTech 導入與自動化解決方案，協助企業與個人驅動數據價值。",
+    en: "Official portfolio of Jason Analytics (Jason Tsai). Expert in Data Analysis, AI Modeling, MarTech implementation, and automation solutions.",
+    ja: "Jason Analytics (ジェイソン・ツァイ) の公式ポートフォリオ。データ分析、AIモデリング、MarTech導入、自動化ソリューションを提供しています。"
   };
 
   return {
     title: titles[lang as keyof typeof titles] || titles.zh,
-    description: "Portfolio of Jason Tsai",
+    description: descriptions[lang as keyof typeof descriptions] || descriptions.zh,
     verification: {
       google: "QTIRGrJx67BIEr6FwZpodhAMNjYA01zw2g5-zE7GzNQ",
     },

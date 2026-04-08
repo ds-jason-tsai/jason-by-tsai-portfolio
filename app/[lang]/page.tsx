@@ -2,6 +2,26 @@ import Image from "next/image";
 import Link from "next/link";
 import { getDictionary } from '../dictionaries';
 import StatSection from './components/StatSection';
+import type { Metadata } from 'next';
+
+export async function generateMetadata({ params }: { params: Promise<{ lang: string }> }): Promise<Metadata> {
+  const lang = (await params).lang;
+  const titles = {
+    zh: "傑森數據 Jason Analytics | 數據分析、AI 與 MarTech 專家",
+    en: "Jason Analytics | Data Analysis, AI & MarTech Expert",
+    ja: "ジェイソン・アナリティクス | データ分析・AI・MarTech エキスパート"
+  };
+  const descriptions = {
+    zh: "傑森數據 Jason Tsai 的個人作品集。專注於 AI 建模、MarTech 導入、FinTech 研究與數據自動化顧問。提供專業數據視覺化、Tableau 開發與各產業商業分析解決方案。",
+    en: "Portfolio of Jason Tsai (Jason Analytics). Specializing in AI modeling, MarTech integration, FinTech research, and data automation. Providing expert analytics and visualization solutions.",
+    ja: "Jason Analytics (ジェイソン・ツァイ) のポートフォリオ。AIモデリング、MarTech導入、FinTech研究、データ自動化に特化し、最適なビジネス分析ソリューションを提供します。"
+  };
+
+  return {
+    title: titles[lang as 'zh'|'en'|'ja'] || titles.zh,
+    description: descriptions[lang as 'zh'|'en'|'ja'] || descriptions.zh,
+  };
+}
 
 export default async function Home({ params }: { params: Promise<{ lang: string }> }) {
   const lang = (await params).lang as 'zh' | 'en' | 'ja';

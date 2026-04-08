@@ -3,8 +3,14 @@ import type { Metadata } from 'next';
 
 export async function generateMetadata({ params }: { params: Promise<{ lang: string }> }): Promise<Metadata> {
   const lang = (await params).lang;
-  return {
-    title: lang === 'zh' ? '購買成功 | 傑森數據' : lang === 'ja' ? '購入完了 | ジェイソン・アナリティクス' : 'Purchase Successful | Jason Tsai',
+  const titles = { 
+    zh: "購買成功 | 傑森數據 Jason Analytics", 
+    en: "Purchase Successful | Jason Analytics", 
+    ja: "購入完了 | ジェイソン・アナリティクス" 
+  };
+  return { 
+    title: titles[lang as 'zh'|'en'|'ja'] || titles['zh'],
+    robots: { index: false, follow: false } // Best practice for payment success pages
   };
 }
 

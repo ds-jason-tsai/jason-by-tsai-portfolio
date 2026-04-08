@@ -4,8 +4,20 @@ import type { Metadata } from 'next';
 
 export async function generateMetadata({ params }: { params: Promise<{ lang: string }> }): Promise<Metadata> {
   const lang = (await params).lang;
-  const titles = { zh: "文章專區 | 傑森數據", en: "Articles | Jason Tsai", ja: "記事一覧 | ジェイソン・アナリティクス" };
-  return { title: titles[lang as 'zh'|'en'|'ja'] || titles['zh'] };
+  const titles = { 
+    zh: "數據分析觀點與 AI、MarTech 技術部落格 | 傑森數據", 
+    en: "Data Insights, AI & MarTech Technical Blog | Jason Analytics", 
+    ja: "データ分析・AI・MarTech 技術ブログ | ジェイソン・アナリティクス" 
+  };
+  const descriptions = {
+    zh: "傑森數據 Jason Tsai 的數據部落格。深入探討 AI 應用、MarTech 技術實操、數據視覺化技巧與 FinTech 產業洞察。分享數據分析師的實戰心得與職涯成長。",
+    en: "Technical blog by Jason Tsai. Deep dives into AI applications, MarTech implementations, data visualization tips, and FinTech insights. Sharing practical experience for data professionals.",
+    ja: "Jason Tsai による技術ブログ。AIの活用、MarTechの実装、データ可視化のコツ、FinTechの動向など、データアナリストとしての実務経験と知見を共有します。"
+  };
+  return { 
+    title: titles[lang as 'zh'|'en'|'ja'] || titles['zh'],
+    description: descriptions[lang as 'zh'|'en'|'ja'] || descriptions['zh']
+  };
 }
 
 export default async function Articles({ params }: { params: Promise<{ lang: string }> }) {

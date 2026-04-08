@@ -3,8 +3,20 @@ import Link from 'next/link';
 
 export async function generateMetadata({ params }: { params: Promise<{ lang: string }> }): Promise<Metadata> {
   const lang = (await params).lang;
-  const titles = { zh: "完整職涯經歷 | 傑森數據", en: "Experience | Jason Tsai", ja: "経歴 | ジェイソン・アナリティクス" };
-  return { title: titles[lang as 'zh'|'en'|'ja'] || titles['zh'] };
+  const titles = { 
+    zh: "數據分析師職涯經歷 | 傑森數據 - AI、MarTech 與 FinTech 實務", 
+    en: "Professional Experience | Jason Analytics - AI, MarTech & FinTech", 
+    ja: "実務経験 | ジェイソン・アナリティクス - AI、MarTech、FinTech の実績" 
+  };
+  const descriptions = {
+    zh: "揭秘傑森數據 Jason Tsai 的職業生涯。深耕 FinTech 保險科技、AI 建模與 MarTech 顧問，累積數百小時大數據教學經驗與多家知名企業專案實績。",
+    en: "Explore the career of Jason Tsai. Deep expertise in FinTech, AI modeling, and MarTech consultancy with hundreds of teaching hours and proven corporate projects.",
+    ja: "Jason Tsai のキャリアをご紹介します。FinTech、AIモデリング、MarTechにおける深い知見と、数百時間の指導実績、大手企業でのプロジェクト実績を誇ります。"
+  };
+  return { 
+    title: titles[lang as 'zh'|'en'|'ja'] || titles['zh'],
+    description: descriptions[lang as 'zh'|'en'|'ja'] || descriptions['zh']
+  };
 }
 
 export default async function Experience({ params }: { params: Promise<{ lang: string }> }) {

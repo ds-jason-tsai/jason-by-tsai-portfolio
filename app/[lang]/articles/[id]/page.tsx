@@ -43,9 +43,31 @@ export default async function ArticlePage({ params }: { params: Promise<{ lang: 
 
   const title = articleData.title[lang as 'zh'|'en'|'ja'] || articleData.title['zh'];
   const tags = articleData.tags[lang as 'zh'|'en'|'ja'] || articleData.tags['zh'];
+  const baseUrl = 'https://jason-by-tsai-portfolio.vercel.app';
+  const desc = articleData.description ? (articleData.description[lang as 'zh'|'en'|'ja'] || articleData.description['zh']) : `${title} - 數據分析、AI 與 MarTech 深度探討。`;
 
   return (
     <article className="article-container" style={{ maxWidth: '800px', margin: '0 auto', padding: '2rem' }}>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "BlogPosting",
+            "headline": title,
+            "description": desc,
+            "author": {
+              "@type": "Person",
+              "name": "Jason Tsai",
+              "url": baseUrl
+            },
+            "datePublished": articleData.date,
+            "url": `${baseUrl}/${lang}/articles/${id}`,
+            "inLanguage": lang,
+            "keywords": tags.join(", ")
+          })
+        }}
+      />
       <Link href={`/${lang}/articles`} style={{ color: 'var(--accent-color)', textDecoration: 'none', marginBottom: '2rem', display: 'inline-block' }}>
         &larr; Back
       </Link>

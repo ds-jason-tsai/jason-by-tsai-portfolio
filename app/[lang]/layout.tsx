@@ -61,6 +61,13 @@ export default async function RootLayout({
 }>) {
   const lang = (await params).lang as 'zh' | 'en' | 'ja';
   const dict = await getDictionary(lang);
+  const baseUrl = 'https://jason-by-tsai-portfolio.vercel.app';
+  
+  const descriptions = {
+    zh: "傑森數據 Jason Analytics 的官方作品集。提供專業數據分析、商業分析、AI 建模、MarTech 導入、數據工程與自動化解決方案，協助企業驅動數據價值。",
+    en: "Official portfolio of Jason Analytics (Jason Tsai). Expert in Data Analysis, Business Analytics, AI Modeling, MarTech, Data Engineering, and automation solutions.",
+    ja: "Jason Analytics のポートフォリオ。數據分析、ビジネス分析、AIモデリング、MarTech導入、データエンジニアリング、自動化ソリューションを提供しています。"
+  };
 
   return (
     <html lang={lang} className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}>
@@ -91,6 +98,36 @@ export default async function RootLayout({
             backdrop-filter: none !important;
           }
         `}} />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@graph": [
+                {
+                  "@type": "WebSite",
+                  "@id": `${baseUrl}/${lang}/#website`,
+                  "url": `${baseUrl}/${lang}/`,
+                  "name": "傑森數據 Jason Analytics",
+                  "description": descriptions[lang as keyof typeof descriptions] || descriptions.zh,
+                  "publisher": { "@id": `${baseUrl}/${lang}/#person` },
+                  "inLanguage": lang
+                },
+                {
+                  "@type": "Person",
+                  "id": `${baseUrl}/${lang}/#person`,
+                  "name": "Jason Tsai (蔡傑森)",
+                  "alternateName": "Jason Analytics",
+                  "jobTitle": "Data Analyst & AI/MarTech Consultant",
+                  "description": descriptions[lang as keyof typeof descriptions] || descriptions.zh,
+                  "url": baseUrl,
+                  "image": `${baseUrl}/profile.jpg`, // Adjust if a standard profile image exists
+                  "knowsAbout": ["Data Analysis", "AI Modeling", "MarTech", "FinTech", "Tableau", "Python", "SQL", "n8n"]
+                }
+              ]
+            })
+          }}
+        />
       </head>
       <body className="min-h-full flex flex-col">
         <Script src="https://www.googletagmanager.com/gtag/js?id=G-WH682R80NK" strategy="lazyOnload" />

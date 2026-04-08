@@ -9,9 +9,9 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
     ja: "分析プロジェクト集 | ジェイソン・アナリティクス - Tableau, AI と FinTech の実績" 
   };
   const descriptions = {
-    zh: "傑森數據 Jason Analytics 精選數據分析作品集。涵蓋 Python 數據建模、Tableau 商業視覺化儀表板、NotebookLM AI 應用與大型數據工程開發實績。展示多元產業的數據決策與自動化成果，協助您理解數據的實務應用價值，立即點擊探索並看更多專案詳情。",
-    en: "Showcasing the data analysis portfolio of Jason Analytics (Jason Tsai). Featured projects include Python data modeling, Tableau business dashboards, NotebookLM AI applications, and large-scale data engineering. Explore our evidence-based results across multiple industries and discover how data drives real-world value.",
-    ja: "Jason Analytics (ジェイソン・ツァイ) のデータ分析ポートフォリオです。Pythonデータモデリング、Tableauビジネスダッシュボード、NotebookLM AI活用、大規模データエンジニアリングの実績を掲載。データが実社会でどのような価値を生むか、実際のプロジェクトを通じてご覧ください。詳細はこちら。"
+    zh: "傑森數據 Jason Analytics 精選數據分析作品集。由 Jason Tsai 主導，涵蓋 Python 進階數據建模、Tableau 商業動態視覺化儀表板、NotebookLM 與多種 AI 技術應用實績。深耕大型數據工程開發與 MarTech 技術架構，展示多元產業的數據決策透明化與流程自動化成果，協助您深度理解數據在商業實務中的關鍵價值。立即點擊看更多專案詳情。",
+    en: "Showcasing the data analysis portfolio of Jason Analytics. Featured projects include advanced Python data modeling, interactive Tableau business dashboards, AI-driven applications with NotebookLM, and large-scale data engineering projects. Explore evidence-based results and learn how we transform raw data into strategic business value across diverse industries.",
+    ja: "Jason Analytics のデータ分析ポートフォリオ。Python データモデリング、動的な Tableau ダッシュボード、AI（NotebookLM）のビジネス活用、大規模データエンジニアリングの実績を公開。多角的な視点から産業データの可視化と自動化を推進し、データがビジネスに不可欠な価値を生むプロセスを紹介します。詳細なプロジェクト一覧はこちら。"
   };
   return { 
     title: titles[lang as 'zh'|'en'|'ja'] || titles['zh'],

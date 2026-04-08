@@ -9,9 +9,9 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
     ja: "データダッシュボード | Tableau, Looker Studio & 可視化 | ジェイソン・アナリティクス" 
   };
   const descriptions = {
-    zh: "傑森數據 Jason Analytics 專業數據視覺化服務。精通 Tableau 與 Looker Studio 商業儀表板設計，將複雜數據轉化為直覺、具行動價值的決策圖表。涵蓋多種產業銷售監控、市場分析與營運效能分析案例。立即點擊查看互動式視覺化範例，打造您的數據競爭優勢。",
-    en: "Jason Analytics (Jason Tsai) provides expert data visualization services. We specialize in designing Tableau and Looker Studio business dashboards that turn complex data into intuitive, actionable insights. Explore our industry-specific visualization cases and see how we create data-driven advantages. View interactive dashboards now.",
-    ja: "Jason Analytics (ジェイソン・ツァイ) が提供する専門的なデータ視覚化サービス。TableauやLooker Studioを用いたビジネスダッシュボード設計に精通。複雑なデータを直感的な意思決定用チャートに変換し、販売監視や市場・運営分析の実績が豊富です。インタラクティブなダッシュボード例を今すぐご覧ください。"
+    zh: "傑森數據 Jason Analytics 專業數據視覺化服務。精通 Tableau 與 Looker Studio 商業儀表板設計，將複雜數據轉化為直覺且具備行動價值的決策圖表。我們能協助企業透過互動式監控面板掌握銷售趨勢、市場變化與營運效能。立即探索如何透過數據視覺化打造資訊領先優勢，將原始資料轉化為清晰的成長指南。點擊查看完整互動範例。",
+    en: "Jason Analytics specializes in professional data visualization services. We design interactive Tableau and Looker Studio dashboards that transform complex raw data into intuitive, actionable business insights. Optimize your decision-making with custom sales monitoring, market analysis, and operational tracking. View our interactive dashboard gallery today.",
+    ja: "Jason Analytics (ジェイソン・ツァイ) が提供するデータ視覚化。TableauやLooker Studioを用いたビジネスダッシュボード設計に精通。複雑なデータを直感的な意思決定チャートに変換し、販売監視や市場分析の実績も豊富。データの視覚化を通じて、情報優位性を築き、ビジネスを加速させるお手伝いをします。"
   };
   return { 
     title: titles[lang as 'zh'|'en'|'ja'] || titles['zh'],

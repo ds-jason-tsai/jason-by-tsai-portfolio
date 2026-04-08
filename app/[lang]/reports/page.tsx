@@ -9,9 +9,9 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
     ja: "分析レポート・AI実務講座・自動化ソリューション | ジェイソン・アナリティクス" 
   };
   const descriptions = {
-    zh: "傑森數據 Jason Analytics 數據專題深入報導。運用 NotebookLM 與先進 AI 技術，針對數據分析趨勢、AI 實戰應用與 MarTech 顧問洞察進行深度解析。提供專業且具行動導向的數據專案建議，協助個人與企業掌握未來數據趨勢，立即獲取最新專題報導並看更多專業建議。",
-    en: "In-depth data reports by Jason Analytics (Jason Tsai). We use NotebookLM and advanced AI to analyze data trends, AI applications, and MarTech insights. Our actionable professional reports help individuals and businesses master future data trends. Get the latest insights and expert advice now.",
-    ja: "Jason Analytics (ジェイソン・ツァイ) によるデータレポートの深掘り。NotebookLMと高度なAIを駆使し、データ分析トレンド、AI実務、MarTechの知見を徹底解説。個人や企業のデータ活用を支援する実践的なアドバイスを掲載。最新のデータレポートを今すぐチェック。"
+    zh: "傑森數據 Jason Analytics 精選進階數據報告與專業簡報範例。我們提供高品質的市場研究報告、清洗過的乾淨資料集，以及專為解決企業問題設計的 Solution Engineer 簡報模板。透過最前線的觀察與嚴謹的數據分析，協助您快速掌握產業競爭態勢與技術實作解決方案。購買後即可立即下載，省去冗長的數據收集整理時間，賦能您的商業決策。",
+    en: "Explore premium data reports and presentation templates at Jason Analytics. We provide high-quality market research, cleaned datasets, and specialized Solution Engineer pitch decks. Our rigorous data analysis helps you master industry trends and implementation strategies quickly. Instantly download these resources to empower your decision-making and save time.",
+    ja: "Jason Analytics が提供するプレミアムデータレポートとプレゼンテーション用テンプレート。高品質な市場動向、クレンジング済みデータセット、ソリューションエンジニア向けの提案資料など、企業の課題解決に特化した資料を揃えています。最新のデータ分析に基づいた洞察を今すぐダウンロードし、ビジネスの意思決定を最適化しましょう。"
   };
   return { 
     title: titles[lang as 'zh'|'en'|'ja'] || titles['zh'],

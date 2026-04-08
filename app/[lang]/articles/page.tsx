@@ -10,9 +10,9 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
     ja: "データ分析ブログ | ジェイソン・アナリティクス - Python, SQL と AI 実戦" 
   };
   const descriptions = {
-    zh: "傑森數據 Jason Analytics 技術部落格。提供專業數據分析師轉職導引、Python 與 SQL 實戰教學、AI 自動化技術與 MarTech 趨勢解析。累積豐富的實務心得與職涯建議，協助數據愛好者從基礎邁向專家職涯，立即訂閱並開始學習最新的數據分析與自動化技術。",
-    en: "The Jason Analytics technical blog. We provide expert advice on data analyst career transitions, practical Python and SQL tutorials, AI automation tips, and MarTech trend analysis. Gain valuable professional insights and career guidance to help you advance in the data industry. Start learning today.",
-    ja: "Jason Analytics (ジェイソン・ツァイ) の技術ブログです。データアナリストのキャリア転換ガイド、PythonやSQLの実践、AI自動化技術、MarTechのトレンド分析まで。実務経験に基づいた知見とキャリアアドバイスで、あなたのデータスキルの向上を支援します。今すぐ学びを始めましょう。"
+    zh: "傑森數據 Jason Analytics 數據技術與商務部落格。由 Jason Tsai 主筆，分享包含 Python 數據處理秘訣、SQL 查詢優化、Tableau 視覺化技巧、MarTech 趨勢深入探討、AI 實戰應用方案以及數據分析師的職涯心法。我們致力於將複雜的技術概念轉化為易懂且具備高度行動價值的商業洞察，協助讀者持續提升數據思維與實戰競爭力。歡迎訂閱並查看最新文章。",
+    en: "The Jason Analytics technical blog, authored by Jason Tsai. We cover expert Python and SQL tutorials, Tableau visualization tips, MarTech trends, and practical AI application strategies. Our mission is to transform complex technical concepts into actionable business insights and career guidance for data professionals. Subscribe now for the latest data insights and technical deep dives.",
+    ja: "Jason Analytics (ジェイソン・ツァイ) の技術ブログ。Python や SQL の高度な活用法、Tableau による視覚化、MarTech トレンド、AI の実務応用、そしてデータアナリストとしてのキャリア戦略まで幅広く公開。複雑な技術概念をわかりやすく、かつ実践的なビジネスインサイトへと変換してお届けします。最新の記事を今すぐチェック。"
   };
   return { 
     title: titles[lang as 'zh'|'en'|'ja'] || titles['zh'],

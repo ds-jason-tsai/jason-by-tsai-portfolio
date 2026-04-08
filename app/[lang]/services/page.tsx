@@ -10,9 +10,9 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
     ja: "データコンサルティング・n8n自動化・MarTech顧問 | ジェイソン・アナリティクス" 
   };
   const descriptions = {
-    zh: "傑森數據 Jason Analytics 提供專業 Python/SQL 數據工程開發、GA4/CDP MarTech 系統導入與 n8n 流程自動化等一站式數據顧問服務。透過深度商業分析與 AI 技術運用，協助企業優化專案效率並建立數位營運體系，提供高價值的數據驅動決策建議，歡迎立即洽詢各項合作項目。",
-    en: "Jason Analytics (Jason Tsai) provides specialized Python/SQL data engineering, GA4/CDP MarTech implementation, and n8n automation services. We leverage business analytics and AI to optimize enterprise operations and data project efficiency. Discover high-value data advisory solutions and contact us for your next project.",
-    ja: "Jason Analytics (ジェイソン・ツァイ) は、Python/SQLデータエンジニアリング、GA4/CDP MarTech導入、n8nオートメーションなどの専門サービスを提供します。ビジネス分析とAIを活用し、企業の業務効率化とデータ駆動型の意思決定を支援するワンストップのデータアドバイザリーを提供しています。"
+    zh: "傑森數據 Jason Analytics 提供全方位的數據解決方案。包含專業的 Python 與 SQL 數據工程開發、GA4 與 CDP 客戶數據平台等 MarTech 系統導入，以及高效的 n8n 業務流程自動化顧問服務。透過深度商業分析與 AI 技術的彈性運用，協助企業從零建立數位營運體系並優化專案決策效率。提供具備高度商業價值的數據驅動建議，歡迎立即洽詢各類合作項目。",
+    en: "Jason Analytics offers comprehensive data solutions: Python/SQL data engineering, GA4/CDP MarTech implementation, and n8n workflow automation consulting. We leverage business analytics and AI to help organizations build digital operating systems and optimize decision-making. Contact us for high-value data-driven strategy and consulting services.",
+    ja: "Jason Analytics (ジェイソン・ツァイ) は、包括的なデータソリューションを提供します。Python/SQL データエンジニアリング、GA4/CDP MarTech システム導入、n8n 業務自動化コンサルティングなどを通じて、企業のデジタルオペレーションを最適化します。ビジネス分析と AI 技術を駆使し、意思決定の効率化とデータ駆動型の成長戦略をワンストップで支援します。各プロジェクトのご相談はこちらから。"
   };
   return { 
     title: titles[lang as 'zh'|'en'|'ja'] || titles['zh'],

@@ -12,9 +12,9 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
     ja: "ジェイソン・アナリティクス | データ分析・AI・MarTech エキスパート"
   };
   const descriptions = {
-    zh: "傑森數據 Jason Analytics 作品集。精通 Python、SQL 與 Tableau 數據視覺化，專注於 AI 建模、MarTech 導入與 FinTech 數據專案。提供專業商業分析、數據工程顧問與數據分析師轉職建議。",
-    en: "Jason Analytics Portfolio. Expert in Python, SQL, and Tableau. Focused on AI modeling, MarTech, and FinTech projects. Providing business analytics, data engineering, and career transition advice.",
-    ja: "Jason Analytics ポートフォリオ。Python、SQL、Tableau に精通。AIモデリング、MarTech、FinTechプロジェクト、データエンジニアリング、キャリア転換のアドバイスを提供します。"
+    zh: "傑森數據 Jason Analytics 官方作品集。由數據專家 Jason Tsai (蔡傑森) 主理，深耕數據分析與 AI 轉型領域。精通 Python、SQL 與 Tableau 數據視覺化，專注於 AI 機器學習建模、MarTech 數位行銷科技導入與 FinTech 數據專案實務。提供專業商業分析、數據工程顧問服務，並協助企業透過數據驅動決策轉化為實質營收。立即探索數據驅動的無限可能。",
+    en: "Official portfolio of Jason Analytics, led by data expert Jason Tsai. Specializing in Data Analysis, AI/ML Modeling, MarTech, and FinTech projects. We transform complex data into actionable insights using Python, SQL, and Tableau. Discover how we drive growth through data-driven decisions and strategic consulting.",
+    ja: "データ専門家 Jason Tsai が主宰する Jason Analytics 公式ポートフォリオ。Python、SQL、Tableau を駆使し、データ分析、AI機械学習モデリング、MarTech 導入、FinTech プロジェクトを包括的に支援します。ビジネスインテリジェンスとデータエンジニアリングを通じて、企業の意思決定を最適化し、価値創出を加速させます。"
   };
 
   return {

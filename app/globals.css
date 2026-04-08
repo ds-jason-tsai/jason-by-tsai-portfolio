@@ -412,19 +412,24 @@ h1, h2, h3, h4 {
   border-color: transparent;
 }
 
+@media (max-width: 768px) {
+  .main-container {
+    padding: 0 0.5rem;
+  }
+}
+
 @media (max-width: 480px) {
   .tags-container {
-    display: grid !important;
-    grid-template-columns: repeat(3, 1fr) !important;
-    gap: 0.4rem !important;
+    display: flex !important;
+    flex-wrap: wrap !important;
+    gap: 0.5rem !important;
   }
   .tag {
-    font-size: 0.65rem !important;
-    padding: 0.2rem 0.4rem !important;
+    font-size: 0.75rem !important;
+    padding: 0.3rem 0.6rem !important;
     text-align: center;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    white-space: normal !important;
+    word-break: break-all !important;
   }
 }
 

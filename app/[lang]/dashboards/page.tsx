@@ -281,7 +281,13 @@ export default function DashboardsPage({ params }: { params: Promise<{ lang: str
         }
 
         @media (max-width: 1024px) {
-          .dashboards-container { padding: 1.5rem 0 !important; }
+          .dashboards-container { 
+            padding: 1.5rem 0 !important; 
+            margin-left: -0.5rem !important; 
+            margin-right: -0.5rem !important; 
+            width: calc(100% + 1rem) !important;
+            max-width: none !important;
+          }
           .dashboard-carousel-wrapper { padding: 0 !important; width: 100% !important; max-width: 100% !important; }
           .dashboard-display-card { padding: 1.5rem 0.5rem !important; border-radius: 0 !important; border-left: none; border-right: none; }
           .carousel-btn {

@@ -256,7 +256,17 @@ export default function Reports({ params }: { params: Promise<{ lang: string }> 
         .price-val { font-size: 1.8rem; font-weight: 900; color: var(--accent-color); }
         .status-label { font-size: 0.7rem; color: rgba(255,255,255,0.4); margin-top: 4px; }
         @media (max-width: 768px) {
+          .portfolio { padding: 0 0.5rem !important; }
           .section-title { font-size: 2.2rem !important; }
+          .reports-grid { gap: 1.5rem !important; }
+          .report-card > div:last-child { padding: 1.5rem !important; }
+          .price-action-container { 
+            padding: 1.2rem !important; 
+            flex-direction: column; 
+            align-items: center; 
+            text-align: center;
+          }
+          .price-info { margin-bottom: 1rem; }
         }
       `}} />
     </section>

@@ -104,7 +104,15 @@ export default async function Services({ params }: { params: Promise<{ lang: str
   const t = content[lang];
 
   return (
-    <section className="services fade-in" style={{ padding: '0 2rem' }}>
+    <section className="services fade-in" style={{ padding: '0 1rem' }}>
+      <style dangerouslySetInnerHTML={{__html: `
+        @media (max-width: 768px) {
+          .services { padding: 0 0.5rem !important; }
+          .service-price-tag, .service-card > div:last-child { 
+            align-self: center !important; 
+          }
+        }
+      `}} />
       <h2 className="section-title">{t.title}</h2>
       <p style={{ textAlign: 'center', marginBottom: '3rem', color: 'var(--text-secondary)' }}>{t.desc}</p>
       <div className="services-grid">

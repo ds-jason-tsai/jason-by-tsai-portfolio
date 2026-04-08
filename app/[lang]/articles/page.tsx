@@ -35,7 +35,12 @@ export default async function Articles({ params }: { params: Promise<{ lang: str
   const articles = getSortedArticlesData();
 
   return (
-    <section className="articles fade-in" style={{ padding: '0 2rem' }}>
+    <section className="articles fade-in" style={{ padding: '0 1rem' }}>
+      <style dangerouslySetInnerHTML={{__html: `
+        @media (max-width: 768px) {
+          .articles { padding: 0 0.5rem !important; }
+        }
+      `}} />
       <h2 className="section-title">{t.title}</h2>
       <p style={{ textAlign: 'center', marginBottom: '4rem', color: 'var(--text-secondary)' }}>{t.desc}</p>
       <ArticleListClient articles={articles} lang={lang} t={t} />

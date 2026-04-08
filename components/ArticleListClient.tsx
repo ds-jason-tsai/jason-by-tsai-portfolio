@@ -133,6 +133,17 @@ export default function ArticleListClient({ articles, lang, t }: { articles: any
           box-shadow: 0 0 20px rgba(0, 242, 254, 0.2);
           transform: scale(1.05);
         }
+        @media (max-width: 768px) {
+          .articles-client-container { padding: 0 !important; }
+          .article-list-card { 
+            padding: 1.5rem !important; 
+            border-radius: 12px !important; 
+            margin: 0 -0.5rem; /* Slight negative margin to offset parent padding if any */
+          }
+          .article-list-card h3 { font-size: 1.3rem !important; }
+          .article-list-card p { font-size: 0.95rem !important; margin-bottom: 1.5rem !important; }
+          .category-btn { padding: 0.5rem 1.2rem !important; font-size: 0.9rem !important; }
+        }
       `}} />
     </div>
   );

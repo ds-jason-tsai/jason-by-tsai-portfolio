@@ -281,8 +281,9 @@ export default function DashboardsPage({ params }: { params: Promise<{ lang: str
         }
 
         @media (max-width: 1024px) {
+          .dashboards-container { padding: 1.5rem 0 !important; }
           .dashboard-carousel-wrapper { padding: 0 !important; width: 100% !important; max-width: 100% !important; }
-          .dashboard-display-card { padding: 1rem !important; border-radius: 0 !important; border-left: none; border-right: none; }
+          .dashboard-display-card { padding: 1.5rem 0.5rem !important; border-radius: 0 !important; border-left: none; border-right: none; }
           .carousel-btn {
             position: relative;
             top: auto;
@@ -292,11 +293,11 @@ export default function DashboardsPage({ params }: { params: Promise<{ lang: str
             width: 44px;
             height: 44px;
           }
-          .dashboards-header { margin-bottom: 2rem; }
+          .dashboards-header { margin-bottom: 2rem; padding: 0 1rem; }
           .iframe-container { height: 50vh !important; border-radius: 8px !important; }
         }
         @media (max-width: 768px) {
-          .section-title { font-size: 2rem !important; }
+          .section-title { font-size: 2.2rem !important; }
           .iframe-container { height: 45vh !important; }
           .partner-logo { font-size: 1.1rem; }
         }

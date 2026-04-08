@@ -21,16 +21,16 @@ export default async function Experience({ params }: { params: Promise<{ lang: s
                 { name: "X Platform", url: "https://www.xplatform.world/", logo: "/assets/icons/XPlatform.png" },
                 { name: "無限學院", url: "https://www.ooschool.cc/", logo: "/assets/icons/無限學院.png" }
               ],
-              desc: "協助近100位學員完成Python資料分析、AI建模、n8n自動化等專案。" 
+              desc: "協助近 100 位學員完成 Python 資料分析、AI 建模、n8n 自動化等專案。" 
             },
             { date: "2024.08 - 至今", role: "合作講師", company: "聯成電腦 (菜鳥救星)", url: "https://live.rookiesavior.net/", logo: "/assets/icons/菜鳥救星.png", desc: "開發從零到一的 Tableau 完整課程；累積 300+ 小時教學，培訓超過 150 位業界人士。成功協助多位學員轉職商業分析師(BA)、數據分析師(DA)，並獲得學員們的高滿意度回饋。" },
-            { date: "2023.07 - 至今", role: "資料分析師", company: "國泰人壽 (Cathay Life Insurance)", url: "", logo: "/assets/icons/國泰人壽.png", desc: "負責數位軌跡系統建置(GA4)、客戶標籤設計、客戶資料平台(CDP)評估、導入以及保單貸款資料分析等專案。" },
+            { date: "2023.07 - 至今", role: "資料分析師(Data Analyst)", company: "國泰人壽 (Cathay Life Insurance)", url: "", logo: "/assets/icons/國泰人壽.png", desc: "負責數位軌跡系統建置(GA4)、客戶標籤設計、客戶資料平台(CDP)評估、導入以及保單貸款資料分析等專案。" },
             { date: "2023.03 - 2023.06", role: "資料分析師 (Data Analyst)", company: "iKala Interactive Media Inc.", url: "", logo: "/assets/icons/iKala.png", desc: "參與 KOL 網紅影響力分析專案，量化行銷效益並優化網紅選擇策略。優化 Tableau 儀表板並實作自動化排程寄送系統，提升整體營運效率 200% 以上。" },
             { date: "2023.01", role: "企業專案 | 蝦皮店到店擴張策略", company: "NTUDAC 臺大資料分析社 x 蝦皮 (Shopee Xpress)", url: "", logo: "/assets/icons/Shopee.png", desc: "負責空間智能與策略規劃，拆解物流痛點並追蹤設點關鍵指標。結合爬蟲、分群與地理空間分析建立互動式儀表板，優化整體營運網點評估規劃。" },
             { date: "2022.10", role: "數發部 Data Station 數據競賽 | 冠軍", company: "家樂福 (Carrefour)", url: "", logo: "/assets/icons/Carrefour.png", desc: "透過分群、關聯式演算法和其他機器學習演算法開發顧客購買預測模型，並深入規劃商品搭售策略。在規模龐大的全國專案競賽中脫穎而出，贏得冠軍與最佳模型獎。" },
             { date: "2022.01 - 2023.01", role: "資料工程師 (Data Engineer)", company: "零壹科技 (Zero One Technology)", url: "", logo: "/assets/icons/zerone.png", desc: "擔任技術培訓講師，累積 30+ 場次企業授課。為財政部、台灣證交所等高階政經單位提供架構建議與數據視覺化儀表板設計。" },
             { date: "2021.09 - 2023.06", role: "企業管理碩士 (MBA)", company: "國立陽明交通大學 (NYCU)", url: "", logo: "/assets/icons/陽明交通大學.png", desc: "專注於商業管理、數據決策與營運策略分析等進階領域。" },
-            { date: "2019.09 - 2021.06", role: "企業管理理學士 (BBA)", company: "國立臺北商業大學 (NTUB)", url: "", logo: "/assets/icons/NTUB.png", desc: "奠定商業分析基礎。期間取得 TOEIC 金色證書 (860)、JLPT N3 日語檢定、GA 認證以及 ERP 相關專業證照。" }
+            { date: "2019.09 - 2021.06", role: "企業管理理學士 (BBA)", company: "國立臺北商業大學 (NTUB)", url: "", logo: "/assets/icons/NTUB.png", desc: "奠定商業分析基礎。期間取得 TOEIC 金色證書、JLPT N3 日語檢定、GA 認證以及 ERP 專業證照。" }
           ]
     },
     en: { title: "Experience", 

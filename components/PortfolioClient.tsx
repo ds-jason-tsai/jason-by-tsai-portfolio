@@ -232,6 +232,12 @@ export default function PortfolioClient({ projects, lang, t }: { projects: any[]
         .carousel-nav-btn.next { right: -60px; }
 
         @media (max-width: 1024px) {
+          .portfolio-client-container { 
+            width: calc(100% + 1rem) !important;
+            margin-left: -0.5rem !important;
+            margin-right: -0.5rem !important;
+            max-width: none !important;
+          }
           .carousel-nav-btn { 
             display: flex !important; 
             background: rgba(255, 255, 255, 0.1) !important;
@@ -239,23 +245,29 @@ export default function PortfolioClient({ projects, lang, t }: { projects: any[]
             color: #fff !important;
           }
           
-          .portfolio-image-wrapper { height: 180px !important; }
+          .portfolio-image-wrapper { height: 200px !important; }
           .portfolio-carousel-wrapper { 
             flex-direction: column !important; 
             align-items: center !important; 
             gap: 1rem !important;
             padding: 0;
             min-height: auto !important;
+            width: 100% !important;
           }
           .carousel-card { 
-            width: 98% !important;
-            max-width: 100% !important; 
+            width: 100% !important;
+            max-width: none !important; 
             margin-bottom: 0.5rem;
             padding: 0 !important;
-            border-radius: 16px !important;
+            border-radius: 0 !important;
+            border-left: none !important;
+            border-right: none !important;
           }
-          .service-title { font-size: 1.2rem !important; }
-          .category-btn { padding: 0.6rem 1.5rem !important; font-size: 0.9rem !important; }
+          .carousel-card > div:last-child {
+            padding: 1.2rem !important;
+          }
+          .service-title { font-size: 1.3rem !important; }
+          .category-btn { padding: 0.6rem 1.2rem !important; font-size: 0.85rem !important; }
         }
         @keyframes pulse {
           0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(0, 242, 254, 0.4); }

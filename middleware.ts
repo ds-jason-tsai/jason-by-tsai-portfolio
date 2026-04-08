@@ -14,7 +14,8 @@ function getLocale(request: NextRequest) {
   const acceptLanguage = request.headers.get('accept-language');
   if (!acceptLanguage) return defaultLocale;
 
-  // Simple locale detection based on accept-language header
+  // Prioritize Traditional Chinese for the target audience
+  if (acceptLanguage.includes('zh')) return 'zh';
   if (acceptLanguage.includes('ja')) return 'ja';
   if (acceptLanguage.includes('en')) return 'en';
   

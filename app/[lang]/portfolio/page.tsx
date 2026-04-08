@@ -85,7 +85,12 @@ export default async function Portfolio({ params }: { params: Promise<{ lang: st
   ];
 
   return (
-    <section className="portfolio fade-in" style={{ padding: '0 2rem' }}>
+    <section className="portfolio fade-in" style={{ padding: '0 1rem' }}>
+      <style dangerouslySetInnerHTML={{__html: `
+        @media (max-width: 768px) {
+          .portfolio { padding: 0 0.5rem !important; }
+        }
+      `}} />
       <h2 className="section-title">{t.title}</h2>
       <p style={{ textAlign: 'center', marginBottom: '3rem', color: 'var(--text-secondary)' }}>{t.desc}</p>
       

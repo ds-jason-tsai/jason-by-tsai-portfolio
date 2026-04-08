@@ -12,9 +12,9 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
     ja: "ジェイソン・アナリティクス | データ分析・AI・MarTech エキスパート"
   };
   const descriptions = {
-    zh: "傑森數據 Jason Tsai 的個人作品集。專注於 AI 建模、MarTech 導入、FinTech 研究與數據自動化顧問。提供專業數據視覺化、Tableau 開發與各產業商業分析解決方案。",
-    en: "Portfolio of Jason Tsai (Jason Analytics). Specializing in AI modeling, MarTech integration, FinTech research, and data automation. Providing expert analytics and visualization solutions.",
-    ja: "Jason Analytics (ジェイソン・ツァイ) のポートフォリオ。AIモデリング、MarTech導入、FinTech研究、データ自動化に特化し、最適なビジネス分析ソリューションを提供します。"
+    zh: "傑森數據 Jason Analytics 作品集。精通 Python、SQL 與 Tableau 數據視覺化，專注於 AI 建模、MarTech 導入與 FinTech 數據專案。提供專業商業分析、數據工程顧問與數據分析師轉職建議。",
+    en: "Jason Analytics Portfolio. Expert in Python, SQL, and Tableau. Focused on AI modeling, MarTech, and FinTech projects. Providing business analytics, data engineering, and career transition advice.",
+    ja: "Jason Analytics ポートフォリオ。Python、SQL、Tableau に精通。AIモデリング、MarTech、FinTechプロジェクト、データエンジニアリング、キャリア転換のアドバイスを提供します。"
   };
 
   return {

@@ -5,14 +5,14 @@ import type { Metadata } from 'next';
 export async function generateMetadata({ params }: { params: Promise<{ lang: string }> }): Promise<Metadata> {
   const lang = (await params).lang;
   const titles = { 
-    zh: "數據分析觀點與 AI、MarTech 技術部落格 | 傑森數據", 
-    en: "Data Insights, AI & MarTech Technical Blog | Jason Analytics", 
-    ja: "データ分析・AI・MarTech 技術ブログ | ジェイソン・アナリティクス" 
+    zh: "數據分析與專案分享部落格 | 傑森數據 - Python, SQL 與 AI 實戰", 
+    en: "Data Insights Blog | Jason Analytics - Python, SQL & AI Practical", 
+    ja: "データ分析ブログ | ジェイソン・アナリティクス - Python, SQL と AI 実戦" 
   };
   const descriptions = {
-    zh: "傑森數據 Jason Tsai 的數據部落格。深入探討 AI 應用、MarTech 技術實操、數據視覺化技巧與 FinTech 產業洞察。分享數據分析師的實戰心得與職涯成長。",
-    en: "Technical blog by Jason Tsai. Deep dives into AI applications, MarTech implementations, data visualization tips, and FinTech insights. Sharing practical experience for data professionals.",
-    ja: "Jason Tsai による技術ブログ。AIの活用、MarTechの実装、データ可視化のコツ、FinTechの動向など、データアナリストとしての実務経験と知見を共有します。"
+    zh: "傑森數據 Jason Analytics 的技術部落格。分享數據分析師轉職經驗、Python 與 SQL 技術實戰、AI 應用趨勢及跨產業商業分析觀點。",
+    en: "Technical blog of Jason Analytics. Sharing data analyst career transition tips, Python & SQL practicals, AI trends, and cross-industry business analytics insights.",
+    ja: "Jason Analytics の技術ブログ。データアナリストのキャリア転換、Python と SQL の実戦テクニック、AI活用トレンド、ビジネス分析の知見を共有します。"
   };
   return { 
     title: titles[lang as 'zh'|'en'|'ja'] || titles['zh'],

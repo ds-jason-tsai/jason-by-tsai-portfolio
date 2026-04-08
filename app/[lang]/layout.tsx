@@ -21,9 +21,9 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
   };
 
   const descriptions = {
-    zh: "傑森數據 Jason Tsai 的官方作品集。提供專業數據分析、AI 建模、MarTech 導入與自動化解決方案，協助企業與個人驅動數據價值。",
-    en: "Official portfolio of Jason Analytics (Jason Tsai). Expert in Data Analysis, AI Modeling, MarTech implementation, and automation solutions.",
-    ja: "Jason Analytics (ジェイソン・ツァイ) の公式ポートフォリオ。データ分析、AIモデリング、MarTech導入、自動化ソリューションを提供しています。"
+    zh: "傑森數據 Jason Analytics 的官方作品集。提供專業數據分析、商業分析、AI 建模、MarTech 導入、數據工程與自動化解決方案，協助企業驅動數據價值。",
+    en: "Official portfolio of Jason Analytics (Jason Tsai). Expert in Data Analysis, Business Analytics, AI Modeling, MarTech, Data Engineering, and automation solutions.",
+    ja: "Jason Analytics のポートフォリオ。データ分析、ビジネス分析、AIモデリング、MarTech導入、データエンジニアリング、自動化ソリューションを提供しています。"
   };
 
   return {

@@ -10,9 +10,9 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
     ja: "お問い合わせ・無料相談 | ジェイソン・アナリティクス" 
   };
   const descriptions = {
-    zh: "準備好釋放數據潛力了嗎？立即與傑森數據聯絡，預約 AI 建模、MarTech 導入、數據分析專案諮詢或企業培訓報價。",
-    en: "Ready to unlock your data potential? Contact Jason Analytics today for AI modeling, MarTech integration, data analysis projects, or corporate training quotes.",
-    ja: "データの力を最大限に引き出す準備はできましたか？AI活用、MarTech導入、データ分析プロジェクト、法人研修のお見積りなど、お気軽にお問い合わせください。"
+    zh: "歡迎聯絡傑森數據 Jason Analytics 諮詢數據分析、AI 建模或 MarTech 顧問合作項目。無論是數據自動化流程優化、Python/SQL 工程開發，還是數據分析師職涯導引，我將為您提供最專業的見解與客製化解決方案，立即填寫表單與我聯繫。",
+    en: "Contact Jason Analytics (Jason Tsai) for professional data analysis, AI modeling, or MarTech consulting inquiries. Whether it's enterprise automation, Python/SQL engineering, or data career coaching, I provide expert insights and customized solutions. Fill out the form and reach out today.",
+    ja: "Jason Analytics (ジェイソン・ツァイ) へのデータ分析、AIモデリング、MarTech顧問のご相談はこちら。業務自動化の最適化からPython/SQL開発、データアナリストとしてのキャリア相談まで、専門的な知見を提供します。お問い合わせフォームからお気軽にご連絡ください。"
   };
   return { 
     title: titles[lang as 'zh'|'en'|'ja'] || titles['zh'],

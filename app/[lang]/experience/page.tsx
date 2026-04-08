@@ -9,9 +9,9 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
     ja: "実務経験 | ジェイソン・アナリティクス - Python, SQL とデータエンジニアリングの実績" 
   };
   const descriptions = {
-    zh: "傑森數據 Jason Analytics 的職涯實績。具備 Python 自動化、SQL 數據建模與數據工程開發經驗。深耕 FinTech 金融科技、AI 建模與 MarTech 顧問领域。",
-    en: "Career highlights of Jason Analytics. Expertise in Python automation, SQL data modeling, and data engineering. Deep experience in FinTech, AI modeling, and MarTech consultancy.",
-    ja: "Jason Analytics のキャリア実績。Python自動化、SQLデータモデリング、データエンジニアリングの開発経験。FinTech、AIモデリング、MarTech分野に精通しています。"
+    zh: "深入了解傑森數據 Jason Analytics 的專業職涯實績。累積多年數據分析與數據工程開發經驗，深耕 FinTech 金融科技、AI 建模與 MarTech 顧問領域。具備豐富的大數據教學經驗與企業端專案實務，協助您掌握數據職涯脈動，立即點擊查看完整履歷。",
+    en: "Explore the professional career of Jason Analytics (Jason Tsai). Over a decade of experience in data analysis, data engineering, FinTech, and MarTech. Discover my journey from practitioner to consultant and instructor. Click to learn more about my career highlights.",
+    ja: "Jason Analytics (ジェイソン・ツァイ) の職歴と実績をご紹介します。データ分析、データエンジニアリング、FinTech、MarTechの分野で長年の経験があります。実務から教育まで、データ活用の最前線での歩みをご覧ください。詳細はこちら。"
   };
   return { 
     title: titles[lang as 'zh'|'en'|'ja'] || titles['zh'],

@@ -9,9 +9,9 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
     ja: "データダッシュボード | Tableau, Looker Studio & 可視化 | ジェイソン・アナリティクス" 
   };
   const descriptions = {
-    zh: "傑森數據 Jason Analytics 的商業儀表板作品集。展示 Tableau、Looker Studio 與 Power BI 數據視覺化實務，包含 AI 搜尋監測與社群輿情分析儀表板。",
-    en: "Business dashboard portfolio of Jason Analytics. Showcasing Tableau, Looker Studio, and Power BI visualization projects, including AI monitoring and social listening.",
-    ja: "Jason Analytics のビジネスダッシュボード集。Tableau、Looker Studio、Power BI によるデータ可視化、AI検索監視、SNS分析の実績を公開中。"
+    zh: "傑森數據 Jason Analytics 專業數據視覺化服務。精通 Tableau 與 Looker Studio 商業儀表板設計，將複雜數據轉化為直覺、具行動價值的決策圖表。涵蓋多種產業銷售監控、市場分析與營運效能分析案例。立即點擊查看互動式視覺化範例，打造您的數據競爭優勢。",
+    en: "Jason Analytics (Jason Tsai) provides expert data visualization services. We specialize in designing Tableau and Looker Studio business dashboards that turn complex data into intuitive, actionable insights. Explore our industry-specific visualization cases and see how we create data-driven advantages. View interactive dashboards now.",
+    ja: "Jason Analytics (ジェイソン・ツァイ) が提供する専門的なデータ視覚化サービス。TableauやLooker Studioを用いたビジネスダッシュボード設計に精通。複雑なデータを直感的な意思決定用チャートに変換し、販売監視や市場・運営分析の実績が豊富です。インタラクティブなダッシュボード例を今すぐご覧ください。"
   };
   return { 
     title: titles[lang as 'zh'|'en'|'ja'] || titles['zh'],

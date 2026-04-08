@@ -9,9 +9,9 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
     ja: "分析レポート・AI実務講座・自動化ソリューション | ジェイソン・アナリティクス" 
   };
   const descriptions = {
-    zh: "傑森數據 Jason Analytics 付費專區。提供 Google NotebookLM AI 實戰課程、專業數據分析報告、Salesforce 技術簡報框架與數據工程實務指南。立即獲取深度商業洞察。",
-    en: "Jason Analytics Premium. Expert AI practical courses (NotebookLM), data analysis reports, Salesforce pitch decks, and data engineering guides for deep business insights.",
-    ja: "Jason Analytics プレミアム。Google NotebookLM AI実務講座、データ分析レポート、Salesforce 技術プレゼン、データエンジニアリングガイドを公開中。"
+    zh: "傑森數據 Jason Analytics 數據專題深入報導。運用 NotebookLM 與先進 AI 技術，針對數據分析趨勢、AI 實戰應用與 MarTech 顧問洞察進行深度解析。提供專業且具行動導向的數據專案建議，協助個人與企業掌握未來數據趨勢，立即獲取最新專題報導並看更多專業建議。",
+    en: "In-depth data reports by Jason Analytics (Jason Tsai). We use NotebookLM and advanced AI to analyze data trends, AI applications, and MarTech insights. Our actionable professional reports help individuals and businesses master future data trends. Get the latest insights and expert advice now.",
+    ja: "Jason Analytics (ジェイソン・ツァイ) によるデータレポートの深掘り。NotebookLMと高度なAIを駆使し、データ分析トレンド、AI実務、MarTechの知見を徹底解説。個人や企業のデータ活用を支援する実践的なアドバイスを掲載。最新のデータレポートを今すぐチェック。"
   };
   return { 
     title: titles[lang as 'zh'|'en'|'ja'] || titles['zh'],

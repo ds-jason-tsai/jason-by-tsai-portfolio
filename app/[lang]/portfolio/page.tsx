@@ -9,9 +9,9 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
     ja: "分析プロジェクト集 | ジェイソン・アナリティクス - Tableau, AI と FinTech の実績" 
   };
   const descriptions = {
-    zh: "傑森數據 Jason Analytics 的精選數據分析作品集。涵蓋 FinTech 金融科技數據專案、Google NotebookLM AI 應用、Tableau 商業視覺化與數據工程實作案例。",
-    en: "Selected data analytics portfolio of Jason Analytics. Featuring FinTech data projects, Google NotebookLM AI apps, Tableau business visualization, and data engineering cases.",
-    ja: "Jason Analytics のデータ分析作品集。FinTech、Google NotebookLM AI活用、Tableau、データエンジニアリングの実積案例を公開しています。"
+    zh: "傑森數據 Jason Analytics 精選數據分析作品集。涵蓋 Python 數據建模、Tableau 商業視覺化儀表板、NotebookLM AI 應用與大型數據工程開發實績。展示多元產業的數據決策與自動化成果，協助您理解數據的實務應用價值，立即點擊探索並看更多專案詳情。",
+    en: "Showcasing the data analysis portfolio of Jason Analytics (Jason Tsai). Featured projects include Python data modeling, Tableau business dashboards, NotebookLM AI applications, and large-scale data engineering. Explore our evidence-based results across multiple industries and discover how data drives real-world value.",
+    ja: "Jason Analytics (ジェイソン・ツァイ) のデータ分析ポートフォリオです。Pythonデータモデリング、Tableauビジネスダッシュボード、NotebookLM AI活用、大規模データエンジニアリングの実績を掲載。データが実社会でどのような価値を生むか、実際のプロジェクトを通じてご覧ください。詳細はこちら。"
   };
   return { 
     title: titles[lang as 'zh'|'en'|'ja'] || titles['zh'],

@@ -10,9 +10,9 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
     ja: "データコンサルティング・n8n自動化・MarTech顧問 | ジェイソン・アナリティクス" 
   };
   const descriptions = {
-    zh: "傑森數據 Jason Analytics 提供 Python/SQL 數據工程、GA4/CDP MarTech 顧問與 n8n 流程自動化服務。透過專業商業分析，協助企業優化數據專案與數位營運效率。",
-    en: "Jason Analytics offers Python/SQL data engineering, GA4/CDP MarTech consulting, and n8n workflow automation. Expert business analytics to optimize data projects and operational efficiency.",
-    ja: "Jason Analytics は、Python/SQLデータエンジニアリング、GA4/CDP MarTech顧問、n8nワークフロー自動化を提供。ビジネス分析により、プロジェクトと運営効率を最適化します。"
+    zh: "傑森數據 Jason Analytics 提供專業 Python/SQL 數據工程開發、GA4/CDP MarTech 系統導入與 n8n 流程自動化等一站式數據顧問服務。透過深度商業分析與 AI 技術運用，協助企業優化專案效率並建立數位營運體系，提供高價值的數據驅動決策建議，歡迎立即洽詢各項合作項目。",
+    en: "Jason Analytics (Jason Tsai) provides specialized Python/SQL data engineering, GA4/CDP MarTech implementation, and n8n automation services. We leverage business analytics and AI to optimize enterprise operations and data project efficiency. Discover high-value data advisory solutions and contact us for your next project.",
+    ja: "Jason Analytics (ジェイソン・ツァイ) は、Python/SQLデータエンジニアリング、GA4/CDP MarTech導入、n8nオートメーションなどの専門サービスを提供します。ビジネス分析とAIを活用し、企業の業務効率化とデータ駆動型の意思決定を支援するワンストップのデータアドバイザリーを提供しています。"
   };
   return { 
     title: titles[lang as 'zh'|'en'|'ja'] || titles['zh'],

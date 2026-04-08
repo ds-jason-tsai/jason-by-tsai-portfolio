@@ -10,9 +10,9 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
     ja: "データ分析ブログ | ジェイソン・アナリティクス - Python, SQL と AI 実戦" 
   };
   const descriptions = {
-    zh: "傑森數據 Jason Analytics 的技術部落格。分享數據分析師轉職經驗、Python 與 SQL 技術實戰、AI 應用趨勢及跨產業商業分析觀點。",
-    en: "Technical blog of Jason Analytics. Sharing data analyst career transition tips, Python & SQL practicals, AI trends, and cross-industry business analytics insights.",
-    ja: "Jason Analytics の技術ブログ。データアナリストのキャリア転換、Python と SQL の実戦テクニック、AI活用トレンド、ビジネス分析の知見を共有します。"
+    zh: "傑森數據 Jason Analytics 技術部落格。提供專業數據分析師轉職導引、Python 與 SQL 實戰教學、AI 自動化技術與 MarTech 趨勢解析。累積豐富的實務心得與職涯建議，協助數據愛好者從基礎邁向專家職涯，立即訂閱並開始學習最新的數據分析與自動化技術。",
+    en: "The Jason Analytics technical blog. We provide expert advice on data analyst career transitions, practical Python and SQL tutorials, AI automation tips, and MarTech trend analysis. Gain valuable professional insights and career guidance to help you advance in the data industry. Start learning today.",
+    ja: "Jason Analytics (ジェイソン・ツァイ) の技術ブログです。データアナリストのキャリア転換ガイド、PythonやSQLの実践、AI自動化技術、MarTechのトレンド分析まで。実務経験に基づいた知見とキャリアアドバイスで、あなたのデータスキルの向上を支援します。今すぐ学びを始めましょう。"
   };
   return { 
     title: titles[lang as 'zh'|'en'|'ja'] || titles['zh'],

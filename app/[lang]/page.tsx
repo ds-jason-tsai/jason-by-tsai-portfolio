@@ -120,7 +120,7 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
             <div className="image-wrapper-glow">
               <Link href={`/${lang}/experience?utm_source=internal&utm_medium=image&utm_campaign=home_profile_image`} style={{ display: 'block', borderRadius: '50%' }}>
                 <Image 
-                  src="/images/Jason6.jpg" 
+                  src="/images/Jason6.webp" 
                   alt="Jason Tsai" 
                   width={380} 
                   height={380} 

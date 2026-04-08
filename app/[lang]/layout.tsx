@@ -147,7 +147,7 @@ export default async function RootLayout({
           <div className="desktop-only">
             <div className="nav-links" style={{ display: 'flex', alignItems: 'center', position: 'relative' }}>
               <NavLink lang={lang} href={`/${lang}`}>{dict.nav.home}</NavLink>
-              <NavLink lang={lang} href={`/${lang}/experience`}>{dict.nav.experience}</NavLink>
+              <NavLink lang={lang} href={`/${lang}/professional-experience`}>{dict.nav.experience}</NavLink>
               <NavLink lang={lang} href={`/${lang}/portfolio`}>{dict.nav.portfolio}</NavLink>
               <NavLink lang={lang} href={`/${lang}/dashboards`}>{dict.nav.dashboards || 'Dashboards'}</NavLink>
               <NavLink lang={lang} href={`/${lang}/services`}>{dict.nav.services}</NavLink>
@@ -214,7 +214,7 @@ export default async function RootLayout({
               <div style={{ display: 'flex', gap: '2rem', marginTop: '1.5rem' }} className="footer-links">
                  <Link href={`/${lang}/portfolio?utm_source=internal&utm_medium=button&utm_campaign=footer_nav_portfolio`} className="footer-link">Portfolio</Link>
                  <Link href={`/${lang}/services?utm_source=internal&utm_medium=button&utm_campaign=footer_nav_services`} className="footer-link">Services</Link>
-                 <Link href={`/${lang}/experience?utm_source=internal&utm_medium=button&utm_campaign=footer_nav_experience`} className="footer-link">Experience</Link>
+                 <Link href={`/${lang}/professional-experience?utm_source=internal&utm_medium=button&utm_campaign=footer_nav_experience`} className="footer-link">Experience</Link>
                  <Link href={`/${lang}/contact?utm_source=internal&utm_medium=button&utm_campaign=footer_nav_contact`} className="footer-link">Contact</Link>
               </div>
               <div style={{ borderTop: '1px solid #222', width: '100%', marginTop: '2rem', paddingTop: '2rem', fontSize: '0.85rem', color: '#555', letterSpacing: '1px' }}>

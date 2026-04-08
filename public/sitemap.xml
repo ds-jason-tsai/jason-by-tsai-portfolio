@@ -122,24 +122,24 @@
 
   <!-- Experience Page -->
   <url>
-    <loc>https://jason-by-tsai-portfolio.vercel.app/zh/experience</loc>
-    <xhtml:link rel="alternate" hreflang="zh" href="https://jason-by-tsai-portfolio.vercel.app/zh/experience" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://jason-by-tsai-portfolio.vercel.app/en/experience" />
-    <xhtml:link rel="alternate" hreflang="ja" href="https://jason-by-tsai-portfolio.vercel.app/ja/experience" />
+    <loc>https://jason-by-tsai-portfolio.vercel.app/zh/professional-experience</loc>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://jason-by-tsai-portfolio.vercel.app/zh/professional-experience" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://jason-by-tsai-portfolio.vercel.app/en/professional-experience" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://jason-by-tsai-portfolio.vercel.app/ja/professional-experience" />
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://jason-by-tsai-portfolio.vercel.app/en/experience</loc>
-    <xhtml:link rel="alternate" hreflang="zh" href="https://jason-by-tsai-portfolio.vercel.app/zh/experience" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://jason-by-tsai-portfolio.vercel.app/en/experience" />
-    <xhtml:link rel="alternate" hreflang="ja" href="https://jason-by-tsai-portfolio.vercel.app/ja/experience" />
+    <loc>https://jason-by-tsai-portfolio.vercel.app/en/professional-experience</loc>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://jason-by-tsai-portfolio.vercel.app/zh/professional-experience" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://jason-by-tsai-portfolio.vercel.app/en/professional-experience" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://jason-by-tsai-portfolio.vercel.app/ja/professional-experience" />
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://jason-by-tsai-portfolio.vercel.app/ja/experience</loc>
-    <xhtml:link rel="alternate" hreflang="zh" href="https://jason-by-tsai-portfolio.vercel.app/zh/experience" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://jason-by-tsai-portfolio.vercel.app/en/experience" />
-    <xhtml:link rel="alternate" hreflang="ja" href="https://jason-by-tsai-portfolio.vercel.app/ja/experience" />
+    <loc>https://jason-by-tsai-portfolio.vercel.app/ja/professional-experience</loc>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://jason-by-tsai-portfolio.vercel.app/zh/professional-experience" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://jason-by-tsai-portfolio.vercel.app/en/professional-experience" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://jason-by-tsai-portfolio.vercel.app/ja/professional-experience" />
     <priority>0.8</priority>
   </url>
 

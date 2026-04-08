@@ -31,7 +31,7 @@ export default function MobileNav({
 
   const navLinks = [
     { href: `/${lang}`, label: dict.nav.home },
-    { href: `/${lang}/experience`, label: dict.nav.experience },
+    { href: `/${lang}/professional-experience`, label: dict.nav.experience },
     { href: `/${lang}/portfolio`, label: dict.nav.portfolio },
     { href: `/${lang}/dashboards`, label: dict.nav.dashboards || 'Dashboards' },
     { href: `/${lang}/services`, label: dict.nav.services },

@@ -180,7 +180,7 @@ export default function ReportsClient({ lang }: { lang: 'zh' | 'en' | 'ja' }) {
       categories: { all: "すべて", video: "動画講座", report: "ケーススタディ", data: "データセット" },
       badge: "獨占限定",
       chaptersLabel: "チャプターリスト",
-      buyBtn: "💳 今すぐ購入",
+      buyBtn: "💳 今續き購入",
       downloadLabel: "購入後に即座にアクセス可能",
     },
   };
@@ -293,7 +293,7 @@ export default function ReportsClient({ lang }: { lang: 'zh' | 'en' | 'ja' }) {
               transition: isTransitioning ? 'transform 0.45s cubic-bezier(0.23, 1, 0.32, 1)' : 'none',
               transform: `translateX(calc(-${currentIndex} * (100% / var(--items-per-row))))`,
               gap: 'var(--gap)',
-              padding: '1rem 0 3rem', // Removed horizontal padding to fix alignment
+              padding: '1rem 0 3rem',
               width: '100%',
             }}
           >
@@ -308,7 +308,7 @@ export default function ReportsClient({ lang }: { lang: 'zh' | 'en' | 'ja' }) {
                   animation: 'slideUp 0.5s ease forwards',
                   opacity: 0,
                   height: '840px',
-                  maxWidth: '430px', // Exact match to Portfolio card max width
+                  maxWidth: 'none', // Removed max-width to allow perfect fill for exactly 2 items
                 }}
               >
                 {/* 1. TOP - Fixed Image Container */}

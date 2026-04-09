@@ -5,8 +5,8 @@ title:
   ja: "初めての技術投稿：Markdownで記事を管理する"
 description:
   zh: "這是一篇範例文章，展示如何透過 Markdown 語法來編寫與管理你的部落格區塊。所有的標題、段落跟重點都能輕鬆呈現！"
-  en: "This is a sample article showing how to write and manage your blog section using Markdown syntax."
-  ja: "これは、Markdown構文を使用してブログセクションを作成および管理する方法を示すサンプル記事です。"
+  en: "This is a sample article demonstrating how to write and manage your blog section using Markdown syntax. It covers essential formatting such as headings, lists, quotes, and code blocks, making it easy for you to focus on content creation while maintaining a clean, technical structure."
+  ja: "これは Markdown 構文を使用してブログ記事を編集および管理するためのサンプル記事です。見出し、段落、リスト、引用、コードブロックなど、技術ブログに欠かせない主要な要素をどのように記述し、サイトに反映させるかを初心者の方にも分かりやすく解説しています。記事を簡単に追加する方法についても紹介しています。"
 date: "2026-04-05"
 tags:
   zh: ["#技術教學", "#部落格", "#Markdown"]
@@ -14,7 +14,7 @@ tags:
   ja: ["#技術チュートリアル", "#ブログ", "#Markdown"]
 ---
 
-# 歡迎來到你的全新文章專區！
+## 歡迎來到你的全新文章專區！
 
 這是一個示範如何使用 **Markdown** 標記語言來撰寫內容的範例文章。Markdown 被廣泛應用於如 GitHub, Notion 或是各大技術部落格中，因為它讓你可以專心於「寫作」，而不是排版。
 

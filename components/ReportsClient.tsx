@@ -105,7 +105,7 @@ export default function ReportsClient({ lang }: { lang: 'zh' | 'en' | 'ja' }) {
 
   return (
     <section className="portfolio fade-in" style={{ padding: '0 2rem' }}>
-      <h2 className="section-title">{t.title}</h2>
+      <h1 className="section-title">{t.title}</h1>
       <p style={{ textAlign: 'center', marginBottom: '3rem', color: 'var(--text-secondary)', maxWidth: '680px', margin: '0 auto 3rem', lineHeight: '1.8' }}>
         {t.desc}
       </p>

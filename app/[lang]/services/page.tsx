@@ -6,12 +6,12 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
   const lang = (await params).lang;
   const titles = { 
     zh: "數據分析諮詢、n8n 自動化與 MarTech 顧問 | 傑森數據", 
-    en: "Consulting Services | n8n Automation, SQL & MarTech | Jason Analytics", 
+    en: "Services | Jason Analytics - n8n Automation & MarTech", 
     ja: "データコンサルティング・n8n自動化・MarTech顧問 | ジェイソン・アナリティクス" 
   };
   const descriptions = {
     zh: "傑森數據 Jason Analytics 提供全方位的數據解決方案。包含專業的 Python 與 SQL 數據工程開發、GA4 與 CDP 客戶數據平台等 MarTech 系統導入，以及高效的 n8n 業務流程自動化顧問服務。透過深度商業分析與 AI 技術的彈性運用，協助企業從零建立數位營運體系並優化專案決策效率。提供具備高度商業價值的數據驅動建議，歡迎立即洽詢各類合作項目。",
-    en: "Jason Analytics offers comprehensive data solutions: Python/SQL data engineering, GA4/CDP MarTech implementation, and n8n workflow automation consulting. We leverage business analytics and AI to help organizations build digital operating systems and optimize decision-making. Contact us for high-value data-driven strategy and consulting services.",
+    en: "Jason Analytics offers data solutions: Python/SQL engineering, MarTech, and n8n automation. We use AI to help organizations optimize decision-making. Contact us for expert data-driven strategy and consulting services.",
     ja: "Jason Analytics (ジェイソン・ツァイ) は、包括的なデータソリューションを提供します。Python/SQL データエンジニアリング、GA4/CDP MarTech システム導入、n8n 業務自動化コンサルティングなどを通じて、企業のデジタルオペレーションを最適化します。ビジネス分析と AI 技術を駆使し、意思決定の効率化とデータ駆動型の成長戦略をワンストップで支援します。各プロジェクトのご相談はこちらから。"
   };
   return { 
@@ -125,7 +125,7 @@ export default async function Services({ params }: { params: Promise<{ lang: str
           }
         }
       `}} />
-      <h2 className="section-title">{t.title}</h2>
+      <h1 className="section-title">{t.title}</h1>
       <p style={{ textAlign: 'center', marginBottom: '3rem', color: 'var(--text-secondary)' }}>{t.desc}</p>
       <div className="services-grid">
         {t.services.map((svc, idx) => {

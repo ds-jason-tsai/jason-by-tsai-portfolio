@@ -1,7 +1,7 @@
 ---
 title:
   zh: "第一篇技術分享：使用 Markdown 管理你的文章"
-  en: "First Post: Managing Articles with Markdown"
+  en: "First Post: Managing Articles via Markdown"
   ja: "初めての技術投稿：Markdownで記事を管理する"
 description:
   zh: "這是一篇專業的範例文章，旨在向您展示如何透過 Markdown 語法來編寫與管理個人部落格內容。本文詳細介紹了標題、段落、列表、引用以及程式碼塊等技術標籤的撰寫方式，並提供完整的新增文章流程指南。透過 Markdown，您可以更專注於產出高品質的數據分析觀點，同時維持乾淨、一致且具備專業感的網頁排版結構。"

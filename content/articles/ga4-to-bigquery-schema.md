@@ -7,7 +7,7 @@ description:
   zh: "當資料從 GA4 被匯出至 BigQuery 後，本文說明 GA4 資料表各欄位的定義，並將其分為「事件」和「使用者」兩大主軸，幫助你理解資料樣態。"
   en: "This article explains the definitions of various fields in the GA4 data table, categorizing them into 'Events' and 'Users' to help you better structure exported BQ tracking."
   ja: "GA4からBigQueryにデータがエクスポートされた後に行うデータクレンジングについて、イベントとユーザーの二大軸で理解を深めます。"
-date: "2023-11-20"
+date: "2023-11-07"
 tags:
   zh: ["#GA4", "#BigQuery", "#資料分析"]
   en: ["#GA4", "#BigQuery", "#DataAnalytics"]

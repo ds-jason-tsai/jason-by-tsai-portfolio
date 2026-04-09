@@ -7,7 +7,7 @@ description:
   zh: "與通用 GA 不同，GA4 的分析結構以「事件」為基礎，本文介紹 GA4 的四種類型事件（自動、加強型、建議與自訂），幫助各界 GA 使用者交流心得。"
   en: "Unlike Universal GA, GA4 is based on 'events'. This article explains the 4 core event types (Automatic, Enhanced, Recommended, and Custom) to help you master digital footprint tracking in GA4."
   ja: "GA4の分析構造は「イベント」に基づいています。本記事では、GA4の4つのコアなイベントの種類を解説します。"
-date: "2023-10-15"
+date: "2023-10-10"
 tags:
   zh: ["#GA4", "#數據分析", "#數位軌跡"]
   en: ["#GA4", "#DataAnalytics", "#DigitalFootprint"]

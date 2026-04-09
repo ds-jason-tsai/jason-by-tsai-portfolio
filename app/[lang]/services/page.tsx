@@ -5,7 +5,7 @@ import type { Metadata } from 'next';
 export async function generateMetadata({ params }: { params: Promise<{ lang: string }> }): Promise<Metadata> {
   const lang = (await params).lang;
   const titles = { 
-    zh: "數據分析諮詢、n8n 自動化與 MarTech 顧問 | 傑森數據", 
+    zh: "數據分析諮詢、n8n 自動化與 MarTech 顧問 (Services) | 傑森數據 Jason Analytics", 
     en: "Services | Jason Analytics - n8n Automation & MarTech", 
     ja: "データコンサルティング (Services) ・ n8n自動化 ・ MarTech顧問 | ジェイソン・アナリティクス" 
   };
@@ -76,7 +76,7 @@ export default async function Services({ params }: { params: Promise<{ lang: str
   
   const content = {
     zh: {
-      title: "專業服務",
+      title: "專業服務 (Services)",
       desc: "結合商業思維與深厚技術底蘊，為您提供專屬的數據驅動解決方案。",
       cta: "👉 立即預約諮詢",
       services: [

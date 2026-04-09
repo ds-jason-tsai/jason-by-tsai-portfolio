@@ -43,13 +43,13 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
     },
     icons: {
       icon: [
-        { url: '/icon.png', sizes: '32x32', type: 'image/png' },
-        { url: '/icon.png', sizes: '192x192', type: 'image/png' },
-        { url: '/icon.png', sizes: '512x512', type: 'image/png' },
+        { url: '/official-brand-logo.png', sizes: '32x32', type: 'image/png' },
+        { url: '/official-brand-logo.png', sizes: '192x192', type: 'image/png' },
+        { url: '/official-brand-logo.png', sizes: '512x512', type: 'image/png' },
       ],
-      shortcut: '/icon.png',
+      shortcut: '/official-brand-logo.png',
       apple: [
-        { url: '/icon.png', sizes: '180x180', type: 'image/png' },
+        { url: '/official-brand-logo.png', sizes: '180x180', type: 'image/png' },
       ],
     },
   };
@@ -93,6 +93,7 @@ export default async function RootLayout({
         <link rel="dns-prefetch" href="https://www.youtube.com" />
         <link rel="dns-prefetch" href="https://www.facebook.com" />
         <link rel="dns-prefetch" href="https://www.instagram.com" />
+        <link rel="icon" href="/official-brand-logo.png" sizes="any" />
 
         <style dangerouslySetInnerHTML={{ __html: `
           .mobile-drawer {
@@ -154,7 +155,7 @@ export default async function RootLayout({
         <nav className="nav">
           <div className="nav-logo">
             <Link href={`/${lang}`} style={{ textDecoration: 'none', borderBottom: 'none', display: 'flex', alignItems: 'center', gap: '0.8rem' }}>
-              <Image src="/icon.png" alt="Logo" width={45} height={45} style={{ borderRadius: '8px' }} />
+              <Image src="/official-brand-logo.png" alt="Logo" width={45} height={45} style={{ borderRadius: '8px' }} />
               <span>{dict.brand?.logo || '傑森數據 Jason Analytics'}</span>
             </Link>
           </div>

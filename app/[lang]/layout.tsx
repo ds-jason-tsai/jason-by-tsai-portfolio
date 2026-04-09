@@ -42,9 +42,15 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
       },
     },
     icons: {
-      icon: '/icon.png',
+      icon: [
+        { url: '/icon.png', sizes: '32x32', type: 'image/png' },
+        { url: '/icon.png', sizes: '192x192', type: 'image/png' },
+        { url: '/icon.png', sizes: '512x512', type: 'image/png' },
+      ],
       shortcut: '/icon.png',
-      apple: '/icon.png',
+      apple: [
+        { url: '/icon.png', sizes: '180x180', type: 'image/png' },
+      ],
     },
   };
 }
@@ -56,6 +62,7 @@ export async function generateStaticParams() {
 import NavLink from './components/NavLink';
 import MobileNav from './components/MobileNav';
 import ShareButton from './components/ShareButton';
+import Image from 'next/image';
 
 export default async function RootLayout({
   children,
@@ -71,7 +78,7 @@ export default async function RootLayout({
   const descriptions = {
     zh: "傑森數據 Jason Analytics 的官方作品集，由數據專家 Jason Tsai (蔡傑森) 創立。提供全方位專業數據分析、商業分析、AI 機器學習建模、MarTech 數位行銷科技導入、數據工程優化與自動化解決方案。協助企業從原始數據中挖掘商業價值，透過數據驅動決策提升競爭力與營運效率。",
     en: "Official portfolio of Jason Analytics, led by data expert Jason Tsai. Providing comprehensive solutions in Data Analysis, AI/ML Modeling, MarTech, and Data Engineering to help businesses unlock value through data-driven insights.",
-    ja: "データ専門家 Jason Tsai が率いる Jason Analytics の公式ポートフォリオ。高度なデータ分析、ビジネスインテリジェンス、AI機械学習モデリング、MarTech 導入、データエンジニアリング、自動化ソリューションを包括的に提供します。企業のデータを価値あるインサイトに変え、意思決定を通じて成長を支援します。"
+    ja: "データ専門家 Jason Tsai が率いる Jason Analytics の公式ポートフォリオ。高度な數據分析、ビジネスインテリジェンス、AI機械学習モデリング、MarTech 導入、データエンジニアリング、自動化ソリューションを包括的に提供します。企業のデータを価値あるインサイトに変え、意思決定を通じて成長を支援します。"
   };
 
   return (
@@ -146,7 +153,10 @@ export default async function RootLayout({
         </Script>
         <nav className="nav">
           <div className="nav-logo">
-            <Link href={`/${lang}`} style={{ textDecoration: 'none', borderBottom: 'none' }}>{dict.brand?.logo || 'Jason Tsai'}</Link>
+            <Link href={`/${lang}`} style={{ textDecoration: 'none', borderBottom: 'none', display: 'flex', alignItems: 'center', gap: '0.8rem' }}>
+              <Image src="/icon.png" alt="Logo" width={45} height={45} style={{ borderRadius: '8px' }} />
+              <span>{dict.brand?.logo || '傑森數據 Jason Analytics'}</span>
+            </Link>
           </div>
           
           <div className="desktop-only">

@@ -267,23 +267,20 @@ export default function ReportsClient({ lang }: { lang: 'zh' | 'en' | 'ja' }) {
         ))}
       </div>
 
-      <div className="reports-outer-container" style={{ position: 'relative', width: '100%', maxWidth: '1400px', margin: '0 auto' }}>
+      {/* Inner Container: Correct Max-Width to match Portfolio (1000px content area) */}
+      <div className="reports-inner-wrapper" style={{ position: 'relative', width: '100%', maxWidth: '1000px', margin: '0 auto' }}>
         
-        {/* Mobile-Only Navigation (Centered Above) */}
+        {/* Mobile-Only Navigation */}
         <div className="mobile-only-nav" style={{ display: 'none', justifyContent: 'center', gap: '1.5rem', marginBottom: '2rem' }}>
           <button onClick={handlePrev} className="carousel-nav-btn-mobile">‹</button>
           <button onClick={handleNext} className="carousel-nav-btn-mobile">›</button>
         </div>
 
-        {/* Desktop Carousel Controls */}
+        {/* Desktop Carousel Controls - Offset to -60px to match Portfolio */}
         {totalOriginal > 1 && (
           <>
-            <button className="carousel-control prev" onClick={handlePrev} aria-label="Previous">
-              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
-            </button>
-            <button className="carousel-control next" onClick={handleNext} aria-label="Next">
-              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><path d="M9 18l6-6-6-6"/></svg>
-            </button>
+            <button className="carousel-control-standard prev" onClick={handlePrev} aria-label="Previous">‹</button>
+            <button className="carousel-control-standard next" onClick={handleNext} aria-label="Next">›</button>
           </>
         )}
 
@@ -293,10 +290,10 @@ export default function ReportsClient({ lang }: { lang: 'zh' | 'en' | 'ja' }) {
             onTransitionEnd={onTransitionEnd}
             style={{ 
               display: 'flex', 
-              transition: isTransitioning ? 'transform 0.6s cubic-bezier(0.23, 1, 0.32, 1)' : 'none',
+              transition: isTransitioning ? 'transform 0.45s cubic-bezier(0.23, 1, 0.32, 1)' : 'none',
               transform: `translateX(calc(-${currentIndex} * (100% / var(--items-per-row))))`,
               gap: 'var(--gap)',
-              padding: '1rem 1.5rem 3rem',
+              padding: '1rem 0 3rem', // Removed horizontal padding to fix alignment
               width: '100%',
             }}
           >
@@ -311,6 +308,7 @@ export default function ReportsClient({ lang }: { lang: 'zh' | 'en' | 'ja' }) {
                   animation: 'slideUp 0.5s ease forwards',
                   opacity: 0,
                   height: '840px',
+                  maxWidth: '430px', // Exact match to Portfolio card max width
                 }}
               >
                 {/* 1. TOP - Fixed Image Container */}
@@ -322,7 +320,6 @@ export default function ReportsClient({ lang }: { lang: 'zh' | 'en' | 'ja' }) {
                     style={{ objectFit: 'contain', objectPosition: 'center', padding: '1rem' }}
                     className="report-img"
                   />
-                  {/* Re-designed Pop Badge */}
                   <div className="premium-badge-fixed">{t.badge}</div>
                 </div>
 
@@ -360,7 +357,6 @@ export default function ReportsClient({ lang }: { lang: 'zh' | 'en' | 'ja' }) {
                     </div>
                   )}
 
-                  {/* Tags */}
                   <div className="tags-container" style={{ marginBottom: '1rem' }}>
                     {report.tags.map((tag, i) => (
                       <span key={i} className="tag" style={{ border: '1px solid rgba(255,255,255,0.1)', background: 'rgba(255,255,255,0.03)', padding: '0.2rem 0.6rem', fontSize: '0.75rem', borderRadius: '4px' }}>{tag}</span>
@@ -413,7 +409,7 @@ export default function ReportsClient({ lang }: { lang: 'zh' | 'en' | 'ja' }) {
       <style dangerouslySetInnerHTML={{__html: `
         :root {
           --items-per-row: 2;
-          --gap: 2.5rem;
+          --gap: 2rem;
         }
         @keyframes slideUp {
           from { opacity: 0; transform: translateY(30px); }
@@ -454,22 +450,21 @@ export default function ReportsClient({ lang }: { lang: 'zh' | 'en' | 'ja' }) {
           animation: glowPulse 2s infinite ease-in-out;
         }
 
-        .carousel-control {
-          position: absolute; top: 35%; transform: translateY(-50%);
-          width: 74px; height: 74px; border-radius: 50%;
-          background: rgba(10, 10, 15, 0.9); border: 2px solid rgba(255,255,255,0.1);
-          color: white; display: flex; align-items: center; justify-content: center;
-          cursor: pointer; z-index: 100; backdrop-filter: blur(16px);
+        /* High-Impact Carousel Controls - Exact Portfoilo Match */
+        .carousel-control-standard {
+          position: absolute; top: 40%; transform: translateY(-50%);
+          width: 60px; height: 60px; border-radius: 50%;
+          background: rgba(0, 0, 0, 0.7); border: 1px solid rgba(0, 242, 254, 0.3);
+          color: #fff; font-size: 2.2rem; display: flex; align-items: center; justify-content: center;
+          cursor: pointer; z-index: 100;
           transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-          box-shadow: 0 15px 40px rgba(0,0,0,0.8);
         }
-        .carousel-control:hover { 
+        .carousel-control-standard:hover { 
           background: var(--accent-color); color: #000; 
-          border-color: var(--accent-color); 
-          transform: translateY(-50%) scale(1.1);
+          box-shadow: 0 0 25px rgba(0, 242, 254, 0.6);
         }
-        .carousel-control.prev { left: -37px; }
-        .carousel-control.next { right: -37px; }
+        .carousel-control-standard.prev { left: -60px; }
+        .carousel-control-standard.next { right: -60px; }
         
         .price-action-vertical {
           background: rgba(255, 255, 255, 0.04);
@@ -478,18 +473,23 @@ export default function ReportsClient({ lang }: { lang: 'zh' | 'en' | 'ja' }) {
         }
         .price-val-big { font-size: 2rem; font-weight: 900; color: var(--accent-color); text-align: center; }
 
+        @media (max-width: 1120px) {
+           .carousel-control-standard.prev { left: -30px; }
+           .carousel-control-standard.next { right: -30px; }
+        }
+
         @media (max-width: 1024px) {
           :root { --items-per-row: 2; --gap: 2rem; }
           .report-card { height: 800px !important; }
-          .carousel-control { width: 64px; height: 64px; }
-          .carousel-control.prev { left: -20px; }
-          .carousel-control.next { right: -20px; }
+          .carousel-control-standard { width: 54px; height: 54px; font-size: 1.8rem; }
+          .carousel-control-standard.prev { left: -10px; }
+          .carousel-control-standard.next { right: -10px; }
         }
         
         @media (max-width: 768px) {
           :root { --items-per-row: 1; --gap: 0rem; }
           .premium-section { padding: 0 0.5rem !important; }
-          .reports-outer-container { padding: 0 !important; }
+          .reports-inner-wrapper { padding: 0 !important; width: 100% !important; max-width: none !important; }
           .reports-container { padding: 0 !important; }
           .reports-track { padding: 1rem 0 3rem !important; }
           
@@ -500,10 +500,11 @@ export default function ReportsClient({ lang }: { lang: 'zh' | 'en' | 'ja' }) {
             border-left: none !important; 
             border-right: none !important;
             width: 100vw !important;
+            max-width: none !important;
             margin: 0 !important;
           }
           
-          .carousel-control { display: none; }
+          .carousel-control-standard { display: none; }
           .mobile-only-nav { display: flex !important; }
           
           .carousel-nav-btn-mobile {

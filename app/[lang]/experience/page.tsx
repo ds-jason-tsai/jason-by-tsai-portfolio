@@ -29,7 +29,7 @@ export default async function Experience({ params }: { params: Promise<{ lang: s
     zh: { title: "完整經歷", 
           desc: "從技術實作到高階戰略規劃，持續創造數據價值。",
           certsTitle: "專業證照",
-          viewCert: "顯示證讓",
+          viewCert: "顯示證照",
           issuedBy: "頒發單位",
           exp: [
             { 
@@ -56,15 +56,15 @@ export default async function Experience({ params }: { params: Promise<{ lang: s
               title: "ChatGPT 教育者基礎認證",
               issuer: "OpenAI",
               date: "2025年12月",
-              logo: "/assets/icons/openai_logo.jfif",
+              logo: "/assets/icons/openai_logo.png",
               url: "https://www.credly.com/badges/95a39d40-346f-4e1a-9090-f8aaf729a1b0/linked_in_profile"
             },
             {
               title: "Gemini 認證教育者",
               issuer: "Google",
-              date: "2025年9月 - 2028年9月",
+              date: "2025年9月",
               id: "160793457",
-              logo: "/assets/icons/google_logo.jfif",
+              logo: "/assets/icons/google_logo.png",
               url: "https://edu.google.accredible.com/344a67ad-adf1-4366-9d3e-337dc26e3ff5#acc.QnLCxWVD"
             }
           ]
@@ -99,15 +99,15 @@ export default async function Experience({ params }: { params: Promise<{ lang: s
               title: "ChatGPT Foundations for Teachers",
               issuer: "OpenAI",
               date: "Dec 2025",
-              logo: "/assets/icons/openai_logo.jfif",
+              logo: "/assets/icons/openai_logo.png",
               url: "https://www.credly.com/badges/95a39d40-346f-4e1a-9090-f8aaf729a1b0/linked_in_profile"
             },
             {
               title: "Gemini Certified Educator",
               issuer: "Google",
-              date: "Sep 2025 - Sep 2028",
+              date: "Sep 2025",
               id: "160793457",
-              logo: "/assets/icons/google_logo.jfif",
+              logo: "/assets/icons/google_logo.png",
               url: "https://edu.google.accredible.com/344a67ad-adf1-4366-9d3e-337dc26e3ff5#acc.QnLCxWVD"
             }
           ]
@@ -142,15 +142,15 @@ export default async function Experience({ params }: { params: Promise<{ lang: s
               title: "ChatGPT 教育者向け基礎認證",
               issuer: "OpenAI",
               date: "2025年12月",
-              logo: "/assets/icons/openai_logo.jfif",
+              logo: "/assets/icons/openai_logo.png",
               url: "https://www.credly.com/badges/95a39d40-346f-4e1a-9090-f8aaf729a1b0/linked_in_profile"
             },
             {
               title: "Gemini 認定教育者",
               issuer: "Google",
-              date: "2025年9月 - 2028年9月",
+              date: "2025年9月",
               id: "160793457",
-              logo: "/assets/icons/google_logo.jfif",
+              logo: "/assets/icons/google_logo.png",
               url: "https://edu.google.accredible.com/344a67ad-adf1-4366-9d3e-337dc26e3ff5#acc.QnLCxWVD"
             }
           ]

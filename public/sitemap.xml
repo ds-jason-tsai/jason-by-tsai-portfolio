@@ -188,4 +188,73 @@
     <xhtml:link rel="alternate" hreflang="ja" href="https://jason-by-tsai-portfolio.vercel.app/ja/contact" />
     <priority>0.5</priority>
   </url>
+  <!-- Dynamic Article Pages -->
+  <!-- ga4-to-bigquery-schema -->
+  <url>
+    <loc>https://jason-by-tsai-portfolio.vercel.app/zh/articles/ga4-to-bigquery-schema</loc>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://jason-by-tsai-portfolio.vercel.app/zh/articles/ga4-to-bigquery-schema" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://jason-by-tsai-portfolio.vercel.app/en/articles/ga4-to-bigquery-schema" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://jason-by-tsai-portfolio.vercel.app/ja/articles/ga4-to-bigquery-schema" />
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://jason-by-tsai-portfolio.vercel.app/en/articles/ga4-to-bigquery-schema</loc>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://jason-by-tsai-portfolio.vercel.app/zh/articles/ga4-to-bigquery-schema" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://jason-by-tsai-portfolio.vercel.app/en/articles/ga4-to-bigquery-schema" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://jason-by-tsai-portfolio.vercel.app/ja/articles/ga4-to-bigquery-schema" />
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://jason-by-tsai-portfolio.vercel.app/ja/articles/ga4-to-bigquery-schema</loc>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://jason-by-tsai-portfolio.vercel.app/zh/articles/ga4-to-bigquery-schema" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://jason-by-tsai-portfolio.vercel.app/en/articles/ga4-to-bigquery-schema" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://jason-by-tsai-portfolio.vercel.app/ja/articles/ga4-to-bigquery-schema" />
+    <priority>0.7</priority>
+  </url>
+
+  <!-- sample-article -->
+  <url>
+    <loc>https://jason-by-tsai-portfolio.vercel.app/zh/articles/sample-article</loc>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://jason-by-tsai-portfolio.vercel.app/zh/articles/sample-article" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://jason-by-tsai-portfolio.vercel.app/en/articles/sample-article" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://jason-by-tsai-portfolio.vercel.app/ja/articles/sample-article" />
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://jason-by-tsai-portfolio.vercel.app/en/articles/sample-article</loc>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://jason-by-tsai-portfolio.vercel.app/zh/articles/sample-article" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://jason-by-tsai-portfolio.vercel.app/en/articles/sample-article" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://jason-by-tsai-portfolio.vercel.app/ja/articles/sample-article" />
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://jason-by-tsai-portfolio.vercel.app/ja/articles/sample-article</loc>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://jason-by-tsai-portfolio.vercel.app/zh/articles/sample-article" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://jason-by-tsai-portfolio.vercel.app/en/articles/sample-article" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://jason-by-tsai-portfolio.vercel.app/ja/articles/sample-article" />
+    <priority>0.7</priority>
+  </url>
+
+  <!-- what-is-ga4-event -->
+  <url>
+    <loc>https://jason-by-tsai-portfolio.vercel.app/zh/articles/what-is-ga4-event</loc>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://jason-by-tsai-portfolio.vercel.app/zh/articles/what-is-ga4-event" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://jason-by-tsai-portfolio.vercel.app/en/articles/what-is-ga4-event" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://jason-by-tsai-portfolio.vercel.app/ja/articles/what-is-ga4-event" />
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://jason-by-tsai-portfolio.vercel.app/en/articles/what-is-ga4-event</loc>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://jason-by-tsai-portfolio.vercel.app/zh/articles/what-is-ga4-event" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://jason-by-tsai-portfolio.vercel.app/en/articles/what-is-ga4-event" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://jason-by-tsai-portfolio.vercel.app/ja/articles/what-is-ga4-event" />
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://jason-by-tsai-portfolio.vercel.app/ja/articles/what-is-ga4-event</loc>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://jason-by-tsai-portfolio.vercel.app/zh/articles/what-is-ga4-event" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://jason-by-tsai-portfolio.vercel.app/en/articles/what-is-ga4-event" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://jason-by-tsai-portfolio.vercel.app/ja/articles/what-is-ga4-event" />
+    <priority>0.7</priority>
+  </url>
 </urlset>

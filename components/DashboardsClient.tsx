@@ -73,7 +73,7 @@ export default function DashboardsClient({ lang }: { lang: 'zh' | 'en' | 'ja' })
       next: "Next"
     },
     ja: {
-      mainTitle: "データダッシュボード",
+      mainTitle: "データダッシュボード (Dashboards)",
       desc: "生のデータを直感的な動的ダッシュボードに変換します。視覚的なインターフェースを通じて、データの操作、フィルタリング、深いビジネス戦略の発見が可能です。",
       note: "※ PCブラウザでの閲覧を推奨します。",
       backToHome: "ホームに戻る",

@@ -28,7 +28,7 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
   const desc = articleData.description ? (articleData.description[lang as 'zh'|'en'|'ja'] || articleData.description['zh']) : "";
   
   return { 
-    title: `${title} | 傑森數據 Jason Analytics`,
+    title: `${title} | Jason Analytics`,
     description: desc || `${title} - 數據分析、AI 與 MarTech 專踐。`,
     alternates: {
       canonical: `https://jason-by-tsai-portfolio.vercel.app/${lang}/articles/${id}`,

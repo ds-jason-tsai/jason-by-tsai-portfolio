@@ -29,7 +29,10 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
   
   return { 
     title: `${title} | 傑森數據 Jason Analytics`,
-    description: desc || `${title} - 深入探討數據分析、AI 機器學習建模與 MarTech 行銷科技實務。傑森數據 Jason Analytics 分享最前線的技術心得與商業洞察，協助您掌握數據驅動的關鍵競爭力。專業解析數據視覺化、數據工程與自動化解決方案。`,
+    description: desc || `${title} - 數據分析、AI 與 MarTech 專踐。`,
+    alternates: {
+      canonical: `https://jason-by-tsai-portfolio.vercel.app/${lang}/articles/${id}`,
+    }
   };
 }
 

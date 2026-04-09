@@ -192,7 +192,6 @@ export default function ReportsClient({ lang }: { lang: 'zh' | 'en' | 'ja' }) {
     : reports.filter(r => r.category === activeCategory);
 
   const totalOriginal = filteredReports.length;
-  // Infinite loop prep: [Last, ...Original, First]
   const displayItems = totalOriginal > 1 
     ? [filteredReports[totalOriginal - 1], ...filteredReports, filteredReports[0]] 
     : filteredReports;
@@ -230,23 +229,19 @@ export default function ReportsClient({ lang }: { lang: 'zh' | 'en' | 'ja' }) {
     }
   };
 
-  // Map currentIndex back to 0-based dot index
-  // currentIndex 1 is dot 0, currentIndex 2 is dot 1...
-  // currentIndex 0 (clone of 5) is dot 5
-  // currentIndex 7 (clone of 0) is dot 0
   const activeDotIndex = totalOriginal > 1 
     ? ((currentIndex - 1 + totalOriginal) % totalOriginal) 
     : 0;
 
   return (
-    <section className="portfolio fade-in" style={{ padding: '0 2rem' }}>
+    <section className="portfolio premium-section fade-in" style={{ padding: '0 2rem' }}>
       <h1 className="section-title">{t.title}</h1>
       <p style={{ textAlign: 'center', marginBottom: '3rem', color: 'var(--text-secondary)', maxWidth: '680px', margin: '0 auto 3rem', lineHeight: '1.8' }}>
         {t.desc}
       </p>
 
       {/* Category Tabs */}
-      <div style={{ display: 'flex', justifyContent: 'center', gap: '1rem', marginBottom: '4rem', flexWrap: 'wrap' }}>
+      <div style={{ display: 'flex', justifyContent: 'center', gap: '1rem', marginBottom: '3rem', flexWrap: 'wrap' }}>
         {(['all', 'video', 'report', 'data'] as const).map(cat => (
           <button
             key={cat}
@@ -273,7 +268,14 @@ export default function ReportsClient({ lang }: { lang: 'zh' | 'en' | 'ja' }) {
       </div>
 
       <div className="reports-outer-container" style={{ position: 'relative', width: '100%', maxWidth: '1400px', margin: '0 auto' }}>
-        {/* Carousel Controls */}
+        
+        {/* Mobile-Only Navigation (Centered Above) */}
+        <div className="mobile-only-nav" style={{ display: 'none', justifyContent: 'center', gap: '1.5rem', marginBottom: '2rem' }}>
+          <button onClick={handlePrev} className="carousel-nav-btn-mobile">‹</button>
+          <button onClick={handleNext} className="carousel-nav-btn-mobile">›</button>
+        </div>
+
+        {/* Desktop Carousel Controls */}
         {totalOriginal > 1 && (
           <>
             <button className="carousel-control prev" onClick={handlePrev} aria-label="Previous">
@@ -294,13 +296,13 @@ export default function ReportsClient({ lang }: { lang: 'zh' | 'en' | 'ja' }) {
               transition: isTransitioning ? 'transform 0.6s cubic-bezier(0.23, 1, 0.32, 1)' : 'none',
               transform: `translateX(calc(-${currentIndex} * (100% / var(--items-per-row))))`,
               gap: 'var(--gap)',
-              padding: '2rem 1.5rem 4rem',
+              padding: '1rem 1.5rem 3rem',
               width: '100%',
             }}
           >
             {displayItems.map((report, idx) => (
               <div
-                key={`${report.id}-${idx}-${currentIndex}`} // Force re-animation pattern like Portfolio
+                key={`${report.id}-${idx}-${currentIndex}`}
                 className="report-card"
                 style={{ 
                   flex: '0 0 calc((100% - (var(--items-per-row) - 1) * var(--gap)) / var(--items-per-row))',
@@ -320,7 +322,8 @@ export default function ReportsClient({ lang }: { lang: 'zh' | 'en' | 'ja' }) {
                     style={{ objectFit: 'contain', objectPosition: 'center', padding: '1rem' }}
                     className="report-img"
                   />
-                  <div className="premium-badge">{t.badge}</div>
+                  {/* Re-designed Pop Badge */}
+                  <div className="premium-badge-fixed">{t.badge}</div>
                 </div>
 
                 {/* 2. MIDDLE - Scrollable Content Body */}
@@ -386,9 +389,9 @@ export default function ReportsClient({ lang }: { lang: 'zh' | 'en' | 'ja' }) {
           </div>
         </div>
 
-        {/* Pagination Dots - Matching Portfolio Style */}
+        {/* Pagination Dots */}
         {totalOriginal > 1 && (
-          <div style={{ display: 'flex', justifyContent: 'center', gap: '10px', marginTop: '2rem' }}>
+          <div style={{ display: 'flex', justifyContent: 'center', gap: '10px', marginTop: '1rem' }}>
             {filteredReports.map((_, i) => (
               <div 
                 key={i} 
@@ -399,8 +402,7 @@ export default function ReportsClient({ lang }: { lang: 'zh' | 'en' | 'ja' }) {
                   borderRadius: '5px',
                   background: i === activeDotIndex ? 'var(--accent-color)' : 'rgba(255,255,255,0.15)',
                   cursor: 'pointer',
-                  transition: 'all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)',
-                  border: i === activeDotIndex ? 'none' : '1px solid rgba(255,255,255,0.1)'
+                  transition: 'all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)'
                 }}
               />
             ))}
@@ -417,10 +419,15 @@ export default function ReportsClient({ lang }: { lang: 'zh' | 'en' | 'ja' }) {
           from { opacity: 0; transform: translateY(30px); }
           to { opacity: 1; transform: translateY(0); }
         }
+        @keyframes glowPulse {
+          0% { box-shadow: 0 0 5px rgba(0, 242, 254, 0.5), 0 0 10px rgba(0, 242, 254, 0.3); }
+          50% { box-shadow: 0 0 20px rgba(79, 172, 254, 0.8), 0 0 30px rgba(0, 242, 254, 0.5); }
+          100% { box-shadow: 0 0 5px rgba(0, 242, 254, 0.5), 0 0 10px rgba(0, 242, 254, 0.3); }
+        }
+        
         .reports-track::-webkit-scrollbar { display: none; }
         .card-body-scrollable::-webkit-scrollbar { width: 4px; }
         .card-body-scrollable::-webkit-scrollbar-thumb { background: var(--accent-color); border-radius: 10px; }
-        .card-body-scrollable::-webkit-scrollbar-track { background: transparent; }
 
         .report-card {
           border: 1px solid rgba(255, 255, 255, 0.05);
@@ -436,6 +443,17 @@ export default function ReportsClient({ lang }: { lang: 'zh' | 'en' | 'ja' }) {
           box-shadow: 0 30px 60px rgba(0,0,0,0.5), 0 0 30px rgba(0, 242, 254, 0.15);
         }
         
+        .premium-badge-fixed {
+          position: absolute; top: 20px; right: 20px;
+          background: var(--accent-grad); color: #000;
+          padding: 0.5rem 1.4rem; border-radius: 50px;
+          font-size: 0.8rem; font-weight: 900;
+          text-transform: uppercase; z-index: 10;
+          box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+          border: 1px solid rgba(255,255,255,0.4);
+          animation: glowPulse 2s infinite ease-in-out;
+        }
+
         .carousel-control {
           position: absolute; top: 35%; transform: translateY(-50%);
           width: 74px; height: 74px; border-radius: 50%;
@@ -446,11 +464,9 @@ export default function ReportsClient({ lang }: { lang: 'zh' | 'en' | 'ja' }) {
           box-shadow: 0 15px 40px rgba(0,0,0,0.8);
         }
         .carousel-control:hover { 
-          background: var(--accent-color); 
-          color: #000; 
+          background: var(--accent-color); color: #000; 
           border-color: var(--accent-color); 
           transform: translateY(-50%) scale(1.1);
-          box-shadow: 0 0 30px rgba(0, 242, 254, 0.5);
         }
         .carousel-control.prev { left: -37px; }
         .carousel-control.next { right: -37px; }
@@ -459,26 +475,44 @@ export default function ReportsClient({ lang }: { lang: 'zh' | 'en' | 'ja' }) {
           background: rgba(255, 255, 255, 0.04);
           padding: 1.5rem; border-radius: 20px;
           display: flex; flex-direction: column; gap: 1.2rem;
-          border: 1px solid rgba(255,255,255,0.05);
         }
         .price-val-big { font-size: 2rem; font-weight: 900; color: var(--accent-color); text-align: center; }
-        .status-label-small { font-size: 0.7rem; color: rgba(255,255,255,0.4); text-align: center; margin-top: 4px; }
-        
-        .price-action-vertical > div { width: 100%; }
-        .price-action-vertical button { width: 100% !important; display: block; }
 
         @media (max-width: 1024px) {
           :root { --items-per-row: 2; --gap: 2rem; }
-          .report-card { height: 780px !important; }
-          .carousel-control { width: 60px; height: 60px; }
+          .report-card { height: 800px !important; }
+          .carousel-control { width: 64px; height: 64px; }
           .carousel-control.prev { left: -20px; }
           .carousel-control.next { right: -20px; }
         }
+        
         @media (max-width: 768px) {
-          :root { --items-per-row: 1; --gap: 1.5rem; }
-          .report-card { height: auto !important; min-height: 700px; }
-          .portfolio { padding: 0 1rem !important; }
+          :root { --items-per-row: 1; --gap: 0rem; }
+          .premium-section { padding: 0 0.5rem !important; }
+          .reports-outer-container { padding: 0 !important; }
+          .reports-container { padding: 0 !important; }
+          .reports-track { padding: 1rem 0 3rem !important; }
+          
+          .report-card { 
+            height: auto !important; 
+            min-height: 750px; 
+            border-radius: 0 !important; 
+            border-left: none !important; 
+            border-right: none !important;
+            width: 100vw !important;
+            margin: 0 !important;
+          }
+          
           .carousel-control { display: none; }
+          .mobile-only-nav { display: flex !important; }
+          
+          .carousel-nav-btn-mobile {
+            width: 54px; height: 54px; border-radius: 50%;
+            background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
+            color: #fff; font-size: 2rem; display: flex; align-items: center; justify-content: center;
+            cursor: pointer; transition: all 0.3s;
+          }
+          .carousel-nav-btn-mobile:active { background: var(--accent-color); color: #000; }
         }
       `}} />
     </section>

@@ -244,6 +244,16 @@ export default async function RootLayout({
               .footer-link:hover::after {
                 width: 100%;
               }
+              @media (max-width: 640px) {
+                .footer-links {
+                  gap: 1rem !important;
+                  flex-wrap: wrap;
+                  justify-content: center;
+                }
+                .footer-link {
+                  font-size: 0.85rem;
+                }
+              }
             `}} />
           </footer>
         </div>

@@ -22,7 +22,7 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
 
   const descriptions = {
     zh: "傑森數據 Jason Analytics 的官方作品集，由數據專家 Jason Tsai (蔡傑森) 創立。提供全方位專業數據分析、商業分析、AI 機器學習建模、MarTech 數位行銷科技導入、數據工程優化與自動化解決方案。協助企業從原始數據中挖掘商業價值，透過數據驅動決策提升競爭力與營運效率。",
-    en: "Official portfolio of Jason Analytics, founded by data expert Jason Tsai. We provide comprehensive solutions in Data Analysis, AI/ML Modeling, MarTech implementation, and Data Engineering. Our mission is to help businesses unlock data value through automated workflows and data-driven insights to drive growth.",
+    en: "Official portfolio of Jason Analytics, led by data expert Jason Tsai. Providing comprehensive solutions in Data Analysis, AI/ML Modeling, MarTech, and Data Engineering to help businesses unlock value through data-driven insights.",
     ja: "データ専門家 Jason Tsai が率いる Jason Analytics の公式ポートフォリオ。高度なデータ分析、ビジネスインテリジェンス、AI機械学習モデリング、MarTech 導入、データエンジニアリング、自動化ソリューションを包括的に提供します。企業のデータを価値あるインサイトに変え、意思決定を通じて成長を支援します。"
   };
 
@@ -65,7 +65,7 @@ export default async function RootLayout({
   
   const descriptions = {
     zh: "傑森數據 Jason Analytics 的官方作品集，由數據專家 Jason Tsai (蔡傑森) 創立。提供全方位專業數據分析、商業分析、AI 機器學習建模、MarTech 數位行銷科技導入、數據工程優化與自動化解決方案。協助企業從原始數據中挖掘商業價值，透過數據驅動決策提升競爭力與營運效率。",
-    en: "Official portfolio of Jason Analytics, founded by data expert Jason Tsai. We provide comprehensive solutions in Data Analysis, AI/ML Modeling, MarTech implementation, and Data Engineering. Our mission is to help businesses unlock data value through automated workflows and data-driven insights to drive growth.",
+    en: "Official portfolio of Jason Analytics, led by data expert Jason Tsai. Providing comprehensive solutions in Data Analysis, AI/ML Modeling, MarTech, and Data Engineering to help businesses unlock value through data-driven insights.",
     ja: "データ専門家 Jason Tsai が率いる Jason Analytics の公式ポートフォリオ。高度なデータ分析、ビジネスインテリジェンス、AI機械学習モデリング、MarTech 導入、データエンジニアリング、自動化ソリューションを包括的に提供します。企業のデータを価値あるインサイトに変え、意思決定を通じて成長を支援します。"
   };
 

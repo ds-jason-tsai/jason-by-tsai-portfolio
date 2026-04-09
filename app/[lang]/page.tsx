@@ -13,7 +13,7 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
   };
   const descriptions = {
     zh: "傑森數據 Jason Analytics 官方作品集。由數據專家 Jason Tsai (蔡傑森) 主理，深耕數據分析與 AI 轉型領域。精通 Python、SQL 與 Tableau 數據視覺化，專注於 AI 機器學習建模、MarTech 數位行銷科技導入與 FinTech 數據專案實務。提供專業商業分析、數據工程顧問服務，並協助企業透過數據驅動決策轉化為實質營收。立即探索數據驅動的無限可能。",
-    en: "Official portfolio of Jason Analytics, led by data expert Jason Tsai. Specializing in Data Analysis, AI/ML Modeling, MarTech, and FinTech projects. We transform complex data into actionable insights using Python, SQL, and Tableau. Discover how we drive growth through data-driven decisions and strategic consulting.",
+    en: "Official portfolio of Jason Analytics, led by data expert Jason Tsai. Providing comprehensive solutions in Data Analysis, AI/ML Modeling, MarTech, and Data Engineering to help businesses unlock value through data-driven insights.",
     ja: "データ専門家 Jason Tsai が主宰する Jason Analytics 公式ポートフォリオ。Python、SQL、Tableau を駆使し、データ分析、AI機械学習モデリング、MarTech 導入、FinTech プロジェクトを包括的に支援します。ビジネスインテリジェンスとデータエンジニアリングを通じて、企業の意思決定を最適化し、価値創出を加速させます。"
   };
 
@@ -120,12 +120,12 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
             <div className="image-wrapper-glow">
               <Link href={`/${lang}/experience?utm_source=internal&utm_medium=image&utm_campaign=home_profile_image`} style={{ display: 'block', borderRadius: '50%' }}>
                 <Image 
-                  src="/images/Jason6.webp" 
+                  src="/images/Jason6.jpg" 
                   alt="Jason Tsai" 
                   width={380} 
                   height={380} 
                   className="hero-image"
-                  sizes="(max-width: 768px) 300px, 380px"
+                  sizes="(max-width: 768px) 300px, 400px"
                   style={{ objectPosition: 'center top', objectFit: 'cover', borderRadius: '50%', border: '4px solid rgba(0, 242, 254, 0.3)', position: 'relative', zIndex: 1, transition: 'transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)', cursor: 'pointer' }}
                   priority
                 />

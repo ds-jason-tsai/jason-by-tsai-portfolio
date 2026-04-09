@@ -143,8 +143,15 @@ const reports = [
 
 export default function ReportsClient({ lang }: { lang: 'zh' | 'en' | 'ja' }) {
   const [activeCategory, setActiveCategory] = useState<'all' | 'video' | 'report' | 'data'>('all');
-  const [currentIndex, setCurrentIndex] = useState(1);
-  const [isTransitioning, setIsTransitioning] = useState(true);
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth < 1024);
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
@@ -180,7 +187,7 @@ export default function ReportsClient({ lang }: { lang: 'zh' | 'en' | 'ja' }) {
       categories: { all: "すべて", video: "動画講座", report: "ケーススタディ", data: "データセット" },
       badge: "獨占限定",
       chaptersLabel: "チャプターリスト",
-      buyBtn: "💳 今續き購入",
+      buyBtn: "💳 今すぐ購入",
       downloadLabel: "購入後に即座にアクセス可能",
     },
   };
@@ -191,47 +198,21 @@ export default function ReportsClient({ lang }: { lang: 'zh' | 'en' | 'ja' }) {
     ? reports 
     : reports.filter(r => r.category === activeCategory);
 
-  const totalOriginal = filteredReports.length;
-  const displayItems = totalOriginal > 1 
-    ? [filteredReports[totalOriginal - 1], ...filteredReports, filteredReports[0]] 
-    : filteredReports;
-
-  useEffect(() => {
-    setCurrentIndex(totalOriginal > 1 ? 1 : 0);
-  }, [activeCategory, totalOriginal]);
+  const total = filteredReports.length;
 
   const handleNext = () => {
-    if (totalOriginal <= 1) return;
-    setIsTransitioning(true);
-    setCurrentIndex((prev) => prev + 1);
+    if (total <= 1) return;
+    setCurrentIndex((prev) => (prev + 1) % total);
   };
 
   const handlePrev = () => {
-    if (totalOriginal <= 1) return;
-    setIsTransitioning(true);
-    setCurrentIndex((prev) => prev - 1);
+    if (total <= 1) return;
+    setCurrentIndex((prev) => (prev === 0 ? total - 1 : prev - 1));
   };
 
-  const handleDotClick = (dotIndex: number) => {
-    if (totalOriginal <= 1) return;
-    setIsTransitioning(true);
-    setCurrentIndex(dotIndex + 1);
-  };
-
-  const onTransitionEnd = () => {
-    if (totalOriginal <= 1) return;
-    if (currentIndex >= totalOriginal + 1) {
-      setIsTransitioning(false);
-      setCurrentIndex(1);
-    } else if (currentIndex <= 0) {
-      setIsTransitioning(false);
-      setCurrentIndex(totalOriginal);
-    }
-  };
-
-  const activeDotIndex = totalOriginal > 1 
-    ? ((currentIndex - 1 + totalOriginal) % totalOriginal) 
-    : 0;
+  const currentBatch = isMobile || total <= 1
+    ? [filteredReports[currentIndex]]
+    : [filteredReports[currentIndex], filteredReports[(currentIndex + 1) % total]];
 
   return (
     <section className="portfolio premium-section fade-in" style={{ padding: '0 2rem' }}>
@@ -247,6 +228,7 @@ export default function ReportsClient({ lang }: { lang: 'zh' | 'en' | 'ja' }) {
             key={cat}
             onClick={() => {
               setActiveCategory(cat);
+              setCurrentIndex(0);
               window.history.pushState(null, '', `#${cat}`);
             }}
             style={{
@@ -267,136 +249,136 @@ export default function ReportsClient({ lang }: { lang: 'zh' | 'en' | 'ja' }) {
         ))}
       </div>
 
-      {/* Inner Container: Correct Max-Width to match Portfolio (1000px content area) */}
-      <div className="reports-inner-wrapper" style={{ position: 'relative', width: '100%', maxWidth: '1000px', margin: '0 auto' }}>
+      <div className="reports-outer-container" style={{ position: 'relative', width: '100%', maxWidth: '1000px', margin: '0 auto' }}>
         
-        {/* Mobile-Only Navigation */}
-        <div className="mobile-only-nav" style={{ display: 'none', justifyContent: 'center', gap: '1.5rem', marginBottom: '2rem' }}>
-          <button onClick={handlePrev} className="carousel-nav-btn-mobile">‹</button>
-          <button onClick={handleNext} className="carousel-nav-btn-mobile">›</button>
-        </div>
+        {/* Mobile-Only Navigation (Centered Above) */}
+        {isMobile && total > 1 && (
+          <div style={{ display: 'flex', justifyContent: 'center', gap: '1.5rem', marginBottom: '2rem' }}>
+            <button onClick={handlePrev} className="carousel-nav-btn-mobile">‹</button>
+            <button onClick={handleNext} className="carousel-nav-btn-mobile">›</button>
+          </div>
+        )}
 
         {/* Desktop Carousel Controls - Offset to -60px to match Portfolio */}
-        {totalOriginal > 1 && (
+        {!isMobile && total > 1 && (
           <>
             <button className="carousel-control-standard prev" onClick={handlePrev} aria-label="Previous">‹</button>
             <button className="carousel-control-standard next" onClick={handleNext} aria-label="Next">›</button>
           </>
         )}
 
-        <div className="reports-container" style={{ overflow: 'hidden', padding: '1rem 0' }}>
-          <div 
-            className="reports-track" 
-            onTransitionEnd={onTransitionEnd}
-            style={{ 
-              display: 'flex', 
-              transition: isTransitioning ? 'transform 0.45s cubic-bezier(0.23, 1, 0.32, 1)' : 'none',
-              transform: `translateX(calc(-${currentIndex} * (100% / var(--items-per-row))))`,
-              gap: 'var(--gap)',
-              padding: '1rem 0 3rem',
-              width: '100%',
-            }}
-          >
-            {displayItems.map((report, idx) => (
-              <div
-                key={`${report.id}-${idx}-${currentIndex}`}
-                className="report-card"
-                style={{ 
-                  flex: '0 0 calc((100% - (var(--items-per-row) - 1) * var(--gap)) / var(--items-per-row))',
-                  display: 'flex', 
-                  flexDirection: 'column', 
-                  animation: 'slideUp 0.5s ease forwards',
-                  opacity: 0,
-                  height: '840px',
-                  maxWidth: 'none', // Removed max-width to allow perfect fill for exactly 2 items
-                }}
-              >
-                {/* 1. TOP - Fixed Image Container */}
-                <div className="card-header-fixed" style={{ width: '100%', aspectRatio: '16/9', position: 'relative', overflow: 'hidden', background: '#0a0a0f', borderRadius: '24px 24px 0 0', flexShrink: 0 }}>
-                  <Image
-                    src={report.image}
-                    alt={report.title[lang]}
-                    fill
-                    style={{ objectFit: 'contain', objectPosition: 'center', padding: '1rem' }}
-                    className="report-img"
-                  />
-                  <div className="premium-badge-fixed">{t.badge}</div>
-                </div>
+        {/* Physical Page Display (Zero Stutter Logic) */}
+        <div className="reports-display-area" style={{ 
+          display: 'flex', 
+          justifyContent: 'center', 
+          gap: '2rem', 
+          minHeight: '840px',
+          width: '100%',
+          overflow: 'hidden'
+        }}>
+          {currentBatch.map((report, idx) => (
+            <div
+              key={`${report.id}-${currentIndex}-${idx}`}
+              className="report-card"
+              style={{ 
+                flex: isMobile ? '0 0 100%' : '0 0 calc(50% - 1rem)',
+                maxWidth: isMobile ? 'none' : '430px',
+                display: 'flex', 
+                flexDirection: 'column', 
+                animation: 'slideUp 0.4s ease forwards',
+                height: '840px',
+                border: '1px solid rgba(255, 255, 255, 0.05)',
+                borderRadius: '24px',
+                background: 'rgba(255,255,255,0.02)',
+                position: 'relative',
+                overflow: 'hidden'
+              }}
+            >
+              {/* 1. TOP - Fixed Image Container */}
+              <div className="card-header-fixed" style={{ width: '100%', aspectRatio: '16/9', position: 'relative', overflow: 'hidden', background: '#0a0a0f', borderRadius: '24px 24px 0 0', flexShrink: 0 }}>
+                <Image
+                  src={report.image}
+                  alt={report.title[lang]}
+                  fill
+                  style={{ objectFit: 'contain', objectPosition: 'center', padding: '1rem' }}
+                  className="report-img"
+                />
+                <div className="premium-badge-fixed">{t.badge}</div>
+              </div>
 
-                {/* 2. MIDDLE - Scrollable Content Body */}
-                <div className="card-body-scrollable" style={{ 
-                  flex: 1, 
-                  overflowY: 'auto', 
-                  padding: '2rem 2.5rem', 
-                  background: 'rgba(255,255,255,0.02)',
-                  scrollbarWidth: 'thin',
-                  scrollbarColor: 'var(--accent-color) transparent'
-                }}>
-                  <h3 style={{ fontSize: '1.4rem', fontWeight: '800', marginBottom: '1.5rem', color: '#fff', lineHeight: '1.4' }}>
-                    {report.title[lang]}
-                  </h3>
+              {/* 2. MIDDLE - Scrollable Content Body */}
+              <div className="card-body-scrollable" style={{ 
+                flex: 1, 
+                overflowY: 'auto', 
+                padding: '2rem 2.5rem', 
+                background: 'rgba(255,255,255,0.02)',
+                scrollbarWidth: 'thin',
+                scrollbarColor: 'var(--accent-color) transparent'
+              }}>
+                <h3 style={{ fontSize: '1.4rem', fontWeight: '800', marginBottom: '1.5rem', color: '#fff', lineHeight: '1.4' }}>
+                  {report.title[lang]}
+                </h3>
 
-                  <p style={{ color: 'var(--text-secondary)', fontSize: '0.95rem', lineHeight: '1.8', marginBottom: '2rem' }}>
-                    {report.description[lang]}
-                  </p>
+                <p style={{ color: 'var(--text-secondary)', fontSize: '0.95rem', lineHeight: '1.8', marginBottom: '2rem' }}>
+                  {report.description[lang]}
+                </p>
 
-                  {/* Chapters List */}
-                  {report.chapters && (
-                    <div style={{ marginBottom: '2rem', padding: '1.2rem', background: 'rgba(0,0,0,0.2)', borderRadius: '16px', border: '1px solid rgba(255,255,255,0.05)' }}>
-                      <h4 style={{ fontSize: '0.85rem', color: 'var(--accent-color)', fontWeight: '900', textTransform: 'uppercase', marginBottom: '1rem', letterSpacing: '2px' }}>
-                        {t.chaptersLabel}
-                      </h4>
-                      <div style={{ display: 'flex', flexDirection: 'column', gap: '0.8rem' }}>
-                        {report.chapters.map((ch, i) => (
-                          <div key={i} style={{ display: 'flex', alignItems: 'center', gap: '0.8rem' }}>
-                            <div style={{ width: '6px', height: '6px', borderRadius: '50%', background: 'var(--accent-color)', opacity: 0.8 }}></div>
-                            <span style={{ fontSize: '0.85rem', color: 'rgba(255,255,255,0.7)' }}>{(ch as any)[lang]}</span>
-                          </div>
-                        ))}
-                      </div>
+                {/* Chapters List */}
+                {report.chapters && (
+                  <div style={{ marginBottom: '2rem', padding: '1.2rem', background: 'rgba(0,0,0,0.2)', borderRadius: '16px', border: '1px solid rgba(255,255,255,0.05)' }}>
+                    <h4 style={{ fontSize: '0.85rem', color: 'var(--accent-color)', fontWeight: '900', textTransform: 'uppercase', marginBottom: '1rem', letterSpacing: '2px' }}>
+                      {t.chaptersLabel}
+                    </h4>
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '0.8rem' }}>
+                      {report.chapters.map((ch, i) => (
+                        <div key={i} style={{ display: 'flex', alignItems: 'center', gap: '0.8rem' }}>
+                          <div style={{ width: '6px', height: '6px', borderRadius: '50%', background: 'var(--accent-color)', opacity: 0.8 }}></div>
+                          <span style={{ fontSize: '0.85rem', color: 'rgba(255,255,255,0.7)' }}>{(ch as any)[lang]}</span>
+                        </div>
+                      ))}
                     </div>
-                  )}
-
-                  <div className="tags-container" style={{ marginBottom: '1rem' }}>
-                    {report.tags.map((tag, i) => (
-                      <span key={i} className="tag" style={{ border: '1px solid rgba(255,255,255,0.1)', background: 'rgba(255,255,255,0.03)', padding: '0.2rem 0.6rem', fontSize: '0.75rem', borderRadius: '4px' }}>{tag}</span>
-                    ))}
                   </div>
-                </div>
+                )}
 
-                {/* 3. BOTTOM - Fixed Footer */}
-                <div className="card-footer-fixed" style={{ padding: '1.5rem 2.5rem 2.5rem', background: 'rgba(255,255,255,0.02)', borderRadius: '0 0 24px 24px', flexShrink: 0 }}>
-                  <div className="price-action-vertical">
-                    <div className="price-info-new">
-                      <div className="price-val-big">NT${report.price}</div>
-                      <div className="status-label-small">📥 {t.downloadLabel}</div>
-                    </div>
-                    <BuyButton
-                      reportId={report.id}
-                      lang={lang}
-                      buttonText={t.buyBtn}
-                      price={report.price}
-                      productName={report.title[lang]}
-                    />
-                  </div>
+                <div className="tags-container" style={{ marginBottom: '1rem' }}>
+                  {report.tags.map((tag, i) => (
+                    <span key={i} className="tag">{tag}</span>
+                  ))}
                 </div>
               </div>
-            ))}
-          </div>
+
+              {/* 3. BOTTOM - Fixed Footer */}
+              <div className="card-footer-fixed" style={{ padding: '1.5rem 2.5rem 2.5rem', background: 'rgba(255,255,255,0.02)', borderRadius: '0 0 24px 24px', flexShrink: 0 }}>
+                <div className="price-action-vertical">
+                  <div className="price-info-new">
+                    <div className="price-val-big">NT${report.price}</div>
+                    <div className="status-label-small">📥 {t.downloadLabel}</div>
+                  </div>
+                  <BuyButton
+                    reportId={report.id}
+                    lang={lang}
+                    buttonText={t.buyBtn}
+                    price={report.price}
+                    productName={report.title[lang]}
+                  />
+                </div>
+              </div>
+            </div>
+          ))}
         </div>
 
         {/* Pagination Dots */}
-        {totalOriginal > 1 && (
-          <div style={{ display: 'flex', justifyContent: 'center', gap: '10px', marginTop: '1rem' }}>
+        {total > 1 && (
+          <div style={{ display: 'flex', justifyContent: 'center', gap: '10px', marginTop: '3rem' }}>
             {filteredReports.map((_, i) => (
               <div 
                 key={i} 
-                onClick={() => handleDotClick(i)}
+                onClick={() => setCurrentIndex(i)}
                 style={{
-                  width: i === activeDotIndex ? '35px' : '10px',
+                  width: i === currentIndex ? '35px' : '10px',
                   height: '10px',
                   borderRadius: '5px',
-                  background: i === activeDotIndex ? 'var(--accent-color)' : 'rgba(255,255,255,0.15)',
+                  background: i === currentIndex ? 'var(--accent-color)' : 'rgba(255,255,255,0.15)',
                   cursor: 'pointer',
                   transition: 'all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)'
                 }}
@@ -407,10 +389,6 @@ export default function ReportsClient({ lang }: { lang: 'zh' | 'en' | 'ja' }) {
       </div>
 
       <style dangerouslySetInnerHTML={{__html: `
-        :root {
-          --items-per-row: 2;
-          --gap: 2rem;
-        }
         @keyframes slideUp {
           from { opacity: 0; transform: translateY(30px); }
           to { opacity: 1; transform: translateY(0); }
@@ -421,21 +399,12 @@ export default function ReportsClient({ lang }: { lang: 'zh' | 'en' | 'ja' }) {
           100% { box-shadow: 0 0 5px rgba(0, 242, 254, 0.5), 0 0 10px rgba(0, 242, 254, 0.3); }
         }
         
-        .reports-track::-webkit-scrollbar { display: none; }
         .card-body-scrollable::-webkit-scrollbar { width: 4px; }
         .card-body-scrollable::-webkit-scrollbar-thumb { background: var(--accent-color); border-radius: 10px; }
 
-        .report-card {
-          border: 1px solid rgba(255, 255, 255, 0.05);
-          border-radius: 24px;
-          transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-          background: rgba(255,255,255,0.02);
-          position: relative;
-          overflow: hidden;
-        }
         .report-card:hover {
           transform: translateY(-8px);
-          border-color: var(--accent-color);
+          border-color: var(--accent-color) !important;
           box-shadow: 0 30px 60px rgba(0,0,0,0.5), 0 0 30px rgba(0, 242, 254, 0.15);
         }
         
@@ -450,7 +419,6 @@ export default function ReportsClient({ lang }: { lang: 'zh' | 'en' | 'ja' }) {
           animation: glowPulse 2s infinite ease-in-out;
         }
 
-        /* High-Impact Carousel Controls - Exact Portfoilo Match */
         .carousel-control-standard {
           position: absolute; top: 40%; transform: translateY(-50%);
           width: 60px; height: 60px; border-radius: 50%;
@@ -479,7 +447,6 @@ export default function ReportsClient({ lang }: { lang: 'zh' | 'en' | 'ja' }) {
         }
 
         @media (max-width: 1024px) {
-          :root { --items-per-row: 2; --gap: 2rem; }
           .report-card { height: 800px !important; }
           .carousel-control-standard { width: 54px; height: 54px; font-size: 1.8rem; }
           .carousel-control-standard.prev { left: -10px; }
@@ -487,12 +454,7 @@ export default function ReportsClient({ lang }: { lang: 'zh' | 'en' | 'ja' }) {
         }
         
         @media (max-width: 768px) {
-          :root { --items-per-row: 1; --gap: 0rem; }
           .premium-section { padding: 0 0.5rem !important; }
-          .reports-inner-wrapper { padding: 0 !important; width: 100% !important; max-width: none !important; }
-          .reports-container { padding: 0 !important; }
-          .reports-track { padding: 1rem 0 3rem !important; }
-          
           .report-card { 
             height: auto !important; 
             min-height: 750px; 
@@ -500,7 +462,6 @@ export default function ReportsClient({ lang }: { lang: 'zh' | 'en' | 'ja' }) {
             border-left: none !important; 
             border-right: none !important;
             width: 100vw !important;
-            max-width: none !important;
             margin: 0 !important;
           }
           

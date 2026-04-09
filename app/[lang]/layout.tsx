@@ -41,6 +41,11 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
         'x-default': `${baseUrl}/zh`,
       },
     },
+    icons: {
+      icon: '/icon.png',
+      shortcut: '/icon.png',
+      apple: '/icon.png',
+    },
   };
 }
 

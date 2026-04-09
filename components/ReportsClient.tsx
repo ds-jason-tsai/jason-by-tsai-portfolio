@@ -34,9 +34,9 @@ const reports = [
     category: 'video',
     image: '/images/notebooklm_cover.jpg',
     title: {
-      zh: 'Google NotebookLM：AI 專屬知識庫完全指南 (全五章)',
-      en: 'Google NotebookLM: The Ultimate AI Knowledge Base Guide (Full Course)',
-      ja: 'Google NotebookLM完全ガイド：AIナレッジベース構築 (全5章)',
+      zh: 'NotebookLM 實戰應用：第一章 (全五章指南)',
+      en: 'NotebookLM Applied: Chapter 1 (Ultimate Guide)',
+      ja: 'NotebookLM活用術：第1章 (完全ガイド)',
     },
     description: {
       zh: '這是一套完整的 Google NotebookLM 專家級課程。從基礎介面、資料來源管理到高階 AI 對話技巧與創意工作坊，全方位解鎖 AI 對於個人知識管理與商業分析的強大潛力。',
@@ -58,9 +58,9 @@ const reports = [
     category: 'video',
     image: '/images/notebooklm_cover.jpg',
     title: {
-      zh: 'NotebookLM 實戰應用：日語學習夥伴',
-      en: 'NotebookLM: AI Japanese Learning Partner',
-      ja: 'NotebookLM：AI日本語学習パートナー',
+      zh: 'NotebookLM 實戰應用：第二章 (日語學習)',
+      en: 'NotebookLM Applied: Chapter 2 (Japanese Learning)',
+      ja: 'NotebookLM活用術：第2章 (日本語学習)',
     },
     description: {
       zh: '用 NotebookLM 打造專屬日語口說與聽力練習環境。透過 AI 模擬對話、文法解析與單字卡生成，讓個人知識庫成為您的 24 小時外語家教。',
@@ -79,9 +79,9 @@ const reports = [
     category: 'video',
     image: '/images/notebooklm_cover.jpg',
     title: {
-      zh: 'NotebookLM 實戰應用：商業分析工具',
-      en: 'NotebookLM: AI Business Analysis Toolkit',
-      ja: 'NotebookLM：AIビジネス分析ツールキット',
+      zh: 'NotebookLM 實戰應用：第三章 (商業分析)',
+      en: 'NotebookLM Applied: Chapter 3 (Business Analysis)',
+      ja: 'NotebookLM活用術：第3章 (ビジネス分析)',
     },
     description: {
       zh: '結合 NotebookLM 深度解析市場趨勢與商業模型。學會將海量研究報告與競爭者資訊，快速轉化為精簡、高價值的決策洞察與策略藍圖。',
@@ -101,9 +101,9 @@ const reports = [
     category: 'video',
     image: '/images/notebooklm_cover.jpg',
     title: {
-      zh: 'NotebookLM 實戰應用：聊天紀錄 AI 摘要',
-      en: 'NotebookLM: AI Chat Log Summarizer',
-      ja: 'NotebookLM：AIチャット履歴要約',
+      zh: 'NotebookLM 實戰應用：第四章 (聊天摘要)',
+      en: 'NotebookLM Applied: Chapter 4 (Chat Summary)',
+      ja: 'NotebookLM活用術：第4章 (対話要約)',
     },
     description: {
       zh: '運用 NotebookLM 快速梳理 LINE/WhatsApp 聊天紀錄。自動提取關鍵訊息、待辦清單與情感分析，解決群組對話斷層問題，提升社群營運效率。',
@@ -123,9 +123,9 @@ const reports = [
     category: 'video',
     image: '/images/notebooklm_cover.jpg',
     title: {
-      zh: 'NotebookLM 實戰應用：財務報表、股票分析',
-      en: 'NotebookLM: AI Financial & Stock Analysis',
-      ja: 'NotebookLM：AI財務諸表・株価分析',
+      zh: 'NotebookLM 實戰應用：第五章 (財報分析)',
+      en: 'NotebookLM Applied: Chapter 5 (Finance Analysis)',
+      ja: 'NotebookLM活用術：第5章 (投資分析)',
     },
     description: {
       zh: '第一手 NotebookLM 投資分析法。從上市櫃公司財報對標到新聞綜合評點，建立您的個人化 AI 投資領航員，從複雜數據中精準鎖定增長動能。',
@@ -192,7 +192,6 @@ export default function ReportsClient({ lang }: { lang: 'zh' | 'en' | 'ja' }) {
     : reports.filter(r => r.category === activeCategory);
 
   const totalOriginal = filteredReports.length;
-  // Infinite loop prep: [Last, ...Original, First]
   const displayItems = totalOriginal > 1 
     ? [filteredReports[totalOriginal - 1], ...filteredReports, filteredReports[0]] 
     : filteredReports;
@@ -258,74 +257,88 @@ export default function ReportsClient({ lang }: { lang: 'zh' | 'en' | 'ja' }) {
         ))}
       </div>
 
-      <div className="reports-container" style={{ position: 'relative', maxWidth: '1400px', margin: '0 auto', overflow: 'hidden' }}>
+      <div className="reports-outer-container" style={{ position: 'relative', width: '100%', maxWidth: '1400px', margin: '0 auto' }}>
+        {/* Carousel Controls - Outside of hidden area for visibility */}
         {totalOriginal > 1 && (
           <>
             <button className="carousel-control prev" onClick={handlePrev} aria-label="Previous">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
             </button>
             <button className="carousel-control next" onClick={handleNext} aria-label="Next">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><path d="M9 18l6-6-6-6"/></svg>
             </button>
           </>
         )}
 
-        <div 
-          className="reports-track" 
-          onTransitionEnd={onTransitionEnd}
-          style={{ 
-            display: 'flex', 
-            transition: isTransitioning ? 'transform 0.6s cubic-bezier(0.23, 1, 0.32, 1)' : 'none',
-            transform: `translateX(calc(-${currentIndex} * (100% / var(--items-per-row))))`,
-            gap: 'var(--gap)',
-            padding: '2rem 1.5rem 4rem',
-            width: '100%',
-          }}
-        >
-          {displayItems.map((report, idx) => (
-            <div
-              key={`${report.id}-${idx}`}
-              className="report-card"
-              style={{ 
-                flex: '0 0 calc((100% - (var(--items-per-row) - 1) * var(--gap)) / var(--items-per-row))',
-                display: 'flex', 
-                flexDirection: 'column', 
-                animation: `slideUp 0.6s ease forwards ${idx * 0.1}s`,
-                opacity: 0,
-              }}
-            >
-              {/* Image */}
-              <div style={{ width: '100%', aspectRatio: '16/9', position: 'relative', overflow: 'hidden', background: '#0a0a0f', borderRadius: '24px 24px 0 0' }}>
-                <Image
-                  src={report.image}
-                  alt={report.title[lang]}
-                  fill
-                  style={{ objectFit: 'contain', objectPosition: 'center', padding: '1rem' }}
-                  className="report-img"
-                />
-                <div className="premium-badge">{t.badge}</div>
-              </div>
-
-              {/* Content Body */}
-              <div style={{ padding: '2.5rem', background: 'rgba(255,255,255,0.02)', borderRadius: '0 0 24px 24px', flex: 1, display: 'flex', flexDirection: 'column' }}>
-                <div style={{ minHeight: '11rem' }}>
-                  <h3 style={{ fontSize: '1.4rem', fontWeight: '800', marginBottom: '1.2rem', color: '#fff', minHeight: '3.5rem', display: 'flex', alignItems: 'center' }}>
-                    {report.title[lang]}
-                  </h3>
-                  <p style={{ color: 'var(--text-secondary)', fontSize: '0.95rem', lineHeight: '1.8', marginBottom: '2rem' }}>
-                    {report.description[lang]}
-                  </p>
+        <div className="reports-container" style={{ overflow: 'hidden', padding: '1rem 0' }}>
+          <div 
+            className="reports-track" 
+            onTransitionEnd={onTransitionEnd}
+            style={{ 
+              display: 'flex', 
+              transition: isTransitioning ? 'transform 0.6s cubic-bezier(0.23, 1, 0.32, 1)' : 'none',
+              transform: `translateX(calc(-${currentIndex} * (100% / var(--items-per-row))))`,
+              gap: 'var(--gap)',
+              padding: '2rem 1.5rem 4rem',
+              width: '100%',
+            }}
+          >
+            {displayItems.map((report, idx) => (
+              <div
+                key={`${report.id}-${idx}`}
+                className="report-card"
+                style={{ 
+                  flex: '0 0 calc((100% - (var(--items-per-row) - 1) * var(--gap)) / var(--items-per-row))',
+                  display: 'flex', 
+                  flexDirection: 'column', 
+                  animation: `slideUp 0.6s ease forwards ${idx * 0.1}s`,
+                  opacity: 0,
+                }}
+              >
+                {/* Fixed Image Container */}
+                <div style={{ width: '100%', aspectRatio: '16/9', position: 'relative', overflow: 'hidden', background: '#0a0a0f', borderRadius: '24px 24px 0 0' }}>
+                  <Image
+                    src={report.image}
+                    alt={report.title[lang]}
+                    fill
+                    style={{ objectFit: 'contain', objectPosition: 'center', padding: '1rem' }}
+                    className="report-img"
+                  />
+                  <div className="premium-badge">{t.badge}</div>
                 </div>
 
-                {/* Chapters List - Fixed position via margin-top: auto spacer if needed, but here we just ensure content above is min-height */}
-                <div style={{ flex: 1 }}>
-                  {report.chapters && (
-                    <div style={{ marginBottom: '2rem', padding: '1.5rem', background: 'rgba(0,0,0,0.2)', borderRadius: '16px', border: '1px solid rgba(255,255,255,0.05)' }}>
-                      <h4 style={{ fontSize: '0.85rem', color: 'var(--accent-color)', fontWeight: '900', textTransform: 'uppercase', marginBottom: '1rem', letterSpacing: '2px' }}>
+                {/* Content Body with Rigid Framework */}
+                <div style={{ padding: '2.5rem', background: 'rgba(255,255,255,0.02)', borderRadius: '0 0 24px 24px', flex: 1, display: 'flex', flexDirection: 'column' }}>
+                  {/* Fixed Header/Title and Description area */}
+                  <div style={{ minHeight: '5.5rem' }}>
+                    <h3 style={{ fontSize: '1.4rem', fontWeight: '800', marginBottom: '1.2rem', color: '#fff', minHeight: '3.5rem', display: 'flex', alignItems: 'center' }}>
+                      {report.title[lang]}
+                    </h3>
+                  </div>
+                  <div style={{ minHeight: '7rem' }}>
+                    <p style={{ color: 'var(--text-secondary)', fontSize: '0.95rem', lineHeight: '1.8', marginBottom: '1.5rem' }}>
+                      {report.description[lang]}
+                    </p>
+                  </div>
+
+                  {/* Chapters List with Fixed Height + Internal Scroll */}
+                  <div style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
+                    <div className="chapters-container-fixed" style={{ 
+                      height: '180px', 
+                      overflowY: 'auto', 
+                      marginBottom: '2rem', 
+                      padding: '1.5rem', 
+                      background: 'rgba(0,0,0,0.2)', 
+                      borderRadius: '16px', 
+                      border: '1px solid rgba(255,255,255,0.05)',
+                      scrollbarWidth: 'thin',
+                      scrollbarColor: 'var(--accent-color) transparent'
+                    }}>
+                      <h4 style={{ fontSize: '0.85rem', color: 'var(--accent-color)', fontWeight: '900', textTransform: 'uppercase', marginBottom: '1rem', letterSpacing: '2px', position: 'sticky', top: 0, background: 'rgba(0,0,0,0.4)', padding: '4px 0', zIndex: 1 }}>
                         {t.chaptersLabel}
                       </h4>
                       <div style={{ display: 'flex', flexDirection: 'column', gap: '0.8rem' }}>
-                        {report.chapters.map((ch, i) => (
+                        {report.chapters && report.chapters.map((ch, i) => (
                           <div key={i} style={{ display: 'flex', alignItems: 'center', gap: '0.8rem' }}>
                             <div style={{ width: '6px', height: '6px', borderRadius: '50%', background: 'var(--accent-color)', opacity: 0.8 }}></div>
                             <span style={{ fontSize: '0.85rem', color: 'rgba(255,255,255,0.7)' }}>{(ch as any)[lang]}</span>
@@ -333,32 +346,32 @@ export default function ReportsClient({ lang }: { lang: 'zh' | 'en' | 'ja' }) {
                         ))}
                       </div>
                     </div>
-                  )}
 
-                  <div className="tags-container" style={{ marginBottom: '2rem' }}>
-                    {report.tags.map((tag, i) => (
-                      <span key={i} className="tag" style={{ border: '1px solid rgba(255,255,255,0.1)', background: 'rgba(255,255,255,0.03)', padding: '0.2rem 0.6rem', fontSize: '0.75rem', borderRadius: '4px' }}>{tag}</span>
-                    ))}
+                    <div className="tags-container" style={{ marginBottom: '2rem', minHeight: '2rem' }}>
+                      {report.tags.map((tag, i) => (
+                        <span key={i} className="tag" style={{ border: '1px solid rgba(255,255,255,0.1)', background: 'rgba(255,255,255,0.03)', padding: '0.2rem 0.6rem', fontSize: '0.75rem', borderRadius: '4px' }}>{tag}</span>
+                      ))}
+                    </div>
                   </div>
-                </div>
 
-                {/* Action Container - Price and Button stacked */}
-                <div className="price-action-vertical">
-                  <div className="price-info-new">
-                    <div className="price-val-big">NT${report.price}</div>
-                    <div className="status-label-small">📥 {t.downloadLabel}</div>
+                  {/* Action Container - Bottom Fixed */}
+                  <div className="price-action-vertical">
+                    <div className="price-info-new">
+                      <div className="price-val-big">NT${report.price}</div>
+                      <div className="status-label-small">📥 {t.downloadLabel}</div>
+                    </div>
+                    <BuyButton
+                      reportId={report.id}
+                      lang={lang}
+                      buttonText={t.buyBtn}
+                      price={report.price}
+                      productName={report.title[lang]}
+                    />
                   </div>
-                  <BuyButton
-                    reportId={report.id}
-                    lang={lang}
-                    buttonText={t.buyBtn}
-                    price={report.price}
-                    productName={report.title[lang]}
-                  />
                 </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </div>
 
@@ -372,6 +385,10 @@ export default function ReportsClient({ lang }: { lang: 'zh' | 'en' | 'ja' }) {
           to { opacity: 1; transform: translateY(0); }
         }
         .reports-track::-webkit-scrollbar { display: none; }
+        .chapters-container-fixed::-webkit-scrollbar { width: 4px; }
+        .chapters-container-fixed::-webkit-scrollbar-thumb { background: var(--accent-color); border-radius: 10px; }
+        .chapters-container-fixed::-webkit-scrollbar-track { background: transparent; }
+
         .report-card {
           border: 1px solid rgba(255, 255, 255, 0.05);
           border-radius: 24px;
@@ -379,28 +396,29 @@ export default function ReportsClient({ lang }: { lang: 'zh' | 'en' | 'ja' }) {
           background: rgba(255,255,255,0.02);
         }
         .report-card:hover {
-          transform: translateY(-10px) scale(1.01);
+          transform: translateY(-8px);
           border-color: var(--accent-color);
           box-shadow: 0 30px 60px rgba(0,0,0,0.5), 0 0 30px rgba(0, 242, 254, 0.15);
         }
         .carousel-control {
-          position: absolute; top: 45%; transform: translateY(-50%);
-          width: 58px; height: 58px; border-radius: 50%;
-          background: rgba(10, 10, 15, 0.8); border: 1px solid rgba(255,255,255,0.1);
+          position: absolute; top: 38%; transform: translateY(-50%);
+          width: 74px; height: 74px; border-radius: 50%;
+          background: rgba(10, 10, 15, 0.9); border: 2px solid rgba(255,255,255,0.1);
           color: white; display: flex; align-items: center; justify-content: center;
-          cursor: pointer; z-index: 20; backdrop-filter: blur(12px);
+          cursor: pointer; z-index: 100; backdrop-filter: blur(16px);
           transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-          box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+          box-shadow: 0 15px 40px rgba(0,0,0,0.8);
         }
         .carousel-control:hover { 
           background: var(--accent-color); 
           color: #000; 
           border-color: var(--accent-color); 
-          transform: translateY(-50%) scale(1.15);
-          box-shadow: 0 0 25px rgba(0, 242, 254, 0.4);
+          transform: translateY(-50%) scale(1.1);
+          box-shadow: 0 0 30px rgba(0, 242, 254, 0.5);
         }
-        .carousel-control.prev { left: -30px; }
-        .carousel-control.next { right: -30px; }
+        .carousel-control.prev { left: -37px; }
+        .carousel-control.next { right: -37px; }
+        
         .premium-badge {
           position: absolute; top: 20px; right: 20px;
           background: var(--accent-grad); color: #000;
@@ -414,19 +432,19 @@ export default function ReportsClient({ lang }: { lang: 'zh' | 'en' | 'ja' }) {
           padding: 1.5rem; border-radius: 20px;
           display: flex; flex-direction: column; gap: 1.2rem;
           border: 1px solid rgba(255,255,255,0.05);
-          margin-top: 1rem;
+          margin-top: auto;
         }
         .price-val-big { font-size: 2rem; font-weight: 900; color: var(--accent-color); text-align: center; }
         .status-label-small { font-size: 0.7rem; color: rgba(255,255,255,0.4); text-align: center; margin-top: 4px; }
         
-        /* Ensure BuyButton component takes full width */
         .price-action-vertical > div { width: 100%; }
         .price-action-vertical button { width: 100% !important; display: block; }
 
         @media (max-width: 1024px) {
           :root { --items-per-row: 2; --gap: 2rem; }
-          .carousel-control.prev { left: -15px; }
-          .carousel-control.next { right: -15px; }
+          .carousel-control { width: 60px; height: 60px; }
+          .carousel-control.prev { left: -20px; }
+          .carousel-control.next { right: -20px; }
         }
         @media (max-width: 768px) {
           :root { --items-per-row: 1; --gap: 1.5rem; }

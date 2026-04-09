@@ -228,8 +228,22 @@ export default async function RootLayout({
                 transition: color 0.3s ease;
                 font-size: 0.95rem;
                 font-weight: 600;
+                position: relative;
               }
               .footer-link:hover { color: var(--text-primary); }
+              .footer-link::after {
+                content: '';
+                position: absolute;
+                bottom: -4px;
+                left: 0;
+                width: 0;
+                height: 2px;
+                background: var(--accent-grad);
+                transition: width 0.3s ease;
+              }
+              .footer-link:hover::after {
+                width: 100%;
+              }
             `}} />
           </footer>
         </div>

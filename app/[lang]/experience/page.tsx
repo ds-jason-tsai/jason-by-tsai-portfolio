@@ -28,6 +28,9 @@ export default async function Experience({ params }: { params: Promise<{ lang: s
   const content = {
     zh: { title: "完整經歷", 
           desc: "從技術實作到高階戰略規劃，持續創造數據價值。",
+          certsTitle: "專業證照",
+          viewCert: "顯示證讓",
+          issuedBy: "頒發單位",
           exp: [
             { 
               date: "2026.01 - 至今", 
@@ -47,10 +50,30 @@ export default async function Experience({ params }: { params: Promise<{ lang: s
             { date: "2022.01 - 2023.01", role: "資料工程師 (Data Engineer)", company: "零壹科技 (Zero One Technology)", url: "", logo: "/assets/icons/zerone.png", desc: "擔任技術培訓講師，累積 30+ 場次企業授課。為財政部、台灣證交所等高階政經單位提供架構建議與數據視覺化儀表板設計。" },
             { date: "2021.09 - 2023.06", role: "企業管理碩士 (MBA)", company: "國立陽明交通大學 (NYCU)", url: "", logo: "/assets/icons/陽明交通大學.png", desc: "專注於商業管理、數據決策與營運策略分析等進階領域。" },
             { date: "2019.09 - 2021.06", role: "企業管理理學士 (BBA)", company: "國立臺北商業大學 (NTUB)", url: "", logo: "/assets/icons/NTUB.png", desc: "奠定商業分析基礎。期間取得 TOEIC 金色證書、JLPT N3 日語檢定、GA 認證以及 ERP 專業證照。" }
+          ],
+          certs: [
+            {
+              title: "ChatGPT 教育者基礎認證",
+              issuer: "OpenAI",
+              date: "2025年12月",
+              logo: "/assets/icons/openai_logo.jfif",
+              url: "https://www.credly.com/badges/95a39d40-346f-4e1a-9090-f8aaf729a1b0/linked_in_profile"
+            },
+            {
+              title: "Gemini 認證教育者",
+              issuer: "Google",
+              date: "2025年9月 - 2028年9月",
+              id: "160793457",
+              logo: "/assets/icons/google_logo.jfif",
+              url: "https://edu.google.accredible.com/344a67ad-adf1-4366-9d3e-337dc26e3ff5#acc.QnLCxWVD"
+            }
           ]
     },
     en: { title: "Experience", 
           desc: "From technical implementations to high-level strategic planning, driving data impact.",
+          certsTitle: "Certifications",
+          viewCert: "View Certificate",
+          issuedBy: "Issued by",
           exp: [
             { 
               date: "2026.01 - Present", 
@@ -70,10 +93,30 @@ export default async function Experience({ params }: { params: Promise<{ lang: s
             { date: "2022.01 - 2023.01", role: "Data Engineer", company: "Zero One Technology", url: "", logo: "/assets/icons/zerone.png", desc: "Served as technical trainer for 30+ corporate sessions. Delivered architecture advice and dashboards for high-level government & financial institutions." },
             { date: "2021.09 - 2023.06", role: "Master of Business Administration (MBA)", company: "NYCU", url: "", logo: "/assets/icons/陽明交通大學.png", desc: "Focused on business management, data-driven decision making, and operational strategy analysis." },
             { date: "2019.09 - 2021.06", role: "Bachelor of Business Administration (BBA)", company: "NTUB", url: "", logo: "/assets/icons/NTUB.png", desc: "Obtained TOEIC Gold (860), JLPT N3, GA Certification, and ERP professional licenses." }
+          ],
+          certs: [
+            {
+              title: "ChatGPT Foundations for Teachers",
+              issuer: "OpenAI",
+              date: "Dec 2025",
+              logo: "/assets/icons/openai_logo.jfif",
+              url: "https://www.credly.com/badges/95a39d40-346f-4e1a-9090-f8aaf729a1b0/linked_in_profile"
+            },
+            {
+              title: "Gemini Certified Educator",
+              issuer: "Google",
+              date: "Sep 2025 - Sep 2028",
+              id: "160793457",
+              logo: "/assets/icons/google_logo.jfif",
+              url: "https://edu.google.accredible.com/344a67ad-adf1-4366-9d3e-337dc26e3ff5#acc.QnLCxWVD"
+            }
           ]
     },
     ja: { title: "職歴", 
           desc: "技術的な実装から高度な戦略立案まで、常にデータの価値を最大化し続けています。",
+          certsTitle: "専門資格・認定",
+          viewCert: "認定証を表示",
+          issuedBy: "発行元",
           exp: [
             { 
               date: "2026.01 - 現在", 
@@ -87,12 +130,29 @@ export default async function Experience({ params }: { params: Promise<{ lang: s
             },
             { date: "2024.08 - 現在", role: "パートナー講師", company: "聯成電腦 (Rookie Savior)", url: "https://live.rookiesavior.net/", logo: "/assets/icons/菜鳥救星.png", desc: "Tableau総合カリキュラムを開発。300時間以上の指導を通じて150名以上の専門家を育成し、BA/DAへの転職を支援。" },
             { date: "2023.07 - 現在", role: "資料分析師", company: "國泰人壽 (Cathay Life Insurance)", url: "", logo: "/assets/icons/國泰人壽.png", desc: "GA4導入、タグ設計、CDP評価・導入、および保険融資データ分析プロジェクトを担当。" },
-            { date: "2023.03 - 2023.06", role: "データアナリスト", company: "iKala Interactive Media Inc.", url: "", logo: "/assets/icons/iKala.png", desc: "KOLインフルエンサーの影響力分析。Tableauダッシュボードの最適化と自動レポート送信システムを構築し、運営効率を200%向上。" },
+            { date: "2023.03 - 2023.06", role: "データアナリスト", company: "iKala Interactive Media Inc.", url: "", logo: "/assets/icons/iKala.png", desc: "KOLインフルエンサーの影響力分析。Tableauダッシュボードの最適化と自動レポート送信システムを構築し、運営效率を200%向上。" },
             { date: "2023.01", role: "企業プロジェクト | 蝦皮 (Shopee) 店舗拡大戦略", company: "NTUDAC x Shopee Xpress", url: "", logo: "/assets/icons/Shopee.png", desc: "位置情報インテリジェンスと戦略立案を担当。スクレイピングと空間分析でダッシュボードを構築。" },
             { date: "2022.10", role: "数位発展部 Data Station データコンテスト | 優勝", company: "Carrefour (家樂福)", url: "", logo: "/assets/icons/Carrefour.png", desc: "クラスタリング、レコメンデーション、およびその他の機械学習アルゴリズムを用いた顧客購買予測モデルの開発。全国コンテストで優勝。" },
             { date: "2022.01 - 2023.01", role: "データエンジニア", company: "Zero One Technology (零壹科技)", url: "", logo: "/assets/icons/zerone.png", desc: "技術研修講師として30回以上の法人向けセッションを実施。政府機関等にアーキテクチャ提案を提供。" },
             { date: "2021.09 - 2023.06", role: "経営学修士 (MBA)", company: "国立陽明交通大学 (NYCU)", url: "", logo: "/assets/icons/陽明交通大學.png", desc: "経営管理、データドリブンな意思決定、運営戦略分析を専攻。" },
             { date: "2019.09 - 2021.06", role: "経営学学士 (BBA)", company: "国立台北商業大学 (NTUB)", url: "", logo: "/assets/icons/NTUB.png", desc: "TOEIC Gold (860)、JLPT N3、GA認定、ERP専門資格を取得。" }
+          ],
+          certs: [
+            {
+              title: "ChatGPT 教育者向け基礎認證",
+              issuer: "OpenAI",
+              date: "2025年12月",
+              logo: "/assets/icons/openai_logo.jfif",
+              url: "https://www.credly.com/badges/95a39d40-346f-4e1a-9090-f8aaf729a1b0/linked_in_profile"
+            },
+            {
+              title: "Gemini 認定教育者",
+              issuer: "Google",
+              date: "2025年9月 - 2028年9月",
+              id: "160793457",
+              logo: "/assets/icons/google_logo.jfif",
+              url: "https://edu.google.accredible.com/344a67ad-adf1-4366-9d3e-337dc26e3ff5#acc.QnLCxWVD"
+            }
           ]
     }
   };
@@ -140,6 +200,56 @@ export default async function Experience({ params }: { params: Promise<{ lang: s
         ))}
       </div>
 
+      {/* Certifications Section */}
+      <div className="certifications-section" style={{ marginTop: '6rem', marginBottom: '4rem' }}>
+        <h2 className="section-title" style={{ fontSize: '2.5rem', marginBottom: '3.5rem' }}>{t.certsTitle}</h2>
+        <div className="certs-grid" style={{ 
+          display: 'grid', 
+          gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', 
+          gap: '2rem',
+          maxWidth: '1000px',
+          margin: '0 auto'
+        }}>
+          {(t as any).certs?.map((cert: any, idx: number) => (
+            <div key={idx} className="cert-card">
+              <div style={{ display: 'flex', alignItems: 'center', gap: '1.2rem' }}>
+                <Image src={cert.logo} alt={`${cert.issuer} Logo`} width={48} height={48} style={{ borderRadius: '10px', objectFit: 'contain', background: 'white', padding: '5px' }} />
+                <div>
+                  <h3 style={{ fontSize: '1.2rem', marginBottom: '0.2rem', lineHeight: '1.3' }}>{cert.title}</h3>
+                  <p style={{ color: 'var(--accent-color)', fontWeight: '700', fontSize: '0.9rem', textTransform: 'uppercase', letterSpacing: '1px' }}>{cert.issuer}</p>
+                </div>
+              </div>
+              <div style={{ color: 'var(--text-secondary)', fontSize: '0.95rem', margin: '1.5rem 0' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.6rem', borderBottom: '1px solid var(--glass-border)', paddingBottom: '0.6rem' }}>
+                  <span>{t.issuedBy}</span>
+                  <span style={{ color: 'var(--text-primary)', fontWeight: '600' }}>{cert.issuer}</span>
+                </div>
+                <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: cert.id ? '0.6rem' : '0', borderBottom: cert.id ? '1px solid var(--glass-border)' : 'none', paddingBottom: cert.id ? '0.6rem' : '0' }}>
+                  <span>{lang === 'zh' ? '頒發日期' : (lang === 'ja' ? '発行日' : 'Issued Date')}</span>
+                  <span style={{ color: 'var(--text-primary)', fontWeight: '600' }}>{cert.date}</span>
+                </div>
+                {cert.id && (
+                  <div style={{ display: 'flex', justifyContent: 'space-between', paddingTop: '0.6rem' }}>
+                    <span>{lang === 'zh' ? '證照編號' : (lang === 'ja' ? '認定番号' : 'Credential ID')}</span>
+                    <span style={{ color: 'var(--text-primary)', fontWeight: '600', fontSize: '0.85rem' }}>{cert.id}</span>
+                  </div>
+                )}
+              </div>
+              <a href={cert.url} target="_blank" rel="noopener noreferrer" className="btn-primary" style={{ 
+                textAlign: 'center', 
+                padding: '0.8rem', 
+                fontSize: '0.95rem',
+                marginTop: 'auto',
+                width: '100%',
+                borderRadius: '12px'
+              }}>
+                {t.viewCert}
+              </a>
+            </div>
+          ))}
+        </div>
+      </div>
+
       <div className="trusted-by-section" style={{ marginTop: '5rem', marginBottom: '4rem', textAlign: 'center' }}>
         <h3 style={{ fontSize: '1.1rem', color: 'var(--text-secondary)', marginBottom: '3rem', textTransform: 'uppercase', letterSpacing: '2px' }}>
            Partner Platforms & Multi-Brand Collaboration
@@ -176,6 +286,28 @@ export default async function Experience({ params }: { params: Promise<{ lang: s
              opacity: 1;
              color: var(--accent-color);
              transform: translateY(-2px);
+          }
+          .cert-card {
+             background: var(--glass-bg);
+             border: 1px solid var(--glass-border);
+             border-radius: 24px;
+             padding: 2rem;
+             display: flex;
+             flex-direction: column;
+             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+          }
+          .cert-card:hover {
+             transform: translateY(-10px) scale(1.02);
+             border-color: var(--accent-color);
+             box-shadow: 0 20px 40px rgba(0, 242, 254, 0.1);
+          }
+          @media (max-width: 768px) {
+            .certs-grid {
+              grid-template-columns: 1fr !important;
+            }
+            .cert-card {
+              padding: 1.5rem;
+            }
           }
         `}} />
       </div>

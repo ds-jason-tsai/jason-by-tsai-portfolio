@@ -24,6 +24,26 @@ const REPORT_CATALOG: Record<string, { name: string; price: number }> = {
     name: 'Case Study: Salesforce Solution Engineer Pitch',
     price: 498,
   },
+  notebooklm_series: {
+    name: 'NotebookLM 知識庫完全指南',
+    price: 898,
+  },
+  notebooklm_ja_learning: {
+    name: 'NotebookLM x 日語學習夥伴',
+    price: 898,
+  },
+  notebooklm_biz_analysis: {
+    name: 'NotebookLM x 商業分析工具',
+    price: 898,
+  },
+  notebooklm_chat_summary: {
+    name: 'NotebookLM x 聊天紀錄 AI 摘要',
+    price: 898,
+  },
+  notebooklm_finance_stock: {
+    name: 'NotebookLM x 財務報表、股票分析',
+    price: 898,
+  },
 };
 
 /** AES-256-CBC 加密（藍新 TradeInfo）*/

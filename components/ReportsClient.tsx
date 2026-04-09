@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
 import BuyButton from '../app/[lang]/components/BuyButton';
 
@@ -47,6 +47,18 @@ export default function ReportsClient({ lang }: { lang: 'zh' | 'en' | 'ja' }) {
   };
 
   const t = content[lang];
+  const scrollRef = useRef<HTMLDivElement>(null);
+
+  const scroll = (direction: 'left' | 'right') => {
+    if (scrollRef.current) {
+      const { scrollLeft, clientWidth } = scrollRef.current;
+      const scrollAmount = clientWidth * 0.8;
+      scrollRef.current.scrollTo({
+        left: direction === 'left' ? scrollLeft - scrollAmount : scrollLeft + scrollAmount,
+        behavior: 'smooth'
+      });
+    }
+  };
 
   const reports = [
     {
@@ -74,6 +86,92 @@ export default function ReportsClient({ lang }: { lang: 'zh' | 'en' | 'ja' }) {
       tags: ['#NotebookLM', '#GoogleAI', '#VideoCourse', '#Productivity'],
     },
     {
+      id: 'notebooklm_ja_learning',
+      category: 'video',
+      image: '/images/notebooklm_cover.jpg',
+      title: {
+        zh: 'NotebookLM 實戰應用：日語學習夥伴',
+        en: 'NotebookLM: AI Japanese Learning Partner',
+        ja: 'NotebookLM：AI日本語学習パートナー',
+      },
+      description: {
+        zh: '用 NotebookLM 打造專屬日語口說與聽力練習環境。透過 AI 模擬對話、文法解析與單字卡生成，讓個人知識庫成為您的 24 小時外語家教。',
+        en: 'Create a Japanese learning environment with NotebookLM. Use AI for dialogue simulation and grammar analysis, transforming your knowledge base into an AI tutor.',
+        ja: 'NotebookLMで自分専用の日本語学習環境を構築。AI対話、文法分析、単語カード生成を通じて、ナレッジベースを24時間の語学家庭教師に変えます。',
+      },
+      chapters: [
+        { id: '2-1', zh: '2-1 日語學習夥伴(1)', en: '2-1 AI Japanese Partner (Pt.1)', ja: '2-1 日本語学習パートナー (Part 1)' },
+        { id: '2-2', zh: '2-2 日語學習夥伴(2)', en: '2-2 AI Japanese Partner (Pt.2)', ja: '2-2 日本語学習パートナー (Part 2)' }
+      ],
+      price: 898,
+      tags: ['#NotebookLM', '#JapaneseLearning', '#AIEducation', '#LanguageTips'],
+    },
+    {
+      id: 'notebooklm_biz_analysis',
+      category: 'video',
+      image: '/images/notebooklm_cover.jpg',
+      title: {
+        zh: 'NotebookLM 實戰應用：商業分析工具',
+        en: 'NotebookLM: AI Business Analysis Toolkit',
+        ja: 'NotebookLM：AIビジネス分析ツールキット',
+      },
+      description: {
+        zh: '結合 NotebookLM 深度解析市場趨勢與商業模型。學會將海量研究報告與競爭者資訊，快速轉化為精簡、高價值的決策洞察與策略藍圖。',
+        en: 'Analyze trends and business models with NotebookLM. Learn to transform massive reports and competitor data into high-value strategic insights and blueprints.',
+        ja: 'NotebookLMを駆使して市場動向とビジネスモデルを分析。大量の調査レポートや競合情報を、価値の高い戦略的な洞察やロードマップに迅速に変換します。',
+      },
+      chapters: [
+        { id: '3-1', zh: '3-1 商業分析工具(1)', en: '3-1 Business Analysis (Pt.1)', ja: '3-1 ビジネス分析ツール (Part 1)' },
+        { id: '3-2', zh: '3-2 商業分析工具(2)', en: '3-2 Business Analysis (Pt.2)', ja: '3-2 ビジネス分析ツール (Part 2)' },
+        { id: '3-3', zh: '3-3 商業分析工具(3)', en: '3-3 Business Analysis (Pt.3)', ja: '3-3 ビジネス分析ツール (Part 3)' }
+      ],
+      price: 898,
+      tags: ['#NotebookLM', '#BusinessAnalysis', '#MarketResearch', '#Strategy'],
+    },
+    {
+      id: 'notebooklm_chat_summary',
+      category: 'video',
+      image: '/images/notebooklm_cover.jpg',
+      title: {
+        zh: 'NotebookLM 實戰應用：聊天紀錄 AI 摘要',
+        en: 'NotebookLM: AI Chat Log Summarizer',
+        ja: 'NotebookLM：AIチャット履歴要約',
+      },
+      description: {
+        zh: '運用 NotebookLM 快速梳理 LINE/WhatsApp 聊天紀錄。自動提取關鍵訊息、待辦清單與情感分析，解決群組對話斷層問題，提升社群營運效率。',
+        en: 'Summarize LINE/WhatsApp logs with NotebookLM. Extract key messages, tasks, and sentiment to close dialogue gaps and boost social operations.',
+        ja: 'NotebookLMでLINE/WhatsAppの履歴を整理。主要メッセージやタスク、感情分析を自動抽出し、グループ対話の断絶を解消してコミュニティ運営を効率化します。',
+      },
+      chapters: [
+        { id: '4-1', zh: '4-1 聊天紀錄摘要(1)', en: '4-1 Chat Summary (Pt.1)', ja: '4-1 対話要約 (Part 1)' },
+        { id: '4-2', zh: '4-2 聊天紀錄摘要(2)', en: '4-2 Chat Summary (Pt.2)', ja: '4-2 対話要約 (Part 2)' },
+        { id: '4-3', zh: '4-3 聊天紀錄摘要(3)', en: '4-3 Chat Summary (Pt.3)', ja: '4-3 対話要約 (Part 3)' }
+      ],
+      price: 898,
+      tags: ['#NotebookLM', '#AIAssistant', '#ChatOps', '#SocialManagement'],
+    },
+    {
+      id: 'notebooklm_finance_stock',
+      category: 'video',
+      image: '/images/notebooklm_cover.jpg',
+      title: {
+        zh: 'NotebookLM 實戰應用：財務報表、股票分析',
+        en: 'NotebookLM: AI Financial & Stock Analysis',
+        ja: 'NotebookLM：AI財務諸表・株価分析',
+      },
+      description: {
+        zh: '第一手 NotebookLM 投資分析法。從上市櫃公司財報對標到新聞綜合評點，建立您的個人化 AI 投資領航員，從複雜數據中精準鎖定增長動能。',
+        en: 'Innovative investment analysis using NotebookLM. From financial reports to news synthesis, build your AI navigator to spot growth in complex data.',
+        ja: 'NotebookLMによる革新的な投資分析法。企業の財務諸表からニュースの総合評価まで、複雑なデータから成長性を的確に捉える個別のAI投資ナビゲーターを構築します。',
+      },
+      chapters: [
+        { id: '4-4', zh: '4-4 財務報表、股票分析(1)', en: '4-4 Financial Analysis (Pt.1)', ja: '4-4 財務分析 (Part 1)' },
+        { id: '4-5', zh: '4-5 財務報表、股票分析(2)', en: '4-5 Financial Analysis (Pt.2)', ja: '4-5 財務分析 (Part 2)' }
+      ],
+      price: 898,
+      tags: ['#NotebookLM', '#FinanceAI', '#StockAnalysis', '#Investment'],
+    },
+    {
       id: 'salesforce_se',
       category: 'report',
       image: '/images/salesforce_cover.png',
@@ -97,7 +195,7 @@ export default function ReportsClient({ lang }: { lang: 'zh' | 'en' | 'ja' }) {
       price: 498,
       tags: ['#Salesforce', '#SolutionEngineer', '#C-Level', '#BusinessPresentation'],
     },
-  ];
+];
 
   const filteredReports = activeCategory === 'all' 
     ? reports 
@@ -137,25 +235,46 @@ export default function ReportsClient({ lang }: { lang: 'zh' | 'en' | 'ja' }) {
         ))}
       </div>
 
-      <div className="reports-grid" style={{ 
-        display: 'grid', 
-        gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 450px))', 
-        gap: '3rem', 
-        justifyContent: 'center', 
-        maxWidth: '1200px', 
-        margin: '0 auto' 
-      }}>
-        {filteredReports.map((report, idx) => (
-          <div
-            key={report.id}
-            className="report-card"
-            style={{ 
-              display: 'flex', 
-              flexDirection: 'column', 
-              animation: `slideUp 0.6s ease forwards ${idx * 0.1}s`,
-              opacity: 0
-            }}
-          >
+      <div className="reports-container" style={{ position: 'relative', maxWidth: '1400px', margin: '0 auto' }}>
+        {/* Carousel Controls - Only for Video category or All */}
+        {(activeCategory === 'all' || activeCategory === 'video') && (
+          <>
+            <button className="carousel-control prev" onClick={() => scroll('left')} aria-label="Previous">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+            </button>
+            <button className="carousel-control next" onClick={() => scroll('right')} aria-label="Next">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+            </button>
+          </>
+        )}
+
+        <div 
+          className="reports-carousel" 
+          ref={scrollRef}
+          style={{ 
+            display: 'flex', 
+            gap: '3rem', 
+            overflowX: 'auto',
+            padding: '2rem 1rem 4rem',
+            scrollSnapType: 'x mandatory',
+            scrollbarWidth: 'none',
+            msOverflowStyle: 'none'
+          }}
+        >
+          {filteredReports.map((report, idx) => (
+            <div
+              key={report.id}
+              className="report-card"
+              style={{ 
+                flex: '0 0 auto',
+                width: 'min(450px, 85vw)',
+                scrollSnapAlign: 'center',
+                display: 'flex', 
+                flexDirection: 'column', 
+                animation: `slideUp 0.6s ease forwards ${idx * 0.1}s`,
+                opacity: 0
+              }}
+            >
             {/* Image */}
             <div style={{ width: '100%', aspectRatio: '16/9', position: 'relative', overflow: 'hidden', background: '#0a0a0f', borderRadius: '24px 24px 0 0' }}>
               <Image
@@ -219,45 +338,27 @@ export default function ReportsClient({ lang }: { lang: 'zh' | 'en' | 'ja' }) {
           </div>
         ))}
       </div>
+    </div>
 
       <style dangerouslySetInnerHTML={{__html: `
-        @keyframes slideUp {
-          to { opacity: 1; transform: translateY(0); }
+        .reports-carousel::-webkit-scrollbar { display: none; }
+        .carousel-control {
+          position: absolute; top: 40%; transform: translateY(-50%);
+          width: 50px; height: 50px; border-radius: 50%;
+          background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
+          color: white; display: flex; align-items: center; justify-content: center;
+          cursor: pointer; z-index: 10; backdrop-filter: blur(10px);
+          transition: all 0.3s ease;
         }
-        .report-card {
-          border: 1px solid rgba(255, 255, 255, 0.05);
-          border-radius: 24px;
-          transition: all 0.4s ease;
-        }
-        .report-card:hover {
-          transform: translateY(-10px);
-          border-color: var(--accent-color);
-          box-shadow: 0 30px 60px rgba(0,0,0,0.5), 0 0 30px rgba(0, 242, 254, 0.1);
-        }
-        .premium-badge {
-          position: absolute; top: 20px; right: 20px;
-          background: var(--accent-grad); color: #000;
-          padding: 0.4rem 1.2rem; border-radius: 50px;
-          font-size: 0.7rem; font-weight: 900;
-          text-transform: uppercase; z-index: 2;
-        }
-        .category-btn:hover {
-          box-shadow: 0 0 20px rgba(0, 242, 254, 0.2);
-          transform: scale(1.05);
-        }
-        .price-action-container {
-          background: rgba(255, 255, 255, 0.03);
-          padding: 1.5rem; border-radius: 20px;
-          display: flex; align-items: center; justify-content: space-between; gap: 1rem;
-        }
-        .price-label { font-size: 0.6rem; color: var(--text-secondary); letter-spacing: 1px; }
-        .price-val { font-size: 1.8rem; font-weight: 900; color: var(--accent-color); }
-        .status-label { font-size: 0.7rem; color: rgba(255,255,255,0.4); margin-top: 4px; }
+        .carousel-control:hover { background: var(--accent-color); color: black; border-color: var(--accent-color); transform: translateY(-50%) scale(1.1); }
+        .carousel-control.prev { left: -25px; }
+        .carousel-control.next { right: -25px; }
         @media (max-width: 768px) {
           .portfolio { padding: 0 0.5rem !important; }
           .section-title { font-size: 2.2rem !important; }
-          .reports-grid { gap: 1.5rem !important; }
-          .report-card > div:last-child { padding: 1.5rem !important; }
+          .carousel-control { display: none; }
+          .reports-carousel { gap: 1.5rem !important; padding: 1rem 0.5rem 3rem !important; }
+          .report-card { width: 85vw !important; }
           .price-action-container { 
             padding: 1.2rem !important; 
             flex-direction: column; 

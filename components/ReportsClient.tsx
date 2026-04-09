@@ -41,13 +41,13 @@ const reports = [
     description: {
       zh: '這是一套完整的 Google NotebookLM 專家級課程。從基礎介面、資料來源管理到高階 AI 對話技巧與創意工作坊，全方位解鎖 AI 對於個人知識管理與商業分析的強大潛力。',
       en: 'A comprehensive expert-level course on Google NotebookLM. Master core UI, source management, advanced AI collaboration, and creative workshops to unlock the full potential of AI.',
-      ja: 'Google NotebookLMのエキスパート級講座。基本インターフェースから、多角的なソース管理、高度なAI対話テクニックまで、AIの可能性を最大限に引き出します。',
+      ja: 'Google NotebookLMのエキスパート級講座。基本インターフェースから、多角的なソース管理、高度なAI對話テクニックまで、AIの可能性を最大限に引き出します。',
     },
     chapters: [
       { id: '1-1', zh: '1-1 認識講師', en: '1-1 Introduction', ja: '1-1 講師紹介' },
       { id: '1-2', zh: '1-2 介面認識與基本導航', en: '1-2 Interface & Navigation', ja: '1-2 ユーザーインターフェース' },
       { id: '1-3', zh: '1-3 來源導入 (PDF/網址/YT/雲端)', en: '1-3 Source Management', ja: '1-3 ソースのインポート' },
-      { id: '1-4', zh: '1-4 對話與提示詞 (Prompt Engineering)', en: '1-4 Dialogue & Prompt Engineering', ja: '1-4 対話とプロンプト' },
+      { id: '1-4', zh: '1-4 對話與提示詞 (Prompt Engineering)', en: '1-4 Dialogue & Prompt Engineering', ja: '1-4 對話とプロンプト' },
       { id: '1-5', zh: '1-5 工作室 (語音/心智圖/報告生成)', en: '1-5 Creative Workshop', ja: '1-5 クリエイティブスタジオ' }
     ],
     price: 898,
@@ -60,16 +60,16 @@ const reports = [
     title: {
       zh: 'NotebookLM 實戰應用：第二章 (日語學習)',
       en: 'NotebookLM Applied: Chapter 2 (Japanese Learning)',
-      ja: 'NotebookLM活用術：第2章 (日本語学習)',
+      ja: 'NotebookLM活用術：第2章 (日本語教育)',
     },
     description: {
       zh: '用 NotebookLM 打造專屬日語口說與聽力練習環境。透過 AI 模擬對話、文法解析與單字卡生成，讓個人知識庫成為您的 24 小時外語家教。',
       en: 'Create a Japanese learning environment with NotebookLM. Use AI for dialogue simulation and grammar analysis, transforming your knowledge base into an AI tutor.',
-      ja: 'NotebookLMで自分専用の日本語学習環境を構築。AI対話、文法分析、単語カード生成を通じて、ナレッジベースを24時間の語学家庭教師に変えます。',
+      ja: 'NotebookLMで自分専用の日本語學習環境を構築。AI對話、文法分析、單字卡生成を通じて、ナレッジベースを24時間の語學家庭教師に變えます。',
     },
     chapters: [
-      { id: '2-1', zh: '2-1 日語學習夥伴(1)', en: '2-1 AI Japanese Partner (Pt.1)', ja: '2-1 日本語学習パートナー (Part 1)' },
-      { id: '2-2', zh: '2-2 日語學習夥伴(2)', en: '2-2 AI Japanese Partner (Pt.2)', ja: '2-2 日本語学習パートナー (Part 2)' }
+      { id: '2-1', zh: '2-1 日語學習夥伴(1)', en: '2-1 AI Japanese Partner (Pt.1)', ja: '2-1 日本語言學習夥伴 (Part 1)' },
+      { id: '2-2', zh: '2-2 日語學習夥伴(2)', en: '2-2 AI Japanese Partner (Pt.2)', ja: '2-2 日本語言學習夥伴 (Part 2)' }
     ],
     price: 898,
     tags: ['#NotebookLM', '#JapaneseLearning', '#AIEducation', '#LanguageTips'],
@@ -86,7 +86,7 @@ const reports = [
     description: {
       zh: '結合 NotebookLM 深度解析市場趨勢與商業模型。學會將海量研究報告與競爭者資訊，快速轉化為精簡、高價值的決策洞察與策略藍圖。',
       en: 'Analyze trends and business models with NotebookLM. Learn to transform massive reports and competitor data into high-value strategic insights and blueprints.',
-      ja: 'NotebookLMを駆使して市場動向とビジネスモデルを分析。大量の調査レポートや競合情報を、価値の高い戦略的な洞察やロードマップに迅速に変換します。',
+      ja: 'NotebookLMを驅使して市場動向とビジネスモデルを分析。大量の調査レポートや競合情報を、價値の高い策略的な洞察やロードマップに迅速に變換します。',
     },
     chapters: [
       { id: '3-1', zh: '3-1 商業分析工具(1)', en: '3-1 Business Analysis (Pt.1)', ja: '3-1 ビジネス分析ツール (Part 1)' },
@@ -103,17 +103,17 @@ const reports = [
     title: {
       zh: 'NotebookLM 實戰應用：第四章 (聊天摘要)',
       en: 'NotebookLM Applied: Chapter 4 (Chat Summary)',
-      ja: 'NotebookLM活用術：第4章 (対話要約)',
+      ja: 'NotebookLM活用術：第4章 (對話摘要)',
     },
     description: {
       zh: '運用 NotebookLM 快速梳理 LINE/WhatsApp 聊天紀錄。自動提取關鍵訊息、待辦清單與情感分析，解決群組對話斷層問題，提升社群營運效率。',
       en: 'Summarize LINE/WhatsApp logs with NotebookLM. Extract key messages, tasks, and sentiment to close dialogue gaps and boost social operations.',
-      ja: 'NotebookLMでLINE/WhatsAppの履歴を整理。主要メッセージやタスク、感情分析を自動抽出し、グループ対話の斷絶を解消してコミュニティ運営を効率化します。',
+      ja: 'NotebookLMでLINE/WhatsAppの履歴を整理。主要メッセージやタスク、感情分析を自動抽出し、グループ對話の斷絕を解消してコミュニティ運營を效率化します。',
     },
     chapters: [
-      { id: '4-1', zh: '4-1 聊天紀錄摘要(1)', en: '4-1 Chat Summary (Pt.1)', ja: '4-1 対話要約 (Part 1)' },
-      { id: '4-2', zh: '4-2 聊天紀錄摘要(2)', en: '4-2 Chat Summary (Pt.2)', ja: '4-2 対話要約 (Part 2)' },
-      { id: '4-3', zh: '4-3 聊天紀錄摘要(3)', en: '4-3 Chat Summary (Pt.3)', ja: '4-3 対話要約 (Part 3)' }
+      { id: '4-1', zh: '4-1 聊天紀錄摘要(1)', en: '4-1 Chat Summary (Pt.1)', ja: '4-1 對話要約 (Part 1)' },
+      { id: '4-2', zh: '4-2 聊天紀錄摘要(2)', en: '4-2 Chat Summary (Pt.2)', ja: '4-2 對話要約 (Part 2)' },
+      { id: '4-3', zh: '4-3 聊天紀錄摘要(3)', en: '4-3 Chat Summary (Pt.3)', ja: '4-3 對話要約 (Part 3)' }
     ],
     price: 898,
     tags: ['#NotebookLM', '#AIAssistant', '#ChatOps', '#SocialManagement'],
@@ -130,7 +130,7 @@ const reports = [
     description: {
       zh: '第一手 NotebookLM 投資分析法。從上市櫃公司財報對標到新聞綜合評點，建立您的個人化 AI 投資領航員，從複雜數據中精準鎖定增長動能。',
       en: 'Innovative investment analysis using NotebookLM. From financial reports to news synthesis, build your AI navigator to spot growth in complex data.',
-      ja: 'NotebookLMによる創新的な投資分析法。企業の財務諸表からニュースの統合評価まで、複雜な數據から成長性を的確に捉える個別のAI投資ナビゲーターを構築します。',
+      ja: 'NotebookLMによる創新的な投資分析法。企業の財務諸表からニュースの統合評價まで、複雜な數據から成長性を的確に捉える個別的AI投資ナビゲーターを構築します。',
     },
     chapters: [
       { id: '4-4', zh: '4-4 財務報表、股票分析(1)', en: '4-4 Financial Analysis (Pt.1)', ja: '4-4 財務分析 (Part 1)' },
@@ -176,9 +176,9 @@ export default function ReportsClient({ lang }: { lang: 'zh' | 'en' | 'ja' }) {
     },
     ja: {
       title: "分析レポート (Reports)・AI講座 (AI Courses)",
-      desc: "ジェイソン・アナリティクス (Jason Analytics) が提供する独占的な分析レポート、AI実務講座、および自動化ソリューション。高品質なビジネスインサイトと戦略フレームワークを即座に提供します。",
+      desc: "ジェイソン・アナリティクス (Jason Analytics) が提供する獨占的な分析レポート、AI実務講座、および自動化ソリューション。高品質なビジネスインサイトと戦略フレームワークを即座に提供します。",
       categories: { all: "すべて", video: "動画講座", report: "ケーススタディ", data: "データセット" },
-      badge: "独占限定",
+      badge: "獨占限定",
       chaptersLabel: "チャプターリスト",
       buyBtn: "💳 今すぐ購入",
       downloadLabel: "購入後に即座にアクセス可能",
@@ -258,7 +258,7 @@ export default function ReportsClient({ lang }: { lang: 'zh' | 'en' | 'ja' }) {
       </div>
 
       <div className="reports-outer-container" style={{ position: 'relative', width: '100%', maxWidth: '1400px', margin: '0 auto' }}>
-        {/* Carousel Controls - Outside of hidden area for visibility */}
+        {/* Carousel Controls */}
         {totalOriginal > 1 && (
           <>
             <button className="carousel-control prev" onClick={handlePrev} aria-label="Previous">
@@ -293,10 +293,11 @@ export default function ReportsClient({ lang }: { lang: 'zh' | 'en' | 'ja' }) {
                   flexDirection: 'column', 
                   animation: `slideUp 0.6s ease forwards ${idx * 0.1}s`,
                   opacity: 0,
+                  height: '840px', // Fixed Overall Card Height
                 }}
               >
-                {/* Fixed Image Container */}
-                <div style={{ width: '100%', aspectRatio: '16/9', position: 'relative', overflow: 'hidden', background: '#0a0a0f', borderRadius: '24px 24px 0 0' }}>
+                {/* 1. TOP - Fixed Image Container */}
+                <div className="card-header-fixed" style={{ width: '100%', aspectRatio: '16/9', position: 'relative', overflow: 'hidden', background: '#0a0a0f', borderRadius: '24px 24px 0 0', flexShrink: 0 }}>
                   <Image
                     src={report.image}
                     alt={report.title[lang]}
@@ -307,38 +308,33 @@ export default function ReportsClient({ lang }: { lang: 'zh' | 'en' | 'ja' }) {
                   <div className="premium-badge">{t.badge}</div>
                 </div>
 
-                {/* Content Body with Rigid Framework */}
-                <div style={{ padding: '2.5rem', background: 'rgba(255,255,255,0.02)', borderRadius: '0 0 24px 24px', flex: 1, display: 'flex', flexDirection: 'column' }}>
-                  {/* Fixed Header/Title and Description area */}
-                  <div style={{ minHeight: '5.5rem' }}>
-                    <h3 style={{ fontSize: '1.4rem', fontWeight: '800', marginBottom: '1.2rem', color: '#fff', minHeight: '3.5rem', display: 'flex', alignItems: 'center' }}>
-                      {report.title[lang]}
-                    </h3>
-                  </div>
-                  <div style={{ minHeight: '7rem' }}>
-                    <p style={{ color: 'var(--text-secondary)', fontSize: '0.95rem', lineHeight: '1.8', marginBottom: '1.5rem' }}>
-                      {report.description[lang]}
-                    </p>
-                  </div>
+                {/* 2. MIDDLE - Scrollable Content Body (Title to Tags) */}
+                <div className="card-body-scrollable" style={{ 
+                  flex: 1, 
+                  overflowY: 'auto', 
+                  padding: '2rem 2.5rem', 
+                  background: 'rgba(255,255,255,0.02)',
+                  scrollbarWidth: 'thin',
+                  scrollbarColor: 'var(--accent-color) transparent'
+                }}>
+                  {/* Title */}
+                  <h3 style={{ fontSize: '1.4rem', fontWeight: '800', marginBottom: '1.5rem', color: '#fff', lineHeight: '1.4' }}>
+                    {report.title[lang]}
+                  </h3>
 
-                  {/* Chapters List with Fixed Height + Internal Scroll */}
-                  <div style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
-                    <div className="chapters-container-fixed" style={{ 
-                      height: '180px', 
-                      overflowY: 'auto', 
-                      marginBottom: '2rem', 
-                      padding: '1.5rem', 
-                      background: 'rgba(0,0,0,0.2)', 
-                      borderRadius: '16px', 
-                      border: '1px solid rgba(255,255,255,0.05)',
-                      scrollbarWidth: 'thin',
-                      scrollbarColor: 'var(--accent-color) transparent'
-                    }}>
-                      <h4 style={{ fontSize: '0.85rem', color: 'var(--accent-color)', fontWeight: '900', textTransform: 'uppercase', marginBottom: '1rem', letterSpacing: '2px', position: 'sticky', top: 0, background: 'rgba(0,0,0,0.4)', padding: '4px 0', zIndex: 1 }}>
+                  {/* Description */}
+                  <p style={{ color: 'var(--text-secondary)', fontSize: '0.95rem', lineHeight: '1.8', marginBottom: '2rem' }}>
+                    {report.description[lang]}
+                  </p>
+
+                  {/* Chapters List */}
+                  {report.chapters && (
+                    <div style={{ marginBottom: '2rem', padding: '1.2rem', background: 'rgba(0,0,0,0.2)', borderRadius: '16px', border: '1px solid rgba(255,255,255,0.05)' }}>
+                      <h4 style={{ fontSize: '0.85rem', color: 'var(--accent-color)', fontWeight: '900', textTransform: 'uppercase', marginBottom: '1rem', letterSpacing: '2px' }}>
                         {t.chaptersLabel}
                       </h4>
                       <div style={{ display: 'flex', flexDirection: 'column', gap: '0.8rem' }}>
-                        {report.chapters && report.chapters.map((ch, i) => (
+                        {report.chapters.map((ch, i) => (
                           <div key={i} style={{ display: 'flex', alignItems: 'center', gap: '0.8rem' }}>
                             <div style={{ width: '6px', height: '6px', borderRadius: '50%', background: 'var(--accent-color)', opacity: 0.8 }}></div>
                             <span style={{ fontSize: '0.85rem', color: 'rgba(255,255,255,0.7)' }}>{(ch as any)[lang]}</span>
@@ -346,15 +342,18 @@ export default function ReportsClient({ lang }: { lang: 'zh' | 'en' | 'ja' }) {
                         ))}
                       </div>
                     </div>
+                  )}
 
-                    <div className="tags-container" style={{ marginBottom: '2rem', minHeight: '2rem' }}>
-                      {report.tags.map((tag, i) => (
-                        <span key={i} className="tag" style={{ border: '1px solid rgba(255,255,255,0.1)', background: 'rgba(255,255,255,0.03)', padding: '0.2rem 0.6rem', fontSize: '0.75rem', borderRadius: '4px' }}>{tag}</span>
-                      ))}
-                    </div>
+                  {/* Tags */}
+                  <div className="tags-container" style={{ marginBottom: '1rem' }}>
+                    {report.tags.map((tag, i) => (
+                      <span key={i} className="tag" style={{ border: '1px solid rgba(255,255,255,0.1)', background: 'rgba(255,255,255,0.03)', padding: '0.2rem 0.6rem', fontSize: '0.75rem', borderRadius: '4px' }}>{tag}</span>
+                    ))}
                   </div>
+                </div>
 
-                  {/* Action Container - Bottom Fixed */}
+                {/* 3. BOTTOM - Fixed Footer (Price & Button) */}
+                <div className="card-footer-fixed" style={{ padding: '1.5rem 2.5rem 2.5rem', background: 'rgba(255,255,255,0.02)', borderRadius: '0 0 24px 24px', flexShrink: 0 }}>
                   <div className="price-action-vertical">
                     <div className="price-info-new">
                       <div className="price-val-big">NT${report.price}</div>
@@ -385,23 +384,26 @@ export default function ReportsClient({ lang }: { lang: 'zh' | 'en' | 'ja' }) {
           to { opacity: 1; transform: translateY(0); }
         }
         .reports-track::-webkit-scrollbar { display: none; }
-        .chapters-container-fixed::-webkit-scrollbar { width: 4px; }
-        .chapters-container-fixed::-webkit-scrollbar-thumb { background: var(--accent-color); border-radius: 10px; }
-        .chapters-container-fixed::-webkit-scrollbar-track { background: transparent; }
+        .card-body-scrollable::-webkit-scrollbar { width: 4px; }
+        .card-body-scrollable::-webkit-scrollbar-thumb { background: var(--accent-color); border-radius: 10px; }
+        .card-body-scrollable::-webkit-scrollbar-track { background: transparent; }
 
         .report-card {
           border: 1px solid rgba(255, 255, 255, 0.05);
           border-radius: 24px;
           transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
           background: rgba(255,255,255,0.02);
+          position: relative;
+          overflow: hidden;
         }
         .report-card:hover {
           transform: translateY(-8px);
           border-color: var(--accent-color);
           box-shadow: 0 30px 60px rgba(0,0,0,0.5), 0 0 30px rgba(0, 242, 254, 0.15);
         }
+        
         .carousel-control {
-          position: absolute; top: 38%; transform: translateY(-50%);
+          position: absolute; top: 35%; transform: translateY(-50%);
           width: 74px; height: 74px; border-radius: 50%;
           background: rgba(10, 10, 15, 0.9); border: 2px solid rgba(255,255,255,0.1);
           color: white; display: flex; align-items: center; justify-content: center;
@@ -432,7 +434,6 @@ export default function ReportsClient({ lang }: { lang: 'zh' | 'en' | 'ja' }) {
           padding: 1.5rem; border-radius: 20px;
           display: flex; flex-direction: column; gap: 1.2rem;
           border: 1px solid rgba(255,255,255,0.05);
-          margin-top: auto;
         }
         .price-val-big { font-size: 2rem; font-weight: 900; color: var(--accent-color); text-align: center; }
         .status-label-small { font-size: 0.7rem; color: rgba(255,255,255,0.4); text-align: center; margin-top: 4px; }
@@ -442,17 +443,18 @@ export default function ReportsClient({ lang }: { lang: 'zh' | 'en' | 'ja' }) {
 
         @media (max-width: 1024px) {
           :root { --items-per-row: 2; --gap: 2rem; }
+          .report-card { height: 780px !important; }
           .carousel-control { width: 60px; height: 60px; }
           .carousel-control.prev { left: -20px; }
           .carousel-control.next { right: -20px; }
         }
         @media (max-width: 768px) {
           :root { --items-per-row: 1; --gap: 1.5rem; }
+          .report-card { height: auto !important; min-height: 700px; }
+          .card-body-scrollable { height: auto !important; max-height: 450px; }
           .portfolio { padding: 0 1rem !important; }
-          .section-title { font-size: 2.2rem !important; }
           .carousel-control { display: none; }
           .reports-track { padding: 1rem 0.5rem 3rem !important; }
-          .report-card { border-radius: 20px; }
         }
       `}} />
     </section>

@@ -192,6 +192,7 @@ export default function ReportsClient({ lang }: { lang: 'zh' | 'en' | 'ja' }) {
     : reports.filter(r => r.category === activeCategory);
 
   const totalOriginal = filteredReports.length;
+  // Infinite loop prep: [Last, ...Original, First]
   const displayItems = totalOriginal > 1 
     ? [filteredReports[totalOriginal - 1], ...filteredReports, filteredReports[0]] 
     : filteredReports;
@@ -212,6 +213,12 @@ export default function ReportsClient({ lang }: { lang: 'zh' | 'en' | 'ja' }) {
     setCurrentIndex((prev) => prev - 1);
   };
 
+  const handleDotClick = (dotIndex: number) => {
+    if (totalOriginal <= 1) return;
+    setIsTransitioning(true);
+    setCurrentIndex(dotIndex + 1);
+  };
+
   const onTransitionEnd = () => {
     if (totalOriginal <= 1) return;
     if (currentIndex >= totalOriginal + 1) {
@@ -222,6 +229,14 @@ export default function ReportsClient({ lang }: { lang: 'zh' | 'en' | 'ja' }) {
       setCurrentIndex(totalOriginal);
     }
   };
+
+  // Map currentIndex back to 0-based dot index
+  // currentIndex 1 is dot 0, currentIndex 2 is dot 1...
+  // currentIndex 0 (clone of 5) is dot 5
+  // currentIndex 7 (clone of 0) is dot 0
+  const activeDotIndex = totalOriginal > 1 
+    ? ((currentIndex - 1 + totalOriginal) % totalOriginal) 
+    : 0;
 
   return (
     <section className="portfolio fade-in" style={{ padding: '0 2rem' }}>
@@ -285,15 +300,15 @@ export default function ReportsClient({ lang }: { lang: 'zh' | 'en' | 'ja' }) {
           >
             {displayItems.map((report, idx) => (
               <div
-                key={`${report.id}-${idx}`}
+                key={`${report.id}-${idx}-${currentIndex}`} // Force re-animation pattern like Portfolio
                 className="report-card"
                 style={{ 
                   flex: '0 0 calc((100% - (var(--items-per-row) - 1) * var(--gap)) / var(--items-per-row))',
                   display: 'flex', 
                   flexDirection: 'column', 
-                  animation: `slideUp 0.6s ease forwards ${idx * 0.1}s`,
+                  animation: 'slideUp 0.5s ease forwards',
                   opacity: 0,
-                  height: '840px', // Fixed Overall Card Height
+                  height: '840px',
                 }}
               >
                 {/* 1. TOP - Fixed Image Container */}
@@ -308,7 +323,7 @@ export default function ReportsClient({ lang }: { lang: 'zh' | 'en' | 'ja' }) {
                   <div className="premium-badge">{t.badge}</div>
                 </div>
 
-                {/* 2. MIDDLE - Scrollable Content Body (Title to Tags) */}
+                {/* 2. MIDDLE - Scrollable Content Body */}
                 <div className="card-body-scrollable" style={{ 
                   flex: 1, 
                   overflowY: 'auto', 
@@ -317,12 +332,10 @@ export default function ReportsClient({ lang }: { lang: 'zh' | 'en' | 'ja' }) {
                   scrollbarWidth: 'thin',
                   scrollbarColor: 'var(--accent-color) transparent'
                 }}>
-                  {/* Title */}
                   <h3 style={{ fontSize: '1.4rem', fontWeight: '800', marginBottom: '1.5rem', color: '#fff', lineHeight: '1.4' }}>
                     {report.title[lang]}
                   </h3>
 
-                  {/* Description */}
                   <p style={{ color: 'var(--text-secondary)', fontSize: '0.95rem', lineHeight: '1.8', marginBottom: '2rem' }}>
                     {report.description[lang]}
                   </p>
@@ -352,7 +365,7 @@ export default function ReportsClient({ lang }: { lang: 'zh' | 'en' | 'ja' }) {
                   </div>
                 </div>
 
-                {/* 3. BOTTOM - Fixed Footer (Price & Button) */}
+                {/* 3. BOTTOM - Fixed Footer */}
                 <div className="card-footer-fixed" style={{ padding: '1.5rem 2.5rem 2.5rem', background: 'rgba(255,255,255,0.02)', borderRadius: '0 0 24px 24px', flexShrink: 0 }}>
                   <div className="price-action-vertical">
                     <div className="price-info-new">
@@ -372,6 +385,27 @@ export default function ReportsClient({ lang }: { lang: 'zh' | 'en' | 'ja' }) {
             ))}
           </div>
         </div>
+
+        {/* Pagination Dots - Matching Portfolio Style */}
+        {totalOriginal > 1 && (
+          <div style={{ display: 'flex', justifyContent: 'center', gap: '10px', marginTop: '2rem' }}>
+            {filteredReports.map((_, i) => (
+              <div 
+                key={i} 
+                onClick={() => handleDotClick(i)}
+                style={{
+                  width: i === activeDotIndex ? '35px' : '10px',
+                  height: '10px',
+                  borderRadius: '5px',
+                  background: i === activeDotIndex ? 'var(--accent-color)' : 'rgba(255,255,255,0.15)',
+                  cursor: 'pointer',
+                  transition: 'all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)',
+                  border: i === activeDotIndex ? 'none' : '1px solid rgba(255,255,255,0.1)'
+                }}
+              />
+            ))}
+          </div>
+        )}
       </div>
 
       <style dangerouslySetInnerHTML={{__html: `
@@ -421,14 +455,6 @@ export default function ReportsClient({ lang }: { lang: 'zh' | 'en' | 'ja' }) {
         .carousel-control.prev { left: -37px; }
         .carousel-control.next { right: -37px; }
         
-        .premium-badge {
-          position: absolute; top: 20px; right: 20px;
-          background: var(--accent-grad); color: #000;
-          padding: 0.4rem 1.2rem; border-radius: 50px;
-          font-size: 0.7rem; font-weight: 900;
-          text-transform: uppercase; z-index: 2;
-          box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-        }
         .price-action-vertical {
           background: rgba(255, 255, 255, 0.04);
           padding: 1.5rem; border-radius: 20px;
@@ -451,10 +477,8 @@ export default function ReportsClient({ lang }: { lang: 'zh' | 'en' | 'ja' }) {
         @media (max-width: 768px) {
           :root { --items-per-row: 1; --gap: 1.5rem; }
           .report-card { height: auto !important; min-height: 700px; }
-          .card-body-scrollable { height: auto !important; max-height: 450px; }
           .portfolio { padding: 0 1rem !important; }
           .carousel-control { display: none; }
-          .reports-track { padding: 1rem 0.5rem 3rem !important; }
         }
       `}} />
     </section>

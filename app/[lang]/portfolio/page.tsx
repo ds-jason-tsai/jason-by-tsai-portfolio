@@ -5,12 +5,12 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
   const lang = (await params).lang;
   const titles = { 
     zh: "數據專案作品集 | 傑森數據 - Tableau, AI 與 FinTech 實務案例", 
-    en: "Project Portfolio | Jason Analytics - Tableau, AI & FinTech Cases", 
+    en: "Portfolio | Jason Analytics - Tableau, AI & FinTech", 
     ja: "分析プロジェクト集 | ジェイソン・アナリティクス - Tableau, AI と FinTech の実績" 
   };
   const descriptions = {
     zh: "傑森數據 Jason Analytics 精選數據分析作品集。由 Jason Tsai 主導，涵蓋 Python 進階數據建模、Tableau 商業動態視覺化儀表板、NotebookLM 與多種 AI 技術應用實績。深耕大型數據工程開發與 MarTech 技術架構，展示多元產業的數據決策透明化與流程自動化成果，協助您深度理解數據在商業實務中的關鍵價值。立即點擊看更多專案詳情。",
-    en: "Showcasing the data analysis portfolio of Jason Analytics. Featured projects include advanced Python data modeling, interactive Tableau business dashboards, AI-driven applications with NotebookLM, and large-scale data engineering projects. Explore evidence-based results and learn how we transform raw data into strategic business value across diverse industries.",
+    en: "Explore Jason Analytics' data portfolio. Projects include Python modeling, Tableau dashboards, and AI applications. We transform raw data into strategic value through advanced engineering and visualization. See our latest analytics cases here.",
     ja: "Jason Analytics のデータ分析ポートフォリオ。Python データモデリング、動的な Tableau ダッシュボード、AI（NotebookLM）のビジネス活用、大規模データエンジニアリングの実績を公開。多角的な視点から産業データの可視化と自動化を推進し、データがビジネスに不可欠な価値を生むプロセスを紹介します。詳細なプロジェクト一覧はこちら。"
   };
   return { 
@@ -103,7 +103,7 @@ export default async function Portfolio({ params }: { params: Promise<{ lang: st
           .portfolio { padding: 0 0.5rem !important; }
         }
       `}} />
-      <h2 className="section-title">{t.title}</h2>
+      <h1 className="section-title">{t.title}</h1>
       <p style={{ textAlign: 'center', marginBottom: '3rem', color: 'var(--text-secondary)' }}>{t.desc}</p>
       
       <PortfolioClient projects={projects} lang={lang} t={t} />

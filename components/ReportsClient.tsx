@@ -341,24 +341,60 @@ export default function ReportsClient({ lang }: { lang: 'zh' | 'en' | 'ja' }) {
     </div>
 
       <style dangerouslySetInnerHTML={{__html: `
+        @keyframes slideUp {
+          from { opacity: 0; transform: translateY(30px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
         .reports-carousel::-webkit-scrollbar { display: none; }
+        .report-card {
+          border: 1px solid rgba(255, 255, 255, 0.05);
+          border-radius: 24px;
+          transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+          background: rgba(255,255,255,0.02);
+        }
+        .report-card:hover {
+          transform: translateY(-10px) scale(1.02);
+          border-color: var(--accent-color);
+          box-shadow: 0 30px 60px rgba(0,0,0,0.5), 0 0 30px rgba(0, 242, 254, 0.15);
+        }
         .carousel-control {
           position: absolute; top: 40%; transform: translateY(-50%);
-          width: 50px; height: 50px; border-radius: 50%;
-          background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
+          width: 54px; height: 54px; border-radius: 50%;
+          background: rgba(10, 10, 15, 0.8); border: 1px solid rgba(255,255,255,0.1);
           color: white; display: flex; align-items: center; justify-content: center;
-          cursor: pointer; z-index: 10; backdrop-filter: blur(10px);
-          transition: all 0.3s ease;
+          cursor: pointer; z-index: 10; backdrop-filter: blur(12px);
+          transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+          box-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
-        .carousel-control:hover { background: var(--accent-color); color: black; border-color: var(--accent-color); transform: translateY(-50%) scale(1.1); }
-        .carousel-control.prev { left: -25px; }
-        .carousel-control.next { right: -25px; }
+        .carousel-control:hover { 
+          background: var(--accent-color); 
+          color: #000; 
+          border-color: var(--accent-color); 
+          transform: translateY(-50%) scale(1.15);
+          box-shadow: 0 0 25px rgba(0, 242, 254, 0.4);
+        }
+        .carousel-control.prev { left: -27px; }
+        .carousel-control.next { right: -27px; }
+        .premium-badge {
+          position: absolute; top: 20px; right: 20px;
+          background: var(--accent-grad); color: #000;
+          padding: 0.4rem 1.2rem; border-radius: 50px;
+          font-size: 0.7rem; font-weight: 900;
+          text-transform: uppercase; z-index: 2;
+          box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+        .price-action-container {
+          background: rgba(255, 255, 255, 0.04);
+          padding: 1.5rem; border-radius: 20px;
+          display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+          border: 1px solid rgba(255,255,255,0.05);
+        }
         @media (max-width: 768px) {
           .portfolio { padding: 0 0.5rem !important; }
           .section-title { font-size: 2.2rem !important; }
           .carousel-control { display: none; }
           .reports-carousel { gap: 1.5rem !important; padding: 1rem 0.5rem 3rem !important; }
-          .report-card { width: 85vw !important; }
+          .report-card { width: 88vw !important; }
           .price-action-container { 
             padding: 1.2rem !important; 
             flex-direction: column; 

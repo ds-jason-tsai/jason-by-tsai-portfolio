@@ -35,7 +35,7 @@ export default async function Contact({ params }: { params: Promise<{ lang: stri
 
   return (
     <section className="contact fade-in" style={{ padding: '0 2rem' }}>
-      <h1 className="section-title">{t.title}</h1>
+      <h1 className="section-title" id="contact-title">{t.title}</h1>
       <p style={{ textAlign: 'center', marginBottom: '3rem', color: 'var(--text-secondary)' }}>{t.subtitle}</p>
       <div className="contact-card">
         <h3 className="service-title">{t.desc}</h3>

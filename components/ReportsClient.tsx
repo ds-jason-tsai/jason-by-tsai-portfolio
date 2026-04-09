@@ -69,7 +69,7 @@ const reports = [
     },
     chapters: [
       { id: '2-1', zh: '2-1 日語學習夥伴(1)', en: '2-1 AI Japanese Partner (Pt.1)', ja: '2-1 日本語学習パートナー (Part 1)' },
-      { id: '2-2', zh: '2-2 日語學習夥伴(2)', en: '2-2 AI Japanese Partner (Pt.2)', ja: '2-2 日本語學習パートナー (Part 2)' }
+      { id: '2-2', zh: '2-2 日語學習夥伴(2)', en: '2-2 AI Japanese Partner (Pt.2)', ja: '2-2 日本語学習パートナー (Part 2)' }
     ],
     price: 898,
     tags: ['#NotebookLM', '#JapaneseLearning', '#AIEducation', '#LanguageTips'],
@@ -143,7 +143,8 @@ const reports = [
 
 export default function ReportsClient({ lang }: { lang: 'zh' | 'en' | 'ja' }) {
   const [activeCategory, setActiveCategory] = useState<'all' | 'video' | 'report' | 'data'>('all');
-  const [currentIndex, setCurrentIndex] = useState(0);
+  const [currentIndex, setCurrentIndex] = useState(1);
+  const [isTransitioning, setIsTransitioning] = useState(true);
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
@@ -153,10 +154,6 @@ export default function ReportsClient({ lang }: { lang: 'zh' | 'en' | 'ja' }) {
       }
     }
   }, []);
-
-  useEffect(() => {
-    setCurrentIndex(0);
-  }, [activeCategory]);
 
   const content = {
     zh: {
@@ -194,14 +191,37 @@ export default function ReportsClient({ lang }: { lang: 'zh' | 'en' | 'ja' }) {
     ? reports 
     : reports.filter(r => r.category === activeCategory);
 
-  const totalItems = filteredReports.length;
+  const totalOriginal = filteredReports.length;
+  // Infinite loop prep: [Last, ...Original, First]
+  const displayItems = totalOriginal > 1 
+    ? [filteredReports[totalOriginal - 1], ...filteredReports, filteredReports[0]] 
+    : filteredReports;
+
+  useEffect(() => {
+    setCurrentIndex(totalOriginal > 1 ? 1 : 0);
+  }, [activeCategory, totalOriginal]);
 
   const handleNext = () => {
-    setCurrentIndex((prev) => (prev + 1 >= totalItems ? 0 : prev + 1));
+    if (totalOriginal <= 1) return;
+    setIsTransitioning(true);
+    setCurrentIndex((prev) => prev + 1);
   };
 
   const handlePrev = () => {
-    setCurrentIndex((prev) => (prev - 1 < 0 ? totalItems - 1 : prev - 1));
+    if (totalOriginal <= 1) return;
+    setIsTransitioning(true);
+    setCurrentIndex((prev) => prev - 1);
+  };
+
+  const onTransitionEnd = () => {
+    if (totalOriginal <= 1) return;
+    if (currentIndex >= totalOriginal + 1) {
+      setIsTransitioning(false);
+      setCurrentIndex(1);
+    } else if (currentIndex <= 0) {
+      setIsTransitioning(false);
+      setCurrentIndex(totalOriginal);
+    }
   };
 
   return (
@@ -239,28 +259,32 @@ export default function ReportsClient({ lang }: { lang: 'zh' | 'en' | 'ja' }) {
       </div>
 
       <div className="reports-container" style={{ position: 'relative', maxWidth: '1400px', margin: '0 auto', overflow: 'hidden' }}>
-        {/* Carousel Controls */}
-        <button className="carousel-control prev" onClick={handlePrev} aria-label="Previous">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
-        </button>
-        <button className="carousel-control next" onClick={handleNext} aria-label="Next">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><path d="M9 18l6-6-6-6"/></svg>
-        </button>
+        {totalOriginal > 1 && (
+          <>
+            <button className="carousel-control prev" onClick={handlePrev} aria-label="Previous">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+            </button>
+            <button className="carousel-control next" onClick={handleNext} aria-label="Next">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+            </button>
+          </>
+        )}
 
         <div 
           className="reports-track" 
+          onTransitionEnd={onTransitionEnd}
           style={{ 
             display: 'flex', 
-            transition: 'transform 0.6s cubic-bezier(0.23, 1, 0.32, 1)',
+            transition: isTransitioning ? 'transform 0.6s cubic-bezier(0.23, 1, 0.32, 1)' : 'none',
             transform: `translateX(calc(-${currentIndex} * (100% / var(--items-per-row))))`,
             gap: 'var(--gap)',
             padding: '2rem 1.5rem 4rem',
             width: '100%',
           }}
         >
-          {filteredReports.map((report, idx) => (
+          {displayItems.map((report, idx) => (
             <div
-              key={report.id}
+              key={`${report.id}-${idx}`}
               className="report-card"
               style={{ 
                 flex: '0 0 calc((100% - (var(--items-per-row) - 1) * var(--gap)) / var(--items-per-row))',
@@ -284,42 +308,45 @@ export default function ReportsClient({ lang }: { lang: 'zh' | 'en' | 'ja' }) {
 
               {/* Content Body */}
               <div style={{ padding: '2.5rem', background: 'rgba(255,255,255,0.02)', borderRadius: '0 0 24px 24px', flex: 1, display: 'flex', flexDirection: 'column' }}>
-                <h3 style={{ fontSize: '1.4rem', fontWeight: '800', marginBottom: '1.2rem', color: '#fff', minHeight: '3.5rem', display: 'flex', alignItems: 'center' }}>
-                  {report.title[lang]}
-                </h3>
-
-                <p style={{ color: 'var(--text-secondary)', fontSize: '0.95rem', lineHeight: '1.8', marginBottom: '2rem', minHeight: '6.5rem' }}>
-                  {report.description[lang]}
-                </p>
-
-                {/* Chapters List */}
-                {report.chapters && (
-                  <div style={{ marginBottom: '2rem', padding: '1.5rem', background: 'rgba(0,0,0,0.2)', borderRadius: '16px', border: '1px solid rgba(255,255,255,0.05)' }}>
-                    <h4 style={{ fontSize: '0.85rem', color: 'var(--accent-color)', fontWeight: '900', textTransform: 'uppercase', marginBottom: '1rem', letterSpacing: '2px' }}>
-                      {t.chaptersLabel}
-                    </h4>
-                    <div style={{ display: 'flex', flexDirection: 'column', gap: '0.8rem' }}>
-                      {report.chapters.map((ch, i) => (
-                        <div key={i} style={{ display: 'flex', alignItems: 'center', gap: '0.8rem' }}>
-                          <div style={{ width: '6px', height: '6px', borderRadius: '50%', background: 'var(--accent-color)', opacity: 0.8 }}></div>
-                          <span style={{ fontSize: '0.85rem', color: 'rgba(255,255,255,0.7)' }}>{(ch as any)[lang]}</span>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                )}
-
-                <div className="tags-container" style={{ margin: 'auto 0 2rem' }}>
-                  {report.tags.map((tag, i) => (
-                    <span key={i} className="tag" style={{ border: '1px solid rgba(255,255,255,0.1)', background: 'rgba(255,255,255,0.03)', padding: '0.2rem 0.6rem', fontSize: '0.75rem', borderRadius: '4px' }}>{tag}</span>
-                  ))}
+                <div style={{ minHeight: '11rem' }}>
+                  <h3 style={{ fontSize: '1.4rem', fontWeight: '800', marginBottom: '1.2rem', color: '#fff', minHeight: '3.5rem', display: 'flex', alignItems: 'center' }}>
+                    {report.title[lang]}
+                  </h3>
+                  <p style={{ color: 'var(--text-secondary)', fontSize: '0.95rem', lineHeight: '1.8', marginBottom: '2rem' }}>
+                    {report.description[lang]}
+                  </p>
                 </div>
 
-                <div className="price-action-container">
-                  <div className="price-info">
-                    <div className="price-label">PREMIUM VALUE</div>
-                    <div className="price-val">NT${report.price}</div>
-                    <div className="status-label">📥 {t.downloadLabel}</div>
+                {/* Chapters List - Fixed position via margin-top: auto spacer if needed, but here we just ensure content above is min-height */}
+                <div style={{ flex: 1 }}>
+                  {report.chapters && (
+                    <div style={{ marginBottom: '2rem', padding: '1.5rem', background: 'rgba(0,0,0,0.2)', borderRadius: '16px', border: '1px solid rgba(255,255,255,0.05)' }}>
+                      <h4 style={{ fontSize: '0.85rem', color: 'var(--accent-color)', fontWeight: '900', textTransform: 'uppercase', marginBottom: '1rem', letterSpacing: '2px' }}>
+                        {t.chaptersLabel}
+                      </h4>
+                      <div style={{ display: 'flex', flexDirection: 'column', gap: '0.8rem' }}>
+                        {report.chapters.map((ch, i) => (
+                          <div key={i} style={{ display: 'flex', alignItems: 'center', gap: '0.8rem' }}>
+                            <div style={{ width: '6px', height: '6px', borderRadius: '50%', background: 'var(--accent-color)', opacity: 0.8 }}></div>
+                            <span style={{ fontSize: '0.85rem', color: 'rgba(255,255,255,0.7)' }}>{(ch as any)[lang]}</span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
+                  <div className="tags-container" style={{ marginBottom: '2rem' }}>
+                    {report.tags.map((tag, i) => (
+                      <span key={i} className="tag" style={{ border: '1px solid rgba(255,255,255,0.1)', background: 'rgba(255,255,255,0.03)', padding: '0.2rem 0.6rem', fontSize: '0.75rem', borderRadius: '4px' }}>{tag}</span>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Action Container - Price and Button stacked */}
+                <div className="price-action-vertical">
+                  <div className="price-info-new">
+                    <div className="price-val-big">NT${report.price}</div>
+                    <div className="status-label-small">📥 {t.downloadLabel}</div>
                   </div>
                   <BuyButton
                     reportId={report.id}
@@ -337,7 +364,7 @@ export default function ReportsClient({ lang }: { lang: 'zh' | 'en' | 'ja' }) {
 
       <style dangerouslySetInnerHTML={{__html: `
         :root {
-          --items-per-row: 3;
+          --items-per-row: 2;
           --gap: 2.5rem;
         }
         @keyframes slideUp {
@@ -382,12 +409,20 @@ export default function ReportsClient({ lang }: { lang: 'zh' | 'en' | 'ja' }) {
           text-transform: uppercase; z-index: 2;
           box-shadow: 0 4px 15px rgba(0,0,0,0.3);
         }
-        .price-action-container {
+        .price-action-vertical {
           background: rgba(255, 255, 255, 0.04);
           padding: 1.5rem; border-radius: 20px;
-          display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+          display: flex; flex-direction: column; gap: 1.2rem;
           border: 1px solid rgba(255,255,255,0.05);
+          margin-top: 1rem;
         }
+        .price-val-big { font-size: 2rem; font-weight: 900; color: var(--accent-color); text-align: center; }
+        .status-label-small { font-size: 0.7rem; color: rgba(255,255,255,0.4); text-align: center; margin-top: 4px; }
+        
+        /* Ensure BuyButton component takes full width */
+        .price-action-vertical > div { width: 100%; }
+        .price-action-vertical button { width: 100% !important; display: block; }
+
         @media (max-width: 1024px) {
           :root { --items-per-row: 2; --gap: 2rem; }
           .carousel-control.prev { left: -15px; }
@@ -400,13 +435,6 @@ export default function ReportsClient({ lang }: { lang: 'zh' | 'en' | 'ja' }) {
           .carousel-control { display: none; }
           .reports-track { padding: 1rem 0.5rem 3rem !important; }
           .report-card { border-radius: 20px; }
-          .price-action-container { 
-            padding: 1.2rem !important; 
-            flex-direction: column; 
-            align-items: center; 
-            text-align: center;
-          }
-          .price-info { margin-bottom: 1rem; }
         }
       `}} />
     </section>

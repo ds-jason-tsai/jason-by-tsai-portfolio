@@ -4,14 +4,14 @@ import Link from 'next/link';
 export async function generateMetadata({ params }: { params: Promise<{ lang: string }> }): Promise<Metadata> {
   const lang = (await params).lang;
   const titles = { 
-    zh: "數據分析師職涯經歷 | 傑森數據 - Python, SQL 與數據工程實務", 
-    en: "Professional Experience | Jason Analytics - Python, SQL & Data Engineering", 
-    ja: "実務経験 | ジェイソン・アナリティクス - Python, SQL とデータエンジニアリングの実績" 
+    zh: "數據分析師職涯經歷 | 傑森數據 Jason Analytics", 
+    en: "Professional Experience | Jason Analytics - Data Expert", 
+    ja: "職務経歴 | ジェイソン・アナリティクス Jason Analytics" 
   };
   const descriptions = {
-    zh: "深入了解傑森數據 Jason Analytics 與 Jason Tsai 的專業職涯實績。累積多年跨領域數據分析與數據工程開發經驗，深耕 FinTech 金融科技、AI 建模與 MarTech 行銷科技顧問領域。具備豐富的企業端大數據教學經驗與實際產學專案執行力，協助您更全面地了解數據分析師的實戰能力與專業背景。立即點擊查看完整資歷軌跡。",
-    en: "Explore the professional career and achievements of Jason Tsai at Jason Analytics. Years of experience in Data Analysis, Data Engineering, FinTech, and MarTech consulting. Bridging technical implementation and business strategy through corporate and academic projects. View the full career timeline and expertise here.",
-    ja: "Jason Analytics と Jason Tsai の専門的な職務経歴と実績をご紹介します。金融テクノロジー（FinTech）、AI モデリング、マーケティングテクノロジー（MarTech）のコンサルティング分野で長年の実務経験を積み、データエンジニアリングと教育の両面で実績があります。実務から得た深い知見と、キャリアの歩みを詳細に公開しています。職務経歴の全容はこちら。"
+    zh: "探索傑森數據 Jason Analytics 與 Jason Tsai 的專業職涯實績。累積多年跨領域數據分析與數據工程經驗，深耕 FinTech、AI 建模與 MarTech 顧問領域。具備豐富的企業端教學經驗與實際產學專案執行力，協助您更全面了解數據分析師的實戰背景，立即點擊查看完整資歷軌跡。",
+    en: "Explore Jason Tsai's professional career and achievements at Jason Analytics. With years of experience in Data Analysis, Data Engineering, FinTech, and MarTech, we bridge technical implementation with business strategy. View the full career timeline and expert data analytics background here.",
+    ja: "ジェイソン・アナリティクス Jason Analytics と Jason Tsai の專業的な職務経歴。FinTech、AIモデリング、MarTechの各分野で長年の實務経験があり、數據エンジニアリングと教育の両面で実績があります。実務から得た深い知見とキャリアの歩みを詳細に公開。職務経歴の全容をこちらでご紹介します。"
   };
   return { 
     title: titles[lang as 'zh'|'en'|'ja'] || titles['zh'],

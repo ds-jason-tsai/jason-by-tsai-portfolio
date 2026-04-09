@@ -1,7 +1,7 @@
 ---
 title:
   zh: "GA4 匯出至 BigQuery 的資料結構"
-  en: "Data Structure of GA4 Export to BigQuery"
+  en: "GA4 BigQuery Export Schema Explained"
   ja: "GA4からBigQueryへのエクスポートデータ構造"
 description:
   zh: "當資料從 GA4 被匯出至 BigQuery 後，本文說明 GA4 資料表各欄位的定義，並將其分為「事件」和「使用者」兩大主軸，幫助你理解資料樣態。"

@@ -9,7 +9,7 @@ export default function ArticleListClient({ articles, lang, t }: { articles: any
   // Extract all unique tags dynamically
   const uniqueTags = Array.from(new Set(
     articles.flatMap(art => art.tags ? art.tags[lang] : [])
-  )).slice(0, 5); // Limit to top 5 tags to prevent crowding
+  ));
   
   const categories = ['all', ...uniqueTags];
 
@@ -25,7 +25,7 @@ export default function ArticleListClient({ articles, lang, t }: { articles: any
         } catch(e) {}
       }
     }
-  }, []);
+  }, [categories]);
 
   const handleCategoryClick = (cat: string) => {
     setActiveCategory(cat);
@@ -39,28 +39,41 @@ export default function ArticleListClient({ articles, lang, t }: { articles: any
   return (
     <div className="articles-client-container" style={{ maxWidth: '900px', margin: '0 auto' }}>
       
-      {/* Category Tabs */}
-      <div style={{ display: 'flex', justifyContent: 'center', gap: '1rem', marginBottom: '4rem', flexWrap: 'wrap' }}>
-        {categories.map((cat, idx) => (
-          <button
-            key={idx}
-            onClick={() => handleCategoryClick(cat)}
-            style={{
-              padding: '0.6rem 1.8rem',
-              borderRadius: '30px',
-              border: '1px solid rgba(255,255,255,0.1)',
-              background: activeCategory === cat ? 'var(--accent-color)' : 'rgba(255,255,255,0.05)',
-              color: activeCategory === cat ? '#000' : '#fff',
-              fontSize: '1rem',
-              fontWeight: activeCategory === cat ? '800' : '500',
-              cursor: 'pointer',
-              transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)'
-            }}
-            className="category-btn fade-in"
-          >
-            {cat === 'all' ? (lang === 'zh' ? '全部文章' : (lang === 'ja' ? 'すべての記事' : 'All Articles')) : cat}
-          </button>
-        ))}
+      {/* Category Tabs with Horizontal Scroll for Mobile */}
+      <div className="category-scroll-wrapper" style={{ marginBottom: '3.5rem', position: 'relative' }}>
+        <div className="category-scroll-container" style={{ 
+          display: 'flex', 
+          justifyContent: categories.length > 5 ? 'flex-start' : 'center', 
+          gap: '0.8rem', 
+          overflowX: 'auto',
+          padding: '0.5rem 0 1.5rem',
+          msOverflowStyle: 'none',
+          scrollbarWidth: 'none',
+          WebkitOverflowScrolling: 'touch'
+        }}>
+          {categories.map((cat, idx) => (
+            <button
+              key={idx}
+              onClick={() => handleCategoryClick(cat)}
+              style={{
+                padding: '0.5rem 1.4rem',
+                borderRadius: '30px',
+                border: '1px solid rgba(255,255,255,0.1)',
+                background: activeCategory === cat ? 'var(--accent-color)' : 'rgba(255,255,255,0.05)',
+                color: activeCategory === cat ? '#000' : '#fff',
+                fontSize: '0.9rem',
+                fontWeight: activeCategory === cat ? '800' : '500',
+                cursor: 'pointer',
+                transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+                whiteSpace: 'nowrap',
+                flexShrink: 0
+              }}
+              className="category-btn fade-in"
+            >
+              {cat === 'all' ? (lang === 'zh' ? '全部文章' : (lang === 'ja' ? 'すべての記事' : 'All Articles')) : cat}
+            </button>
+          ))}
+        </div>
       </div>
 
       <div className="articles-list" style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
@@ -133,16 +146,31 @@ export default function ArticleListClient({ articles, lang, t }: { articles: any
           box-shadow: 0 0 20px rgba(0, 242, 254, 0.2);
           transform: scale(1.05);
         }
+        /* Mobile Horizontal Scroll Polish */
+        .category-scroll-container::-webkit-scrollbar {
+          display: none;
+        }
         @media (max-width: 768px) {
+          .category-scroll-wrapper::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            height: 100%;
+            width: 40px;
+            background: linear-gradient(to left, var(--bg-color, #0a0a0a), transparent);
+            pointer-events: none;
+            z-index: 2;
+          }
           .articles-client-container { padding: 0 !important; }
           .article-list-card { 
             padding: 1.5rem !important; 
             border-radius: 12px !important; 
-            margin: 0 -0.5rem; /* Slight negative margin to offset parent padding if any */
+            margin: 0 -0.5rem;
           }
           .article-list-card h3 { font-size: 1.3rem !important; }
           .article-list-card p { font-size: 0.95rem !important; margin-bottom: 1.5rem !important; }
-          .category-btn { padding: 0.5rem 1.2rem !important; font-size: 0.9rem !important; }
+          .category-btn { padding: 0.45rem 1.1rem !important; font-size: 0.85rem !important; }
         }
       `}} />
     </div>

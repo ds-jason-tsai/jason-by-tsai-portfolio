@@ -36,7 +36,7 @@ export default function ReportsClient({ lang }: { lang: 'zh' | 'en' | 'ja' }) {
       downloadLabel: "Instant access after purchase",
     },
     ja: {
-      title: "分析報告・AI講座・自動化解決策",
+      title: "分析レポート (Reports)・AI講座 (AI Courses)",
       desc: "ジェイソン・アナリティクス (Jason Analytics) が提供する独占的な分析レポート、AI実務講座、および自動化ソリューション。高品質なビジネスインサイトと戦略フレームワークを即座に提供します。",
       categories: { all: "すべて", video: "動画講座", report: "ケーススタディ", data: "データセット" },
       badge: "独占限定",

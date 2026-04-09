@@ -57,7 +57,7 @@ export default function DashboardsClient({ lang }: { lang: 'zh' | 'en' | 'ja' })
 
   const t = {
     zh: {
-      mainTitle: "數據儀表板專區",
+      mainTitle: "Tableau 與 Looker Studio 數據視覺化",
       desc: "透過直覺的視覺化界面，將枯燥的原始數據轉化為可隨時互動、過濾並挖掘深層商業策略的動態儀表板。",
       note: "※ 建議使用電腦瀏覽器以獲得最佳交互體驗",
       backToHome: "回到首頁",

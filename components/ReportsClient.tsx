@@ -210,6 +210,47 @@ export default function ReportsClient({ lang }: { lang: 'zh' | 'en' | 'ja' }) {
     setCurrentIndex((prev) => (prev === 0 ? total - 1 : prev - 1));
   };
 
+  // Safety check to prevent index out of bounds when total is 0
+  if (total === 0) {
+    return (
+      <section className="portfolio premium-section fade-in" style={{ padding: '0 2rem' }}>
+        <h1 className="section-title">{t.title}</h1>
+        <p style={{ textAlign: 'center', marginBottom: '3rem', color: 'var(--text-secondary)', maxWidth: '680px', margin: '0 auto 3rem', lineHeight: '1.8' }}>
+          {t.desc}
+        </p>
+        <div style={{ display: 'flex', justifyContent: 'center', gap: '1rem', marginBottom: '3rem', flexWrap: 'wrap' }}>
+          {(['all', 'video', 'report', 'data'] as const).map(cat => (
+            <button
+              key={cat}
+              onClick={() => {
+                setActiveCategory(cat);
+                setCurrentIndex(0);
+                window.history.pushState(null, '', `#${cat}`);
+              }}
+              style={{
+                padding: '0.6rem 2rem',
+                borderRadius: '50px',
+                border: '1px solid rgba(255,255,255,0.1)',
+                background: activeCategory === cat ? 'var(--accent-color)' : 'rgba(255,255,255,0.05)',
+                color: activeCategory === cat ? '#000' : '#fff',
+                fontSize: '0.9rem',
+                fontWeight: activeCategory === cat ? '800' : '500',
+                cursor: 'pointer',
+                transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)'
+              }}
+              className="category-btn"
+            >
+              {t.categories[cat]}
+            </button>
+          ))}
+        </div>
+        <div style={{ textAlign: 'center', padding: '5rem 0', color: 'var(--text-secondary)', background: 'var(--glass-bg)', borderRadius: '24px' }}>
+          {lang === 'zh' ? '☕ 內容正在準備中，敬請期待！' : (lang === 'ja' ? '☕ コンテンツ準備中、お見逃しなく！' : '☕ Content coming soon, stay tuned!')}
+        </div>
+      </section>
+    );
+  }
+
   const currentBatch = isMobile || total <= 1
     ? [filteredReports[currentIndex]]
     : [filteredReports[currentIndex], filteredReports[(currentIndex + 1) % total]];

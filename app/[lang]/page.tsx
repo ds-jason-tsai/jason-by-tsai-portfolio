@@ -205,7 +205,7 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
           text-align: center;
         }
         .hero-content {
-          max-width: 800px;
+          max-width: 950px;
           width: 100%;
           z-index: 2;
         }
@@ -225,7 +225,7 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
           font-size: 1.15rem;
           color: var(--text-secondary);
           margin-bottom: 2.5rem;
-          max-width: 800px;
+          max-width: 950px;
           margin-left: auto;
           margin-right: auto;
         }

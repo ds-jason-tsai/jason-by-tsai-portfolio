@@ -356,16 +356,27 @@ export default function ReportsClient({ lang }: { lang: 'zh' | 'en' | 'ja' }) {
                 scrollbarWidth: 'thin',
                 scrollbarColor: 'var(--accent-color) transparent'
               }}>
-                <h3 style={{ fontSize: '1.4rem', fontWeight: '800', marginBottom: '1.5rem', color: '#fff', lineHeight: '1.4', minHeight: '4.2rem' }}>
+                <h3 style={{ 
+                  fontSize: '1.4rem', 
+                  fontWeight: '800', 
+                  marginBottom: '1.5rem', 
+                  color: '#fff', 
+                  lineHeight: '1.5', 
+                  minHeight: '4.5rem',
+                  display: '-webkit-box',
+                  WebkitLineClamp: 2,
+                  WebkitBoxOrient: 'vertical',
+                  overflow: 'hidden'
+                }}>
                   {report.title[lang]}
                 </h3>
-
+                
                 <p style={{ 
                   color: 'var(--text-secondary)', 
                   fontSize: '0.95rem', 
                   lineHeight: '1.8', 
                   marginBottom: '2rem', 
-                  minHeight: '7.5rem',
+                  minHeight: '7.2rem',
                   display: '-webkit-box',
                   WebkitLineClamp: 4,
                   WebkitBoxOrient: 'vertical',

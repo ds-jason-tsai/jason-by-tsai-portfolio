@@ -4,9 +4,9 @@ title:
   en: "GA4 BigQuery Export Schema Explained"
   ja: "GA4からBigQueryへのエクスポートデータ構造"
 description:
-  zh: "當資料從 GA4 被匯出至 BigQuery 後，本文說明 GA4 資料表各欄位的定義，並將其分為「事件」和「使用者」兩大主軸，幫助你理解資料樣態。"
-  en: "This article explains the definitions of various fields in the GA4 data table, categorizing them into 'Events' and 'Users' to help you better structure exported BQ tracking."
-  ja: "GA4からBigQueryにデータがエクスポートされた後に行うデータクレンジングについて、イベントとユーザーの二大軸で理解を深めます。"
+  zh: "當 Google Analytics 4 (GA4) 數據匯出至 BigQuery 後，理解其複雜的 RECORD 與 STRUCT 巢狀資料結構是進行進階分析的首要任務。本文深入解析 GA4 在 BigQuery 中的 Schema 架構，並將其拆解為「事件」與「使用者」兩大核心主軸。我們將說明重要欄位定義、資料清洗的緩衝機制，以及如何優化 SQL 查詢以捕捉精確的數位軌跡。這份完整的 BigQuery 資料結構指南，能幫助分析師與工程師建立可靠的數據模型並產出商業洞察。"
+  en: "Mastering the GA4 BigQuery export schema is essential for advanced data analysis. This guide provides a detailed breakdown of the complex RECORD and STRUCT nested data structures, categorizing fields into 'Events' and 'Users' dimensions. Learn about key field definitions, data cleansing buffer strategies, and how to handle nested parameters for efficient SQL querying. Perfect for data analysts and engineers looking to build robust data models and unlock deep behavioral insights from raw GA4 data."
+  ja: "Google アナリティクス 4 (GA4) から BigQuery へのエクスポート機能は生データ分析に強力ですが、その構造は RECORD や STRUCT 等の複雑なネスト型で構成されています。本記事では、GA4 データのスキーマを「イベント」と「ユーザー」の 2 軸に分けて分かりやすく解説。データクレンジングのポイントから各フィールドの定義、実践的な分析 Tips まで現役アナリストが紹介します。BigQuery を活用して高度な顧客行動分析やマーケティング最適化を目指す方のための実践ガイドです。"
 date: "2023-11-07"
 tags:
   zh: ["#GA4", "#BigQuery", "#資料分析"]

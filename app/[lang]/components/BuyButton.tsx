@@ -31,11 +31,12 @@ export default function BuyButton({ reportId, lang, buttonText, price, productNa
         return;
       }
 
-      if (data.newebpayUrl && data.params) {
-        // 動態建立隱藏 form，POST 到藍新金流頁面
+      const gatewayUrl = data.paymentUrl || data.newebpayUrl;
+      if (gatewayUrl && data.params) {
+        // 動態建立隱藏 form，POST 到金流頁面
         const form = document.createElement('form');
         form.method = 'POST';
-        form.action = data.newebpayUrl;
+        form.action = gatewayUrl;
 
         Object.entries(data.params as Record<string, string>).forEach(([key, val]) => {
           const input = document.createElement('input');
@@ -46,7 +47,7 @@ export default function BuyButton({ reportId, lang, buttonText, price, productNa
         });
 
         document.body.appendChild(form);
-        form.submit(); // 跳轉到綠界付款頁面
+        form.submit(); // 跳轉到付款頁面
       } else {
         setError('無法建立付款連結，請稍後再試。');
       }

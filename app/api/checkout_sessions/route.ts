@@ -1,24 +1,24 @@
 import { NextResponse } from 'next/server';
 import crypto from 'crypto';
 
-// ─────────────────────────────────────────────
-// 藍新金流 (NewebPay) MPG 幕前支付
-// 需在 Vercel 環境變數設定：
-//   NEWEBPAY_MERCHANT_ID  → 商店代號
-//   NEWEBPAY_HASH_KEY     → HashKey
-//   NEWEBPAY_HASH_IV      → HashIV
-//   NEXT_PUBLIC_BASE_URL  → 正式網域 e.g. https://your.vercel.app
-// ─────────────────────────────────────────────
+/**
+ * ─────────────────────────────────────────────
+ * 綠界金流 (ECPay) AIO 串接方案
+ * 需在 Vercel 環境變數設定：
+ *   ECPAY_MERCHANT_ID  → 商店代號 (例如: 3496178)
+ *   ECPAY_HASH_KEY     → HashKey
+ *   ECPAY_HASH_IV      → HashIV
+ *   NEXT_PUBLIC_BASE_URL  → 正式網域 e.g. https://your.vercel.app
+ * ─────────────────────────────────────────────
+ */
 
-// 測試環境（開發用）
-const NEWEBPAY_STAGE_URL = 'https://ccore.newebpay.com/MPG/mpg_gateway';
-// 正式環境（上線時使用）
-const NEWEBPAY_PROD_URL  = 'https://core.newebpay.com/MPG/mpg_gateway';
+// 正式環境與測試環境 URL
+const ECPAY_PROD_URL  = 'https://payment.ecpay.com.tw/Cashier/AioCheckOut/V5';
+const ECPAY_STAGE_URL = 'https://payment-stage.ecpay.com.tw/Cashier/AioCheckOut/V5';
 
 const IS_PRODUCTION = process.env.NODE_ENV === 'production';
-const NEWEBPAY_URL  = IS_PRODUCTION ? NEWEBPAY_PROD_URL : NEWEBPAY_STAGE_URL;
 
-// 商品目錄 — 之後新增報告在這裡加
+// 商品目錄
 const REPORT_CATALOG: Record<string, { name: string; price: number }> = {
   salesforce_se: {
     name: 'Case Study: Salesforce Solution Engineer Pitch',
@@ -46,29 +46,50 @@ const REPORT_CATALOG: Record<string, { name: string; price: number }> = {
   },
 };
 
-/** AES-256-CBC 加密（藍新 TradeInfo）*/
-function aesEncrypt(data: string, key: string, iv: string): string {
-  const cipher = crypto.createCipheriv(
-    'aes-256-cbc',
-    Buffer.from(key),
-    Buffer.from(iv),
-  );
-  let encrypted = cipher.update(data, 'utf8', 'hex');
-  encrypted += cipher.final('hex');
-  return encrypted;
+/** 綠界特有的 URL Encode 轉換錶 */
+function ecpayUrlEncode(str: string): string {
+  return encodeURIComponent(str)
+    .replace(/%20/g, '+')
+    .replace(/%2d/g, '-')
+    .replace(/%5f/g, '_')
+    .replace(/%2e/g, '.')
+    .replace(/%21/g, '!')
+    .replace(/%2a/g, '*')
+    .replace(/%28/g, '(')
+    .replace(/%29/g, ')')
+    .toLowerCase();
 }
 
-/** SHA-256 雜湊（藍新 TradeSha）*/
-function sha256Hash(data: string): string {
-  return crypto.createHash('sha256').update(data).digest('hex').toUpperCase();
+/** 產生綠界 CheckMacValue (SHA256) */
+function generateCheckMacValue(params: Record<string, string>, hashKey: string, hashIV: string): string {
+  // 1. 依照 Key 排序 (A-Z)
+  const sortedKeys = Object.keys(params).sort();
+  
+  // 2. 組合為 Query String
+  const queryString = sortedKeys.map(key => `${key}=${params[key]}`).join('&');
+  
+  // 3. 頭尾夾入 HashKey 與 HashIV
+  const rawString = `HashKey=${hashKey}&${queryString}&HashIV=${hashIV}`;
+  
+  // 4. 特殊 URL Encode 並轉小寫
+  const encodedString = ecpayUrlEncode(rawString);
+  
+  // 5. SHA256 雜湊與大寫
+  return crypto.createHash('sha256').update(encodedString).digest('hex').toUpperCase();
 }
 
-/** 產生不重複的訂單號（20碼英數字）*/
+/** 產生不重複訂單號 (ECPay 限制 20 碼) */
 function generateOrderNo(): string {
-  const now  = new Date();
-  const ts   = `${now.getFullYear()}${String(now.getMonth() + 1).padStart(2, '0')}${String(now.getDate()).padStart(2, '0')}${String(now.getHours()).padStart(2, '0')}${String(now.getMinutes()).padStart(2, '0')}${String(now.getSeconds()).padStart(2, '0')}`;
-  const rand = Math.floor(Math.random() * 1000000).toString().padStart(6, '0');
-  return `JT${ts}${rand}`.slice(0, 20);
+  const ts = Date.now().toString().slice(-10);
+  const rand = Math.floor(Math.random() * 100000).toString().padStart(5, '0');
+  return `JT${ts}${rand}`;
+}
+
+/** 取得符合綠界格式的時間字串 (YYYY/MM/DD HH:mm:ss) */
+function getECPayDate(): string {
+  const d = new Date();
+  const pad = (n: number) => String(n).padStart(2, '0');
+  return `${d.getFullYear()}/${pad(d.getMonth() + 1)}/${pad(d.getDate())} ${pad(d.getHours())}:${pad(d.getMinutes())}:${pad(d.getSeconds())}`;
 }
 
 export async function POST(request: Request) {
@@ -76,71 +97,51 @@ export async function POST(request: Request) {
     const body = await request.json();
     const { reportId, lang = 'zh', price: customPrice, productName: customName } = body;
 
-    const merchantId = (process.env.NEWEBPAY_MERCHANT_ID || '').trim();
-    const hashKey    = (process.env.NEWEBPAY_HASH_KEY || '').trim();
-    const hashIV     = (process.env.NEWEBPAY_HASH_IV || '').trim();
-    const baseUrl    = (process.env.NEXT_PUBLIC_BASE_URL || '').trim();
-
-    if (!merchantId || !hashKey || !hashIV) {
-      return NextResponse.json(
-        { error: '藍新金流環境變數尚未設定（NEWEBPAY_MERCHANT_ID / HASH_KEY / HASH_IV）。請在 Vercel 後台 Settings → Environment Variables 填入。' },
-        { status: 503 },
-      );
-    }
+    // 優先讀取綠界環境變數
+    const merchantId = (process.env.ECPAY_MERCHANT_ID || '3496178').trim();
+    const hashKey    = (process.env.ECPAY_HASH_KEY || 'MSJAnIDjCEfFstbn').trim();
+    const hashIV     = (process.env.ECPAY_HASH_IV || 'lD3B480PFBUQNOAk').trim();
+    const baseUrl    = (process.env.NEXT_PUBLIC_BASE_URL || 'https://jason-by-tsai-portfolio.vercel.app').trim();
 
     const catalog     = REPORT_CATALOG[reportId];
-    const itemName    = customName  || catalog?.name  || '數位分析報告';
+    const itemName    = customName  || catalog?.name  || 'Digital Insights';
     const amount      = customPrice || catalog?.price || 0;
     const orderNo     = generateOrderNo();
-    const timeStamp   = Math.floor(Date.now() / 1000).toString();
+    const tradeDate   = getECPayDate();
 
-    // ─────────────────────────────────────────────
-    // 藍新 MPG 規格：參數需依照 A-Z 排序，且不進行 URL Encoding
-    // ─────────────────────────────────────────────
-    const tradeParamsObj: Record<string, string> = {
-      MerchantID:      merchantId,
-      RespondType:     'JSON',
-      TimeStamp:       timeStamp,
-      Version:         '2.0',
-      MerchantOrderNo: orderNo,
-      Amt:             String(amount),      // 2.0 規格
-      TransAmt:        String(amount),      // 1.5/1.6 規格
-      ItemDesc:        itemName.slice(0, 50),
-      ReturnURL:       `${baseUrl}/${lang}/success?product=${reportId}`,
-      NotifyURL:       `${baseUrl}/api/newebpay/callback`,
-      ClientBackURL:   `${baseUrl}/${lang}/reports`,
-      LoginType:       '0',
-      CREDIT:          '1',
+    // 綠界 AIO CheckOut 參數要求
+    const params: Record<string, string> = {
+      MerchantID: merchantId,
+      MerchantTradeNo: orderNo,
+      MerchantTradeDate: tradeDate,
+      PaymentType: 'aio',
+      TotalAmount: String(amount),
+      TradeDesc: ecpayUrlEncode(itemName.slice(0, 20)), // 描述限制長度
+      ItemName: itemName.replace(/,/g, '#'), // 商品名稱用 # 隔開
+      ReturnURL: `${baseUrl}/api/ecpay/callback`, // Server 端回傳
+      ChoosePayment: 'ALL',
+      EncryptType: '1', // 1 表 SHA256
+      ClientBackURL: `${baseUrl}/${lang}/reports`,
+      OrderResultURL: `${baseUrl}/${lang}/success?product=${reportId}`, // 付款完跳轉 (ECPay 規定)
+      NeedExtraPaidInfo: 'Y',
     };
 
-    // 依照 KEY 排序並組合成字串
-    const tradeParams = Object.keys(tradeParamsObj)
-      .sort()
-      .map(key => `${key}=${tradeParamsObj[key]}`)
-      .join('&');
+    // 產生檢查碼
+    const checkMacValue = generateCheckMacValue(params, hashKey, hashIV);
+    params['CheckMacValue'] = checkMacValue;
 
-    // 決定閘道網址 (如果 MerchantID 是 MS 開頭則強制走測試環境)
-    const finalGateway = merchantId.startsWith('MS') ? NEWEBPAY_STAGE_URL : NEWEBPAY_URL;
-    
-    console.log(`[Checkout] Merchant: ${merchantId}, Gateway: ${finalGateway}`);
+    // 決定閘道網址 (如果是測試用 MerchantID 2000132 則走測試端)
+    const finalGateway = merchantId === '2000132' ? ECPAY_STAGE_URL : (IS_PRODUCTION ? ECPAY_PROD_URL : ECPAY_STAGE_URL);
 
-    // Step 1: AES 加密 → TradeInfo
-    const tradeInfo = aesEncrypt(tradeParams, hashKey, hashIV);
-
-    // Step 2: SHA256 雜湊 → TradeSha
-    const tradeSha = sha256Hash(`HashKey=${hashKey}&${tradeInfo}&HashIV=${hashIV}`);
+    console.log(`[ECPay Checkout] Merchant: ${merchantId}, Order: ${orderNo}, Gateway: ${finalGateway}`);
 
     return NextResponse.json({
-      newebpayUrl: finalGateway,
-      params: {
-        MerchantID: merchantId,
-        TradeInfo:  tradeInfo,
-        TradeSha:   tradeSha,
-        Version:    '2.0',
-      },
+      paymentUrl: finalGateway,
+      params: params
     });
+
   } catch (err: any) {
-    console.error('[NewebPay Checkout Error]', err.message);
+    console.error('[ECPay Checkout Error]', err.message);
     return NextResponse.json({ error: err.message }, { status: 500 });
   }
 }

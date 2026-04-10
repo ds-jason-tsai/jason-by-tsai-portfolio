@@ -46,7 +46,7 @@ const REPORT_CATALOG: Record<string, { name: string; price: number }> = {
   },
 };
 
-/** 綠界特有的 URL Encode 轉換錶 */
+/** 綠界特有的 URL Encode 轉換錶 (由官方規格導出) */
 function ecpayUrlEncode(str: string): string {
   return encodeURIComponent(str)
     .replace(/%20/g, '+')
@@ -65,10 +65,10 @@ function generateCheckMacValue(params: Record<string, string>, hashKey: string, 
   // 1. 依照 Key 排序 (A-Z)
   const sortedKeys = Object.keys(params).sort();
   
-  // 2. 組合為 Query String
+  // 2. 組合為 Query String (Key=Value)
   const queryString = sortedKeys.map(key => `${key}=${params[key]}`).join('&');
   
-  // 3. 頭尾夾入 HashKey 與 HashIV
+  // 3. 組合 HashKey + QueryString + HashIV
   const rawString = `HashKey=${hashKey}&${queryString}&HashIV=${hashIV}`;
   
   // 4. 特殊 URL Encode 並轉小寫
@@ -116,20 +116,20 @@ export async function POST(request: Request) {
     const orderNo     = generateOrderNo();
     const tradeDate   = getECPayDate();
 
-    // 綠界 AIO CheckOut 參數要求
+    // 綠界 AIO CheckOut 參數要求 (注意：這裡的內容填寫原始文字，不進行預編碼)
     const params: Record<string, string> = {
       MerchantID: merchantId,
       MerchantTradeNo: orderNo,
       MerchantTradeDate: tradeDate,
       PaymentType: 'aio',
       TotalAmount: String(amount),
-      TradeDesc: ecpayUrlEncode(itemName.slice(0, 20)), // 描述限制長度
-      ItemName: itemName.replace(/,/g, '#'), // 商品名稱用 # 隔開
-      ReturnURL: `${baseUrl}/api/ecpay/callback`, // Server 端回傳
-      ChoosePayment: 'ALL',
+      TradeDesc: itemName.slice(0, 50), // 修正：不可預先編碼，否則雜湊值會報錯
+      ItemName: itemName.replace(/,/g, '#'), // 使用官方建議的分隔符號
+      ReturnURL: `${baseUrl}/api/ecpay/callback`,
+      ChoosePayment: 'Credit', // 修正：強制指定信用卡，避免 ALL 的相容性問題
       EncryptType: '1', // 1 表 SHA256
       ClientBackURL: `${baseUrl}/${lang}/reports`,
-      OrderResultURL: `${baseUrl}/${lang}/success?product=${reportId}`, // 付款完跳轉 (ECPay 規定)
+      OrderResultURL: `${baseUrl}/${lang}/success?product=${reportId}`,
       NeedExtraPaidInfo: 'Y',
     };
 

@@ -20,9 +20,15 @@ const REPORT_CATALOG: Record<string, { name: string; price: number }> = {
   notebooklm_finance_stock: { name: 'NotebookLM x 財務報表、股票分析', price: 898 },
 };
 
-/** 綠界特有的 URL Encode 轉換邏輯 (由官方規格導出) */
+/** 
+ * 綠界特有的 URL Encode 轉換邏輯 (由官方官方 .NET 演算法還原)
+ * 規則：先編碼 -> 轉小寫 -> 特殊字元代換
+ */
 function ecpayUrlEncode(str: string): string {
-  return encodeURIComponent(str)
+  let res = encodeURIComponent(str).toLowerCase();
+  
+  // 依照綠界官方文件規定的代換錶進行替換
+  res = res
     .replace(/%20/g, '+')
     .replace(/%21/g, '!')
     .replace(/%2a/g, '*')
@@ -30,27 +36,27 @@ function ecpayUrlEncode(str: string): string {
     .replace(/%29/g, ')')
     .replace(/%2d/g, '-')
     .replace(/%5f/g, '_')
-    .replace(/%2e/g, '.')
-    .toLowerCase(); // 關鍵：轉小寫
+    .replace(/%2e/g, '.');
+    
+  return res;
 }
 
 /** 產生綠界 CheckMacValue (SHA256) */
 function generateCheckMacValue(params: Record<string, string>, hashKey: string, hashIV: string): string {
-  // STEP 1: 依照 Key 排序 (A-Z)
+  // 1. 依照 Key 排序 (A-Z)
   const sortedKeys = Object.keys(params).sort();
   
-  // STEP 2: 組合為 Query String (Key=Value) 且用 & 連接
+  // 2. 組合 Query String
   const queryString = sortedKeys.map(key => `${key}=${params[key]}`).join('&');
   
-  // STEP 3: 前後夾入 HashKey 與 HashIV
+  // 3. 夾入 HashKey 與 HashIV
   const rawString = `HashKey=${hashKey}&${queryString}&HashIV=${hashIV}`;
   
-  // STEP 4: 進行 URL Encode 與特定字符代換，最後轉小寫
+  // 4. ECPay URL Encode 與轉小寫
   const encodedString = ecpayUrlEncode(rawString);
   
-  // STEP 5: SHA256 雜湊 -> 轉大寫
-  const hash = crypto.createHash('sha256').update(encodedString).digest('hex');
-  return hash.toUpperCase();
+  // 5. SHA256 雜湊與大寫
+  return crypto.createHash('sha256').update(encodedString).digest('hex').toUpperCase();
 }
 
 /** 產生唯一訂單號 (限制 20 碼以內) */

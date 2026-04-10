@@ -15,15 +15,15 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
   const baseUrl = 'https://jason-by-tsai-portfolio.vercel.app';
   
   const titles = {
-    zh: "傑森數據 Jason Analytics | 數據分析、AI 與 MarTech 專家",
-    en: "Jason Analytics | Data Analysis, AI & MarTech Expert",
-    ja: "ジェイソン・アナリティクス | データ分析・AI・MarTech エキスパート"
+    zh: "傑森數據 Jason Analytics | 資料分析教學、商業儀表板與 MarTech 轉型專家",
+    en: "Jason Analytics | Data Analysis Teaching, Business Dashboards & MarTech Consultant",
+    ja: "ジェイソン・アナリティクス | データ分析教育、ビジネスダッシュボード、MarTech 導入エキスパート"
   };
 
   const descriptions = {
-    zh: "傑森數據 Jason Analytics 的官方作品集，由數據專家 Jason Tsai (蔡傑森) 創立。提供全方位專業數據分析、商業分析、AI 機器學習建模、MarTech 數位行銷科技導入、數據工程優化與自動化解決方案。協助企業從原始數據中挖掘商業價值，透過數據驅動決策提升競爭力與營運效率。",
-    en: "Official portfolio of Jason Analytics, led by data expert Jason Tsai. Providing comprehensive solutions in Data Analysis, AI/ML Modeling, MarTech, and Data Engineering to help businesses unlock value through data-driven insights.",
-    ja: "データ専門家 Jason Tsai が率いる Jason Analytics の公式ポートフォリオ。高度なデータ分析、ビジネスインテリジェンス、AI機械学習モデリング、MarTech 導入、データエンジニアリング、自動化ソリューションを包括的に提供します。企業のデータを価値あるインサイトに変え、意思決定を通じて成長を支援します。"
+    zh: "傑森數據 Jason Analytics 官方作品集。由數據專家 Jason Tsai 創立，提供專業資料分析教學、客製商業報告與各類 BI 儀表板建置、作品集與專案深度指導，以及 MarTech 數位行銷科技與自動化技術導入解決方案。致力於協助個人與企業從海量數據中挖掘最高商業價值，透過數據驅動決策提升整體營運效率與競爭力。",
+    en: "Official portfolio of Jason Analytics by Jason Tsai. We provide professional Data Analysis teaching, customized business reports and BI dashboard construction, in-depth portfolio/project guidance, and MarTech digital marketing automation solutions. We empower individuals and businesses to uncover maximum value from data and improve operational efficiency through data-driven decisions.",
+    ja: "データ専門家 Jason Tsai が率いる Jason Analytics の公式ポートフォリオ。高度なデータ分析教育、カスタムビジネスレポート、BIダッシュボード構築、ポートフォリオ・プロジェクト指導、MarTech 導入、自動化ソリューションを包括的に提供します。企業のデータを価値あるインサイトに変え、データ駆動型の意思決定を通じて成長と競争力強化を支援します。"
   };
 
   return {
@@ -76,9 +76,9 @@ export default async function RootLayout({
   const baseUrl = 'https://jason-by-tsai-portfolio.vercel.app';
   
   const descriptions = {
-    zh: "傑森數據 Jason Analytics 的官方作品集，由數據專家 Jason Tsai (蔡傑森) 創立。提供全方位專業數據分析、商業分析、AI 機器學習建模、MarTech 數位行銷科技導入、數據工程優化與自動化解決方案。協助企業從原始數據中挖掘商業價值，透過數據驅動決策提升競爭力與營運效率。",
-    en: "Official portfolio of Jason Analytics, led by data expert Jason Tsai. Providing comprehensive solutions in Data Analysis, AI/ML Modeling, MarTech, and Data Engineering to help businesses unlock value through data-driven insights.",
-    ja: "データ専門家 Jason Tsai が率いる Jason Analytics の公式ポートフォリオ。高度な數據分析、ビジネスインテリジェンス、AI機械学習モデリング、MarTech 導入、データエンジニアリング、自動化ソリューションを包括的に提供します。企業のデータを価値あるインサイトに変え、意思決定を通じて成長を支援します。"
+    zh: "傑森數據 Jason Analytics 官方作品集。由數據專家 Jason Tsai 創立，提供專業資料分析教學、客製商業報告與各類 BI 儀表板建置、作品集與專案深度指導，以及 MarTech 數位行銷科技與自動化技術導入解決方案。致力於協助個人與企業從海量數據中挖掘最高商業價值。",
+    en: "Official portfolio of Jason Analytics by Jason Tsai. Providing professional Data Analysis teaching, customized BI dashboards, project guidance, and MarTech automation solutions to unlock maximum value from data.",
+    ja: "データ専門家 Jason Tsai が率いる Jason Analytics の公式ポートフォリオ。高度なデータ分析教育、カスタム BI ダッシュボード構築、プロジェクト指導、MarTech 導入ソリューションを提供し、データの価値を最大化します。"
   };
 
   return (

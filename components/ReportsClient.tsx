@@ -10,9 +10,9 @@ const reports = [
     category: 'report',
     image: '/images/case_study_sfse.png',
     title: {
-      zh: '策略深探：Salesforce 解決方案工程架構與市場策略研究 (Case Study)',
-      en: 'Strategic Case Study: Salesforce GTM & Solution Engineering Analysis',
-      ja: '戦略的考察：Salesforce ソリューションエンジニアリングのフレームワークと市場参入戦略のケーススタディ',
+      zh: 'SaaS 策略深探：Salesforce 解決方案工程與 GTM 研究 (Case Study)',
+      en: 'Strategic Case Study: Salesforce GTM & SE Framework',
+      ja: '戦略的考察：Salesforce SE と GTM 分析 (Case Study)',
     },
     description: {
       zh: '本案例研究深入解析全球 SaaS 領軍企業 Salesforce 的解決方案工程框架與市場進入策略。透過技術價值主張與顧問式銷售方法的深度研究，為專業人士提供高品質的商業分析與解決方案架構範本。適合數據分析師與技術顧問參考其商業敘事框架。',

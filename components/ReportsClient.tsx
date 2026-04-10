@@ -8,16 +8,16 @@ const reports = [
   {
     id: 'salesforce_se',
     category: 'report',
-    image: '/images/salesforce_cover.png',
+    image: '/images/case_study_sfse.png',
     title: {
-      zh: 'Case Study：Salesforce Solution Engineer Pitch Deck',
-      en: 'Case Study: Salesforce Solution Engineer Pitch Deck',
-      ja: 'ケーススタディ：Salesforce SE プレゼン',
+      zh: '策略深探：Salesforce 解決方案工程架構與市場策略研究 (Case Study)',
+      en: 'Strategic Case Study: Salesforce GTM & Solution Engineering Analysis',
+      ja: '戦略的考察：Salesforce ソリューションエンジニアリングのフレームワークと市場参入戦略のケーススタディ',
     },
     description: {
-      zh: '專業 C-level 提案簡報：包含執行摘要、痛點剖析、技術架構 (Einstein AI) 與行動計畫。適合數據分析師與技術顧問參考其商業敘事框架。',
-      en: 'A professional C-level pitch deck. Covers pain points, technical architecture (Einstein AI), and action plan. A perfect reference for business storytelling.',
-      ja: 'プロのCレベル向けプレゼン。Einstein AIを中心とした技術アーキテクチャ、ビジネス上の課題、アクションプランを網羅したピッチデッキです。',
+      zh: '本案例研究深入解析全球 SaaS 領軍企業 Salesforce 的解決方案工程框架與市場進入策略。透過技術價值主張與顧問式銷售方法的深度研究，為專業人士提供高品質的商業分析與解決方案架構範本。適合數據分析師與技術顧問參考其商業敘事框架。',
+      en: 'A comprehensive case study examining the solution engineering framework and go-to-market strategies of a Global SaaS leader. This research explores technical value propositioning and consultative selling methodology, providing a professional template for business storytelling and solution architecture.',
+      ja: '世界的な SaaS リーダーである Salesforce のソリューションエンジニアリング体制と市場戦略を深く掘り下げたケーススタディ。技術的価値提案とコンサルティング・セールス手法の分析を通じて、専門家に高度なビジネスインサイトとソリューション構築のフレームワークを提供します。',
     },
     chapters: [
       { id: '1', zh: '執行摘要與專案影響 (Executive Summary)', en: 'Executive Summary', ja: 'エグゼクティブサマリー' },

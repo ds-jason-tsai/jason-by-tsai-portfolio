@@ -97,7 +97,9 @@ export async function POST(request: Request) {
     // 計算檢查碼
     params['CheckMacValue'] = generateCheckMacValue(params, hashKey, hashIV);
 
-    const finalGateway = merchantId === '2000132' ? ECPAY_STAGE_URL : ECPAY_PROD_URL;
+    // 決定跳轉 URL：包含官方提供的多組測試 ID
+    const isTestAccount = ['2000132', '3002607', '3002599', '3365120'].includes(merchantId);
+    const finalGateway = isTestAccount ? ECPAY_STAGE_URL : ECPAY_PROD_URL;
 
     return NextResponse.json({
       paymentUrl: finalGateway,

@@ -130,8 +130,9 @@ export async function POST(request: Request) {
     const checkMacValue = generateCheckMacValue(params, hashKey, hashIV);
     params['CheckMacValue'] = checkMacValue;
 
-    // 決定閘道網址 (如果是測試用 MerchantID 2000132 則走測試端)
-    const finalGateway = merchantId === '2000132' ? ECPAY_STAGE_URL : (IS_PRODUCTION ? ECPAY_PROD_URL : ECPAY_STAGE_URL);
+    // 決定閘道網址：如果是測試用 ID 2000132 則走測試端；其餘實體 ID 走正式端
+    // 解決 10300023 錯誤：確保正式 ID 不會誤入測試網址。
+    const finalGateway = merchantId === '2000132' ? ECPAY_STAGE_URL : ECPAY_PROD_URL;
 
     console.log(`[ECPay Checkout] Merchant: ${merchantId}, Order: ${orderNo}, Gateway: ${finalGateway}`);
 

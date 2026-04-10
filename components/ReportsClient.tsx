@@ -489,8 +489,13 @@ export default function ReportsClient({ lang }: { lang: 'zh' | 'en' | 'ja' }) {
           background: rgba(255, 255, 255, 0.04);
           padding: 1rem 1.2rem; border-radius: 20px;
           display: flex; flex-direction: column; gap: 0.8rem;
+          align-items: center; justify-content: center;
+        }
+        .price-info-new {
+          display: flex; flex-direction: column; align-items: center; gap: 4px;
         }
         .price-val-big { font-size: 2rem; font-weight: 900; color: var(--accent-color); text-align: center; }
+        .status-label-small { text-align: center; width: 100%; }
 
         @media (max-width: 1120px) {
            .carousel-control-standard.prev { left: -30px; }

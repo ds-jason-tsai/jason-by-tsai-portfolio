@@ -221,6 +221,9 @@ export default async function RootLayout({
 
           <footer className="footer" style={{ borderTop: '1px solid var(--glass-border)', padding: '4rem 2rem 2rem 2rem', background: '#0a0a0a', textAlign: 'center', marginTop: 'auto' }}>
             <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1rem', maxWidth: '800px', margin: '0 auto' }}>
+              <Link href={`/${lang}`} style={{ textDecoration: 'none', borderBottom: 'none', marginBottom: '0.5rem' }}>
+                <Image src="/logo.png" alt="Logo" width={60} height={60} style={{ borderRadius: '12px', filter: 'drop-shadow(0 0 10px rgba(255,255,255,0.1))' }} />
+              </Link>
               <div style={{ fontSize: '1.5rem', fontWeight: 'bold', background: 'var(--accent-grad)', WebkitBackgroundClip: 'text', backgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
                 {dict.brand?.logo || '傑森數據 Jason Analytics'}
               </div>

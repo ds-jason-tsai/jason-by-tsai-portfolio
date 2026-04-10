@@ -3,7 +3,7 @@ import crypto from 'crypto';
 
 /**
  * ─────────────────────────────────────────────
- * 綠界金流 (ECPay) AIO 串接方案 - V5 終極相容版
+ * 綠界金流 (ECPay) AIO 串接方案 - 2024 官方文規對齊版
  * ─────────────────────────────────────────────
  */
 
@@ -15,13 +15,14 @@ const REPORT_CATALOG: Record<string, { name: string; price: number }> = {
   notebooklm_series: { name: 'NotebookLM Guide', price: 898 },
 };
 
-/** 綠界專用 URL Encode (數位顯微鏡校準版) */
+/** 
+ * 絕對校準版 URL Encode 
+ * 根據官方開發者文件 (2904) 規範進行代換
+ */
 function ecpayUrlEncode(str: string): string {
-  // 1. 先編碼並轉全小寫
   let encoded = encodeURIComponent(str).toLowerCase();
   
-  // 2. 依照綠界規定的 .NET 編碼風格進行「符號代換」
-  // 核心邏輯：- _ . ! * ( ) 不需轉碼，其餘依照標準；空格轉 +
+  // 按照官方轉換表要求進行處理
   encoded = encoded
     .replace(/%20/g, '+')
     .replace(/%21/g, '!')
@@ -31,42 +32,41 @@ function ecpayUrlEncode(str: string): string {
     .replace(/%2d/g, '-')
     .replace(/%5f/g, '_')
     .replace(/%2e/g, '.')
-    .replace(/~/g, '%7e')    // 強制編碼波浪號 (JS預設不轉)
-    .replace(/'/g, '%27');   // 強制編碼單引號 (JS預設不轉)
+    .replace(/~/g, '%7e'); // 關鍵：波浪號必須被轉為 %7e (JS不會自動轉)
     
   return encoded;
 }
 
-/** 產生綠界 CheckMacValue (SHA256) */
+/** 產生符合 ECPay V5 規範的 CheckMacValue */
 function generateCheckMacValue(params: Record<string, string>, hashKey: string, hashIV: string): string {
-  // 1. 字典序排序
+  // 1. 字典序排序 Key
   const sortedKeys = Object.keys(params).sort();
   
-  // 2. 組合參數串
+  // 2. 組合 QueryString
   const queryString = sortedKeys.map(key => `${key}=${params[key]}`).join('&');
   
-  // 3. 夾心餅乾組合
+  // 3. 夾入密鑰
   const rawString = `HashKey=${hashKey}&${queryString}&HashIV=${hashIV}`;
   
-  // 4. 進行終極 URL Encode
+  // 4. 標準 URL Encode -> 小寫
   const encodedString = ecpayUrlEncode(rawString);
   
-  // 5. SHA256 雜湊 -> 轉大寫
+  // 5. SHA256 -> 大寫
   const hash = crypto.createHash('sha256').update(encodedString).digest('hex');
   return hash.toUpperCase();
 }
 
-/** 產生唯一、不可預測的訂單號 */
-function generateOrderNo(): string {
-  const ts = Date.now().toString().slice(-10);
-  const rand = Math.floor(Math.random() * 1000000).toString().padStart(6, '0');
-  return `JT${ts}${rand}`.slice(0, 20);
+/** 產生手動格式化的日期 yyyy/MM/dd HH:mm:ss (避開環境差異) */
+function getECPayDate(): string {
+  const d = new Date();
+  const pad = (n: number) => String(n).padStart(2, '0');
+  return `${d.getFullYear()}/${pad(d.getMonth() + 1)}/${pad(d.getDate())} ${pad(d.getHours())}:${pad(d.getMinutes())}:${pad(d.getSeconds())}`;
 }
 
 export async function POST(request: Request) {
   try {
     const body = await request.json();
-    const { reportId, lang = 'zh', price: customPrice, productName: customName } = body;
+    const { reportId, lang = 'zh', price: customPrice } = body;
 
     const merchantId = (process.env.ECPAY_MERCHANT_ID || '').trim();
     const hashKey    = (process.env.ECPAY_HASH_KEY || '').trim();
@@ -74,32 +74,28 @@ export async function POST(request: Request) {
     const baseUrl    = (process.env.NEXT_PUBLIC_BASE_URL || 'https://jason-by-tsai-portfolio.vercel.app').trim();
 
     if (!merchantId || !hashKey || !hashIV) {
-      return NextResponse.json({ error: 'ECPay Environment Variables Missing' }, { status: 503 });
+      return NextResponse.json({ error: 'Missing Credentials' }, { status: 503 });
     }
 
-    const catalog     = REPORT_CATALOG[reportId];
-    const rawName     = customName  || catalog?.name  || 'Report';
-    const itemName    = rawName.replace(/[^\w\s]/g, '').slice(0, 50); // 只留字母、底線、空格
-    const amount      = customPrice || catalog?.price || 498;
-    
+    // 依照 2858 文件，全功能 AIO 必填的所有欄位
     const params: Record<string, string> = {
       MerchantID: merchantId,
-      MerchantTradeNo: generateOrderNo(),
-      MerchantTradeDate: new Date().toLocaleString('zh-TW', { hour12: false, year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit' }).replace(/-/g, '/'),
-      PaymentType: 'aio',
-      TotalAmount: String(amount),
-      TradeDesc: 'DigitalInsights', 
-      ItemName: itemName || 'Insights',
+      MerchantTradeNo: `JT${Date.now()}${Math.floor(Math.random() * 1000)}`.slice(0, 20),
+      MerchantTradeDate: getECPayDate(),
+      PaymentType: 'aio', // 必填：aio
+      TotalAmount: String(customPrice || 498),
+      TradeDesc: 'DigitalInsightReport',
+      ItemName: 'DataReport',
       ReturnURL: `${baseUrl}/api/ecpay/callback`,
-      ChoosePayment: 'Credit', 
-      EncryptType: '1', 
+      ChoosePayment: 'Credit', // 鎖定信用卡以利測試
+      EncryptType: '1', // 1: SHA256
       ClientBackURL: `${baseUrl}/${lang}/reports`,
-      OrderResultURL: `${baseUrl}/${lang}/success?product=${reportId}`,
+      OrderResultURL: `${baseUrl}/${lang}/success?id=${reportId}`,
+      NeedExtraPaidInfo: 'Y',
     };
 
     // 計算檢查碼
-    const checkMacValue = generateCheckMacValue(params, hashKey, hashIV);
-    params['CheckMacValue'] = checkMacValue;
+    params['CheckMacValue'] = generateCheckMacValue(params, hashKey, hashIV);
 
     const finalGateway = merchantId === '2000132' ? ECPAY_STAGE_URL : ECPAY_PROD_URL;
 
@@ -109,7 +105,7 @@ export async function POST(request: Request) {
     });
 
   } catch (err: any) {
-    console.error('[ECPay Error]', err.message);
+    console.error('[ECPay Final API Error]', err.message);
     return NextResponse.json({ error: err.message }, { status: 500 });
   }
 }

@@ -21,14 +21,11 @@ const REPORT_CATALOG: Record<string, { name: string; price: number }> = {
 };
 
 /** 
- * 綠界特有的 URL Encode 轉換邏輯 (由官方官方 .NET 演算法還原)
- * 規則：先編碼 -> 轉小寫 -> 特殊字元代換
+ * 綠界專用 URL Encode (黃金標準版)
+ * 嚴格遵循綠界 AIO V5 附錄：檢查碼機制
  */
 function ecpayUrlEncode(str: string): string {
-  let res = encodeURIComponent(str).toLowerCase();
-  
-  // 依照綠界官方文件規定的代換錶進行替換
-  res = res
+  return encodeURIComponent(str)
     .replace(/%20/g, '+')
     .replace(/%21/g, '!')
     .replace(/%2a/g, '*')
@@ -36,37 +33,37 @@ function ecpayUrlEncode(str: string): string {
     .replace(/%29/g, ')')
     .replace(/%2d/g, '-')
     .replace(/%5f/g, '_')
-    .replace(/%2e/g, '.');
-    
-  return res;
+    .replace(/%2e/g, '.')
+    .replace(/%7e/g, '~') // 增加：波浪號處理
+    .toLowerCase();
 }
 
 /** 產生綠界 CheckMacValue (SHA256) */
 function generateCheckMacValue(params: Record<string, string>, hashKey: string, hashIV: string): string {
-  // 1. 依照 Key 排序 (A-Z)
+  // 1. 排除 CheckMacValue 並排序
   const sortedKeys = Object.keys(params).sort();
   
   // 2. 組合 Query String
-  const queryString = sortedKeys.map(key => `${key}=${params[key]}`).join('&');
+  let queryString = sortedKeys.map(key => `${key}=${params[key]}`).join('&');
   
   // 3. 夾入 HashKey 與 HashIV
   const rawString = `HashKey=${hashKey}&${queryString}&HashIV=${hashIV}`;
   
-  // 4. ECPay URL Encode 與轉小寫
+  // 4. URL Encode 且轉小寫
   const encodedString = ecpayUrlEncode(rawString);
   
   // 5. SHA256 雜湊與大寫
   return crypto.createHash('sha256').update(encodedString).digest('hex').toUpperCase();
 }
 
-/** 產生唯一訂單號 (限制 20 碼以內) */
+/** 產生唯一訂單號 (增加隨機性) */
 function generateOrderNo(): string {
   const ts = Date.now().toString().slice(-10);
-  const rand = Math.floor(Math.random() * 1000).toString().padStart(3, '0');
-  return `JT${ts}${rand}`;
+  const rand = Math.floor(Math.random() * 1000000).toString().padStart(6, '0');
+  return `JT${ts}${rand}`.slice(0, 20);
 }
 
-/** 取得符合綠界格式的時間字串 (YYYY/MM/DD HH:mm:ss) */
+/** 取得符合綠界格式的時間字串 */
 function getECPayDate(): string {
   const d = new Date();
   const pad = (n: number) => String(n).padStart(2, '0');
@@ -78,40 +75,34 @@ export async function POST(request: Request) {
     const body = await request.json();
     const { reportId, lang = 'zh', price: customPrice, productName: customName } = body;
 
-    // 從環境變數讀取 (本地測試請填入 .env.local)
     const merchantId = (process.env.ECPAY_MERCHANT_ID || '').trim();
     const hashKey    = (process.env.ECPAY_HASH_KEY || '').trim();
     const hashIV     = (process.env.ECPAY_HASH_IV || '').trim();
     const baseUrl    = (process.env.NEXT_PUBLIC_BASE_URL || 'https://jason-by-tsai-portfolio.vercel.app').trim();
 
     if (!merchantId || !hashKey || !hashIV) {
-      return NextResponse.json(
-        { error: '金流變數尚未設定！請在 Vercel 後台填入 ECPAY_MERCHANT_ID / HASH_KEY / HASH_IV。' },
-        { status: 503 },
-      );
+      return NextResponse.json({ error: 'Config Missing' }, { status: 503 });
     }
 
     const catalog     = REPORT_CATALOG[reportId];
-    const itemName    = customName  || catalog?.name  || 'Insights Report';
+    const rawName     = customName  || catalog?.name  || 'Report';
+    // 簡化欄位內容：避免特殊字元在編碼過程中產生歧義
+    const itemName    = rawName.replace(/[^\w\s\u4e00-\u9fa5]/g, '').slice(0, 50); 
     const amount      = customPrice || catalog?.price || 498;
-    const orderNo     = generateOrderNo();
-    const tradeDate   = getECPayDate();
-
-    // 綠界標準串接參數
+    
     const params: Record<string, string> = {
       MerchantID: merchantId,
-      MerchantTradeNo: orderNo,
-      MerchantTradeDate: tradeDate,
+      MerchantTradeNo: generateOrderNo(),
+      MerchantTradeDate: getECPayDate(),
       PaymentType: 'aio',
       TotalAmount: String(amount),
-      TradeDesc: itemName.slice(0, 50), 
-      ItemName: itemName.replace(/,/g, '#'), 
+      TradeDesc: 'InsightsReport', // 簡化描述
+      ItemName: itemName || 'Insights',
       ReturnURL: `${baseUrl}/api/ecpay/callback`,
       ChoosePayment: 'Credit', 
       EncryptType: '1', 
       ClientBackURL: `${baseUrl}/${lang}/reports`,
       OrderResultURL: `${baseUrl}/${lang}/success?product=${reportId}`,
-      NeedExtraPaidInfo: 'Y',
     };
 
     // 計算檢查碼

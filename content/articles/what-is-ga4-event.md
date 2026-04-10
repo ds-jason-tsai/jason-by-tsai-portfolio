@@ -4,9 +4,9 @@ title:
   en: "GA4 Event Guide | Digital Footprint"
   ja: "デジタル行動分析 | GA4イベントとは？"
 description:
-  zh: "與通用 GA 不同，GA4 的分析結構以「事件」為基礎，本文介紹 GA4 的四種類型事件（自動、加強型、建議與自訂），幫助各界 GA 使用者交流心得。"
-  en: "Unlike Universal GA, GA4 is based on 'events'. This article explains the 4 core event types (Automatic, Enhanced, Recommended, and Custom) to help you master digital footprint tracking in GA4."
-  ja: "GA4の分析構造は「イベント」に基づいています。本記事では、GA4の4つのコアなイベントの種類を解説します。"
+  zh: "深入探討 Google Analytics 4 (GA4) 以「事件」為核心的分析架構。本文詳細拆解 GA4 的四種關鍵事件類型：自動收集、加強型評估、建議事件及自訂事件。透過專業分析師的視角，幫助您更精確地捕捉使用者在網站上的數位軌跡，優化 Data Mart 建置與數據報表可靠性。適合所有希望從通用 GA 順利轉型至 GA4 的行銷人員與數據分析專家參考。"
+  en: "Master Google Analytics 4 (GA4) event tracking. This comprehensive guide explains the fundamental shift from sessions to events and details the four essential event types: Automatically Collected, Enhanced Measurement, Recommended, and Custom events. Learn how to accurately track digital footprints, enhance data mart reliability, and build superior analytics reports. Perfect for data analysts and digital marketers transitioning to the next generation of analytics."
+  ja: "Google アナリティクス 4 (GA4) の分析構造は、従来のユニバーサル アナリティクスとは根本的に異なり「イベント」を基盤としています。本記事では、自動収集イベント、拡張計測機能イベント、推奨イベント、カスタムイベントという 4 つの主要なイベントタイプについて、現役アナリストの視点から設定方法や活用術を詳しく解説します。データ分析の精度を高め、デジタルトレースを正確に把握するための基礎知識を提供。GA4 を活用したデータ基盤構築やレポート作成にぜひ役立ててください。"
 date: "2023-10-10"
 tags:
   zh: ["#GA4", "#數據分析", "#數位軌跡"]

@@ -59,7 +59,7 @@ export default function BuyButton({ reportId, lang, buttonText, price, productNa
   };
 
   return (
-    <div>
+    <div style={{ display: 'flex', justifyContent: 'center', width: '100%' }}>
       <button
         onClick={handleCheckout}
         disabled={loading}
@@ -70,12 +70,17 @@ export default function BuyButton({ reportId, lang, buttonText, price, productNa
           border: 'none',
           padding: '0.8rem 1.8rem',
           fontSize: '1rem',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          width: '100%',
+          maxWidth: '280px'
         }}
       >
         {loading ? '處理中…' : buttonText}
       </button>
       {error && (
-        <p style={{ color: '#ff6b6b', fontSize: '0.8rem', marginTop: '0.5rem' }}>
+        <p style={{ color: '#ff6b6b', fontSize: '0.8rem', marginTop: '0.5rem', textAlign: 'center' }}>
           ⚠️ {error}
         </p>
       )}

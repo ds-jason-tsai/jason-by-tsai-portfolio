@@ -327,7 +327,7 @@ export default function ReportsClient({ lang }: { lang: 'zh' | 'en' | 'ja' }) {
                 display: 'flex', 
                 flexDirection: 'column', 
                 animation: 'slideUp 0.4s ease forwards',
-                height: '840px',
+                height: '880px',
                 border: '1px solid rgba(255, 255, 255, 0.05)',
                 borderRadius: '24px',
                 background: 'rgba(255,255,255,0.02)',
@@ -487,8 +487,8 @@ export default function ReportsClient({ lang }: { lang: 'zh' | 'en' | 'ja' }) {
         
         .price-action-vertical {
           background: rgba(255, 255, 255, 0.04);
-          padding: 1.5rem; border-radius: 20px;
-          display: flex; flex-direction: column; gap: 1.2rem;
+          padding: 1rem 1.2rem; border-radius: 20px;
+          display: flex; flex-direction: column; gap: 0.8rem;
         }
         .price-val-big { font-size: 2rem; font-weight: 900; color: var(--accent-color); text-align: center; }
 

@@ -222,7 +222,7 @@ export default async function RootLayout({
           <footer className="footer" style={{ borderTop: '1px solid var(--glass-border)', padding: '4rem 2rem 2rem 2rem', background: '#0a0a0a', textAlign: 'center', marginTop: 'auto' }}>
             <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1rem', maxWidth: '800px', margin: '0 auto' }}>
               <Link href={`/${lang}`} style={{ textDecoration: 'none', borderBottom: 'none', marginBottom: '0.5rem' }}>
-                <Image src="/logo.png" alt="Logo" width={60} height={60} style={{ borderRadius: '12px', filter: 'drop-shadow(0 0 10px rgba(255,255,255,0.1))' }} />
+                <Image src="/logo.png" alt="Logo" width={90} height={90} style={{ borderRadius: '16px', filter: 'drop-shadow(0 0 15px rgba(255,255,255,0.15))' }} />
               </Link>
               <div style={{ fontSize: '1.5rem', fontWeight: 'bold', background: 'var(--accent-grad)', WebkitBackgroundClip: 'text', backgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
                 {dict.brand?.logo || '傑森數據 Jason Analytics'}
@@ -230,6 +230,12 @@ export default async function RootLayout({
               <p style={{ color: 'var(--text-secondary)', fontSize: '0.95rem', maxWidth: '600px', lineHeight: '1.6' }}>
                  Empowering decisions through data. <br/> 結合商業思維與深厚技術底蘊，持續在第一線創造數據影響力。
               </p>
+              <div style={{ marginTop: '0.5rem', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.2rem' }}>
+                <a href="mailto:jason.tsai.0604@gmail.com" style={{ color: 'var(--accent-color)', textDecoration: 'none', fontSize: '1rem', fontWeight: 'bold' }}>
+                  jason.tsai.0604@gmail.com
+                </a>
+                <span style={{ fontSize: '0.8rem', color: '#666' }}>Official Contact Email</span>
+              </div>
               <div style={{ display: 'flex', gap: '2rem', marginTop: '1.5rem' }} className="footer-links">
                  <Link href={`/${lang}/portfolio?utm_source=internal&utm_medium=button&utm_campaign=footer_nav_portfolio`} className="footer-link">Portfolio</Link>
                  <Link href={`/${lang}/services?utm_source=internal&utm_medium=button&utm_campaign=footer_nav_services`} className="footer-link">Services</Link>

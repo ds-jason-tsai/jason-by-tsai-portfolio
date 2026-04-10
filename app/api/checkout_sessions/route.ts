@@ -97,11 +97,18 @@ export async function POST(request: Request) {
     const body = await request.json();
     const { reportId, lang = 'zh', price: customPrice, productName: customName } = body;
 
-    // 優先讀取綠界環境變數
-    const merchantId = (process.env.ECPAY_MERCHANT_ID || '3496178').trim();
-    const hashKey    = (process.env.ECPAY_HASH_KEY || 'MSJAnIDjCEfFstbn').trim();
-    const hashIV     = (process.env.ECPAY_HASH_IV || 'lD3B480PFBUQNOAk').trim();
+    // 從環境變數讀取綠界資訊 (安全做法)
+    const merchantId = (process.env.ECPAY_MERCHANT_ID || '').trim();
+    const hashKey    = (process.env.ECPAY_HASH_KEY || '').trim();
+    const hashIV     = (process.env.ECPAY_HASH_IV || '').trim();
     const baseUrl    = (process.env.NEXT_PUBLIC_BASE_URL || 'https://jason-by-tsai-portfolio.vercel.app').trim();
+
+    if (!merchantId || !hashKey || !hashIV) {
+      return NextResponse.json(
+        { error: '綠界金流環境變數尚未設定。請在 Vercel 後台填入 ECPAY_MERCHANT_ID / HASH_KEY / HASH_IV。' },
+        { status: 503 },
+      );
+    }
 
     const catalog     = REPORT_CATALOG[reportId];
     const itemName    = customName  || catalog?.name  || 'Digital Insights';

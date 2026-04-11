@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
+import LeadCaptureModal from './LeadCaptureModal';
 
 export default function PortfolioClient({ projects, lang, t }: { projects: any[], lang: string, t: any }) {
   const categories = ['all', 'dashboards', 'proposals', 'research'];
@@ -14,6 +15,8 @@ export default function PortfolioClient({ projects, lang, t }: { projects: any[]
 
   const [activeCategory, setActiveCategory] = useState<string>('all');
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [isLeadModalOpen, setIsLeadModalOpen] = useState(false);
+  const [pendingProject, setPendingProject] = useState<{name: string, url: string} | null>(null);
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
@@ -23,6 +26,28 @@ export default function PortfolioClient({ projects, lang, t }: { projects: any[]
       }
     }
   }, []);
+
+  const handleProjectClick = (e: React.MouseEvent, projName: string, url: string) => {
+    // Check if email already captured
+    const savedEmail = typeof window !== 'undefined' ? localStorage.getItem('user_email') : null;
+    
+    if (savedEmail) {
+      // If email exists, allow direct access
+      return;
+    } else {
+      // Otherwise, intercept and show modal
+      e.preventDefault();
+      setPendingProject({ name: projName, url });
+      setIsLeadModalOpen(true);
+    }
+  };
+
+  const handleLeadSuccess = () => {
+    if (pendingProject) {
+      window.open(pendingProject.url, '_blank');
+      setPendingProject(null);
+    }
+  };
 
   const handleCategoryClick = (cat: string) => {
     setActiveCategory(cat);
@@ -150,7 +175,14 @@ export default function PortfolioClient({ projects, lang, t }: { projects: any[]
 
                   <div style={{ display: 'flex', gap: '1rem', flexDirection: 'column', marginTop: 'auto' }}>
                     {proj.url ? (
-                      <a href={`${proj.url}${proj.url.includes('?') ? '&' : '?'}utm_source=jason-by-tsai-portfolio.vercel.app&utm_medium=referral&utm_campaign=portfolio_card_external`} target="_blank" rel="noopener noreferrer" className="btn-primary" style={{ display: 'block', textAlign: 'center', padding: '0.8rem 1rem', fontSize: '1rem' }}>
+                      <a 
+                        href={`${proj.url}${proj.url.includes('?') ? '&' : '?'}utm_source=jason-by-tsai-portfolio.vercel.app&utm_medium=referral&utm_campaign=portfolio_card_external`} 
+                        target="_blank" 
+                        rel="noopener noreferrer" 
+                        className="btn-primary" 
+                        style={{ display: 'block', textAlign: 'center', padding: '0.8rem 1rem', fontSize: '1rem' }}
+                        onClick={(e) => handleProjectClick(e, proj.title[lang], proj.url)}
+                      >
                         {t.btn}
                       </a>
                     ) : (
@@ -192,6 +224,14 @@ export default function PortfolioClient({ projects, lang, t }: { projects: any[]
            </div>
         )}
       </div>
+
+      <LeadCaptureModal 
+        isOpen={isLeadModalOpen}
+        onClose={() => setIsLeadModalOpen(false)}
+        onSuccess={handleLeadSuccess}
+        lang={lang as 'zh'|'en'|'ja'}
+        projectName={pendingProject?.name || ''}
+      />
 
       <style dangerouslySetInnerHTML={{__html: `
         @keyframes slideUp {

@@ -14,14 +14,35 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
   };
 }
 
-// Google Drive download links — only shown after payment verification
+// Google Drive & Sheets links — only shown after payment verification
 const ACCESS_LINKS: Record<string, string | string[]> = {
   salesforce_se: 'https://drive.google.com/file/d/1SCD4IGORxikCEXHALAP3zuUt5ArDnvkf/view?usp=sharing',
-  notebooklm_series: 'https://www.youtube.com/playlist?list=PL-placeholder',
-  notebooklm_ja_learning: ['https://youtu.be/HSc-2-7IW_g', 'https://youtu.be/hIlwYCoewn0'],
-  notebooklm_biz_analysis: ['https://youtu.be/aS2CpZpC4xI', 'https://youtu.be/BovFYbX4nKQ', 'https://youtu.be/lJpxm62QjDg'],
-  notebooklm_chat_summary: ['https://youtu.be/mH4wzr-ZWR8', 'https://youtu.be/RK1OkD_BnPg', 'https://youtu.be/LJQOwYdljE8'],
-  notebooklm_finance_stock: ['https://youtu.be/MZ6DV3t54Rg', 'https://youtu.be/wYv7jhoI1nc'],
+  notebooklm_series: [
+    'https://www.youtube.com/playlist?list=PL-placeholder',
+    'https://docs.google.com/spreadsheets/d/18vXidG-qTw4eMrBem4t-V90CQGtRMcBJzP4d-nEI9ns/edit?usp=sharing'
+  ],
+  notebooklm_ja_learning: [
+    'https://youtu.be/HSc-2-7IW_g', 
+    'https://youtu.be/hIlwYCoewn0',
+    'https://docs.google.com/spreadsheets/d/18vXidG-qTw4eMrBem4t-V90CQGtRMcBJzP4d-nEI9ns/edit?usp=sharing'
+  ],
+  notebooklm_biz_analysis: [
+    'https://youtu.be/aS2CpZpC4xI', 
+    'https://youtu.be/BovFYbX4nKQ', 
+    'https://youtu.be/lJpxm62QjDg',
+    'https://docs.google.com/spreadsheets/d/18vXidG-qTw4eMrBem4t-V90CQGtRMcBJzP4d-nEI9ns/edit?usp=sharing'
+  ],
+  notebooklm_chat_summary: [
+    'https://youtu.be/mH4wzr-ZWR8', 
+    'https://youtu.be/RK1OkD_BnPg', 
+    'https://youtu.be/LJQOwYdljE8',
+    'https://docs.google.com/spreadsheets/d/18vXidG-qTw4eMrBem4t-V90CQGtRMcBJzP4d-nEI9ns/edit?usp=sharing'
+  ],
+  notebooklm_finance_stock: [
+    'https://youtu.be/MZ6DV3t54Rg', 
+    'https://youtu.be/wYv7jhoI1nc',
+    'https://docs.google.com/spreadsheets/d/18vXidG-qTw4eMrBem4t-V90CQGtRMcBJzP4d-nEI9ns/edit?usp=sharing'
+  ],
 };
 
 const REPORT_NAMES: Record<string, Record<string, string>> = {
@@ -31,29 +52,29 @@ const REPORT_NAMES: Record<string, Record<string, string>> = {
     ja: '戦略的考察：Salesforce SE と GTM 分析 (Case Study)',
   },
   notebooklm_series: {
-    zh: 'NotebookLM 知識庫完全指南',
-    en: 'NotebookLM Ultimate Guide',
-    ja: 'NotebookLM完全ガイド',
+    zh: 'NotebookLM 實戰應用：第一章 (全五章指南)',
+    en: 'NotebookLM Applied: Chapter 1 (Ultimate Guide)',
+    ja: 'NotebookLM活用術：第1章 (完全ガイド)',
   },
   notebooklm_ja_learning: {
-    zh: 'NotebookLM x 日語學習夥伴',
-    en: 'NotebookLM x Japanese Partner',
-    ja: 'NotebookLM x 日本語学習',
+    zh: 'NotebookLM 實戰應用：第二章 (日語學習)',
+    en: 'NotebookLM Applied: Chapter 2 (Japanese Learning)',
+    ja: 'NotebookLM活用術：第2章 (日本語教育)',
   },
   notebooklm_biz_analysis: {
-    zh: 'NotebookLM x 商業分析工具',
-    en: 'NotebookLM x Biz Analysis',
-    ja: 'NotebookLM x ビジネス分析',
+    zh: 'NotebookLM 實戰應用：第三章 (商業分析)',
+    en: 'NotebookLM Applied: Chapter 3 (Business Analysis)',
+    ja: 'NotebookLM活用術：第3章 (ビジネス分析)',
   },
   notebooklm_chat_summary: {
-    zh: 'NotebookLM x 聊天紀錄 AI 摘要',
-    en: 'NotebookLM x Chat Log Summary',
-    ja: 'NotebookLM x チャット要約',
+    zh: 'NotebookLM 實戰應用：第四章 (聊天摘要)',
+    en: 'NotebookLM Applied: Chapter 4 (Chat Summary)',
+    ja: 'NotebookLM活用術：第4章 (對話摘要)',
   },
   notebooklm_finance_stock: {
-    zh: 'NotebookLM x 財務報表、股票分析',
-    en: 'NotebookLM x Finance & Stock',
-    ja: 'NotebookLM x 財務・株価分析',
+    zh: 'NotebookLM 實戰應用：第五章 (財報分析)',
+    en: 'NotebookLM Applied: Chapter 5 (Finance Analysis)',
+    ja: 'NotebookLM活用術：第5章 (投資分析)',
   },
 };
 
@@ -87,6 +108,7 @@ export default async function SuccessPage({
       downloadTitle: '請點擊下方連結開始：',
       downloadBtn: '📥 下載報告 (Google Drive)',
       watchBtn: '📺 觀看影片 (YouTube)',
+      tableBtn: '📊 工具表格 (Google Sheets)',
       note: '連結將在新分頁開啟。如遇問題請聯絡 Jason。',
       orderId: '訂單編號：',
       back: '返回列表',
@@ -98,6 +120,7 @@ export default async function SuccessPage({
       downloadTitle: 'Click the links below to start:',
       downloadBtn: '📥 Download (Drive)',
       watchBtn: '📺 Watch Now (YouTube)',
+      tableBtn: '📊 Tool Sheet (Google Sheets)',
       note: 'Links will open in a new tab. Contact Jason for issues.',
       orderId: 'Order ID: ',
       back: 'Back',
@@ -109,6 +132,7 @@ export default async function SuccessPage({
       downloadTitle: '以下のリンクをクリックしてください：',
       downloadBtn: '📥 ダウンロード',
       watchBtn: '📺 動画を視聴',
+      tableBtn: '📊 ツール一覧 (Google Sheets)',
       note: '新しいタブで開きます。問題がある場合はJasonにご連絡ください。',
       orderId: '注文ID：',
       back: '戻る',
@@ -118,7 +142,12 @@ export default async function SuccessPage({
 
   const renderLink = (url: string, index?: number) => {
     const isYouTube = url.includes('youtu.be') || url.includes('youtube.com');
-    const label = isYouTube ? t.watchBtn : t.downloadBtn;
+    const isSheet = url.includes('docs.google.com/spreadsheets');
+    
+    let label = t.downloadBtn;
+    if (isYouTube) label = t.watchBtn;
+    if (isSheet) label = t.tableBtn;
+    
     const suffix = index !== undefined ? ` (${index + 1})` : '';
 
     return (
@@ -132,7 +161,8 @@ export default async function SuccessPage({
           display: 'inline-block', 
           fontSize: '0.9rem', 
           padding: '0.8rem 1.8rem',
-          margin: '0.5rem'
+          margin: '0.5rem',
+          minWidth: '220px'
         }}
       >
         {label}{suffix}

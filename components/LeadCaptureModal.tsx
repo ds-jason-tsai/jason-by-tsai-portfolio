@@ -12,14 +12,16 @@ interface LeadCaptureModalProps {
 
 export default function LeadCaptureModal({ isOpen, onClose, onSuccess, lang, projectName }: LeadCaptureModalProps) {
   const [email, setEmail] = useState('');
+  const [name, setName] = useState('');
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
   const [errorMsg, setErrorMsg] = useState('');
 
   const t = {
     zh: {
       title: '解鎖完整作品集',
-      subtitle: `請留下您的 Email 以查看「${projectName}」的詳細內容。我們將僅用於分享相關數據洞察。`,
-      placeholder: '您的電子郵件地址',
+      subtitle: `請留下您的資訊以查看「${projectName}」的詳細內容。`,
+      namePlaceholder: '您的稱呼 / 姓名',
+      emailPlaceholder: '您的電子郵件地址',
       submit: '立即解鎖',
       loading: '發送中...',
       success: '解鎖成功！正在為您開啟...',
@@ -28,8 +30,9 @@ export default function LeadCaptureModal({ isOpen, onClose, onSuccess, lang, pro
     },
     en: {
       title: 'Unlock Full Portfolio',
-      subtitle: `Please enter your email to view "${projectName}". We only use this to share data insights.`,
-      placeholder: 'Your Email Address',
+      subtitle: `Please enter your details to view "${projectName}".`,
+      namePlaceholder: 'Your Name / Identity',
+      emailPlaceholder: 'Your Email Address',
       submit: 'Unlock Now',
       loading: 'Sending...',
       success: 'Unlocked! Opening for you...',
@@ -38,8 +41,9 @@ export default function LeadCaptureModal({ isOpen, onClose, onSuccess, lang, pro
     },
     ja: {
       title: 'ポートフォリオをアンロック',
-      subtitle: `「${projectName}」を閲覧するには、メールアドレスを入力してください。データ分析関連の情報を共有するためにのみ使用されます。`,
-      placeholder: 'メールアドレスを入力',
+      subtitle: `「${projectName}」を閲覧するには、詳細を入力してください。`,
+      namePlaceholder: 'お名前 / 呼称',
+      emailPlaceholder: 'メールアドレスを入力',
       submit: '今すぐアンロック',
       loading: '送信中...',
       success: 'アンロック完了！読み込んでいます...',
@@ -63,12 +67,13 @@ export default function LeadCaptureModal({ isOpen, onClose, onSuccess, lang, pro
       const resp = await fetch('/api/lead-capture', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, project: projectName, lang })
+        body: JSON.stringify({ email, name, project: projectName, lang })
       });
 
       if (resp.ok) {
         setStatus('success');
         localStorage.setItem('user_email', email);
+        localStorage.setItem('user_name', name);
         setTimeout(() => {
           onSuccess(email);
           onClose();
@@ -131,8 +136,24 @@ export default function LeadCaptureModal({ isOpen, onClose, onSuccess, lang, pro
 
         <form onSubmit={handleSubmit}>
           <input 
+            type="text"
+            placeholder={t.namePlaceholder}
+            required
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            style={{
+              width: '100%', padding: '1rem 1.5rem', borderRadius: '12px',
+              background: 'rgba(255, 255, 255, 0.05)', border: '1px solid rgba(255, 255, 255, 0.1)',
+              color: '#fff', fontSize: '1rem', marginBottom: '1rem',
+              outline: 'none', transition: 'border-color 0.3s'
+            }}
+            onFocus={(e) => e.target.style.borderColor = 'var(--accent-color)'}
+            onBlur={(e) => e.target.style.borderColor = 'rgba(255, 255, 255, 0.1)'}
+          />
+
+          <input 
             type="email"
-            placeholder={t.placeholder}
+            placeholder={t.emailPlaceholder}
             required
             value={email}
             onChange={(e) => setEmail(e.target.value)}

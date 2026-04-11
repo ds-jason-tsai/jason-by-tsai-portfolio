@@ -11,7 +11,6 @@ export async function POST(request: Request) {
     }
 
     // Forward to Google Apps Script
-    // We use a fetch here. GAS expects a POST request.
     const response = await fetch(GAS_URL, {
       method: 'POST',
       headers: {
@@ -19,6 +18,7 @@ export async function POST(request: Request) {
       },
       body: JSON.stringify({
         email: data.email,
+        name: data.name || 'Anonymous',
         project: data.project || 'Portfolio Visit',
         lang: data.lang || 'zh',
         source: 'portfolio_lead_gen'

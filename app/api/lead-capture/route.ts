@@ -11,11 +11,11 @@ export async function POST(request: Request) {
     }
 
     // Forward to Google Apps Script
+    console.log('[Lead Capture] Sending data to GAS:', data.email);
+    
     const response = await fetch(GAS_URL, {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         email: data.email,
         name: data.name || 'Anonymous',
@@ -25,12 +25,23 @@ export async function POST(request: Request) {
       }),
     });
 
-    const result = await response.json();
+    const responseText = await response.text();
+    console.log('[Lead Capture] GAS Response Status:', response.status);
+    
+    let result;
+    try {
+      result = JSON.parse(responseText);
+    } catch (e) {
+      console.error('[Lead Capture] GAS returned non-JSON response:', responseText.substring(0, 200));
+      throw new Error('Invalid response from data store (likely a permission or deployment issue).');
+    }
 
     if (result.result === 'success') {
+      console.log('[Lead Capture] Success!');
       return NextResponse.json({ success: true });
     } else {
-      throw new Error(result.message || 'GAS failed');
+      console.error('[Lead Capture] GAS reported error:', result.message);
+      throw new Error(result.message || 'Data store failed to save.');
     }
 
   } catch (err: any) {

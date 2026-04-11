@@ -58,17 +58,27 @@ const REPORT_NAMES: Record<string, Record<string, string>> = {
 };
 
 export default async function SuccessPage({
-  searchParams,
+    searchParams,
   params,
 }: {
-  searchParams: Promise<{ session_id?: string; product?: string }>;
+  searchParams: Promise<{ 
+    session_id?: string; 
+    product?: string; 
+    id?: string; 
+    CustomField1?: string; 
+    MerchantTradeNo?: string 
+  }>;
   params: Promise<{ lang: string }>;
 }) {
   const lang = (await params).lang as 'zh' | 'en' | 'ja';
-  const { session_id, product } = await searchParams;
+  const sParams = await searchParams;
+  
+  // 優先從多個來源獲取產品 ID (product, id, 或綠界回傳的 CustomField1)
+  const productId = sParams.product || sParams.id || sParams.CustomField1 || '';
+  const orderId = sParams.session_id || sParams.MerchantTradeNo || '';
 
-  const accessData = product ? ACCESS_LINKS[product] : '';
-  const reportName = product ? (REPORT_NAMES[product]?.[lang] || REPORT_NAMES[product]?.['zh'] || product) : '';
+  const accessData = productId ? ACCESS_LINKS[productId] : '';
+  const reportName = productId ? (REPORT_NAMES[productId]?.[lang] || REPORT_NAMES[productId]?.['zh'] || productId) : '';
 
   const t = {
     zh: {
@@ -178,9 +188,9 @@ export default async function SuccessPage({
           </p>
         )}
 
-        {session_id && (
+        {orderId && (
           <p style={{ marginTop: '1.5rem', fontSize: '0.75rem', color: '#444', wordBreak: 'break-all' }}>
-            {t.orderId}<span style={{ color: '#666' }}>{session_id}</span>
+            {t.orderId}<span style={{ color: '#666' }}>{orderId}</span>
           </p>
         )}
       </div>

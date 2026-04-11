@@ -18,37 +18,40 @@ export default function LeadCaptureModal({ isOpen, onClose, onSuccess, lang, pro
 
   const t = {
     zh: {
-      title: '解鎖完整作品集',
-      subtitle: `請留下您的資訊以查看「${projectName}」的詳細內容。`,
+      title: '解鎖完整內容 & 獲取分析報告',
+      subtitle: `請留下資訊解鎖「${projectName}」，並免費閱覽【數據趨勢報告】與【實戰數據懶人包】。`,
       namePlaceholder: '您的稱呼 / 姓名',
       emailPlaceholder: '您的電子郵件地址',
-      submit: '立即解鎖',
+      submit: '立即獲取 & 解鎖',
       loading: '發送中...',
-      success: '解鎖成功！正在為您開啟...',
+      success: '驗證成功！正在為您開啟...',
       error: '發生錯誤，請稍後再試。',
-      privacy: '我們絕不會發送垃圾郵件。填寫即代表您同意接收數據分析相關技術分享。'
+      invalidEmail: '請輸入有效的電子郵件地址',
+      privacy: '我們絕不會發送垃圾郵件，僅分享數據洞察。填寫即代表同意接收分析技術分享。'
     },
     en: {
-      title: 'Unlock Full Portfolio',
-      subtitle: `Please enter your details to view "${projectName}".`,
+      title: 'Get Insights & Unlock Full Access',
+      subtitle: `Leave your details to unlock "${projectName}" and get my exclusive "Data Strategy Insider" reports for free.`,
       namePlaceholder: 'Your Name / Identity',
       emailPlaceholder: 'Your Email Address',
-      submit: 'Unlock Now',
+      submit: 'Get Access Now',
       loading: 'Sending...',
-      success: 'Unlocked! Opening for you...',
+      success: 'Success! Opening for you...',
       error: 'Something went wrong. Please try again.',
-      privacy: 'No spam, ever. By submitting, you agree to receive data-related technical shares.'
+      invalidEmail: 'Please enter a valid email address',
+      privacy: 'No spam, ever. Receive data-related technical insights directly in your inbox.'
     },
     ja: {
-      title: 'ポートフォリオをアンロック',
-      subtitle: `「${projectName}」を閲覧するには、詳細を入力してください。`,
+      title: 'フルアクセス & 限定レポートを入手',
+      subtitle: `「${projectName}」をアンロックし、無料の【データトレンド・インサイト】定期レポートを受け取ります。`,
       namePlaceholder: 'お名前 / 呼称',
       emailPlaceholder: 'メールアドレスを入力',
-      submit: '今すぐアンロック',
+      submit: '今すぐ入手 & 解鎖',
       loading: '送信中...',
-      success: 'アンロック完了！読み込んでいます...',
+      success: '成功！読み込んでいます...',
       error: 'エラーが発生しました。もう一度お試しください。',
-      privacy: 'スパム送信は一切ありません。入力により技術情報の受け取りに同意したことになります。'
+      invalidEmail: '有効なメールアドレスを入力してください',
+      privacy: 'スパム送信はありません。分析技術情報の受け取りに同意したことになります。'
     }
   }[lang];
 
@@ -56,9 +59,18 @@ export default function LeadCaptureModal({ isOpen, onClose, onSuccess, lang, pro
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!email || !email.includes('@')) {
+    
+    // Robust email regex
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
       setStatus('error');
-      setErrorMsg('Invalid email');
+      setErrorMsg(t.invalidEmail);
+      return;
+    }
+
+    if (!name.trim()) {
+      setStatus('error');
+      setErrorMsg(lang === 'zh' ? '請輸入姓名' : 'Please enter your name');
       return;
     }
 
@@ -79,11 +91,12 @@ export default function LeadCaptureModal({ isOpen, onClose, onSuccess, lang, pro
           onClose();
         }, 1500);
       } else {
-        throw new Error('Failed to submit');
+        const errorData = await resp.json();
+        throw new Error(errorData.error || 'Failed to submit');
       }
-    } catch (err) {
+    } catch (err: any) {
       setStatus('error');
-      setErrorMsg(t.error);
+      setErrorMsg(err.message || t.error);
     }
   };
 

@@ -113,13 +113,15 @@ export default function DashboardsClient({ lang }: { lang: 'zh' | 'en' | 'ja' })
 
       {/* Carousel Section */}
       <div className="dashboard-carousel-wrapper" style={{ position: 'relative', width: '100%', maxWidth: '1200px', margin: '0 auto' }}>
-        {/* Navigation Buttons Moved adjusted for better centering */}
-        <button onClick={handlePrev} className="carousel-btn prev" aria-label={t.prev}>
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
-        </button>
-        <button onClick={handleNext} className="carousel-btn next" aria-label={t.next}>
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
-        </button>
+        {/* Navigation Buttons */}
+        <div className="carousel-nav-container">
+          <button onClick={handlePrev} className="carousel-btn prev" aria-label={t.prev}>
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+          </button>
+          <button onClick={handleNext} className="carousel-btn next" aria-label={t.next}>
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+          </button>
+        </div>
 
         {/* Dashboard Display Card */}
         <div className="dashboard-display-card" style={{ 
@@ -288,14 +290,23 @@ export default function DashboardsClient({ lang }: { lang: 'zh' | 'en' | 'ja' })
           }
           .dashboard-carousel-wrapper { padding: 0 !important; width: 100% !important; max-width: 100% !important; }
           .dashboard-display-card { padding: 1.5rem 0.5rem !important; border-radius: 0 !important; border-left: none; border-right: none; }
+          .carousel-nav-container {
+            display: flex;
+            justify-content: center;
+            width: 100%;
+            margin-bottom: 2rem;
+            gap: 1.5rem;
+          }
           .carousel-btn {
             position: relative;
             top: auto;
+            left: auto !important;
+            right: auto !important;
             transform: none;
             display: inline-flex;
-            margin: 0.5rem;
             width: 44px;
             height: 44px;
+            margin: 0;
           }
           .dashboards-header { margin-bottom: 2rem; padding: 0 1rem; }
           .iframe-container { height: 50vh !important; border-radius: 8px !important; }

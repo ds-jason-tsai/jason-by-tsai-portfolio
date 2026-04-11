@@ -39,21 +39,18 @@ export default function ArticleListClient({ articles, lang, t }: { articles: any
   return (
     <div className="articles-client-container" style={{ maxWidth: '900px', margin: '0 auto' }}>
       
-      {/* Category Tabs with Horizontal Scroll for Mobile */}
-      <div className="category-scroll-wrapper" style={{ marginBottom: '3.5rem', position: 'relative' }}>
-        <div className="category-scroll-container" style={{ 
+      {/* Category Tabs with Infinite Carousel for Mobile */}
+      <div className="category-scroll-wrapper" style={{ marginBottom: '3.5rem', position: 'relative', overflow: 'hidden' }}>
+        <div className="category-marquee-track" style={{ 
           display: 'flex', 
-          justifyContent: categories.length > 5 ? 'flex-start' : 'center', 
           gap: '0.8rem', 
-          overflowX: 'auto',
+          width: 'max-content',
           padding: '0.5rem 0 1.5rem',
-          msOverflowStyle: 'none',
-          scrollbarWidth: 'none',
-          WebkitOverflowScrolling: 'touch'
         }}>
-          {categories.map((cat, idx) => (
+          {/* Render categories twice for seamless infinite scrolling on mobile */}
+          {[...categories, ...categories].map((cat, idx) => (
             <button
-              key={idx}
+              key={`${cat}-${idx}`}
               onClick={() => handleCategoryClick(cat)}
               style={{
                 padding: '0.5rem 1.4rem',
@@ -146,11 +143,31 @@ export default function ArticleListClient({ articles, lang, t }: { articles: any
           box-shadow: 0 0 20px rgba(0, 242, 254, 0.2);
           transform: scale(1.05);
         }
-        /* Mobile Horizontal Scroll Polish */
-        .category-scroll-container::-webkit-scrollbar {
-          display: none;
+        /* Desktop: Center tags and hide duplicates used for marquee */
+        @media (min-width: 769px) {
+          .category-marquee-track {
+            justify-content: center !important;
+            width: 100% !important;
+            animation: none !important;
+          }
+          /* Hide the second half of tags on desktop (only used for mobile loop) */
+          .category-btn:nth-child(n+${categories.length + 1}) {
+            display: none !important;
+          }
         }
+
         @media (max-width: 768px) {
+          .category-marquee-track {
+            animation: marquee-scroll 25s linear infinite;
+          }
+          .category-marquee-track:active,
+          .category-marquee-track:hover {
+            animation-play-state: paused;
+          }
+          @keyframes marquee-scroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(calc(-50% - 0.4rem)); }
+          }
           .category-scroll-wrapper::after {
             content: '';
             position: absolute;

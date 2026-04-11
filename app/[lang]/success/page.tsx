@@ -15,33 +15,37 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
 }
 
 // Google Drive & Sheets links — only shown after payment verification
-const ACCESS_LINKS: Record<string, string | string[]> = {
-  salesforce_se: 'https://drive.google.com/file/d/1SCD4IGORxikCEXHALAP3zuUt5ArDnvkf/view?usp=sharing',
+const ACCESS_LINKS: Record<string, (string | { url: string; label?: string })[]> = {
+  salesforce_se: [{ url: 'https://drive.google.com/file/d/1SCD4IGORxikCEXHALAP3zuUt5ArDnvkf/view?usp=sharing' }],
   notebooklm_series: [
-    'https://www.youtube.com/playlist?list=PL-placeholder',
-    'https://docs.google.com/spreadsheets/d/18vXidG-qTw4eMrBem4t-V90CQGtRMcBJzP4d-nEI9ns/edit?usp=sharing'
+    { label: '1-1 認識講師', url: 'https://youtu.be/OBRw2ysakaI' },
+    { label: '1-2 介面認識與基本導航', url: 'https://youtu.be/ByYtZNufMrM' },
+    { label: '1-3 來源導入 (PDF/網址/YT/雲端)', url: 'https://youtu.be/G1IbkIMnhuA' },
+    { label: '1-4 對話與提示詞 (Prompt Engineering)', url: 'https://youtu.be/ByP3FcIh0eA' },
+    { label: '1-5 工作室 (語音/心智圖/報告生成)', url: 'https://youtu.be/W6qxsRyeGkI' },
+    { url: 'https://docs.google.com/spreadsheets/d/18vXidG-qTw4eMrBem4t-V90CQGtRMcBJzP4d-nEI9ns/edit?usp=sharing' }
   ],
   notebooklm_ja_learning: [
-    'https://youtu.be/HSc-2-7IW_g', 
-    'https://youtu.be/hIlwYCoewn0',
-    'https://docs.google.com/spreadsheets/d/18vXidG-qTw4eMrBem4t-V90CQGtRMcBJzP4d-nEI9ns/edit?usp=sharing'
+    { label: '2-1 日語學習夥伴(1)', url: 'https://youtu.be/HSc-2-7IW_g' },
+    { label: '2-2 日語學習夥伴(2)', url: 'https://youtu.be/hIlwYCoewn0' },
+    { url: 'https://docs.google.com/spreadsheets/d/18vXidG-qTw4eMrBem4t-V90CQGtRMcBJzP4d-nEI9ns/edit?usp=sharing' }
   ],
   notebooklm_biz_analysis: [
-    'https://youtu.be/aS2CpZpC4xI', 
-    'https://youtu.be/BovFYbX4nKQ', 
-    'https://youtu.be/lJpxm62QjDg',
-    'https://docs.google.com/spreadsheets/d/18vXidG-qTw4eMrBem4t-V90CQGtRMcBJzP4d-nEI9ns/edit?usp=sharing'
+    { label: '3-1 商業分析工具(1)', url: 'https://youtu.be/aS2CpZpC4xI' },
+    { label: '3-2 商業分析工具(2)', url: 'https://youtu.be/BovFYbX4nKQ' },
+    { label: '3-3 商業分析工具(3)', url: 'https://youtu.be/lJpxm62QjDg' },
+    { url: 'https://docs.google.com/spreadsheets/d/18vXidG-qTw4eMrBem4t-V90CQGtRMcBJzP4d-nEI9ns/edit?usp=sharing' }
   ],
   notebooklm_chat_summary: [
-    'https://youtu.be/mH4wzr-ZWR8', 
-    'https://youtu.be/RK1OkD_BnPg', 
-    'https://youtu.be/LJQOwYdljE8',
-    'https://docs.google.com/spreadsheets/d/18vXidG-qTw4eMrBem4t-V90CQGtRMcBJzP4d-nEI9ns/edit?usp=sharing'
+    { label: '4-1 聊天紀錄摘要(1)', url: 'https://youtu.be/mH4wzr-ZWR8' },
+    { label: '4-2 聊天紀錄摘要(2)', url: 'https://youtu.be/RK1OkD_BnPg' },
+    { label: '4-3 聊天紀錄摘要(3)', url: 'https://youtu.be/LJQOwYdljE8' },
+    { url: 'https://docs.google.com/spreadsheets/d/18vXidG-qTw4eMrBem4t-V90CQGtRMcBJzP4d-nEI9ns/edit?usp=sharing' }
   ],
   notebooklm_finance_stock: [
-    'https://youtu.be/MZ6DV3t54Rg', 
-    'https://youtu.be/wYv7jhoI1nc',
-    'https://docs.google.com/spreadsheets/d/18vXidG-qTw4eMrBem4t-V90CQGtRMcBJzP4d-nEI9ns/edit?usp=sharing'
+    { label: '4-4 財務報表、股票分析(1)', url: 'https://youtu.be/MZ6DV3t54Rg' },
+    { label: '4-5 財務報表、股票分析(2)', url: 'https://youtu.be/wYv7jhoI1nc' },
+    { url: 'https://docs.google.com/spreadsheets/d/18vXidG-qTw4eMrBem4t-V90CQGtRMcBJzP4d-nEI9ns/edit?usp=sharing' }
   ],
 };
 
@@ -140,7 +144,10 @@ export default async function SuccessPage({
     },
   }[lang];
 
-  const renderLink = (url: string, index?: number) => {
+  const renderLink = (linkInfo: string | { url: string; label?: string }, index?: number) => {
+    const url = typeof linkInfo === 'string' ? linkInfo : linkInfo.url;
+    const customLabel = typeof linkInfo === 'string' ? undefined : linkInfo.label;
+    
     const isYouTube = url.includes('youtu.be') || url.includes('youtube.com');
     const isSheet = url.includes('docs.google.com/spreadsheets');
     
@@ -148,7 +155,9 @@ export default async function SuccessPage({
     if (isYouTube) label = t.watchBtn;
     if (isSheet) label = t.tableBtn;
     
-    const suffix = index !== undefined ? ` (${index + 1})` : '';
+    // 如果有自定義標籤，優先使用
+    const finalLabel = customLabel || label;
+    const suffix = (index !== undefined && !customLabel) ? ` (${index + 1})` : '';
 
     return (
       <a
@@ -162,10 +171,10 @@ export default async function SuccessPage({
           fontSize: '0.9rem', 
           padding: '0.8rem 1.8rem',
           margin: '0.5rem',
-          minWidth: '220px'
+          minWidth: '240px'
         }}
       >
-        {label}{suffix}
+        {finalLabel}{suffix}
       </a>
     );
   };
@@ -205,7 +214,7 @@ export default async function SuccessPage({
         <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '0.5rem' }}>
           {accessData ? (
             Array.isArray(accessData) 
-              ? accessData.map((url, i) => renderLink(url, i))
+              ? accessData.map((linkInfo, i) => renderLink(linkInfo, i))
               : renderLink(accessData)
           ) : (
             <p style={{ color: 'var(--text-secondary)', fontStyle: 'italic' }}>{t.noLink}</p>

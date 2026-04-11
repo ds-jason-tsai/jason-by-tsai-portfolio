@@ -32,11 +32,12 @@ export default function PortfolioClient({ projects, lang, t }: { projects: any[]
     const savedEmail = typeof window !== 'undefined' ? localStorage.getItem('user_email') : null;
     
     if (savedEmail) {
-      // If email exists, allow direct access
+      console.log('✅ Lead already captured for:', savedEmail, '- Opening directly.');
       return;
     } else {
       // Otherwise, intercept and show modal
       e.preventDefault();
+      console.log('🔒 Intercepted access to:', projName, '- Showing Lead capture modal.');
       setPendingProject({ name: projName, url });
       setIsLeadModalOpen(true);
     }

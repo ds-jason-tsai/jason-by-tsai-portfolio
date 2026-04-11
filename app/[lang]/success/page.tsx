@@ -26,9 +26,9 @@ const ACCESS_LINKS: Record<string, string | string[]> = {
 
 const REPORT_NAMES: Record<string, Record<string, string>> = {
   salesforce_se: {
-    zh: 'Case Study：Salesforce Solution Engineer',
-    en: 'Case Study: Salesforce Solution Engineer Pitch',
-    ja: 'ケーススタディ：Salesforce SE プレゼン',
+    zh: 'SaaS 策略深探：Salesforce 解決方案工程與 GTM 研究 (Case Study)',
+    en: 'Strategic Case Study: Salesforce GTM & SE Framework',
+    ja: '戦略的考察：Salesforce SE と GTM 分析 (Case Study)',
   },
   notebooklm_series: {
     zh: 'NotebookLM 知識庫完全指南',

@@ -108,7 +108,7 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
                 {(dict.home as any).featured_items?.map((item: any) => (
                   <a 
                     key={item.id}
-                    href={`/${lang}/reports?utm_source=internal&utm_medium=button&utm_campaign=home_featured_reports#${item.id}`} 
+                    href={`/${lang}/reports?utm_source=internal&utm_medium=button&utm_campaign=home_featured_reports&utm_content=${item.id}#${item.id}`} 
                     className="btn-outline-cyan"
                   >
                     {item.icon} {item.label}

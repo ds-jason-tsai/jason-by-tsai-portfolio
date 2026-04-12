@@ -18,12 +18,12 @@
     "description": "具備深厚跨領域實務經驗。我不只是資料分析師，更提供：\n【資料分析教學】、【客製商業報告/儀表板建置】、【作品集與專案深度指導】以及【MarTech 與自動化導入】\n等全方位服務，協助您從海量數據中挖掘最高商業價值。",
     "cta": "探索作品集",
     "contact_cta": "洽詢合作項目",
-    "featured_courses": "看專業洞察與課程",
+    "featured_courses": "解鎖更多資源",
     "featured_items": [
       { "icon": "", "label": "影片課程", "id": "video" },
       { "icon": "", "label": "分析報告", "id": "report" }
     ],
-    "social_label": "追蹤我的數據洞察",
+    "social_label": "追蹤我的社群",
     "featured_highlights": "精選特輯",
     "stats": {
       "students": "學員數",

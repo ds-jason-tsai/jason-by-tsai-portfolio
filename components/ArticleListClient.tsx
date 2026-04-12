@@ -143,30 +143,31 @@ export default function ArticleListClient({ articles, lang, t }: { articles: any
           box-shadow: 0 0 20px rgba(0, 242, 254, 0.2);
           transform: scale(1.05);
         }
-        /* Desktop: Center tags and hide duplicates used for marquee */
+        /* Unified Marquee Animation for all screens if needed */
+        .category-marquee-track {
+          animation: marquee-scroll 40s linear infinite;
+        }
+        .category-marquee-track:active,
+        .category-marquee-track:hover {
+          animation-play-state: paused;
+        }
+
+        @keyframes marquee-scroll {
+          0% { transform: translateX(0); }
+          100% { transform: translateX(calc(-50% - 0.4rem)); }
+        }
+
         @media (min-width: 769px) {
+          /* If categories are very few, we can choose to center them, 
+             but the user requested carousel style like mobile. */
           .category-marquee-track {
-            justify-content: center !important;
-            width: 100% !important;
-            animation: none !important;
-          }
-          /* Hide the second half of tags on desktop (only used for mobile loop) */
-          .category-btn:nth-child(n+${categories.length + 1}) {
-            display: none !important;
+            padding: 1rem 0 2rem;
           }
         }
 
         @media (max-width: 768px) {
           .category-marquee-track {
-            animation: marquee-scroll 25s linear infinite;
-          }
-          .category-marquee-track:active,
-          .category-marquee-track:hover {
-            animation-play-state: paused;
-          }
-          @keyframes marquee-scroll {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(calc(-50% - 0.4rem)); }
+            animation-duration: 25s; /* Faster on mobile */
           }
           .category-scroll-wrapper::after {
             content: '';

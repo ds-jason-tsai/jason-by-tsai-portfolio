@@ -142,7 +142,7 @@ const reports = [
   {
     id: 'insurance_raw_data',
     category: 'data',
-    image: 'https://image-cdn.learnin.tw/bnextmedia/image/album/2024-10/img-1730080111-20931.jpg?w=900&output=webp',
+    image: '/images/excel_cover.png',
     title: {
       zh: '全台保險社群原始數據 (2003.08 ~ 2026.04)',
       en: 'Insurance Social Media Raw Data (2003-2026)',

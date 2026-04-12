@@ -21,7 +21,8 @@
     "featured_courses": "解鎖更多資源",
     "featured_items": [
       { "icon": "", "label": "影片課程", "id": "video" },
-      { "icon": "", "label": "分析報告", "id": "report" }
+      { "icon": "", "label": "分析報告", "id": "report" },
+      { "icon": "", "label": "精華數據", "id": "data" }
     ],
     "social_label": "追蹤我的社群",
     "featured_highlights": "精選特輯",

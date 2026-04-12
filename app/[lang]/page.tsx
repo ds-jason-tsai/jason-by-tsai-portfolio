@@ -78,7 +78,14 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
         <div className="hero-content">
           <h1 className="hero-title">
             {dict.home.title} <br />
-            <span>{dict.home.subtitle}</span>
+            <span>
+              {dict.home.subtitle.split('\n').map((line: string, i: number) => (
+                <span key={i}>
+                  {line}
+                  {i < dict.home.subtitle.split('\n').length - 1 && <br />}
+                </span>
+              ))}
+            </span>
           </h1>
           <p className="hero-desc" style={{ whiteSpace: 'pre-wrap', lineHeight: '1.8' }}>
             {dict.home.description}
@@ -115,27 +122,15 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
                {lang === 'zh' ? '金融業資料分析師、多個數位學習平台 AI/資料分析導師、臺清交政等社團資料視覺化講師' : (lang === 'ja' ? '金融データアナリスト / AI・データ分析講師 / トップ大学データ視覚化講師' : 'Financial Data Analyst / AI & Data Analysis Instructor / Top Universities Data Viz Lecturer')}
             </p>
 
-            {/* Combined Social & Paid Section */}
-            <div className="hero-links-integration" style={{ marginTop: '2.5rem', width: '100%', display: 'flex', flexDirection: 'column', gap: '2rem', alignItems: 'center' }}>
+            {/* Combined Social & Paid Section (1-2-3 Architecture) */}
+            <div className="hero-links-integration" style={{ marginTop: '2.5rem', width: '100%', display: 'flex', flexDirection: 'column', gap: '2.5rem', alignItems: 'center' }}>
               
-              {/* Social Links */}
-              <div className="social-links-subsection">
-                <p className="social-label" style={{ marginBottom: '1.2rem', color: '#00f2fe', fontSize: '1.1rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '1px' }}>
-                  {dict.home.social_label || (lang === 'zh' ? '追蹤我的數據洞察' : 'Follow my Data Insights')}
-                </p>
-                <div className="social-icons" style={{ gap: '2rem', display: 'flex', justifyContent: 'center' }}>
-                  <a href="https://tw.linkedin.com/in/jasonb0604?utm_source=jason-by-tsai-portfolio.vercel.app&utm_medium=referral&utm_campaign=home_social_linkedin" target="_blank" rel="noopener noreferrer" className="social-icon-link">LinkedIn</a>
-                  <a href="https://www.instagram.com/chartbar0713/?utm_source=jason-by-tsai-portfolio.vercel.app&utm_medium=referral&utm_campaign=home_social_instagram" target="_blank" rel="noopener noreferrer" className="social-icon-link">Instagram</a>
-                  <a href="https://medium.com/@jasonb0604?utm_source=jason-by-tsai-portfolio.vercel.app&utm_medium=referral&utm_campaign=home_social_medium" target="_blank" rel="noopener noreferrer" className="social-icon-link">Medium</a>
-                </div>
-              </div>
-
-              {/* Paid Content - Now using the same text-link style */}
+              {/* 2. Paid Content (Elevated Priority) */}
               <div className="paid-links-subsection">
                 <p className="social-label" style={{ marginBottom: '1.2rem', color: '#00f2fe', fontSize: '1.1rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '1px' }}>
-                  {(dict.home as any).featured_courses || (lang === 'zh' ? '💎 專業數據洞察 (付費專區)' : '💎 Premium Data Insights')}
+                  {(dict.home as any).featured_courses || '專業數據洞察 (付費專區)'}
                 </p>
-                <div className="course-links" style={{ display: 'flex', gap: '2rem', justifyContent: 'center' }}>
+                <div className="course-links" style={{ display: 'flex', gap: '2.5rem', justifyContent: 'center' }}>
                   {(dict.home as any).featured_items?.map((item: any) => (
                     <a 
                       key={item.id}
@@ -143,9 +138,21 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
                       className="social-icon-link"
                       style={{ fontSize: '1rem', fontWeight: 600 }}
                     >
-                      {item.icon} {item.label}
+                      {item.label}
                     </a>
                   ))}
+                </div>
+              </div>
+
+              {/* 3. Social Links (Secondary Support) */}
+              <div className="social-links-subsection">
+                <p className="social-label" style={{ marginBottom: '1.2rem', color: '#00f2fe', fontSize: '1.1rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '1px' }}>
+                  {dict.home.social_label || (lang === 'zh' ? '追蹤我的數據洞察' : 'Follow my Data Insights')}
+                </p>
+                <div className="social-icons" style={{ gap: '2.5rem', display: 'flex', justifyContent: 'center' }}>
+                  <a href="https://tw.linkedin.com/in/jasonb0604?utm_source=jason-by-tsai-portfolio.vercel.app&utm_medium=referral&utm_campaign=home_social_linkedin" target="_blank" rel="noopener noreferrer" className="social-icon-link">LinkedIn</a>
+                  <a href="https://www.instagram.com/chartbar0713/?utm_source=jason-by-tsai-portfolio.vercel.app&utm_medium=referral&utm_campaign=home_social_instagram" target="_blank" rel="noopener noreferrer" className="social-icon-link">Instagram</a>
+                  <a href="https://medium.com/@jasonb0604?utm_source=jason-by-tsai-portfolio.vercel.app&utm_medium=referral&utm_campaign=home_social_medium" target="_blank" rel="noopener noreferrer" className="social-icon-link">Medium</a>
                 </div>
               </div>
 

@@ -105,12 +105,15 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
           <div className="hero-courses-section" style={{ marginTop: '5rem' }}>
              <p className="social-label" style={{ marginBottom: '2rem', color: '#00f2fe', fontSize: '1.4rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '1px' }}>{dict.home.featured_courses || '推薦熱門課程'}</p>
              <div className="course-buttons" style={{ display: 'flex', gap: '1.2rem', justifyContent: 'center', flexWrap: 'wrap' }}>
-                <a href="https://live.rookiesavior.net/course/tableau?utm_source=jason-by-tsai-portfolio.vercel.app&utm_medium=referral&utm_campaign=home_courses_tableau" target="_blank" rel="noopener noreferrer" className="btn-outline-cyan">
-                  📊 {lang === 'zh' ? 'Tableau 商業視覺化實戰' : 'Tableau Business Viz'}
-                </a>
-                <a href="https://live.rookiesavior.net/course/AI-NotubookLM?utm_source=jason-by-tsai-portfolio.vercel.app&utm_medium=referral&utm_campaign=home_courses_ai" target="_blank" rel="noopener noreferrer" className="btn-outline-cyan">
-                  🤖 {lang === 'zh' ? 'NotebookLM x AI 應用' : 'NotebookLM x AI Apps'}
-                </a>
+                {dict.home.featured_items?.map((item: any) => (
+                  <a 
+                    key={item.id}
+                    href={`/${lang}/reports?product=${item.id}&utm_source=internal&utm_medium=button&utm_campaign=home_featured_reports`} 
+                    className="btn-outline-cyan"
+                  >
+                    {item.icon} {item.label}
+                  </a>
+                ))}
              </div>
           </div>
         </div>

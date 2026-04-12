@@ -16,9 +16,13 @@
     "title": "Translating Complex Data into Intuitive Decisions",
     "subtitle": "I'm Jason Tsai, Your Dedicated Data Analyst",
     "description": "Offering deep cross-disciplinary expertise. I am more than a Data Analyst—I provide comprehensive services in: \n[Data Analysis Teaching], [Custom Business Reports/Dashboards], [Portfolio/Project Guidance], and [MarTech/Automation Integration] \nto uncover the highest commercial value from vast amounts of data.",
-    "cta": "Explore Projects",
-    "contact_cta": "Discuss Cooperation",
-    "featured_courses": "Featured Courses",
+    "cta": "Explore Portfolio",
+    "contact_cta": "Contact Me",
+    "featured_courses": "💎 Premium Data Insights",
+    "featured_items": [
+      { "icon": "📊", "label": "Salesforce Strategy Report", "id": "salesforce_se" },
+      { "icon": "🤖", "label": "NotebookLM AI Guide", "id": "notebooklm_series" }
+    ],
     "social_label": "Follow my Data Insights",
     "featured_highlights": "Featured Highlights",
     "stats": {

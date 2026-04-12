@@ -363,7 +363,7 @@ export default function ReportsClient({ lang }: { lang: 'zh' | 'en' | 'ja' }) {
                   src={report.image}
                   alt={report.title[lang]}
                   fill
-                  style={{ objectFit: 'contain', objectPosition: 'center', padding: '1rem' }}
+                  style={{ objectFit: 'cover', objectPosition: 'center' }}
                   className="report-img"
                 />
               </div>

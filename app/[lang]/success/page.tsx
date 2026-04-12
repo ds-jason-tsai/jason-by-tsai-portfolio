@@ -42,6 +42,7 @@ const ACCESS_LINKS: Record<string, (string | { url: string; label?: string })[]>
     { label: '4-4 財務報表、股票分析(1)', url: 'https://youtu.be/MZ6DV3t54Rg' },
     { label: '4-5 財務報表、股票分析(2)', url: 'https://youtu.be/wYv7jhoI1nc' }
   ],
+  insurance_raw_data: [{ url: 'https://docs.google.com/spreadsheets/d/1bnlPVltkQnzA2bSHRvyMc2zUcBEY4x8Oz0Cd-UmcRlA/edit?usp=sharing', label: '📊 原始數據 (Google Sheets)' }],
 };
 
 const REPORT_NAMES: Record<string, Record<string, string>> = {
@@ -74,6 +75,11 @@ const REPORT_NAMES: Record<string, Record<string, string>> = {
     zh: 'NotebookLM 實戰應用：第五章 (財報分析)',
     en: 'NotebookLM Applied: Chapter 5 (Finance Analysis)',
     ja: 'NotebookLM活用術：第5章 (投資分析)',
+  },
+  insurance_raw_data: {
+    zh: '全台保險社群原始數據 (2003.08 ~ 2026.04)',
+    en: 'Insurance Social Media Raw Data (2003-2026)',
+    ja: '台湾保険コミュニティ原始データ (2003-2026)',
   },
 };
 

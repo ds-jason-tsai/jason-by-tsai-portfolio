@@ -139,6 +139,28 @@ const reports = [
     price: 898,
     tags: ['#NotebookLM', '#FinanceAI', '#StockAnalysis', '#Investment'],
   },
+  {
+    id: 'insurance_raw_data',
+    category: 'data',
+    image: '/images/insurance_raw_data.png',
+    title: {
+      zh: '全台保險社群原始數據 (2003.08 ~ 2026.04)',
+      en: 'Insurance Social Media Raw Data (2003-2026)',
+      ja: '台湾保険コミュニティ原始データ (2003-2026)',
+    },
+    description: {
+      zh: '橫跨 20 年的深度數據資產。涵蓋 PTT, Finfo, MY83 等各大論壇關於保險商品、理賠爭議與業務員互動的結構化紀錄，是保險科技 (InsurTech) 與市場研究的必備基石。',
+      en: '20+ years of deep social data asset. Covers PTT, Finfo, MY83, and major insurance forums. Structured records of insurance products, claims, and agent interactions.',
+      ja: '20年以上にわたる深いソーシャルデータ資産。PTT、Finfo、MY83などの主要な保険フォーラムを網羅。保険商品、保険金請求、エージェントのやり取りを構造化した記録。',
+    },
+    chapters: [
+      { id: 'S1', zh: 'PTT 保險版資料集', en: 'PTT Insurance Dataset', ja: 'PTT保険データ' },
+      { id: 'S2', zh: 'Finfo / MY83 互動紀錄', en: 'Finfo / MY83 Interactions', ja: 'Finfo / MY83 交流データ' },
+      { id: 'S3', zh: '2003-2026 時間序列動向', en: '2003-2026 Time Series', ja: '2003-2026 時系列' }
+    ],
+    price: 298,
+    tags: ['#InsurTech', '#BigData', '#MarketResearch', '#Insurance'],
+  },
 ];
 
 export default function ReportsClient({ lang }: { lang: 'zh' | 'en' | 'ja' }) {

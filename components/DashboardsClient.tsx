@@ -145,10 +145,14 @@ export default function DashboardsClient({ lang }: { lang: 'zh' | 'en' | 'ja' })
                 <span key={i} className="dashboard-tag">#{tag}</span>
               ))}
             </div>
-            {/* Added Buy Data Button */}
+            {/* Refined Buy Data Button for Insurance Data Launch */}
             <div style={{ marginTop: '2rem' }}>
-              <a href={`/${lang}/reports?utm_source=internal&utm_medium=button&utm_campaign=dashboard_card_buy#data`} className="btn-primary dashboard-buy-btn pulse-animation">
-                {lang === 'zh' ? '🛒 購買相關數據' : (lang === 'ja' ? '🛒 関連データを購入' : '🛒 Buy Layout / Data')}
+              <a 
+                href={`/${lang}/reports?utm_source=internal&utm_medium=dashboard_cta&utm_campaign=insurance_data_launch&utm_content=insurance_raw_data#data`} 
+                className="btn-primary dashboard-buy-btn pulse-animation"
+                style={{ background: 'var(--accent-grad)', color: '#000', fontWeight: '800' }}
+              >
+                {lang === 'zh' ? '📊 獲取 20 年保險社群原始數據' : (lang === 'ja' ? '📊 20年分の保険データを取得' : '📊 Get 20y Insurance Social Data')}
               </a>
             </div>
           </div>

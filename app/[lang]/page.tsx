@@ -77,12 +77,12 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
       <section className="hero">
         <div className="hero-content">
           <h1 className="hero-title" style={{ wordBreak: 'keep-all' }}>
-            {dict.home.title} <br className="mobile-only-br" />
-            <span>
+            {dict.home.title}
+            <br />
+            <span className="hero-subtitle">
               {dict.home.subtitle.split('\n').map((line: string, i: number) => (
-                <span key={i}>
+                <span key={i} style={{ display: 'block' }}>
                   {line}
-                  {i < dict.home.subtitle.split('\n').length - 1 && <br />}
                 </span>
               ))}
             </span>
@@ -230,7 +230,7 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
           line-height: 1.2;
           margin-bottom: 1.5rem;
         }
-        .hero-title span {
+        .hero-subtitle {
           background: var(--accent-grad);
           -webkit-background-clip: text;
           background-clip: text;

@@ -101,21 +101,6 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
               <a href="https://medium.com/@jasonb0604?utm_source=jason-by-tsai-portfolio.vercel.app&utm_medium=referral&utm_campaign=home_social_medium" target="_blank" rel="noopener noreferrer" className="social-icon-link">Medium</a>
             </div>
           </div>
-
-          <div className="hero-courses-section" style={{ marginTop: '5rem' }}>
-             <p className="social-label" style={{ marginBottom: '2rem', color: '#00f2fe', fontSize: '1.4rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '1px' }}>{(dict.home as any).featured_courses || '推薦熱門課程'}</p>
-             <div className="course-buttons" style={{ display: 'flex', gap: '1.2rem', justifyContent: 'center', flexWrap: 'wrap' }}>
-                {(dict.home as any).featured_items?.map((item: any) => (
-                  <a 
-                    key={item.id}
-                    href={`/${lang}/reports?utm_source=internal&utm_medium=button&utm_campaign=home_featured_reports&utm_content=${item.id}#${item.id}`} 
-                    className="btn-outline-cyan"
-                  >
-                    {item.icon} {item.label}
-                  </a>
-                ))}
-             </div>
-          </div>
         </div>
 
         <div className="hero-image-outer">
@@ -140,6 +125,22 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
             <p style={{ textAlign: 'center', fontSize: '1rem', color: 'var(--text-secondary)', marginTop: '1rem', fontWeight: 500, lineHeight: '1.6', maxWidth: '650px' }}>
                {lang === 'zh' ? '金融業資料分析師、多個數位學習平台 AI/資料分析導師、臺清交政等社團資料視覺化講師' : (lang === 'ja' ? '金融データアナリスト / AI・データ分析講師 / トップ大学データ視覚化講師' : 'Financial Data Analyst / AI & Data Analysis Instructor / Top Universities Data Viz Lecturer')}
             </p>
+
+            <div className="hero-courses-section" style={{ marginTop: '2.5rem', width: '100%' }}>
+               <p className="social-label" style={{ marginBottom: '1.5rem', color: '#00f2fe', fontSize: '1.2rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '1px' }}>{(dict.home as any).featured_courses || '推薦熱門課程'}</p>
+               <div className="course-buttons" style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
+                  {(dict.home as any).featured_items?.map((item: any) => (
+                    <a 
+                      key={item.id}
+                      href={`/${lang}/reports?utm_source=internal&utm_medium=button&utm_campaign=home_featured_reports&utm_content=${item.id}#${item.id}`} 
+                      className="btn-outline-cyan"
+                      style={{ padding: '0.6rem 1.4rem', fontSize: '0.85rem' }}
+                    >
+                      {item.icon} {item.label}
+                    </a>
+                  ))}
+               </div>
+            </div>
           </div>
         </div>
       </section>

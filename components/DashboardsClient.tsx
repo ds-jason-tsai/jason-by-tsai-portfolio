@@ -62,7 +62,8 @@ export default function DashboardsClient({ lang }: { lang: 'zh' | 'en' | 'ja' })
       note: "※ 建議使用電腦瀏覽器以獲得最佳交互體驗",
       backToHome: "回到首頁",
       prev: "上一個",
-      next: "下一個"
+      next: "下一個",
+      getData: "獲取完整資料"
     },
     en: {
       mainTitle: "Data Dashboards",
@@ -70,7 +71,8 @@ export default function DashboardsClient({ lang }: { lang: 'zh' | 'en' | 'ja' })
       note: "※ Desktop browser recommended for the best experience.",
       backToHome: "Back to Home",
       prev: "Prev",
-      next: "Next"
+      next: "Next",
+      getData: "Get Full Data"
     },
     ja: {
       mainTitle: "データダッシュボード (Dashboards)",
@@ -78,7 +80,8 @@ export default function DashboardsClient({ lang }: { lang: 'zh' | 'en' | 'ja' })
       note: "※ PCブラウザでの閲覧を推奨します。",
       backToHome: "ホームに戻る",
       prev: "前へ",
-      next: "次へ"
+      next: "次へ",
+      getData: "完全なデータを取得"
     }
   }[lang];
 
@@ -134,7 +137,7 @@ export default function DashboardsClient({ lang }: { lang: 'zh' | 'en' | 'ja' })
         }}>
           {/* Info Area */}
           <div className="dashboard-info" style={{ marginBottom: '2rem', textAlign: 'center' }}>
-            <h2 style={{ fontSize: '1.8rem', fontWeight: '800', marginBottom: '1rem', color: '#fff' }}>
+            <h2 style={{ fontSize: '1.8rem', fontWeight: '800', marginBottom: '1rem', color: '#fff', wordBreak: 'break-word' }}>
               {current.title[lang]}
             </h2>
             <p style={{ color: 'var(--text-secondary)', lineHeight: '1.6', fontSize: '1rem', maxWidth: '900px', margin: '0 auto 1.5rem' }}>
@@ -152,11 +155,7 @@ export default function DashboardsClient({ lang }: { lang: 'zh' | 'en' | 'ja' })
                 className="btn-primary dashboard-buy-btn pulse-animation"
                 style={{ background: 'var(--accent-grad)', color: '#000', fontWeight: '800' }}
               >
-                {current.id === 'sentiment_forum' ? (
-                  lang === 'zh' ? '獲取 20 年保險社群原始數據' : (lang === 'ja' ? '20年分の保険データを取得' : 'Get 20y Insurance Social Data')
-                ) : (
-                  lang === 'zh' ? '獲取結構化原始數據' : (lang === 'ja' ? '構造化データを取得' : 'Get Structured Raw Data')
-                )}
+                {t.getData}
               </a>
             </div>
           </div>
@@ -168,7 +167,7 @@ export default function DashboardsClient({ lang }: { lang: 'zh' | 'en' | 'ja' })
             overflow: 'hidden', 
             background: '#0a0a0a',
             width: '100%',
-            height: '1000px', // Increased height
+            height: '1000px',
             maxHeight: '85vh',
             boxShadow: 'inset 0 0 40px rgba(0,0,0,0.8)'
           }}>

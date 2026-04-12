@@ -366,7 +366,6 @@ export default function ReportsClient({ lang }: { lang: 'zh' | 'en' | 'ja' }) {
                   style={{ objectFit: 'contain', objectPosition: 'center', padding: '1rem' }}
                   className="report-img"
                 />
-                <div className="premium-badge-fixed">{t.badge}</div>
               </div>
 
               {/* 2. MIDDLE - Scrollable Content Body */}

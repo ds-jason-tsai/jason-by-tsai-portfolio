@@ -76,8 +76,8 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
     <>
       <section className="hero">
         <div className="hero-content">
-          <h1 className="hero-title">
-            {dict.home.title} <br />
+          <h1 className="hero-title" style={{ wordBreak: 'keep-all' }}>
+            {dict.home.title} <br className="mobile-only-br" />
             <span>
               {dict.home.subtitle.split('\n').map((line: string, i: number) => (
                 <span key={i}>
@@ -87,7 +87,7 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
               ))}
             </span>
           </h1>
-          <p className="hero-desc" style={{ whiteSpace: 'pre-wrap', lineHeight: '1.8' }}>
+          <p className="hero-desc" style={{ whiteSpace: 'pre-wrap', lineHeight: '1.8', wordBreak: 'keep-all' }}>
             {dict.home.description}
           </p>
           
@@ -122,10 +122,8 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
                {lang === 'zh' ? '金融業資料分析師、多個數位學習平台 AI/資料分析導師、臺清交政等社團資料視覺化講師' : (lang === 'ja' ? '金融データアナリスト / AI・データ分析講師 / トップ大学データ視覚化講師' : 'Financial Data Analyst / AI & Data Analysis Instructor / Top Universities Data Viz Lecturer')}
             </p>
 
-            {/* Combined Social & Paid Section (1-2-3 Architecture) */}
             <div className="hero-links-integration" style={{ marginTop: '2.5rem', width: '100%', display: 'flex', flexDirection: 'column', gap: '2.5rem', alignItems: 'center' }}>
               
-              {/* 2. Paid Content (Elevated Priority) */}
               <div className="paid-links-subsection">
                 <p className="social-label" style={{ marginBottom: '1.2rem', color: '#00f2fe', fontSize: '1.1rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '1px' }}>
                   {(dict.home as any).featured_courses || '專業數據洞察 (付費專區)'}
@@ -144,7 +142,6 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
                 </div>
               </div>
 
-              {/* 3. Social Links (Secondary Support) */}
               <div className="social-links-subsection">
                 <p className="social-label" style={{ marginBottom: '1.2rem', color: '#00f2fe', fontSize: '1.1rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '1px' }}>
                   {dict.home.social_label || (lang === 'zh' ? '追蹤我的數據洞察' : 'Follow my Data Insights')}
@@ -167,7 +164,6 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
         <h2 className="section-title">{dict.home.featured_highlights || (lang === 'zh' ? '精選特輯' : 'Featured Highlights')}</h2>
         <div className="carousel-container">
           <div className="carousel-track">
-            {/* Map the array twice for seamless infinite scrolling */}
             {[...featuredPosts, ...featuredPosts].map((post, index) => (
               <div className="media-card" key={index}>
                 <div className="media-card-header">
@@ -181,7 +177,6 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
                     height={post.type === 'youtube' ? '315' : '480'} 
                     style={{ border: 'none', overflow: 'hidden', borderRadius: '10px' }} 
                     scrolling="no" 
-                    frameBorder="0" 
                     allowFullScreen={true} 
                     allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
                     loading="lazy"
@@ -273,28 +268,6 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
           font-size: 1rem;
           transition: all 0.3s ease;
         }
-
-        .btn-outline-cyan {
-          padding: 0.8rem 1.8rem;
-          font-size: 0.95rem;
-          font-weight: 700;
-          color: #00f2fe;
-          background: transparent;
-          border: 1px solid #00f2fe;
-          border-radius: 40px;
-          text-decoration: none;
-          transition: all 0.3s ease;
-          display: flex;
-          align-items: center;
-          gap: 0.6rem;
-        }
-
-        .btn-outline-cyan:hover {
-          background: rgba(0, 242, 254, 0.1);
-          box-shadow: 0 0 15px rgba(0, 242, 254, 0.3);
-          transform: translateY(-2px);
-        }
-        
         .hero-image-outer {
           position: relative;
           width: 100%;
@@ -306,20 +279,17 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
           overflow: visible;
           min-height: 520px;
         }
-
         .hero-image-container {
           display: flex;
           justify-content: center;
           position: relative;
           z-index: 10;
         }
-
         .image-wrapper-glow {
           position: relative;
           padding: 10px;
           border-radius: 50%;
         }
-
         .image-wrapper-glow::after {
           content: '';
           position: absolute;
@@ -330,21 +300,18 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
           filter: blur(20px);
           z-index: -1;
         }
-
         .carousel-container {
           width: 100%;
           overflow: hidden;
           position: relative;
           padding: 2rem 0;
         }
-
         .carousel-track {
           display: flex;
           width: max-content;
           gap: 2.5rem;
           animation: scroll 80s linear infinite;
         }
-
         .media-card {
           width: 500px;
           flex-shrink: 0;
@@ -357,14 +324,16 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
           flex-direction: column;
           gap: 1rem;
         }
-
         @keyframes scroll {
           0% { transform: translateX(0); }
           100% { transform: translateX(calc(-50% - 1.25rem)); }
         }
+        
+        .mobile-only-br { display: none; }
 
         @media (max-width: 768px) {
-          .hero-title { font-size: 2.5rem; }
+          .hero-title { font-size: 2.2rem !important; word-break: keep-all; }
+          .mobile-only-br { display: block; }
           .media-card { width: 320px; }
         }
       `}}/>

@@ -20,8 +20,8 @@
     "contact_cta": "洽詢合作項目",
     "featured_courses": "💎 專業數據洞察 (付費專區)",
     "featured_items": [
-      { "icon": "📊", "label": "Salesforce 數據策略報告", "id": "salesforce_se" },
-      { "icon": "🤖", "label": "NotebookLM AI 應用指南", "id": "notebooklm_series" }
+      { "icon": "🎬", "label": "影片課程", "id": "video" },
+      { "icon": "📄", "label": "實務報告", "id": "report" }
     ],
     "social_label": "追蹤我的數據洞察",
     "featured_highlights": "精選特輯",

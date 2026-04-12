@@ -20,8 +20,8 @@
     "contact_cta": "Contact Me",
     "featured_courses": "💎 Premium Data Insights",
     "featured_items": [
-      { "icon": "📊", "label": "Salesforce Strategy Report", "id": "salesforce_se" },
-      { "icon": "🤖", "label": "NotebookLM AI Guide", "id": "notebooklm_series" }
+      { "icon": "🎬", "label": "Video Courses", "id": "video" },
+      { "icon": "📄", "label": "Case Studies", "id": "report" }
     ],
     "social_label": "Follow my Data Insights",
     "featured_highlights": "Featured Highlights",

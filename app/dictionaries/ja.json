@@ -14,11 +14,15 @@
   },
   "home": {
     "title": "複雑なデータを直感的な意思決定に変える",
-    "subtitle": "Jason Tsai、あなたのための専属データアナリスト",
+    "subtitle": "Jason Tsai、あなたのための専屬データアナリスト",
     "description": "多様な分野での深い実務経験を有しています。データアナリストとしてだけでなく、【データ分析教育】、【カスタムビジネスレポート/ダッシュボード】、【ポートフォリオ・プロジェクト指導】、および【MarTech・自動化技術導入】などの専門サービスを提供し、膨大なデータから最高の価値を引き出します。",
-    "cta": "プロジェクトを見る",
-    "contact_cta": "協力を相談する",
-    "featured_courses": "おすすめ講座",
+    "cta": "ポートフォリオを探索",
+    "contact_cta": "お問い合わせ",
+    "featured_courses": "💎 プレミアム・データ・インサイト",
+    "featured_items": [
+      { "icon": "🎬", "label": "動画講座", "id": "video" },
+      { "icon": "📄", "label": "実務レポート", "id": "report" }
+    ],
     "social_label": "データインサイトをフォロー",
     "featured_highlights": "特集ハイライト",
     "stats": {

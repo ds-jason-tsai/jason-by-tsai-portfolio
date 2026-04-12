@@ -103,9 +103,9 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
           </div>
 
           <div className="hero-courses-section" style={{ marginTop: '5rem' }}>
-             <p className="social-label" style={{ marginBottom: '2rem', color: '#00f2fe', fontSize: '1.4rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '1px' }}>{dict.home.featured_courses || '推薦熱門課程'}</p>
+             <p className="social-label" style={{ marginBottom: '2rem', color: '#00f2fe', fontSize: '1.4rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '1px' }}>{(dict.home as any).featured_courses || '推薦熱門課程'}</p>
              <div className="course-buttons" style={{ display: 'flex', gap: '1.2rem', justifyContent: 'center', flexWrap: 'wrap' }}>
-                {dict.home.featured_items?.map((item: any) => (
+                {(dict.home as any).featured_items?.map((item: any) => (
                   <a 
                     key={item.id}
                     href={`/${lang}/reports?product=${item.id}&utm_source=internal&utm_medium=button&utm_campaign=home_featured_reports`} 

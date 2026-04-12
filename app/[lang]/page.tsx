@@ -91,9 +91,9 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
             {dict.home.description}
           </p>
           
-          <div className="hero-btns">
-            <a href={`/${lang}/portfolio?utm_source=internal&utm_medium=button&utm_campaign=home_hero_portfolio`} className="btn-primary">{dict.home.cta}</a>
-            <a href={`/${lang}/contact?utm_source=internal&utm_medium=button&utm_campaign=home_hero_contact`} className="btn-primary btn-secondary">
+          <div className="hero-btns" style={{ display: 'flex', gap: '1.5rem', marginBottom: '3rem', justifyContent: 'center' }}>
+            <a href={`/${lang}/portfolio?utm_source=internal&utm_medium=button&utm_campaign=home_hero_portfolio`} className="btn-primary" style={{ minWidth: '180px', textAlign: 'center' }}>{dict.home.cta}</a>
+            <a href={`/${lang}/contact?utm_source=internal&utm_medium=button&utm_campaign=home_hero_contact`} className="btn-primary btn-secondary" style={{ minWidth: '180px', textAlign: 'center' }}>
               {dict.home.contact_cta}
             </a>
           </div>

@@ -15,13 +15,13 @@
   "home": {
     "title": "將複雜數據，轉化為直覺決策",
     "subtitle": "我是 Jason Tsai，您專屬的\nData Analyst",
-    "description": "具備深厚跨領域實務經驗。我不只是資料分析師，更提供：\n【資料分析教學】、【客製商業報告/儀表板建置】、【作品集與專案深度指導】以及【MarTech 數位行銷科技與自動化導入】等全方位服務，協助您從海量數據中挖掘最高商業價值。",
+    "description": "具備深厚跨領域實務經驗。我不只是資料分析師，更提供：\n【資料分析教學】、【客製商業報告/儀表板建置】、【作品集與專案深度指導】以及【MarTech 與自動化導入】\n等全方位服務，協助您從海量數據中挖掘最高商業價值。",
     "cta": "探索作品集",
     "contact_cta": "洽詢合作項目",
-    "featured_courses": "專業數據洞察 (付費專區)",
+    "featured_courses": "看專業洞察與課程",
     "featured_items": [
       { "icon": "", "label": "影片課程", "id": "video" },
-      { "icon": "", "label": "實務報告", "id": "report" }
+      { "icon": "", "label": "分析報告", "id": "report" }
     ],
     "social_label": "追蹤我的數據洞察",
     "featured_highlights": "精選特輯",

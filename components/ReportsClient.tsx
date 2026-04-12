@@ -166,7 +166,7 @@ export default function ReportsClient({ lang }: { lang: 'zh' | 'en' | 'ja' }) {
     zh: {
       title: "付費專區",
       desc: "傑森數據 (Jason Tsai) 獨家分析報告、實務課程與數據包，提供高品質的商業洞察與技術框架。購買後可透過專屬連結下載或觀賞。",
-      categories: { all: "全部內容", video: "影片課程", report: "實務報告", data: "原始數據" },
+      categories: { all: "全部內容", video: "影片課程", report: "分析報告", data: "原始數據" },
       badge: "獨家內容",
       chaptersLabel: "章節清單",
       buyBtn: "💳 立即解鎖",
@@ -175,7 +175,7 @@ export default function ReportsClient({ lang }: { lang: 'zh' | 'en' | 'ja' }) {
     en: {
       title: "Premium Section",
       desc: "Exclusive analytical reports, video courses, and data assets by Jason Tsai. High-quality business insights and technical frameworks available instantly after purchase.",
-      categories: { all: "All", video: "Video Courses", report: "Case Studies", data: "Raw Data" },
+      categories: { all: "All", video: "Video Courses", report: "Analysis Reports", data: "Raw Data" },
       badge: "Exclusive",
       chaptersLabel: "Chapter List",
       buyBtn: "💳 Unlock Now",
@@ -184,7 +184,7 @@ export default function ReportsClient({ lang }: { lang: 'zh' | 'en' | 'ja' }) {
     ja: {
       title: "分析レポート (Reports)・AI講座 (AI Courses)",
       desc: "ジェイソン・アナリティクス (Jason Analytics) が提供する獨占的な分析レポート、AI実務講座、および自動化ソリューション。高品質なビジネスインサイトと戦略フレームワークを即座に提供します。",
-      categories: { all: "すべて", video: "動画講座", report: "ケーススタディ", data: "データセット" },
+      categories: { all: "すべて", video: "動画講座", report: "分析レポート", data: "データセット" },
       badge: "獨占限定",
       chaptersLabel: "チャプターリスト",
       buyBtn: "💳 今すぐ購入",

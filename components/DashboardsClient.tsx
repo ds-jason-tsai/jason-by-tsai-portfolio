@@ -145,14 +145,18 @@ export default function DashboardsClient({ lang }: { lang: 'zh' | 'en' | 'ja' })
                 <span key={i} className="dashboard-tag">#{tag}</span>
               ))}
             </div>
-            {/* Refined Buy Data Button for Insurance Data Launch */}
+            {/* Dashboard-specific Buy Data Button */}
             <div style={{ marginTop: '2rem' }}>
               <a 
-                href={`/${lang}/reports?utm_source=internal&utm_medium=dashboard_cta&utm_campaign=insurance_data_launch&utm_content=insurance_raw_data#data`} 
+                href={`/${lang}/reports?utm_source=internal&utm_medium=dashboard_cta&utm_campaign=${current.id === 'sentiment_forum' ? 'insurance_data_launch' : 'general_data_promo'}&utm_content=${current.id}#data`} 
                 className="btn-primary dashboard-buy-btn pulse-animation"
                 style={{ background: 'var(--accent-grad)', color: '#000', fontWeight: '800' }}
               >
-                {lang === 'zh' ? '📊 獲取 20 年保險社群原始數據' : (lang === 'ja' ? '📊 20年分の保険データを取得' : '📊 Get 20y Insurance Social Data')}
+                {current.id === 'sentiment_forum' ? (
+                  lang === 'zh' ? '獲取 20 年保險社群原始數據' : (lang === 'ja' ? '20年分の保険データを取得' : 'Get 20y Insurance Social Data')
+                ) : (
+                  lang === 'zh' ? '獲取結構化原始數據' : (lang === 'ja' ? '構造化データを取得' : 'Get Structured Raw Data')
+                )}
               </a>
             </div>
           </div>

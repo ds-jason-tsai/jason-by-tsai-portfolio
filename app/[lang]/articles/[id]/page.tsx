@@ -32,6 +32,11 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
     description: desc || `${title} - 數據分析、AI 與 MarTech 專踐。`,
     alternates: {
       canonical: `https://jason-by-tsai-portfolio.vercel.app/${lang}/articles/${id}`,
+      languages: {
+        'zh': `https://jason-by-tsai-portfolio.vercel.app/zh/articles/${id}`,
+        'en': `https://jason-by-tsai-portfolio.vercel.app/en/articles/${id}`,
+        'ja': `https://jason-by-tsai-portfolio.vercel.app/ja/articles/${id}`,
+      },
     }
   };
 }

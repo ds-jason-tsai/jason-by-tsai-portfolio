@@ -257,4 +257,26 @@
     <xhtml:link rel="alternate" hreflang="ja" href="https://jason-by-tsai-portfolio.vercel.app/ja/articles/what-is-ga4-event" />
     <priority>0.7</priority>
   </url>
+  <!-- portfolio-seo-best-practices -->
+  <url>
+    <loc>https://jason-by-tsai-portfolio.vercel.app/zh/articles/portfolio-seo-best-practices</loc>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://jason-by-tsai-portfolio.vercel.app/zh/articles/portfolio-seo-best-practices" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://jason-by-tsai-portfolio.vercel.app/en/articles/portfolio-seo-best-practices" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://jason-by-tsai-portfolio.vercel.app/ja/articles/portfolio-seo-best-practices" />
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://jason-by-tsai-portfolio.vercel.app/en/articles/portfolio-seo-best-practices</loc>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://jason-by-tsai-portfolio.vercel.app/zh/articles/portfolio-seo-best-practices" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://jason-by-tsai-portfolio.vercel.app/en/articles/portfolio-seo-best-practices" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://jason-by-tsai-portfolio.vercel.app/ja/articles/portfolio-seo-best-practices" />
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://jason-by-tsai-portfolio.vercel.app/ja/articles/portfolio-seo-best-practices</loc>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://jason-by-tsai-portfolio.vercel.app/zh/articles/portfolio-seo-best-practices" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://jason-by-tsai-portfolio.vercel.app/en/articles/portfolio-seo-best-practices" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://jason-by-tsai-portfolio.vercel.app/ja/articles/portfolio-seo-best-practices" />
+    <priority>0.7</priority>
+  </url>
 </urlset>

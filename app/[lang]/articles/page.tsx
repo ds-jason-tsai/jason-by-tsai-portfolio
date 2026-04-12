@@ -19,6 +19,11 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
     description: descriptions[lang as 'zh'|'en'|'ja'] || descriptions['zh'],
     alternates: {
       canonical: `https://jason-by-tsai-portfolio.vercel.app/${lang}/articles`,
+      languages: {
+        'zh': 'https://jason-by-tsai-portfolio.vercel.app/zh/articles',
+        'en': 'https://jason-by-tsai-portfolio.vercel.app/en/articles',
+        'ja': 'https://jason-by-tsai-portfolio.vercel.app/ja/articles',
+      },
     }
   };
 }

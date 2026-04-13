@@ -19,7 +19,9 @@ function ecpayUrlEncode(str: string): string {
 
 /** 產生符合 ECPay V5 規範的 CheckMacValue */
 function generateCheckMacValue(params: Record<string, string>, hashKey: string, hashIV: string): string {
-  const sortedKeys = Object.keys(params).sort();
+  const sortedKeys = Object.keys(params).sort(function (a, b) {
+    return a.toLowerCase().localeCompare(b.toLowerCase());
+  });
   const queryString = sortedKeys.map(key => `${key}=${params[key]}`).join('&');
   const rawString = `HashKey=${hashKey}&${queryString}&HashIV=${hashIV}`;
   const encodedString = ecpayUrlEncode(rawString);
@@ -36,22 +38,35 @@ export async function POST(request: Request) {
     const textData = await request.text();
     const params = new URLSearchParams(textData);
     
-    // 轉換成一般 Object
+    // 轉換成一般 Object 並找出 CheckMacValue
     const data: Record<string, string> = {};
+    let checkMacValueOriginal = '';
+    const verifyData: Record<string, string> = {};
+
     for (const [key, value] of params.entries()) {
       data[key] = value;
+      if (key.toLowerCase() === 'checkmacvalue') {
+        checkMacValueOriginal = value;
+      } else {
+        verifyData[key] = value;
+      }
     }
 
-    const { CheckMacValue, ...verifyData } = data;
-    
     const hashKey = (process.env.ECPAY_HASH_KEY || '').trim();
     const hashIV = (process.env.ECPAY_HASH_IV || '').trim();
 
     // 驗證檢查碼
     const calculatedMac = generateCheckMacValue(verifyData, hashKey, hashIV);
 
-    if (calculatedMac !== CheckMacValue) {
-      console.error('[ECPay Callback] CheckMacValue mismatch!');
+    if (calculatedMac !== checkMacValueOriginal) {
+      console.error('[ECPay Callback Mismatch Debug] ====================');
+      console.error('TextData from ECPay:', textData);
+      console.error('Parsed Data:', JSON.stringify(data));
+      console.error('VerifyData:', JSON.stringify(verifyData));
+      console.error('HashKey length:', hashKey.length, 'HashIV length:', hashIV.length);
+      console.error('Expected CheckMacValue:', checkMacValueOriginal);
+      console.error('Calculated CheckMacValue:', calculatedMac);
+      console.error('===================================================');
       return new NextResponse('0|CheckMacValue Error', { status: 400 });
     }
 

@@ -39,37 +39,62 @@ export default function ArticleListClient({ articles, lang, t }: { articles: any
   return (
     <div className="articles-client-container" style={{ maxWidth: '900px', margin: '0 auto' }}>
       
-      {/* Category Tabs with Infinite Carousel for Mobile */}
-      <div className="category-scroll-wrapper" style={{ marginBottom: '3.5rem', position: 'relative', overflow: 'hidden' }}>
-        <div className="category-marquee-track" style={{ 
-          display: 'flex', 
-          gap: '0.8rem', 
-          width: 'max-content',
-          padding: '0.5rem 0 1.5rem',
-        }}>
-          {/* Render categories twice for seamless infinite scrolling on mobile */}
-          {[...categories, ...categories].map((cat, idx) => (
-            <button
-              key={`${cat}-${idx}`}
-              onClick={() => handleCategoryClick(cat)}
-              style={{
-                padding: '0.5rem 1.4rem',
-                borderRadius: '30px',
-                border: '1px solid rgba(255,255,255,0.1)',
-                background: activeCategory === cat ? 'var(--accent-color)' : 'rgba(255,255,255,0.05)',
-                color: activeCategory === cat ? '#000' : '#fff',
-                fontSize: '0.9rem',
-                fontWeight: activeCategory === cat ? '800' : '500',
-                cursor: 'pointer',
-                transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
-                whiteSpace: 'nowrap',
-                flexShrink: 0
-              }}
-              className="category-btn fade-in"
-            >
-              {cat === 'all' ? (lang === 'zh' ? '全部文章' : (lang === 'ja' ? 'すべての記事' : 'All Articles')) : cat}
-            </button>
-          ))}
+      {/* Category Tabs: Fixed "All" button + Infinite Carousel for remaining tags */}
+      <div className="category-bar-wrapper" style={{ marginBottom: '3.5rem', display: 'flex', alignItems: 'center', gap: '0.8rem' }}>
+        {/* Fixed "All Articles" button - always visible on the left */}
+        <button
+          onClick={() => handleCategoryClick('all')}
+          style={{
+            padding: '0.5rem 1.4rem',
+            borderRadius: '30px',
+            border: '1px solid rgba(255,255,255,0.1)',
+            background: activeCategory === 'all' ? 'var(--accent-color)' : 'rgba(255,255,255,0.05)',
+            color: activeCategory === 'all' ? '#000' : '#fff',
+            fontSize: '0.9rem',
+            fontWeight: activeCategory === 'all' ? '800' : '500',
+            cursor: 'pointer',
+            transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+            whiteSpace: 'nowrap',
+            flexShrink: 0,
+            zIndex: 3
+          }}
+          className="category-btn fade-in"
+        >
+          {lang === 'zh' ? '全部文章' : (lang === 'ja' ? 'すべての記事' : 'All Articles')}
+        </button>
+
+        {/* Scrolling marquee for remaining tag buttons */}
+        <div className="category-scroll-wrapper" style={{ position: 'relative', overflow: 'hidden', flex: 1 }}>
+          <div className="category-marquee-track" style={{ 
+            display: 'flex', 
+            gap: '0.8rem', 
+            width: 'max-content',
+            padding: '0.5rem 0 1.5rem',
+          }}>
+            {/* Render tags (excluding 'all') twice for seamless infinite scrolling */}
+            {[...uniqueTags, ...uniqueTags].map((cat, idx) => (
+              <button
+                key={`${cat}-${idx}`}
+                onClick={() => handleCategoryClick(cat)}
+                style={{
+                  padding: '0.5rem 1.4rem',
+                  borderRadius: '30px',
+                  border: '1px solid rgba(255,255,255,0.1)',
+                  background: activeCategory === cat ? 'var(--accent-color)' : 'rgba(255,255,255,0.05)',
+                  color: activeCategory === cat ? '#000' : '#fff',
+                  fontSize: '0.9rem',
+                  fontWeight: activeCategory === cat ? '800' : '500',
+                  cursor: 'pointer',
+                  transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+                  whiteSpace: 'nowrap',
+                  flexShrink: 0
+                }}
+                className="category-btn fade-in"
+              >
+                {cat}
+              </button>
+            ))}
+          </div>
         </div>
       </div>
 

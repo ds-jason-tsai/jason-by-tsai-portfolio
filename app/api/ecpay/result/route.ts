@@ -79,11 +79,11 @@ export async function POST(request: Request) {
     } else {
       // 付款失敗 (例如 Apple Pay 授權失敗)
       console.log(`[ECPay Result] Payment failed. RtnCode: ${data.RtnCode}, RtnMsg: ${data.RtnMsg}`);
-      const failedUrl = new URL(`/${lang}/reports?error=payment_failed&msg=${encodeURIComponent(data.RtnMsg || '授權失敗')}`, request.url);
+      const failedUrl = new URL(`/${lang}/failed?msg=${encodeURIComponent(data.RtnMsg || '授權失敗')}`, request.url);
       return NextResponse.redirect(failedUrl, 303);
     }
   } catch (err: any) {
     console.error('[ECPay Result API Error]', err.message);
-    return NextResponse.redirect(new URL('/zh/reports?error=server_error', request.url), 303);
+    return NextResponse.redirect(new URL(`/${lang}/failed?msg=server_error`, request.url), 303);
   }
 }

@@ -11,13 +11,13 @@ const ECPAY_PROD_URL  = 'https://payment.ecpay.com.tw/Cashier/AioCheckOut/V5';
 const ECPAY_STAGE_URL = 'https://payment-stage.ecpay.com.tw/Cashier/AioCheckOut/V5';
 
 const REPORT_CATALOG: Record<string, { name: string; price: number }> = {
-  salesforce_se: { name: 'Salesforce SE Pitch', price: 6 },
-  notebooklm_series: { name: 'NotebookLM Guide', price: 6 },
-  notebooklm_ja_learning: { name: 'NotebookLM Japanese', price: 6 },
-  notebooklm_biz_analysis: { name: 'NotebookLM Biz Analysis', price: 6 },
-  notebooklm_chat_summary: { name: 'NotebookLM Chat Summary', price: 6 },
-  notebooklm_finance_stock: { name: 'NotebookLM Finance', price: 6 },
-  insurance_raw_data: { name: 'Insurance Social Raw Data (20yr)', price: 6 },
+  salesforce_se: { name: 'Salesforce SE Pitch', price: 498 },
+  notebooklm_series: { name: 'NotebookLM Guide', price: 898 },
+  notebooklm_ja_learning: { name: 'NotebookLM Japanese', price: 898 },
+  notebooklm_biz_analysis: { name: 'NotebookLM Biz Analysis', price: 898 },
+  notebooklm_chat_summary: { name: 'NotebookLM Chat Summary', price: 898 },
+  notebooklm_finance_stock: { name: 'NotebookLM Finance', price: 898 },
+  insurance_raw_data: { name: 'Insurance Social Raw Data (20yr)', price: 298 },
 };
 
 /** 
@@ -88,7 +88,7 @@ export async function POST(request: Request) {
       MerchantTradeNo: `JT${Date.now()}${Math.floor(Math.random() * 1000)}`.slice(0, 20),
       MerchantTradeDate: getECPayDate(),
       PaymentType: 'aio', // 必填：aio
-      TotalAmount: String(customPrice || 6),
+      TotalAmount: String(customPrice || 498),
       TradeDesc: 'DigitalInsightReport',
       ItemName: 'DataReport',
       ReturnURL: `${baseUrl}/api/ecpay/callback`,

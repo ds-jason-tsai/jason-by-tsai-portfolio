@@ -35,6 +35,9 @@ function generateCheckMacValue(params: Record<string, string>, hashKey: string, 
  * 我們在這裡攔截 POST 請求，檢查是否有成功付款，再安全地進行 GET 跳轉。
  */
 export async function POST(request: Request) {
+  const { searchParams } = new URL(request.url);
+  const lang = searchParams.get('lang') || 'zh';
+
   try {
     const textData = await request.text();
     const params = new URLSearchParams(textData);
@@ -54,9 +57,6 @@ export async function POST(request: Request) {
 
     const hashKey = (process.env.ECPAY_HASH_KEY || '').trim();
     const hashIV = (process.env.ECPAY_HASH_IV || '').trim();
-    
-    const { searchParams } = new URL(request.url);
-    const lang = searchParams.get('lang') || 'zh';
 
     // 驗證檢查碼
     const calculatedMac = generateCheckMacValue(verifyData, hashKey, hashIV);

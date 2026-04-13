@@ -72,35 +72,8 @@ export async function POST(request: Request) {
 
     // 驗證成功，判斷是否付款成功 (RtnCode === '1' 代表成功)
     if (data.RtnCode === '1') {
-      console.log(`[ECPay Callback] Payment Success! Order: ${data.MerchantTradeNo}`);
-      
-      // 將資料打給 Google Apps Script (Webhook)
-      if (GAS_URL_ECPAY.startsWith('http')) {
-        console.log(`[ECPay Callback] Getting ready to send to GAS URL: ${GAS_URL_ECPAY.substring(0, 30)}...`);
-        try {
-          const gasRes = await fetch(GAS_URL_ECPAY, {
-            method: 'POST',
-            redirect: 'follow', // GAS requires redirect following
-            headers: { 'Content-Type': 'text/plain' }, // Using text/plain avoids CORS and payload truncation in some GAS setups
-            body: JSON.stringify({
-              merchantTradeNo: data.MerchantTradeNo,
-              tradeNo: data.TradeNo,
-              product: data.CustomField1 || 'Unknown',
-              amount: data.TradeAmt,
-              paymentDate: data.PaymentDate,
-              paymentType: data.PaymentType,
-              status: 'Success'
-            })
-          });
-          const gasText = await gasRes.text();
-          console.log('[ECPay Callback] GAS Response Status:', gasRes.status);
-          console.log('[ECPay Callback] GAS Response Text:', gasText);
-        } catch (err: any) {
-          console.error('[ECPay Callback] Error communicating with GAS:', err.message);
-        }
-      } else {
-        console.error('[ECPay Callback] GAS_URL_ECPAY environment variable is not a valid HTTP string!', GAS_URL_ECPAY);
-      }
+      console.log(`[ECPay Callback] Payment Success Background Ping Received! Order: ${data.MerchantTradeNo}`);
+      // 備註：已經將寄信與 Google Sheet 同步的功能移至 /api/ecpay/result (前景同步)，避免背景推播造成通知重複。
     } else {
       console.log(`[ECPay Callback] Payment Failed or Pending. RtnCode: ${data.RtnCode}, Msg: ${data.RtnMsg}`);
     }

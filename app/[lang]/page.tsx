@@ -84,7 +84,7 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
     <>
       <section className="hero">
         <div className="hero-content">
-          <h1 className="hero-title" style={{ wordBreak: 'keep-all' }}>
+          <h1 className="hero-title">
             {dict.home.title}
             <br />
             <span className="hero-subtitle">
@@ -95,7 +95,7 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
               ))}
             </span>
           </h1>
-          <p className="hero-desc" style={{ whiteSpace: 'pre-wrap', lineHeight: '1.8', wordBreak: 'keep-all' }}>
+          <p className="hero-desc" style={{ whiteSpace: 'pre-wrap', lineHeight: '1.8' }}>
             {dict.home.description}
           </p>
           
@@ -287,6 +287,9 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
           overflow: visible;
           min-height: 520px;
         }
+        @media (max-width: 768px) {
+          .hero-image-outer { min-height: 350px; }
+        }
         .hero-image-container {
           display: flex;
           justify-content: center;
@@ -340,9 +343,15 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
         .mobile-only-br { display: none; }
 
         @media (max-width: 768px) {
-          .hero-title { font-size: 2.2rem !important; word-break: keep-all; }
+          .hero-title { font-size: 2.2rem !important; line-height: 1.3; }
+          .hero-desc { padding: 0 1rem; }
+          .hero-btns { flex-direction: column; align-items: center; gap: 1rem !important; }
+          .btn-primary { width: 100%; max-width: 280px; }
           .mobile-only-br { display: block; }
-          .media-card { width: 320px; }
+          .media-card { width: calc(100vw - 40px); max-width: 400px; }
+        }
+        @media (max-width: 480px) {
+          .hero-title { font-size: 1.8rem !important; }
         }
       `}}/>
     </>

@@ -87,7 +87,5 @@ GA4 以事件發生當下的 IP 位址為依據儲存使用者地理位置：
 - `platform` | 事件來源的資料串流平台(Web、iOS、Android)
 
 以上是 GA4 將 raw data 匯入 BQ 後資料樣態的一點分享以及欄位說明。希望這份總整能對初接觸 GA4 或需要清理 BigQuery 結構的朋友帶來幫助。
-
----
 **Reference**
 - [GA4] BigQuery Export schema

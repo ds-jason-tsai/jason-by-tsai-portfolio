@@ -18,8 +18,6 @@ tags:
 
 這篇文章將總結我們這幾天在優化「傑森數據 Jason Analytics」作品集時的實戰精華，整理成適合新手閱讀的四個關鍵心法。
 
----
-
 ## 1. 標題與描述的「黃金比例」
 
 搜尋引擎就像一個忙碌的讀者，它最先看的就是你的 **Title (標題)** 和 **Meta Description (描述)**。
@@ -48,15 +46,11 @@ tags:
 - **採用新格式**：將圖片轉換為 **AVIF** 或 **WebP**。這類格式比傳統 JPG 小很多，但畫質更好。
 - **限制寬度 (Sizes)**：不要讓使用者下載 3840px 的原始大圖，而是根據螢幕大小請求合適的尺寸。
 
----
-
 ## 總結
 
 SEO 不是一門艱深的藝術，而是一系列「細心細節」的累積。透過控制字數、對齊關鍵字以及優化效能，你的作品集就不再只是一個靜態網頁，而是一個會主動幫你吸引機會的強力工具。
 
 **現在就去檢查看看你的作品集吧！**
-
----
 **推薦閱讀：**
-- [GA4 與 BigQuery 的資料結構說明](/zh/articles/ga4-to-bigquery-schema)
-- [實戰案例：保險論壇的情緒分析指標](/zh/dashboards)
+- [GA4 與 BigQuery 的資料結構說明](/zh/articles/ga4-to-bigquery-schema?utm_source=portfolio&utm_medium=internal_link&utm_campaign=recommended_reading)
+- [實戰案例：保險論壇的情緒分析指標](/zh/dashboards?utm_source=portfolio&utm_medium=internal_link&utm_campaign=recommended_reading)

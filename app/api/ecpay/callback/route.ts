@@ -1,0 +1,94 @@
+import { NextResponse } from 'next/server';
+import crypto from 'crypto';
+
+/** 絕對校準版 URL Encode */
+function ecpayUrlEncode(str: string): string {
+  let encoded = encodeURIComponent(str).toLowerCase();
+  encoded = encoded
+    .replace(/%20/g, '+')
+    .replace(/%21/g, '!')
+    .replace(/%2a/g, '*')
+    .replace(/%28/g, '(')
+    .replace(/%29/g, ')')
+    .replace(/%2d/g, '-')
+    .replace(/%5f/g, '_')
+    .replace(/%2e/g, '.')
+    .replace(/~/g, '%7e');
+  return encoded;
+}
+
+/** 產生符合 ECPay V5 規範的 CheckMacValue */
+function generateCheckMacValue(params: Record<string, string>, hashKey: string, hashIV: string): string {
+  const sortedKeys = Object.keys(params).sort();
+  const queryString = sortedKeys.map(key => `${key}=${params[key]}`).join('&');
+  const rawString = `HashKey=${hashKey}&${queryString}&HashIV=${hashIV}`;
+  const encodedString = ecpayUrlEncode(rawString);
+  const hash = crypto.createHash('sha256').update(encodedString).digest('hex');
+  return hash.toUpperCase();
+}
+
+/** 請替換成您新的 GAS Web App 網址 */
+const GAS_URL_ECPAY = process.env.GAS_URL_ECPAY || '請將網址設定在環境變數或直接貼在這裡';
+
+export async function POST(request: Request) {
+  try {
+    // 綠界是以 application/x-www-form-urlencoded 傳送
+    const textData = await request.text();
+    const params = new URLSearchParams(textData);
+    
+    // 轉換成一般 Object
+    const data: Record<string, string> = {};
+    for (const [key, value] of params.entries()) {
+      data[key] = value;
+    }
+
+    const { CheckMacValue, ...verifyData } = data;
+    
+    const hashKey = (process.env.ECPAY_HASH_KEY || '').trim();
+    const hashIV = (process.env.ECPAY_HASH_IV || '').trim();
+
+    // 驗證檢查碼
+    const calculatedMac = generateCheckMacValue(verifyData, hashKey, hashIV);
+
+    if (calculatedMac !== CheckMacValue) {
+      console.error('[ECPay Callback] CheckMacValue mismatch!');
+      return new NextResponse('0|CheckMacValue Error', { status: 400 });
+    }
+
+    // 驗證成功，判斷是否付款成功 (RtnCode === '1' 代表成功)
+    if (data.RtnCode === '1') {
+      console.log(`[ECPay Callback] Payment Success! Order: ${data.MerchantTradeNo}`);
+      
+      // 將資料打給 Google Apps Script (Webhook)
+      if (GAS_URL_ECPAY.startsWith('http')) {
+        await fetch(GAS_URL_ECPAY, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            merchantTradeNo: data.MerchantTradeNo,
+            tradeNo: data.TradeNo,
+            product: data.CustomField1 || 'Unknown', // 我們傳過去的 reportId
+            amount: data.TradeAmt,
+            paymentDate: data.PaymentDate,
+            paymentType: data.PaymentType,
+            status: 'Success'
+          })
+        }).catch(err => {
+          console.error('[ECPay Callback] Error sending to GAS:', err);
+        });
+      }
+    } else {
+      console.log(`[ECPay Callback] Payment Failed or Pending. RtnCode: ${data.RtnCode}, Msg: ${data.RtnMsg}`);
+    }
+
+    // 必須回傳 1|OK 給綠界，否則他們會一直重試發送
+    return new NextResponse('1|OK', {
+      status: 200,
+      headers: { 'Content-Type': 'text/plain' }
+    });
+
+  } catch (err: any) {
+    console.error('[ECPay Callback API Error]', err.message);
+    return new NextResponse('0|Internal Server Error', { status: 500 });
+  }
+}

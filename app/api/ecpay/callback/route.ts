@@ -76,21 +76,30 @@ export async function POST(request: Request) {
       
       // 將資料打給 Google Apps Script (Webhook)
       if (GAS_URL_ECPAY.startsWith('http')) {
-        await fetch(GAS_URL_ECPAY, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            merchantTradeNo: data.MerchantTradeNo,
-            tradeNo: data.TradeNo,
-            product: data.CustomField1 || 'Unknown', // 我們傳過去的 reportId
-            amount: data.TradeAmt,
-            paymentDate: data.PaymentDate,
-            paymentType: data.PaymentType,
-            status: 'Success'
-          })
-        }).catch(err => {
-          console.error('[ECPay Callback] Error sending to GAS:', err);
-        });
+        console.log(`[ECPay Callback] Getting ready to send to GAS URL: ${GAS_URL_ECPAY.substring(0, 30)}...`);
+        try {
+          const gasRes = await fetch(GAS_URL_ECPAY, {
+            method: 'POST',
+            redirect: 'follow', // GAS requires redirect following
+            headers: { 'Content-Type': 'text/plain' }, // Using text/plain avoids CORS and payload truncation in some GAS setups
+            body: JSON.stringify({
+              merchantTradeNo: data.MerchantTradeNo,
+              tradeNo: data.TradeNo,
+              product: data.CustomField1 || 'Unknown',
+              amount: data.TradeAmt,
+              paymentDate: data.PaymentDate,
+              paymentType: data.PaymentType,
+              status: 'Success'
+            })
+          });
+          const gasText = await gasRes.text();
+          console.log('[ECPay Callback] GAS Response Status:', gasRes.status);
+          console.log('[ECPay Callback] GAS Response Text:', gasText);
+        } catch (err: any) {
+          console.error('[ECPay Callback] Error communicating with GAS:', err.message);
+        }
+      } else {
+        console.error('[ECPay Callback] GAS_URL_ECPAY environment variable is not a valid HTTP string!', GAS_URL_ECPAY);
       }
     } else {
       console.log(`[ECPay Callback] Payment Failed or Pending. RtnCode: ${data.RtnCode}, Msg: ${data.RtnMsg}`);

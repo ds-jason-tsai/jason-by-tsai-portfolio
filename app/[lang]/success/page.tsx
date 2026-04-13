@@ -114,7 +114,12 @@ export default async function SuccessPage({
     if (hashKey) {
       const expectedSig = crypto.createHmac('sha256', hashKey).update(`${productId}:${token}`).digest('hex');
       if (expectedSig === signature) {
-        isValid = true;
+        const now = Date.now();
+        const tokenTime = parseInt(token, 10);
+        // 時效設定：30分鐘 (30 * 60 * 1000 = 1800000 毫秒)
+        if (!isNaN(tokenTime) && now - tokenTime < 1800000 && now - tokenTime > -60000) {
+          isValid = true;
+        }
       }
     }
   }
@@ -199,7 +204,7 @@ export default async function SuccessPage({
       }}>
         {!isValid ? (
           <div style={{ padding: '2rem', color: '#ff6b6b' }}>
-            {lang === 'zh' ? '安全驗證失敗或無效的購買連結。若您已付款，請聯繫客服。' : 'Security verification failed or invalid payment link.'}
+            {lang === 'zh' ? '安全驗證失敗：連結已逾期或無效。每次購買專屬連結時效為 30 分鐘，為保護您的權益請盡快下載。若您已付款但連結失效，請聯繫客服務必為您處理。' : 'Security verification failed or link expired.'}
           </div>
         ) : (
           <>

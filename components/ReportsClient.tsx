@@ -26,7 +26,7 @@ const reports = [
       { id: '4', zh: '投資回報與財務效益分析 (ROI Justification)', en: 'Financial Justification & ROI', ja: '投資対効果分析 (ROI)' },
       { id: '5', zh: '導入途徑與行動計畫 (Roadmap & Action Plan)', en: 'Roadmap & Action Plan', ja: '導入ロードマップ' }
     ],
-    price: 498,
+    price: 1,
     tags: ['#Salesforce', '#SolutionEngineer', '#C-Level', '#BusinessPresentation'],
   },
   {
@@ -50,7 +50,7 @@ const reports = [
       { id: '1-4', zh: '1-4 對話與提示詞 (Prompt Engineering)', en: '1-4 Dialogue & Prompt Engineering', ja: '1-4 對話とプロンプト' },
       { id: '1-5', zh: '1-5 工作室 (語音/心智圖/報告生成)', en: '1-5 Creative Workshop', ja: '1-5 クリエイティブスタジオ' }
     ],
-    price: 898,
+    price: 1,
     tags: ['#NotebookLM', '#GoogleAI', '#VideoCourse', '#Productivity'],
   },
   {
@@ -71,7 +71,7 @@ const reports = [
       { id: '2-1', zh: '2-1 日語學習夥伴(1)', en: '2-1 AI Japanese Partner (Pt.1)', ja: '2-1 日本語言學習夥伴 (Part 1)' },
       { id: '2-2', zh: '2-2 日語學習夥伴(2)', en: '2-2 AI Japanese Partner (Pt.2)', ja: '2-2 日本語言學習夥伴 (Part 2)' }
     ],
-    price: 898,
+    price: 1,
     tags: ['#NotebookLM', '#JapaneseLearning', '#AIEducation', '#LanguageTips'],
   },
   {
@@ -93,7 +93,7 @@ const reports = [
       { id: '3-2', zh: '3-2 商業分析工具(2)', en: '3-2 Business Analysis (Pt.2)', ja: '3-2 ビジネス分析ツール (Part 2)' },
       { id: '3-3', zh: '3-3 商業分析工具(3)', en: '3-3 Business Analysis (Pt.3)', ja: '3-3 ビジネス分析ツール (Part 3)' }
     ],
-    price: 898,
+    price: 1,
     tags: ['#NotebookLM', '#BusinessAnalysis', '#MarketResearch', '#Strategy'],
   },
   {
@@ -115,7 +115,7 @@ const reports = [
       { id: '4-2', zh: '4-2 聊天紀錄摘要(2)', en: '4-2 Chat Summary (Pt.2)', ja: '4-2 對話要約 (Part 2)' },
       { id: '4-3', zh: '4-3 聊天紀錄摘要(3)', en: '4-3 Chat Summary (Pt.3)', ja: '4-3 對話要約 (Part 3)' }
     ],
-    price: 898,
+    price: 1,
     tags: ['#NotebookLM', '#AIAssistant', '#ChatOps', '#SocialManagement'],
   },
   {
@@ -136,7 +136,7 @@ const reports = [
       { id: '4-4', zh: '4-4 財務報表、股票分析(1)', en: '4-4 Financial Analysis (Pt.1)', ja: '4-4 財務分析 (Part 1)' },
       { id: '4-5', zh: '4-5 財務報表、股票分析(2)', en: '4-5 Financial Analysis (Pt.2)', ja: '4-5 財務分析 (Part 2)' }
     ],
-    price: 898,
+    price: 1,
     tags: ['#NotebookLM', '#FinanceAI', '#StockAnalysis', '#Investment'],
   },
   {
@@ -158,7 +158,7 @@ const reports = [
       { id: 'S2', zh: 'Finfo / MY83 互動紀錄', en: 'Finfo / MY83 Interactions', ja: 'Finfo / MY83 交流データ' },
       { id: 'S3', zh: '2003-2026 時間序列動向', en: '2003-2026 Time Series', ja: '2003-2026 時系列' }
     ],
-    price: 298,
+    price: 1,
     tags: ['#InsurTech', '#BigData', '#MarketResearch', '#Insurance'],
   },
 ];

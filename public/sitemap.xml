@@ -279,4 +279,27 @@
     <xhtml:link rel="alternate" hreflang="ja" href="https://jason-by-tsai-portfolio.vercel.app/ja/articles/portfolio-seo-best-practices" />
     <priority>0.7</priority>
   </url>
+
+  <!-- ecpay-nextjs-payment-integration -->
+  <url>
+    <loc>https://jason-by-tsai-portfolio.vercel.app/zh/articles/ecpay-nextjs-payment-integration</loc>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://jason-by-tsai-portfolio.vercel.app/zh/articles/ecpay-nextjs-payment-integration" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://jason-by-tsai-portfolio.vercel.app/en/articles/ecpay-nextjs-payment-integration" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://jason-by-tsai-portfolio.vercel.app/ja/articles/ecpay-nextjs-payment-integration" />
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://jason-by-tsai-portfolio.vercel.app/en/articles/ecpay-nextjs-payment-integration</loc>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://jason-by-tsai-portfolio.vercel.app/zh/articles/ecpay-nextjs-payment-integration" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://jason-by-tsai-portfolio.vercel.app/en/articles/ecpay-nextjs-payment-integration" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://jason-by-tsai-portfolio.vercel.app/ja/articles/ecpay-nextjs-payment-integration" />
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://jason-by-tsai-portfolio.vercel.app/ja/articles/ecpay-nextjs-payment-integration</loc>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://jason-by-tsai-portfolio.vercel.app/zh/articles/ecpay-nextjs-payment-integration" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://jason-by-tsai-portfolio.vercel.app/en/articles/ecpay-nextjs-payment-integration" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://jason-by-tsai-portfolio.vercel.app/ja/articles/ecpay-nextjs-payment-integration" />
+    <priority>0.7</priority>
+  </url>
 </urlset>

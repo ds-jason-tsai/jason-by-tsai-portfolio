@@ -69,7 +69,7 @@ export default function ArticleListClient({ articles, lang, t }: { articles: any
             display: 'flex', 
             gap: '0.8rem', 
             width: 'max-content',
-            padding: '0.5rem 0 1.5rem',
+            alignItems: 'center',
           }}>
             {/* Render tags (excluding 'all') twice for seamless infinite scrolling */}
             {[...uniqueTags, ...uniqueTags].map((cat, idx) => (
@@ -182,13 +182,8 @@ export default function ArticleListClient({ articles, lang, t }: { articles: any
           100% { transform: translateX(calc(-50% - 0.4rem)); }
         }
 
-        @media (min-width: 769px) {
-          /* If categories are very few, we can choose to center them, 
-             but the user requested carousel style like mobile. */
-          .category-marquee-track {
-            padding: 1rem 0 2rem;
-          }
-        }
+
+
 
         @media (max-width: 768px) {
           .category-marquee-track {

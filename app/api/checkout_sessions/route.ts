@@ -95,7 +95,7 @@ export async function POST(request: Request) {
       ChoosePayment: 'Credit', // 鎖定信用卡以利測試
       EncryptType: '1', // 1: SHA256
       ClientBackURL: `${baseUrl}/${lang}/reports`,
-      OrderResultURL: `${baseUrl}/${lang}/success?product=${reportId}&lang=${lang}`,
+      OrderResultURL: `${baseUrl}/api/ecpay/result?lang=${lang}`,
       CustomField1: reportId, // 這是為了確保回傳時絕對能抓到商品 ID
       NeedExtraPaidInfo: 'Y',
     };

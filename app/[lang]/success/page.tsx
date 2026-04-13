@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import type { Metadata } from 'next';
+import crypto from 'crypto';
 
 export async function generateMetadata({ params }: { params: Promise<{ lang: string }> }): Promise<Metadata> {
   const lang = (await params).lang;
@@ -92,7 +93,9 @@ export default async function SuccessPage({
     product?: string; 
     id?: string; 
     CustomField1?: string; 
-    MerchantTradeNo?: string 
+    MerchantTradeNo?: string;
+    t?: string;
+    sig?: string;
   }>;
   params: Promise<{ lang: string }>;
 }) {
@@ -102,9 +105,27 @@ export default async function SuccessPage({
   // 優先從多個來源獲取產品 ID (product, id, 或綠界回傳的 CustomField1)
   const productId = sParams.product || sParams.id || sParams.CustomField1 || '';
   const orderId = sParams.session_id || sParams.MerchantTradeNo || '';
+  const token = sParams.t || '';
+  const signature = sParams.sig || '';
 
-  const accessData = productId ? ACCESS_LINKS[productId] : '';
-  const reportName = productId ? (REPORT_NAMES[productId]?.[lang] || REPORT_NAMES[productId]?.['zh'] || productId) : '';
+  let isValid = false;
+  if (productId && token && signature) {
+    const hashKey = (process.env.ECPAY_HASH_KEY || '').trim();
+    if (hashKey) {
+      const expectedSig = crypto.createHmac('sha256', hashKey).update(`${productId}:${token}`).digest('hex');
+      if (expectedSig === signature) {
+        isValid = true;
+      }
+    }
+  }
+
+  // 若安全驗證未通過，強制不顯示商品
+  let accessData = '';
+  let reportName = '';
+  if (isValid) {
+    accessData = productId ? ACCESS_LINKS[productId] : '';
+    reportName = productId ? (REPORT_NAMES[productId]?.[lang] || REPORT_NAMES[productId]?.['zh'] || productId) : '';
+  }
 
   const t = {
     zh: {
@@ -176,12 +197,18 @@ export default async function SuccessPage({
         maxWidth: '600px',
         margin: '0 auto 3rem',
       }}>
-        {reportName && (
-          <p style={{ color: 'var(--accent-color)', fontWeight: '800', marginBottom: '0.75rem', fontSize: '1.1rem' }}>
-            {reportName}
-          </p>
-        )}
-        <p style={{ color: 'var(--text-secondary)', marginBottom: '1.5rem' }}>{t.downloadTitle}</p>
+        {!isValid ? (
+          <div style={{ padding: '2rem', color: '#ff6b6b' }}>
+            {lang === 'zh' ? '安全驗證失敗或無效的購買連結。若您已付款，請聯繫客服。' : 'Security verification failed or invalid payment link.'}
+          </div>
+        ) : (
+          <>
+            {reportName && (
+              <p style={{ color: 'var(--accent-color)', fontWeight: '800', marginBottom: '0.75rem', fontSize: '1.1rem' }}>
+                {reportName}
+              </p>
+            )}
+            <p style={{ color: 'var(--text-secondary)', marginBottom: '1.5rem' }}>{t.downloadTitle}</p>
         
         <div style={{ overflowX: 'auto', marginBottom: '1.5rem', background: 'rgba(0,0,0,0.2)', borderRadius: '12px', border: '1px solid var(--glass-border)' }}>
           <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left' }}>
@@ -233,6 +260,8 @@ export default async function SuccessPage({
           <p style={{ marginTop: '1.5rem', fontSize: '0.75rem', color: '#444', wordBreak: 'break-all' }}>
             {t.orderId}<span style={{ color: '#666' }}>{orderId}</span>
           </p>
+        )}
+          </>
         )}
       </div>
 

@@ -70,6 +70,32 @@ export async function POST(request: Request) {
 
     // 付款成功
     if (data.RtnCode === '1') {
+      console.log(`[ECPay Result] Payment Success! User browser arrived correctly. Order: ${data.MerchantTradeNo}`);
+      
+      const GAS_URL_ECPAY = process.env.GAS_URL_ECPAY || '';
+      if (GAS_URL_ECPAY.startsWith('http')) {
+        console.log(`[ECPay Result] Sending sync to GAS URL: ${GAS_URL_ECPAY.substring(0, 30)}...`);
+        try {
+          const gasRes = await fetch(GAS_URL_ECPAY, {
+            method: 'POST',
+            redirect: 'follow',
+            headers: { 'Content-Type': 'text/plain' },
+            body: JSON.stringify({
+              merchantTradeNo: data.MerchantTradeNo,
+              tradeNo: data.TradeNo,
+              product: product,
+              amount: data.TradeAmt,
+              paymentDate: data.PaymentDate,
+              paymentType: data.PaymentType,
+              status: 'Success'
+            })
+          });
+          console.log('[ECPay Result] GAS Sync Response Status:', gasRes.status);
+        } catch (err: any) {
+          console.error('[ECPay Result] Error syncing with GAS:', err.message);
+        }
+      }
+
       // 為了避免其他人直接輸入 /success 網址就看到內容，我們用 HashKey 對這筆請求簽名
       const timestamp = Date.now().toString();
       const signature = crypto.createHmac('sha256', hashKey).update(`${product}:${timestamp}`).digest('hex');

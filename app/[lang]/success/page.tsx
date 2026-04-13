@@ -120,7 +120,7 @@ export default async function SuccessPage({
   }
 
   // 若安全驗證未通過，強制不顯示商品
-  let accessData = '';
+  let accessData: any = '';
   let reportName = '';
   if (isValid) {
     accessData = productId ? ACCESS_LINKS[productId] : '';

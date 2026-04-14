@@ -20,10 +20,10 @@ def analyze_and_summarize(articles, past_topics=None):
     
     # Simplify discovery: Try direct models first to save a 'list_models' call which also consumes quota
     target_models = [
+        'models/gemini-2.0-flash', 
         'models/gemini-1.5-flash-latest', 
         'models/gemini-1.5-flash', 
-        'models/gemini-1.0-pro',
-        'models/gemini-pro'
+        'models/gemini-1.0-pro'
     ]
     
     model = None

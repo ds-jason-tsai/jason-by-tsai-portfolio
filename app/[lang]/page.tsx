@@ -85,8 +85,9 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
       <section className="hero">
         <div className="hero-content">
           <h1 className="hero-title">
-            {dict.home.title}
-            <br />
+            {dict.home.title.split('\n').map((line: string, i: number) => (
+              <span key={i} style={{ display: 'block' }}>{line}</span>
+            ))}
             <span className="hero-subtitle">
               {dict.home.subtitle.split('\n').map((line: string, i: number) => (
                 <span key={i} style={{ display: 'block' }}>
@@ -95,7 +96,7 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
               ))}
             </span>
           </h1>
-          <p className="hero-desc" style={{ whiteSpace: 'pre-wrap', lineHeight: '1.8' }}>
+          <p className="hero-desc" style={{ whiteSpace: 'pre-wrap', lineHeight: '2' }}>
             {dict.home.description}
           </p>
           
@@ -340,11 +341,18 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
           100% { transform: translateX(calc(-50% - 1.25rem)); }
         }
         
+        .media-title {
+          font-size: 1.2rem;
+          min-height: 3rem; /* Force two lines worth of space to prevent layout shift */
+          display: flex;
+          align-items: center;
+        }
+
         .mobile-only-br { display: none; }
 
         @media (max-width: 768px) {
-          .hero-title { font-size: 1.8rem !important; line-height: 1.4; word-break: keep-all; }
-          .hero-desc { padding: 0 1rem; font-size: 1rem !important; }
+          .hero-title { font-size: 1.8rem !important; line-height: 1.4; }
+          .hero-desc { padding: 0; font-size: 1rem !important; }
           .hero-btns { flex-direction: column; align-items: center; gap: 1rem !important; }
           .btn-primary { width: 100%; max-width: 280px; }
           .mobile-only-br { display: block; }

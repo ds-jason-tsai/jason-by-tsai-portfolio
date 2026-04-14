@@ -23,11 +23,11 @@ def analyze_and_summarize(articles, past_topics=None):
         available_models = [m.name for m in genai.list_models() if 'generateContent' in m.supported_generation_methods]
         logging.info(f"Available Gemini models: {available_models}")
         
-        # Priority mapping (Latest High-performance Flash models first)
+        # Priority mapping (1.5-flash is more stable for free tier quotas)
         target_models = [
+            'models/gemini-1.5-flash-latest',
+            'models/gemini-1.5-flash',
             'models/gemini-2.0-flash', 
-            'models/gemini-1.5-flash-latest', 
-            'models/gemini-1.5-flash', 
             'models/gemini-pro'
         ]
         
@@ -46,7 +46,7 @@ def analyze_and_summarize(articles, past_topics=None):
         logging.warning(f"Dynamic model discovery failed: {e}. Falling back to hardcoded list.")
         # Fallback to a hardcoded list with explicit prefixes as a last resort
         model = None
-        for m in ['models/gemini-1.5-flash', 'models/gemini-1.5-flash-latest', 'models/gemini-pro']:
+        for m in ['models/gemini-1.5-flash', 'models/gemini-1.5-flash-latest', 'models/gemini-2.0-flash']:
             try:
                 model = genai.GenerativeModel(m)
                 break
@@ -72,7 +72,7 @@ def analyze_and_summarize(articles, past_topics=None):
 
     要求 (SEO & 內容品質核心規範碼)：
     1. **標題格式**：`[{date_str}] <吸引人的技術主題>`。
-    2. **內文長度**：中文主體需達到 1500 字以上，必須包含深度技術分析而非僅是新聞摘要。
+    2. **內文長度**：中文主體需達到 1000 字以上，必須包含深度技術分析而非僅是新聞摘要。
     3. **引用規範 (重要)**：每一項新聞觀點必須附上原始連結，格式為 `[標題](URL)`。
     4. **SEO 結構**：必須使用 H1, H2, H3 層級標籤，並在開頭包含技術洞察總結 (Executive Summary)。
     5. **關鍵字優化**：自然地融入 AI, Data, BigQuery, MarTech 等高流量技術關鍵字。

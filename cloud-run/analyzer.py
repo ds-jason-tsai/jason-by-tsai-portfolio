@@ -18,12 +18,10 @@ def analyze_and_summarize(articles, past_topics=None):
     
     genai.configure(api_key=api_key)
     
-    # Simplify discovery: Try direct models first to save a 'list_models' call which also consumes quota
+    # Strictly use the latest Flash models as requested
     target_models = [
-        'models/gemini-2.0-flash', 
-        'models/gemini-1.5-flash-latest', 
-        'models/gemini-1.5-flash', 
-        'models/gemini-1.0-pro'
+        'models/gemini-2.0-flash',
+        'models/gemini-2.5-flash'
     ]
     
     model = None

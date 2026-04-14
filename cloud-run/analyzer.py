@@ -1,6 +1,17 @@
 import os
 from google import genai
 import datetime
+from tenacity import retry, stop_after_attempt, wait_exponential, retry_if_exception_type
+from google.genai import errors
+
+@retry(
+    stop=stop_after_attempt(5),
+    wait=wait_exponential(multiplier=1, min=4, max=60),
+    retry=retry_if_exception_type(errors.ClientError),
+    reraise=True
+)
+def _call_gemini_with_retry(client, model, contents):
+    return client.models.generate_content(model=model, contents=contents)
 
 def analyze_and_summarize(articles, past_topics=None):
     """
@@ -48,7 +59,8 @@ def analyze_and_summarize(articles, past_topics=None):
     ---
     """
     
-    response = client.models.generate_content(
+    response = _call_gemini_with_retry(
+        client=client,
         model='gemini-2.5-flash',
         contents=prompt
     )

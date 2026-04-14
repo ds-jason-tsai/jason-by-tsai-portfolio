@@ -370,10 +370,12 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
         .desktop-hero-text { display: block; }
         
         @media (max-width: 768px) {
+          .hero { padding: 4rem 1rem; }
           .mobile-hero-text { display: block; }
           .desktop-hero-text { display: none; }
-          .hero-title { font-size: 1.8rem !important; line-height: 1.4; }
-          .hero-desc { padding: 0; font-size: 1rem !important; }
+          .hero-title { font-size: 1.85rem !important; line-height: 1.5; }
+          .hero-subtitle { font-size: 1.4rem !important; margin-top: 0.5rem; display: block; line-height: 1.4; }
+          .hero-desc { padding: 0; font-size: 1.05rem !important; }
           .hero-btns { flex-direction: column; align-items: center; gap: 1rem !important; }
           .btn-primary { width: 100%; max-width: 280px; }
           .mobile-only-br { display: block; }

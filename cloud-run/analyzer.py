@@ -1,22 +1,16 @@
 import os
-import logging
 import datetime
+import logging
 import google.generativeai as genai
-from tenacity import retry, stop_after_attempt, wait_exponential, retry_if_exception_type
+from tenacity import retry, stop_after_attempt, wait_exponential
 
-# Configure Retry logic for 503 Service Unavailable
-@retry(
-    stop=stop_after_attempt(5),
-    wait=wait_exponential(multiplier=1, min=10, max=60),
-    reraise=True
-)
+@retry(stop=stop_after_attempt(3), wait=wait_exponential(multiplier=1, min=4, max=10))
 def _call_gemini_with_retry(model, prompt):
     return model.generate_content(prompt)
 
 def analyze_and_summarize(articles, past_topics=None):
     """
-    Takes raw articles list, queries Gemini for summaries, translations, 
-    and returns a structured data object + Markdown string.
+    Uses Gemini to analyze the crawled news and generate a high-quality article.
     """
     api_key = os.environ.get("GEMINI_API_KEY")
     if not api_key:
@@ -24,51 +18,61 @@ def analyze_and_summarize(articles, past_topics=None):
     
     genai.configure(api_key=api_key)
     
-    # Force use of gemini-1.5-flash for maximum stability with Free API keys
-    # and highest generation speed.
+    # Robust Model Selection targeting v1 Stable
     model_name = 'gemini-1.5-flash'
-    model = genai.GenerativeModel(model_name)
+    try:
+        model = genai.GenerativeModel('gemini-1.5-flash')
+    except:
+        model = genai.GenerativeModel('gemini-pro')
 
     date_str = datetime.datetime.now().strftime("%Y-%m-%d")
     past_topics_str = f"\n過去一週已寫過的主題（請避開重複內容）：\n{past_topics}" if past_topics else ""
     
     prompt = f"""
-    你是 Jason Tsai (傑森數據)，資深 Data Analyst 兼 Solution Engineer。
-    文筆風格：專業、客觀、充滿實務洞察，語氣平易近人（有「人味」），善於將技術轉化為商業價值。
+    你是 Jason Tsai (傑森數據)，資深 Data Analyst 兼 Senior Solution Engineer。
+    文筆風格：極度專業、數據驅動、充滿商業洞察，語氣如同寫給客戶的「技術策略報告」 (Technical Strategy Report)。
     
-    任務：根據今日 ({date_str}) 最新 AI 新聞撰寫觀察報告。
+    任務：根據今日 ({date_str}) 最新 AI 新聞撰寫一份深度觀察報告。
     {past_topics_str}
 
-    數據：
+    待處理新聞數據 (包含標題、來源與連結)：
     {articles}
 
-    要求：
+    要求 (SEO & 內容品質核心規範碼)：
     1. **標題格式**：`[{date_str}] <吸引人的技術主題>`。
-    2. **長度**：1200 字以上。
-    3. **Tags**：從 ["Tech Trends", "AI News", "Generative AI", "Data Analysis", "MarTech", "Industry Insights"] 挑選。
-    4. **輸出格式**：先輸出一段 JSON 格式的元數據，接著是正式的 Markdown 内容。
+    2. **內文長度**：中文主體需達到 1500 字以上。
+    3. **引用規範 (重要)**：每一項新聞觀點必須附上原始連結，格式為 `[標題](URL)`。
+    4. **SEO Meta Description**：提供 70-155 字之間的繁體中文摘要，精確描述文章核心。
+    5. **全方位翻譯 (核心)**：你必須提供「繁體中文」、「英文」、「日文」三種語言的完整分析內容。
 
-    JSON 格式範例 (請放在內容最前方，用 ```json 標記，並確保 title/description/tags 都是包含 zh/en/ja 的物件)：
+    輸出格式：請嚴格遵守以下範例，先輸出一段 JSON 元數據，接著是三個語言區塊，中間用指定的標記隔開。
+
+    ```json
     {{
       "title": {{ "zh": "...", "en": "...", "ja": "..." }},
       "description": {{ "zh": "...", "en": "...", "ja": "..." }},
       "sentiment": "...",
       "tags": {{ "zh": ["..."], "en": ["..."], "ja": ["..."] }}
     }}
+    ```
 
-    請直接輸出內容，不要多餘的解釋。
-    Markdown 內容需包含 FrontMatter (這裡暫時只放日期與發布狀態，多語內容會從上面的 JSON 提取)：
     ---
-    date: "{date_str}"
-    published: true
-    ---
+    (這是 JSON 結束後的內容區塊)
+    這裏是繁體中文的完整 1500 字深度分析內容...
+    
+    <!-- en -->
+    # English Title
+    Full 1500-word English translation and analysis here...
+
+    <!-- ja -->
+    # 日本語タイトル
+    Full 1500-word Japanese translation and analysis here...
     """
     
     try:
         response = _call_gemini_with_retry(model, prompt)
         full_text = response.text
         
-        # Validation: If output doesn't contain FrontMatter markers or JSON, it might be an error string
         if "---" not in full_text and "```json" not in full_text:
              logging.error(f"AI returned invalid format: {full_text[:100]}")
              return None, None
@@ -77,7 +81,6 @@ def analyze_and_summarize(articles, past_topics=None):
         logging.error(f"AI Generation Failed after retries: {e}")
         return None, None
     
-    # Simple extraction of JSON and Markdown
     import json
     import re
     
@@ -85,30 +88,37 @@ def analyze_and_summarize(articles, past_topics=None):
         json_match = re.search(r'```json\s*(.*?)\s*```', full_text, re.DOTALL)
         if json_match:
             metadata = json.loads(json_match.group(1))
-            markdown = full_text.replace(json_match.group(0), "").strip()
             
-            # Reconstruct correct title/description/tags into the markdown frontmatter for the site
-            # This ensures the generated file is actually valid for the frontend
+            # More robust body extraction: everything after the first "---" that is NOT part of the JSON block
+            # We look for the first "---" that appears after the closing ``` of the JSON block
+            body_start = full_text.find("---", json_match.end())
+            if body_start != -1:
+                body_content = full_text[body_start+3:].strip()
+            else:
+                # Fallback: take everything after the JSON block
+                body_content = full_text[json_match.end():].strip()
+            
             frontmatter = f"""---
 title:
   zh: "{metadata.get('title', {}).get('zh', 'AI 新聞')}"
   en: "{metadata.get('title', {}).get('en', 'AI News')}"
   ja: "{metadata.get('title', {}).get('ja', 'AIニュース')}"
 description:
-  zh: "{metadata.get('description', {}).get('zh', '')}"
-  en: "{metadata.get('description', {}).get('en', '')}"
-  ja: "{metadata.get('description', {}).get('ja', '')}"
+  zh: "{metadata.get('description', {}).get('zh', '').replace('"', "'")}"
+  en: "{metadata.get('description', {}).get('en', '').replace('"', "'")}"
+  ja: "{metadata.get('description', {}).get('ja', '').replace('"', "'")}"
 date: "{date_str}"
 tags:
-  zh: {json.dumps(metadata.get('tags', {}).get('zh', ['Tech Trends']))}
+  zh: {json.dumps(metadata.get('tags', {}).get('zh', ['Tech Trends']), ensure_ascii=False)}
   en: {json.dumps(metadata.get('tags', {}).get('en', ['Tech Trends']))}
-  ja: {json.dumps(metadata.get('tags', {}).get('ja', ['Tech Trends']))}
+  ja: {json.dumps(metadata.get('tags', {}).get('ja', ['Tech Trends']), ensure_ascii=False)}
 published: true
 ---
 
 """
-            full_markdown = frontmatter + markdown.replace("---", "").strip()
+            full_markdown = frontmatter + body_content
             return full_markdown, metadata
+
     except Exception as e:
         logging.error(f"Failed to parse AI output JSON: {e}")
         

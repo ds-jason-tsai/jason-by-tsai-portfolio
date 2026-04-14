@@ -20,7 +20,7 @@ import type { Metadata } from 'next';
 
 export async function generateMetadata({ params }: { params: Promise<{ lang: string, id: string }> }): Promise<Metadata> {
   const { lang, id } = await params;
-  const articleData = await getArticleData(id);
+  const articleData = await getArticleData(id, lang);
   if (!articleData) return { title: "Article Not Found | Jason Analytics" };
   
   const titleObj = articleData.title || {};
@@ -45,7 +45,7 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
 
 export default async function ArticlePage({ params }: { params: Promise<{ lang: string, id: string }> }) {
   const { lang, id } = await params;
-  const articleData = await getArticleData(id);
+  const articleData = await getArticleData(id, lang);
 
   if (!articleData) {
     return <div style={{ color: 'white', textAlign: 'center', marginTop: '5rem' }}>Article not found / 找不到文章</div>;

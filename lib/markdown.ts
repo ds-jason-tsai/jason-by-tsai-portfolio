@@ -78,7 +78,7 @@ export function getSortedArticlesData(): ArticleData[] {
   });
 }
 
-export async function getArticleData(id: string): Promise<ArticleData | null> {
+export async function getArticleData(id: string, lang: string = 'zh'): Promise<ArticleData | null> {
   const fullPath = path.join(articlesDirectory, `${id}.md`);
   if (!fs.existsSync(fullPath)) {
     return null;
@@ -88,9 +88,28 @@ export async function getArticleData(id: string): Promise<ArticleData | null> {
   const matterResult = matter(fileContents);
   const data = matterResult.data;
 
+  // Split content based on language markers
+  const rawContent = matterResult.content;
+  let localizedContent = rawContent;
+
+  if (lang === 'en') {
+    const enMatch = rawContent.split('<!-- en -->');
+    if (enMatch.length > 1) {
+      localizedContent = enMatch[1].split('<!-- ja -->')[0].trim();
+    }
+  } else if (lang === 'ja') {
+    const jaMatch = rawContent.split('<!-- ja -->');
+    if (jaMatch.length > 1) {
+      localizedContent = jaMatch[1].trim();
+    }
+  } else {
+    // Default to 'zh' or everything before markers
+    localizedContent = rawContent.split('<!-- en -->')[0].split('<!-- ja -->')[0].trim();
+  }
+
   const processedContent = await remark()
     .use(html)
-    .process(matterResult.content);
+    .process(localizedContent);
   
   const contentHtml = processedContent.toString();
 
@@ -115,3 +134,4 @@ export async function getArticleData(id: string): Promise<ArticleData | null> {
     contentHtml,
   };
 }
+

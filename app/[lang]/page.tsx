@@ -123,7 +123,7 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
                 />
               </Link>
             </div>
-            <h2 style={{ marginTop: '1.5rem', fontSize: '2.5rem', fontWeight: 800, background: 'var(--accent-grad)', WebkitBackgroundClip: 'text', backgroundClip: 'text', WebkitTextFillColor: 'transparent', letterSpacing: '2px' }}>
+            <h2 className="jason-name" style={{ marginTop: '1.5rem', fontSize: '2.5rem', fontWeight: 800, background: 'var(--accent-grad)', WebkitBackgroundClip: 'text', backgroundClip: 'text', WebkitTextFillColor: 'transparent', letterSpacing: '2px' }}>
               Jason Tsai
             </h2>
             <p style={{ textAlign: 'center', fontSize: '1rem', color: 'var(--text-secondary)', marginTop: '1rem', fontWeight: 500, lineHeight: '1.6', maxWidth: '650px' }}>
@@ -343,15 +343,17 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
         .mobile-only-br { display: none; }
 
         @media (max-width: 768px) {
-          .hero-title { font-size: 2.2rem !important; line-height: 1.3; }
-          .hero-desc { padding: 0 1rem; }
+          .hero-title { font-size: 1.8rem !important; line-height: 1.4; word-break: keep-all; }
+          .hero-desc { padding: 0 1rem; font-size: 1rem !important; }
           .hero-btns { flex-direction: column; align-items: center; gap: 1rem !important; }
           .btn-primary { width: 100%; max-width: 280px; }
           .mobile-only-br { display: block; }
           .media-card { width: calc(100vw - 40px); max-width: 400px; }
+          .jason-name { font-size: 2rem !important; }
         }
         @media (max-width: 480px) {
-          .hero-title { font-size: 1.8rem !important; }
+          .hero-title { font-size: 1.6rem !important; }
+          .jason-name { font-size: 1.8rem !important; }
         }
       `}}/>
     </>

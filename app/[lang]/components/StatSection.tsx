@@ -135,13 +135,13 @@ export default function StatSection({ dict }: { dict: any }) {
         @media (max-width: 768px) {
           .stats-container {
             grid-template-columns: 1fr;
-            gap: 2.5rem;
+            gap: 2rem;
           }
           .stat-value {
-            font-size: 3.5rem;
+            font-size: 2.8rem;
           }
           .stats-section {
-            padding: 3rem 1.5rem;
+            padding: 2.5rem 1rem;
           }
         }
       `}} />

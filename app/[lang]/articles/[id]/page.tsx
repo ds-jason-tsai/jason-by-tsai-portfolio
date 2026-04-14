@@ -20,6 +20,7 @@ import type { Metadata } from 'next';
 
 export async function generateMetadata({ params }: { params: Promise<{ lang: string, id: string }> }): Promise<Metadata> {
   const { lang, id } = await params;
+  const articleData = await getArticleData(id);
   if (!articleData) return { title: "Article Not Found | Jason Analytics" };
   
   const titleObj = articleData.title || {};

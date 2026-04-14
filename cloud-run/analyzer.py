@@ -8,13 +8,14 @@ from tenacity import retry, stop_after_attempt, wait_exponential
 def _call_gemini_with_retry(model, prompt):
     return model.generate_content(prompt)
 
-def analyze_and_summarize(articles, past_topics=None):
+def analyze_and_summarize(text, past_topics=None, current_date=None):
     """
-    Uses Gemini to analyze the crawled news and generate a high-quality article.
+    Calls Gemini to summarize provided news text into a structured multilingual article.
     """
-    api_key = os.environ.get("GEMINI_API_KEY")
+    api_key = os.getenv("GEMINI_API_KEY")
     if not api_key:
-        raise ValueError("GEMINI_API_KEY not set.")
+        logging.error("GEMINI_API_KEY not set.")
+        return None, None
     
     genai.configure(api_key=api_key)
     
@@ -42,36 +43,33 @@ def analyze_and_summarize(articles, past_topics=None):
         logging.error("Critical: No Gemini models could be initialized.")
         return None, None
 
-    date_str = datetime.datetime.now().strftime("%Y-%m-%d")
-    past_topics_str = f"\n過去一週已寫過的主題（請避開重複內容）：\n{past_topics}" if past_topics else ""
+    date_context = current_date if current_date else "today"
     
     prompt = f"""
-    你是 Jason Tsai (傑森數據)，資深 Data Analyst 兼 Senior Solution Engineer。
-    文筆風格：極度專業、數據驅動、充滿商業洞察，語氣如同寫給客戶的「技術策略報告」 (Technical Strategy Report)。
+    You are an expert AI & Data Science professional analyst. Your job is to create a high-quality, professional technical newsletter article based on the provided news snippet.
     
-    任務：根據今日 ({date_str}) 最新 AI 新聞撰寫一份深度觀察報告。
-    {past_topics_str}
-
-    待處理新聞數據 (包含標題、來源與連結)：
-    {articles}
-
+    今天日期是：{date_context}。
+    
+    請嚴格遵守以下事實與品質規範：
+    1. **限用新聞來源**：僅能根據我提供的新聞標題與內容進行分析，禁止捏造新聞或參考連結。
+    2. **連結嚴謹性**：文末延伸閱讀的連結必須「完全等同」於我提供給你的原始 URL，禁止修改或自創連結，否則會導致 404 報錯。
+    3. **時效正確性**：若文章提到「今日」或「最新」，必須確保該新聞是在 {date_context} 附近發布的事實，專注於事實敘述。
+    
     要求 (SEO & 內容品質核心規範碼)：
-    1. **標題格式**：`[{date_str}] <吸引人的技術主題>`。
+    1. **標題格式**：`[{date_context}] <吸引人的技術主題>`。
     2. **內文長度**：中文主體約 500-700 字即可，需精煉且具備高度技術含金量。
     3. **Tags 標籤**：必須且只能產出 3 個最具代表性的技術標籤。
-    4. **引用文末 (References)**：必須在文末增加一個「參考資料與延伸閱讀」區塊，條列列出本次分析所參考的原始新聞連結：`[標題](URL)`。
-    5. **個人品牌結語**：每篇文章結尾必須包含以下文字：
-       "Jason Tsai (傑森數據) 堅信，以數據為核心，結合 Google DeepMind 的前沿 AI 技術，將是企業在全球市場中取得競爭優勢、實現永續成長的關鍵。歡迎轉載或洽詢合作，請聯繫 [傑森數據 (Jason Tsai)](/zh/contact)。"
-    6. **SEO 限制**：
+    4. **個人品牌結詞**：每篇文章結尾必須使用以下「正確品牌名」結語：
+       "Jason Analytics (傑森數據) 堅信，以數據為核心，結合 Google DeepMind 的前沿 AI 技術，將是企業在全球市場中取得競爭優勢、實現永續成長的關鍵。歡迎轉載或洽詢合作，請聯繫 [傑森數據 (Jason Analytics)](/zh/contact)。"
+    5. **SEO 限制**：
        - Meta Description: 中文 150 字內，英文/日文 160 個字元內。
-       - 標語必須精簡有力。
     
     內容架構必須包含：
-    - Executive Summary (執行摘要)
+    - 前言 (取代原本的執行摘要)
     - 深度技術洞察與商業應用潛力
     - 數據策略與企業轉型
     - 結論與策略建議
-    - 參考資料與延伸閱讀 (附上連結)
+    - 延伸閱讀 (取代原本的參考資料，內容必須是條列式 [標題](URL))
 
     JSON 標籤輸出格式：
     請在 JSON 的 `tags` 欄位中，確保每個語言都只有 3 個最精準的關鍵字標籤。

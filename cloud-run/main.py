@@ -66,12 +66,20 @@ def trigger_generation():
             except Exception as bqe:
                 logging.warning(f"BQ Save Error: {bqe}")
 
-        # Step 3: AI Analysis (Limit to Top 3 items to save quota)
-        logging.info("Step 3: AI Generation Starting (Asking Gemini to write)...")
+        # Step 3: AI Analysis (Limit to Top 3 items + UTM tags)
+        logging.info("Step 3: AI Generation Starting (with UTM injection)...")
         top_items = raw_items[:3]
-        raw_text_for_ai = "\n".join([f"- {i['source']} ({i['link']}): {i['title']}" for i in top_items])
         
-        markdown_content, ai_metadata = analyze_and_summarize(raw_text_for_ai, past_topics=past_topics)
+        # Inject UTM to ensure references link back correctly with attribution
+        utm_suffix = "?utm_source=jasonanalytics&utm_medium=ai-news"
+        raw_text_for_ai = ""
+        for i in top_items:
+            # Check if URL already has query params
+            clean_url = i['link']
+            final_url = f"{clean_url}{utm_suffix}" if "?" not in clean_url else f"{clean_url}&{utm_suffix.replace('?', '')}"
+            raw_text_for_ai += f"- {i['source']} ({final_url}): {i['title']}\n"
+            
+        markdown_content, ai_metadata = analyze_and_summarize(raw_text_for_ai, past_topics=past_topics, current_date=date_str)
         
         if not markdown_content or not ai_metadata:
             logging.error("AI Generation failed (Empty result).")

@@ -84,21 +84,37 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
     <>
       <section className="hero">
         <div className="hero-content">
-          <h1 className="hero-title">
-            {dict.home.title.split('\n').map((line: string, i: number) => (
-              <span key={i} style={{ display: 'block' }}>{line}</span>
-            ))}
-            <span className="hero-subtitle">
-              {dict.home.subtitle.split('\n').map((line: string, i: number) => (
-                <span key={i} style={{ display: 'block' }}>
-                  {line}
-                </span>
+          <div className="desktop-hero-text">
+            <h1 className="hero-title">
+              {dict.home.title.split('\n').map((line: string, i: number) => (
+                <span key={i} style={{ display: 'block' }}>{line}</span>
               ))}
-            </span>
-          </h1>
-          <p className="hero-desc" style={{ whiteSpace: 'pre-wrap', lineHeight: '2' }}>
-            {dict.home.description}
-          </p>
+              <span className="hero-subtitle">
+                {dict.home.subtitle.split('\n').map((line: string, i: number) => (
+                  <span key={i} style={{ display: 'block' }}>{line}</span>
+                ))}
+              </span>
+            </h1>
+            <p className="hero-desc" style={{ whiteSpace: 'pre-wrap', lineHeight: '2' }}>
+              {dict.home.description}
+            </p>
+          </div>
+
+          <div className="mobile-hero-text">
+            <h1 className="hero-title">
+              {((dict.home as any).title_mobile || dict.home.title).split('\n').map((line: string, i: number) => (
+                <span key={i} style={{ display: 'block' }}>{line}</span>
+              ))}
+              <span className="hero-subtitle">
+                {((dict.home as any).subtitle_mobile || dict.home.subtitle).split('\n').map((line: string, i: number) => (
+                  <span key={i} style={{ display: 'block' }}>{line}</span>
+                ))}
+              </span>
+            </h1>
+            <p className="hero-desc" style={{ whiteSpace: 'pre-wrap', lineHeight: '2' }}>
+              {((dict.home as any).description_mobile || dict.home.description)}
+            </p>
+          </div>
           
           <div className="hero-btns" style={{ display: 'flex', gap: '1.5rem', marginBottom: '3rem', justifyContent: 'center' }}>
             <a href={`/${lang}/portfolio?utm_source=internal&utm_medium=button&utm_campaign=home_hero_portfolio`} className="btn-primary" style={{ minWidth: '180px', textAlign: 'center' }}>{dict.home.cta}</a>
@@ -350,7 +366,12 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
 
         .mobile-only-br { display: none; }
 
+        .mobile-hero-text { display: none; }
+        .desktop-hero-text { display: block; }
+        
         @media (max-width: 768px) {
+          .mobile-hero-text { display: block; }
+          .desktop-hero-text { display: none; }
           .hero-title { font-size: 1.8rem !important; line-height: 1.4; }
           .hero-desc { padding: 0; font-size: 1rem !important; }
           .hero-btns { flex-direction: column; align-items: center; gap: 1rem !important; }

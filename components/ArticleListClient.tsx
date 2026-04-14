@@ -52,6 +52,7 @@ export default function ArticleListClient({ articles, lang, t }: { articles: any
             color: activeCategory === 'all' ? '#000' : '#fff',
             fontSize: '0.9rem',
             fontWeight: activeCategory === 'all' ? '800' : '500',
+            lineHeight: '1',
             cursor: 'pointer',
             transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
             whiteSpace: 'nowrap',
@@ -64,7 +65,7 @@ export default function ArticleListClient({ articles, lang, t }: { articles: any
         </button>
 
         {/* Scrolling marquee for remaining tag buttons */}
-        <div className="category-scroll-wrapper" style={{ position: 'relative', overflow: 'hidden', flex: 1 }}>
+        <div className="category-scroll-wrapper" style={{ position: 'relative', overflow: 'hidden', flex: 1, display: 'flex', alignItems: 'center' }}>
           <div className="category-marquee-track" style={{ 
             display: 'flex', 
             gap: '0.8rem', 
@@ -84,6 +85,7 @@ export default function ArticleListClient({ articles, lang, t }: { articles: any
                   color: activeCategory === cat ? '#000' : '#fff',
                   fontSize: '0.9rem',
                   fontWeight: activeCategory === cat ? '800' : '500',
+                  lineHeight: '1',
                   cursor: 'pointer',
                   transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
                   whiteSpace: 'nowrap',

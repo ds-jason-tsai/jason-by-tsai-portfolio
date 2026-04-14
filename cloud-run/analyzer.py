@@ -18,40 +18,28 @@ def analyze_and_summarize(articles, past_topics=None):
     
     genai.configure(api_key=api_key)
     
-    # Dynamic Model Discovery to avoid NotFound errors
-    try:
-        available_models = [m.name for m in genai.list_models() if 'generateContent' in m.supported_generation_methods]
-        logging.info(f"Available Gemini models: {available_models}")
-        
-        # Priority mapping (1.5-flash is more stable for free tier quotas)
-        target_models = [
-            'models/gemini-1.5-flash-latest',
-            'models/gemini-1.5-flash',
-            'models/gemini-2.0-flash', 
-            'models/gemini-pro'
-        ]
-        
-        model = None
-        for target in target_models:
-            if target in available_models:
-                model = genai.GenerativeModel(target)
-                logging.info(f"Successfully selected dynamic model: {target}")
-                break
-        
-        if not model and available_models:
-            model = genai.GenerativeModel(available_models[0])
-            logging.info(f"Selecting fallback model: {available_models[0]}")
+    # Simplify discovery: Try direct models first to save a 'list_models' call which also consumes quota
+    target_models = [
+        'models/gemini-1.5-flash-latest', 
+        'models/gemini-1.5-flash', 
+        'models/gemini-1.0-pro',
+        'models/gemini-pro'
+    ]
+    
+    model = None
+    for target in target_models:
+        try:
+            model = genai.GenerativeModel(target)
+            # Test it briefly
+            logging.info(f"Targeting model: {target}")
+            break
+        except:
+            continue
             
-    except Exception as e:
-        logging.warning(f"Dynamic model discovery failed: {e}. Falling back to hardcoded list.")
-        # Fallback to a hardcoded list with explicit prefixes as a last resort
-        model = None
-        for m in ['models/gemini-1.5-flash', 'models/gemini-1.5-flash-latest', 'models/gemini-2.0-flash']:
-            try:
-                model = genai.GenerativeModel(m)
-                break
-            except:
-                continue
+    if not model:
+        # Emergency backup: list models only if the above fails
+        available_models = [m.name for m in genai.list_models() if 'generateContent' in m.supported_generation_methods]
+        model = genai.GenerativeModel(available_models[0])
     
     if not model:
         logging.error("Critical: No Gemini models could be initialized.")

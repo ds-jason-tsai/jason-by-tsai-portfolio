@@ -1,29 +1,37 @@
 import os
-from google import genai
 import datetime
+import logging
+import google.generativeai as genai
 from tenacity import retry, stop_after_attempt, wait_exponential, retry_if_exception_type
-from google.genai import errors
 
+# Configure Retry logic for 503 Service Unavailable
 @retry(
     stop=stop_after_attempt(5),
-    wait=wait_exponential(multiplier=1, min=4, max=60),
-    retry=retry_if_exception_type(errors.ClientError),
+    wait=wait_exponential(multiplier=1, min=10, max=60),
     reraise=True
 )
-def _call_gemini_with_retry(client, model, contents):
-    return client.models.generate_content(model=model, contents=contents)
+def _call_gemini_with_retry(model, prompt):
+    return model.generate_content(prompt)
 
 def analyze_and_summarize(articles, past_topics=None):
     """
-    Takes raw articles layout, queries Gemini on Vertex AI for summaries, translations, 
+    Takes raw articles list, queries Gemini for summaries, translations, 
     and returns a structured data object + Markdown string.
     """
-    project_id = "personal-site-492809"
-    location = "asia-east1"
+    api_key = os.environ.get("GEMINI_API_KEY")
+    if not api_key:
+        raise ValueError("GEMINI_API_KEY not set.")
     
-    # Vertex AI Client
-    client = genai.Client(vertexai=True, project=project_id, location=location)
+    genai.configure(api_key=api_key)
     
+    # Using Pro model for higher intelligence and lower 503 frequency for Paid users
+    # Fallback to Flash if needed, but Pro is better for complex JSON + FrontMatter
+    model_name = 'gemini-1.5-pro'
+    try:
+        model = genai.GenerativeModel(model_name)
+    except Exception:
+        model = genai.GenerativeModel('gemini-1.5-flash')
+
     date_str = datetime.datetime.now().strftime("%Y-%m-%d")
     past_topics_str = f"\n過去一週已寫過的主題（請避開重複內容）：\n{past_topics}" if past_topics else ""
     
@@ -62,14 +70,12 @@ def analyze_and_summarize(articles, past_topics=None):
     ---
     """
     
-    # Use Pro model for higher stability and quality on Vertex AI
-    response = _call_gemini_with_retry(
-        client=client,
-        model='gemini-1.5-pro',
-        contents=prompt
-    )
-    
-    full_text = response.text
+    try:
+        response = _call_gemini_with_retry(model, prompt)
+        full_text = response.text
+    except Exception as e:
+        logging.error(f"AI Generation Failed after retries: {e}")
+        return f"AI Generation Error: {e}", None
     
     # Simple extraction of JSON and Markdown
     import json

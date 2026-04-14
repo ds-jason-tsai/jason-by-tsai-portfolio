@@ -46,7 +46,11 @@ def fetch_latest_ai_news():
                     if title not in found_titles:
                         found_titles.add(title)
                         full_url = href if href.startswith('http') else source['url'].rstrip('/') + '/' + href.lstrip('/')
-                        articles.append(f"Source: {source['name']} | Title: {title} | Link: {full_url}")
+                        articles.append({
+                            "source": source['name'],
+                            "title": title,
+                            "link": full_url
+                        })
                 
                 if len(found_titles) >= 5: # limit 5 headlines per source
                     break
@@ -54,4 +58,4 @@ def fetch_latest_ai_news():
         except Exception as e:
             logging.error(f"Failed to crawl {source['name']}: {e}")
             
-    return "\n".join(articles)
+    return articles

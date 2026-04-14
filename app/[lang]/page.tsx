@@ -96,7 +96,12 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
             </span>
           </h1>
           <p className="hero-desc" style={{ whiteSpace: 'pre-wrap', lineHeight: '1.8' }}>
-            {dict.home.description}
+            {dict.home.description.split('[mb]').map((part: string, idx: number, arr: string[]) => (
+              <span key={idx}>
+                {part}
+                {idx < arr.length - 1 && <br className="mobile-only-br" />}
+              </span>
+            ))}
           </p>
           
           <div className="hero-btns" style={{ display: 'flex', gap: '1.5rem', marginBottom: '3rem', justifyContent: 'center' }}>

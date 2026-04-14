@@ -77,7 +77,7 @@ def trigger_generation():
         
         return jsonify({
             "status": "success",
-            "message": f"Pipeline execution completed for {date_str}. (Check logs for generation success)"
+            "message": f"Successfully published new article for {date_str} to GitHub and BQ."
         }), 200
         
     except Exception as e:

@@ -24,13 +24,10 @@ def analyze_and_summarize(articles, past_topics=None):
     
     genai.configure(api_key=api_key)
     
-    # Using Pro model for higher intelligence and lower 503 frequency for Paid users
-    # Fallback to Flash if needed, but Pro is better for complex JSON + FrontMatter
-    model_name = 'gemini-1.5-pro'
-    try:
-        model = genai.GenerativeModel(model_name)
-    except Exception:
-        model = genai.GenerativeModel('gemini-1.5-flash')
+    # Force use of gemini-1.5-flash for maximum stability with Free API keys
+    # and highest generation speed.
+    model_name = 'gemini-1.5-flash'
+    model = genai.GenerativeModel(model_name)
 
     date_str = datetime.datetime.now().strftime("%Y-%m-%d")
     past_topics_str = f"\n過去一週已寫過的主題（請避開重複內容）：\n{past_topics}" if past_topics else ""

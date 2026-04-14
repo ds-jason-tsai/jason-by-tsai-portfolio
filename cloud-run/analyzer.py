@@ -23,8 +23,13 @@ def analyze_and_summarize(articles, past_topics=None):
         available_models = [m.name for m in genai.list_models() if 'generateContent' in m.supported_generation_methods]
         logging.info(f"Available Gemini models: {available_models}")
         
-        # Priority mapping
-        target_models = ['models/gemini-1.5-flash-latest', 'models/gemini-1.5-flash', 'models/gemini-pro', 'gemini-1.5-flash']
+        # Priority mapping (Latest High-performance Flash models first)
+        target_models = [
+            'models/gemini-2.0-flash', 
+            'models/gemini-1.5-flash-latest', 
+            'models/gemini-1.5-flash', 
+            'models/gemini-pro'
+        ]
         
         model = None
         for target in target_models:

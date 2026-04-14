@@ -23,17 +23,14 @@ def analyze_and_summarize(text, past_topics=None, current_date=None):
     target_model = 'models/gemini-2.5-flash'
     
     try:
-        # Reduced safety settings to prevent "Empty Result" due to safety blocks
         safety_settings = [
             {"category": "HARM_CATEGORY_HARASSMENT", "threshold": "BLOCK_NONE"},
             {"category": "HARM_CATEGORY_HATE_SPEECH", "threshold": "BLOCK_NONE"},
             {"category": "HARM_CATEGORY_SEXUALLY_EXPLICIT", "threshold": "BLOCK_NONE"},
             {"category": "HARM_CATEGORY_DANGEROUS_CONTENT", "threshold": "BLOCK_NONE"},
         ]
-        
         model = genai.GenerativeModel(target_model, safety_settings=safety_settings)
         logging.info(f"Targeting model: {target_model}")
-            
     except Exception as e:
         logging.error(f"Model initialization failed: {e}")
         return None, None
@@ -41,90 +38,89 @@ def analyze_and_summarize(text, past_topics=None, current_date=None):
     date_context = current_date if current_date else "today"
     
     prompt = f"""
-    You are an expert AI & Data Science professional analyst named Jason Analytics (傑森數據). 
-    Your job is to create a professional technical newsletter article based on the provided data.
-    
+    You are Jason Analytics (傑森數據), a world-class AI news analyst. 
+    Create a professional MULTILINGUAL technical report (ZH, EN, JA).
+
     今日日期：{date_context}
     
-    分析指南：
-    1. 僅基於下方數據進行事實敘述。
-    2. 標題格式：[{date_context}] <標題>。
-    3. 每個主題必須包含：前言、深度技術洞察、數據策略、結論、延伸閱讀。
-    4. 結尾必須附上品牌結語：
-       "Jason Analytics (傑森數據) 堅信，以數據為核心，結合 Google DeepMind 的前沿 AI 技術，將是企業在全球市場中取得競爭優勢、實現永續成長的關鍵。歡迎轉載或洽詢合作，請聯繫 [傑森數據 (Jason Analytics)](/zh/contact)。"
-    
-    輸出格式要求：你必須先輸出一段含有 JSON 的內容，JSON 必須包含 title, description, tags, sentiment。
-    JSON 完畢後，使用 --- 分隔線，接著輸出 Markdown 內文。
-    繁體中文內容後，請使用 <!-- en --> 引導英文版，再使用 <!-- ja --> 引導日文版。
-
-    ### 原始新聞數據 ###
+    ### 原始新聞數據 (請嚴格鎖定此內容) ###
     {text}
+    
+    ### 寫作指令 (嚴格執行) ###
+    1. **延伸閱讀格式**：必須且只能使用 Markdown 超連結格式：`- [新聞標題](URL)`。
+    2. **禁止行為**：禁止在 Markdown 正文中重複輸出 JSON 區塊，禁止編造連結。
+    3. **品牌結語**：文末必須附上：
+       "Jason Analytics (傑森數據) 堅信，以數據為核心，結合 Google DeepMind 的前沿 AI 技術，將是企業在全球市場中取得競爭優勢、實現永續成長的關鍵。歡迎轉載或洽詢合作，請聯繫 [傑森數據 (Jason Analytics)](/zh/contact)。"
+    4. **文章架構**：前言 -> 深度技術洞察與商業應用潛力 -> 數據策略與企業轉型 -> 結論與策略建議 -> 延伸閱讀。
+
+    ### 輸出格式 ###
+    你必須先輸出一個 JSON 區塊，包含 title, description, tags, sentiment。
+    (注意：title 與 description 必須包含 zh, en, ja 子欄位)
+    接著輸入 `---` 分隔線。
+    最後輸出三語版 Markdown 正文 (ZH, EN, JA 分別用 <!-- en --> 與 <!-- ja --> 標註)。
     """
     
     try:
         response = _call_gemini_with_retry(model, prompt)
-        if not response or not response.candidates:
-            logging.error("AI returned NO candidates. Possible safety block.")
-            return None, None
-            
         full_text = response.text
         if not full_text:
-            logging.error(f"AI returned Empty text. Prompt Feedback: {response.prompt_feedback}")
             return None, None
-            
     except Exception as e:
-        logging.error(f"AI Generation Critical Error: {e}")
+        logging.error(f"AI Generation Error: {e}")
         return None, None
     
     import json
     import re
-    
-    # Robust Meta-Data Extraction (Try multiple patterns)
+
+    # Helper to handle both string and dict response for multilingual fields
+    def get_lang_val(obj, key, lang='zh'):
+        field = obj.get(key, {})
+        if isinstance(field, dict):
+            return field.get(lang, "")
+        return field if isinstance(field, str) and lang == 'zh' else ""
+
+    # 1. Extract JSON
     metadata = {}
+    body_content = full_text
     try:
-        # Pattern 1: JSON block with backticks
-        mj = re.search(r'\{.*\}', full_text, re.DOTALL)
-        if mj:
-            metadata = json.loads(mj.group(0))
-        else:
-            raise ValueError("No JSON-like structure found")
-    except Exception as je:
-        logging.warning(f"Metadata JSON parsing failed: {je}. Attempting legacy extraction.")
-        metadata = {
-            "title": {"zh": f"[{date_context}] AI 趨勢快報"},
-            "description": {"zh": "專業 AI 與數據分析報告"},
-            "tags": {"zh": ["AI", "Data", "Tech"]},
-            "sentiment": "Neutral"
-        }
+        json_match = re.search(r'\{(?:[^{}]|(?R))*\}', full_text, re.DOTALL)
+        if json_match:
+            json_str = json_match.group(0)
+            metadata = json.loads(json_str)
+            # Remove JSON from body to prevent double output
+            body_content = full_text.replace(json_str, "", 1).strip()
+            # Remove the separator if it exists
+            if body_content.startswith("---"):
+                body_content = body_content[3:].strip()
 
-    # Robust Body Extraction
-    try:
-        # Everything after the JSON block or the first separator
-        if "---" in full_text:
-            body_content = full_text.split("---", 1)[1].strip()
-        else:
-            # Fallback: remove the JSON part and take the rest
-            body_content = re.sub(r'\{.*\}', '', full_text, flags=re.DOTALL).strip()
-            
-        if len(body_content) < 100:
-             logging.warning("Extracted body too short, using full response.")
-             body_content = full_text
+        # 2. Extract specific fields safely
+        title_zh = get_lang_val(metadata, 'title', 'zh').replace('"', "'") or f"[{date_context}] AI 趨勢分析"
+        title_en = get_lang_val(metadata, 'title', 'en').replace('"', "'") or "AI Trends Analysis"
+        title_ja = get_lang_val(metadata, 'title', 'ja').replace('"', "'") or "AIトレンド分析"
+        
+        desc_zh = get_lang_val(metadata, 'description', 'zh').replace('"', "'")
+        desc_en = get_lang_val(metadata, 'description', 'en').replace('"', "'")
+        desc_ja = get_lang_val(metadata, 'description', 'ja').replace('"', "'")
 
-        # Generate Frontmatter
+        tags_zh = metadata.get('tags', {}).get('zh', ['AI']) if isinstance(metadata.get('tags'), dict) else ["AI"]
+        tags_en = metadata.get('tags', {}).get('en', ['AI']) if isinstance(metadata.get('tags'), dict) else ["AI"]
+        tags_ja = metadata.get('tags', {}).get('ja', ['AI']) if isinstance(metadata.get('tags'), dict) else ["AI"]
+
+        # 3. Final Formatting
         frontmatter = f"""---
 title:
-  zh: "{metadata.get('title', {}).get('zh', '').replace('"', "'")}"
-  en: "{metadata.get('title', {}).get('en', '').replace('"', "'")}"
-  ja: "{metadata.get('title', {}).get('ja', '').replace('"', "'")}"
+  zh: "{title_zh}"
+  en: "{title_en}"
+  ja: "{title_ja}"
 description:
-  zh: "{metadata.get('description', {}).get('zh', '').replace('"', "'")}"
-  en: "{metadata.get('description', {}).get('en', '').replace('"', "'")}"
-  ja: "{metadata.get('description', {}).get('ja', '').replace('"', "'")}"
+  zh: "{desc_zh}"
+  en: "{desc_en}"
+  ja: "{desc_ja}"
 date: "{date_context}"
 tags:
-  zh: {json.dumps(metadata.get('tags', {}).get('zh', ['Tech']), ensure_ascii=False)}
-  en: {json.dumps(metadata.get('tags', {}).get('en', ['Tech']))}
-  ja: {json.dumps(metadata.get('tags', {}).get('ja', ['Tech']), ensure_ascii=False)}
+  zh: {json.dumps(tags_zh, ensure_ascii=False)}
+  en: {json.dumps(tags_en)}
+  ja: {json.dumps(tags_ja, ensure_ascii=False)}
 published: true
 ---
 

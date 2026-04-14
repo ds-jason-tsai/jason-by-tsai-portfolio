@@ -18,9 +18,8 @@ def analyze_and_summarize(articles, past_topics=None):
     
     genai.configure(api_key=api_key)
     
-    # Strictly use the specified 2.5/3.1 generations
+    # Switch to Lite versions to bypass 2.5 Flash day limit
     target_models = [
-        'models/gemini-2.5-flash',
         'models/gemini-3.1-flash-lite',
         'models/gemini-2.5-flash-lite'
     ]

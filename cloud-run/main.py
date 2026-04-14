@@ -9,6 +9,12 @@ from dotenv import load_dotenv
 import datetime
 
 load_dotenv()
+import datetime
+from datetime import timezone, timedelta
+
+# Taiwan Time Utility
+def get_tw_now():
+    return datetime.datetime.now(timezone(timedelta(hours=8)))
 
 app = Flask(__name__)
 logging.basicConfig(level=logging.INFO)
@@ -38,8 +44,9 @@ def trigger_generation():
         if not raw_items:
             return jsonify({"status": "error", "message": "Crawler returned no results."}), 500
         
-        # Step 2: Save RAW to BigQuery
-        date_str = datetime.datetime.now().strftime("%Y-%m-%d")
+        # Step 2: Save RAW to BigQuery (Taiwan Time)
+        tw_now = get_tw_now()
+        date_str = tw_now.strftime("%Y-%m-%d")
         slug = f"ai-news-{date_str}"
         bq_raw_data = []
         for item in raw_items:
@@ -49,7 +56,7 @@ def trigger_generation():
                 "source_domain": item.get('source', 'Unknown'),
                 "headline": item.get('title', 'No Title'),
                 "url": item.get('link', ''),
-                "crawled_at": datetime.datetime.now().isoformat()
+                "crawled_at": tw_now.isoformat()
             })
         
         if bq_raw_data:

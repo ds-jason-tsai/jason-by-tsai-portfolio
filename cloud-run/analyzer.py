@@ -79,34 +79,46 @@ def analyze_and_summarize(text, past_topics=None, current_date=None):
             return field.get(lang, "")
         return field if isinstance(field, str) and lang == 'zh' else ""
 
-    # 1. Extract JSON
+    # 1. Extract JSON and Body separately using index to avoid 'replace' bugs
     metadata = {}
     body_content = full_text
+    
+    # 1. Extract JSON and Body separately using index logic
     try:
-        json_match = re.search(r'\{(?:[^{}]|(?R))*\}', full_text, re.DOTALL)
+        # Priority 1: Markdown JSON block
+        json_match = re.search(r'```json\s*(.*?)\s*```', full_text, re.DOTALL)
         if json_match:
-            json_str = json_match.group(0)
+            json_str = json_match.group(1).strip()
             metadata = json.loads(json_str)
-            # Remove JSON from body to prevent double output
-            body_content = full_text.replace(json_str, "", 1).strip()
-            # Remove the separator if it exists
-            if body_content.startswith("---"):
-                body_content = body_content[3:].strip()
+            body_content = full_text[json_match.end():].strip()
+        else:
+            json_match = re.search(r'\{.*\}', full_text, re.DOTALL)
+            if json_match:
+                json_str = json_match.group(0).strip()
+                metadata = json.loads(json_str)
+                body_content = full_text[json_match.end():].strip()
 
-        # 2. Extract specific fields safely
-        title_zh = get_lang_val(metadata, 'title', 'zh').replace('"', "'") or f"[{date_context}] AI 趨勢分析"
-        title_en = get_lang_val(metadata, 'title', 'en').replace('"', "'") or "AI Trends Analysis"
-        title_ja = get_lang_val(metadata, 'title', 'ja').replace('"', "'") or "AIトレンド分析"
+        if body_content.startswith("---"):
+            body_content = re.sub(r'^---+\s*', '', body_content).strip()
+
+        # 2. Extract and sanitize fields
+        def clean(s): return str(s).replace('"', "'").strip()
         
-        desc_zh = get_lang_val(metadata, 'description', 'zh').replace('"', "'")
-        desc_en = get_lang_val(metadata, 'description', 'en').replace('"', "'")
-        desc_ja = get_lang_val(metadata, 'description', 'ja').replace('"', "'")
+        title_zh = clean(get_lang_val(metadata, 'title', 'zh')) or f"[{date_context}] AI 趨勢分析"
+        title_en = clean(get_lang_val(metadata, 'title', 'en')) or "AI Tech Insights"
+        title_ja = clean(get_lang_val(metadata, 'title', 'ja')) or "AI 技術インサイト"
+        
+        desc_zh = clean(get_lang_val(metadata, 'description', 'zh'))
+        desc_en = clean(get_lang_val(metadata, 'description', 'en'))
+        desc_ja = clean(get_lang_val(metadata, 'description', 'ja'))
 
-        tags_zh = metadata.get('tags', {}).get('zh', ['AI']) if isinstance(metadata.get('tags'), dict) else ["AI"]
-        tags_en = metadata.get('tags', {}).get('en', ['AI']) if isinstance(metadata.get('tags'), dict) else ["AI"]
-        tags_ja = metadata.get('tags', {}).get('ja', ['AI']) if isinstance(metadata.get('tags'), dict) else ["AI"]
+        def get_tags(lang):
+            t = metadata.get('tags', {})
+            return t.get(lang, ["AI"]) if isinstance(t, dict) else ["AI"]
 
-        # 3. Final Formatting
+        tags_zh, tags_en, tags_ja = get_tags('zh'), get_tags('en'), get_tags('ja')
+
+        # 3. Assemble and Return
         frontmatter = f"""---
 title:
   zh: "{title_zh}"
@@ -127,8 +139,9 @@ published: true
 """
         return frontmatter + body_content, metadata
 
-    except Exception as be:
-        logging.error(f"Body Formatting Error: {be}")
+    except Exception as e:
+        logging.error(f"Final Parsing Stage Error: {e}")
+        # Last resort: return original content wrapped in a generic metadata
         return full_text, metadata
 
     return None, None

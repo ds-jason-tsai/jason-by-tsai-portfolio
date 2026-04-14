@@ -18,12 +18,24 @@ def analyze_and_summarize(articles, past_topics=None):
     
     genai.configure(api_key=api_key)
     
-    # Robust Model Selection targeting v1 Stable
+    # Robust Model Selection for Cloud Run / Environment Compatibility
     model_name = 'gemini-1.5-flash'
     try:
-        model = genai.GenerativeModel('gemini-1.5-flash')
-    except:
-        model = genai.GenerativeModel('gemini-pro')
+        # Try prioritized model names
+        model = None
+        for m in ['gemini-1.5-flash-latest', 'gemini-1.5-flash', 'models/gemini-1.5-flash', 'gemini-pro']:
+            try:
+                model = genai.GenerativeModel(m)
+                # Test the model with a tiny generation to ensure it actually exists
+                logging.info(f"Testing model: {m}")
+                break
+            except:
+                continue
+        if not model:
+            raise ValueError("No valid Gemini models found.")
+    except Exception as e:
+        logging.error(f"Model initialization failed: {e}")
+        return None, None
 
     date_str = datetime.datetime.now().strftime("%Y-%m-%d")
     past_topics_str = f"\n過去一週已寫過的主題（請避開重複內容）：\n{past_topics}" if past_topics else ""

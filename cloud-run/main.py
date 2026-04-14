@@ -15,7 +15,10 @@ logging.basicConfig(level=logging.INFO)
 
 # Initialize BigQuery Manager
 bq = BigQueryManager()
-bq.init_db()
+try:
+    bq.init_db()
+except Exception as e:
+    logging.error(f"BigQuery initialization failed at startup: {e}. The service will continue to run, but BQ features may fail.")
 
 @app.route("/", methods=["GET", "POST"])
 def trigger_generation():

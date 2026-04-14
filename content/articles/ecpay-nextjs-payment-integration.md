@@ -247,5 +247,33 @@ const gasRes = await fetch(GAS_URL_ECPAY, {
 如果您也有類似的串接經驗或問題，歡迎透過我的作品集網站與我交流！
 
 **推薦閱讀：**
-- [GA4 與 BigQuery 的資料結構說明](/zh/articles/ga4-to-bigquery-schema?utm_source=portfolio&utm_medium=internal_link&utm_campaign=recommended_reading)
-- [從 0 到 1：資料分析師的作品集 SEO 全指南](/zh/articles/portfolio-seo-best-practices?utm_source=portfolio&utm_medium=internal_link&utm_campaign=recommended_reading)
+- [GA4 與 BigQuery 的資料結構說明](/zh/articles/ga4-to-bigquery-schema)
+- [從 0 到 1：資料分析師的作品集 SEO 全指南](/zh/articles/portfolio-seo-best-practices)
+
+<!-- en -->
+# ECPay Payment Integration: A Technical Guide
+
+Integrating ECPay (Taiwan's leading payment gateway) into a modern Next.js application requires careful handling of security signatures and server-side notifications. This guide documents the process of building a secure digital product checkout system.
+
+## Core Security: CheckMacValue
+CheckMacValue is the digital signature used by ECPay to prevent data tampering. Generating it involves sorting parameters, appending Hash keys, URL encoding, and SHA-256 hashing.
+
+## Secure Redirection
+Using HMAC-SHA256 signatures for success pages prevents "URL guessing" and ensures only paying customers can access digital content. We also implement a 30-minute expiration token for enhanced security.
+
+## Automation with Google Apps Script
+By leveraging GAS as a lightweight webhook receiver, we automatically log sales to Google Sheets and send instant email notifications to administrators upon successful payment.
+
+<!-- ja -->
+# ECPay決済連携：技術ガイド
+
+Next.jsとVercel環境で台湾のECPay（緑界科技）決済ゲートウェイを統合する方法について解説します。セキュアなデジタル商品販売システムの構築プロセスを記録しています。
+
+## セキュリティの核：CheckMacValue
+CheckMacValueは、データー改ざんを防ぐためのデジタル署名です。パラメータのソート、ハッシュキーの追加、URLエンコード、そしてSHA-256ハッシュ化のステップで生成されます。
+
+## 不正アクセス防止策
+成功ページ（Success Page）へのアクセスを保護するために、HMAC-SHA256署名と30分間の有効期限トークンを導入しています。これにより、未購入者によるコンテンツアクセスを完全に遮断します。
+
+## 自動化：Google Apps Script
+GASを軽量なサーバーレスエンドポイントとして活用し、売上データをGoogleスプレッドシートに自動記録し、管理者にメール通知を送る仕組みを構築しました。

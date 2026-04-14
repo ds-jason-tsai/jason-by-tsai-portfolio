@@ -4,14 +4,15 @@ title:
   en: "GA4 Event Guide | Digital Footprint"
   ja: "デジタル行動分析 | GA4イベントとは？"
 description:
-  zh: "深入探討 Google Analytics 4 (GA4) 以「事件」為核心的分析架構。本文詳細拆解 GA4 的四種關鍵事件類型：自動收集、加強型評估、建議事件及自訂事件。透過專業分析師的視角，幫助您更精確地捕捉使用者在網站上的數位軌跡，優化 Data Mart 建置與數據報表可靠性。適合所有希望從通用 GA 順利轉型至 GA4 的行銷人員與數據分析專家參考。"
-  en: "Master Google Analytics 4 (GA4) event tracking. This comprehensive guide explains the fundamental shift from sessions to events and details the four essential event types: Automatically Collected, Enhanced Measurement, Recommended, and Custom events. Learn how to accurately track digital footprints, enhance data mart reliability, and build superior analytics reports. Perfect for data analysts and digital marketers transitioning to the next generation of analytics."
-  ja: "Google アナリティクス 4 (GA4) の分析構造は、従来のユニバーサル アナリティクスとは根本的に異なり「イベント」を基盤としています。本記事では、自動収集イベント、拡張計測機能イベント、推奨イベント、カスタムイベントという 4 つの主要なイベントタイプについて、現役アナリストの視点から設定方法や活用術を詳しく解説します。データ分析の精度を高め、デジタルトレースを正確に把握するための基礎知識を提供。GA4 を活用したデータ基盤構築やレポート作成にぜひ役立ててください。"
+  zh: "深入探討 Google Analytics 4 (GA4) 以「事件」為核心的分析架構。本文詳細拆解 GA4 的四種關鍵事件類型：自動收集、加強型評估、建議事件及自訂事件。透過專業分析師的視告，幫助您更精確地捕捉使用者在網站上的數位軌跡，優化 Data Mart 建置與數據報表可靠性。適合所有希望從通用 GA 順利轉型至 GA4 的行銷人員與數據分析專家參考。"
+  en: "Master Google Analytics 4 (GA4) event tracking. This comprehensive guide explains the fundamental shift from sessions to events and details the four essential event types: Automatically Collected, Enhanced Measurement, Recommended, and Custom events."
+  ja: "Google アナリティクス 4 (GA4) の分析構造は、従来のユニバーサル アナリティクスとは根本的に異なり「イベント」を基盤としています。本記事では、自動収集イベント、拡張計測機能イベント、推奨イベント、カスタムイベントという 4 つの主要なイベントタイプについて解説します。"
 date: "2023-10-10"
 tags:
   zh: ["#GA4", "#數據分析", "#數位軌跡"]
   en: ["#GA4", "#DataAnalytics", "#DigitalFootprint"]
   ja: ["#GA4", "#データ分析", "#デジタルトレース"]
+published: true
 ---
 
 近期因為工作的關係開始大量接觸 Google Analytics，筆者主要負責 GA4 Data Mart 的設計以及雲端資料流的處理，希望能透過文章與各界 GA 使用者分享並交流數位軌跡的追蹤心得。
@@ -26,39 +27,48 @@ tags:
 - **`first_visit`**: 紀錄使用者初次造訪網頁的資訊
 - **`page_view`**: 紀錄使用者瀏覽網頁的狀態
 
-假設某個使用者初次造訪了我們的網頁，GA4 就會自動觸發 `first_visit`、`page_view` 以及 `session_start` 等 3 個事件。其中，`first_visit` 只有在每個使用者初次造訪網頁時才會觸發，而 `user_engagement_msec` 則是 `user_engagement` 的一個參數，以毫秒的方式紀錄時間。
-
 ## 加強型評估事件 (Enhanced measurement events)
 
-GA4 的加強型評估事件比自動事件更複雜一些，主要是以下六項：
 - **`file_download`**: 下載檔案
 - **`click`**: 點擊外連 (Outbound) 連結
 - **`scroll`**: 網頁滾動
 - **`video_related`**: 觀看影片
-- **`form_related`**: 填寫表單
-- **`view_search_result`**: 站內搜尋
-
-每次使用者在網頁上填寫表單時，GA4 即記錄表單互動事件（包含 `form_start` 與 `form_submit` 兩類）。
-大家若在網址上發現類似 `_gl=1*1f88n17*_ga*NzY...` 的 query，就表示該網頁可能有開啟外連追蹤。另外，使用者如果瀏覽至底部(預設為 90%)，就會觸發一次捲動事件 (`scroll`)。實務上也常透過 GTM 去設定 25%、50% 以及 75% 的捲動事件。
 
 ## 建議事件 (Recommended events)
 
-GA4 的建議事件是 Google 為不同產業所生成的推薦清單，目前的官方說明有：
-- **所有資源**: 建議所有產業採用的事件
-- **線上銷售**: 包括 `purchase` (完成購買)、`view_cart` (查看購物車)等
-- **遊戲**: 包括 `level_start` (新關卡)、`unlock_achievement` (解鎖成就)等
-
-皆可透過 GTM(Google Tag Manager) 來無縫完成。
+GA4 的建議事件是 Google 為不同產業所生成的推薦清單。
 
 ## 自訂事件 (Custom events)
 
-顧名思義，自訂事件即 GA4 當中自由度最高的事件。在設定自訂事件之前，我們可以先觀察上述自動、加強型以及建議事件是否已經滿足大家對數位軌跡的分析需求，若無再研究即可。
-
-如果希望在 GA4 完成自訂事件的設定，可以透過：
-1. **GA4 後台** - 管理 > 事件 > 建立事件
-2. **GTM** - [Google Tag Manager](https://tagmanager.google.com/)
-以上是關於 GA4 事件的分享，未來分析師如果能更全面理解每個 Event 觸發的含義與時機點，在建置 Data Mart 甚至是報表時皆能更為可靠。
+顧名思義，自訂事件即 GA4 當中自由度最高的事件。
 
 **Reference**
 - [GA4] About events
-- [GA4] Automatically collected events
+
+<!-- en -->
+# GA4 Event Guide | Digital Footprint
+
+Unlike Universal Analytics, GA4 is built on an **Event-based** model. This guide explores the four core categories of events in GA4.
+
+## 1. Automatically Collected Events
+These include `session_start`, `first_visit`, and `page_view`. They are enabled by default as soon as the GA4 snippet is installed.
+
+## 2. Enhanced Measurement
+Advanced interactions like `scroll` (90% depth), `click` (outbound), and `file_download` can be toggled on within the GA4 admin interface without extra code.
+
+## 3. Recommended & Custom Events
+Recommended events are industry-specific templates (like `purchase` for retail), while Custom events offer full flexibility for unique business logic.
+
+<!-- ja -->
+# デジタル行動分析 | GA4イベントとは？
+
+ユニバーサルアナリティクスと異なり、GA4は「イベント」を中心に設計されています。本記事では主要な4つのイベントカテゴリーを解説します。
+
+## 1. 自動収集イベント
+`first_visit` や `session_start` など、設定不要で自動的に記録されるイベントです。
+
+## 2. 拡張計測機能イベント
+スクロール、離脱クリック、サイト内検索など、管理画面でONにするだけで計測可能なイベントです。
+
+## 3. 推奨およびカスタムイベント
+Googleが推奨する業界別のイベントテンプレートと、独自のビジネスニーズに合わせて自由に定義できるカスタムイベントがあります。

@@ -12,6 +12,7 @@ tags:
   zh: ["#技術教學", "#部落格", "#Markdown"]
   en: ["#TechTutorial", "#Blog", "#Markdown"]
   ja: ["#技術チュートリアル", "#ブログ", "#Markdown"]
+published: true
 ---
 
 ## 歡迎來到你的全新文章專區！
@@ -24,7 +25,7 @@ tags:
 
 1. **粗體字**：在前後加上雙星號 `**我是粗體**`
 2. *斜體字*：在前後加上單星號 `*我是斜體*`
-3. 標題：使用 `#` 字號。一個 `#` 代表大標題，兩個 `##` 是次標題（本區塊所使用的就是次標題）。
+3. 標題：使用 `#` 字號。
 
 ### 清單與引用
 
@@ -35,22 +36,50 @@ tags:
 
 ## 如何放入程式碼？
 
-如果你身為全端工程師或資料分析師，偶爾需要分享程式碼片段，你能這樣寫：
-
 ```python
 import pandas as pd
 
 def clean_data(df):
-    # 簡單的資料清理範例
     return df.dropna()
 ```
 
 ## 如果想要新增其他文章該怎麼做？
 
-未來如果你想要上傳新的文章：
 1. 進入此專案的 `content/articles/` 資料夾中。
-2. 新增一個名為 `你的文章英文名稱.md` 的檔案（例如 `tableau-tutorial-01.md`）。
-3. 參考這篇文章最上方的區塊（稱之為 Frontmatter，也就是被 `---` 包圍的地方），複製過去並把標題、日期、描述改成你的新內容。
-4. 在 `---` 之後，就是你盡情揮灑文章內容的地方囉！
+2. 新增一個名為 `你的文章英文名稱.md` 的檔案。
+3. 參考這篇文章最上方的 Frontmatter 格式。
 
-恭喜你！網站的部落格系統正式上線！
+<!-- en -->
+# First Post: Managing Articles via Markdown
+
+Welcome to your new article section! This is a demonstration of how to use **Markdown** to create content for your portfolio blog.
+
+## Why Markdown?
+Markdown is widely used on platforms like GitHub and Notion because it allows authors to focus on the text rather than formatting.
+
+## Basic Syntax
+- **Bold**: Use double asterisks.
+- *Italic*: Use single asterisks.
+- [Link Text](URL): To create a hyperlink.
+
+## Code Snippets
+```python
+print("Hello, Data World!")
+```
+
+<!-- ja -->
+# 初めての技術投稿：Markdownで記事を管理する
+
+あなたの新しいブログセクションへようこそ！これは、**Markdown**記法を使用してポートフォリオの記事を管理する方法を説明するサンプル記事です。
+
+## Markdownを使う理由
+MarkdownはGitHubやNotionなどで標準的に採用されており、執筆に集中しながら綺麗なフォーマットを作成できるのが特徴です。
+
+## 基本的な使い方
+- **太字**: 前後を2つのアスタリスクで囲みます。
+- *斜体*: 前後を1つのアスタリスクで囲みます。
+
+## コードの挿入
+```javascript
+console.log("こんにちは！");
+```

@@ -11,8 +11,11 @@ date: "2026-04-09"
 tags:
   zh: ["#技術教學", "#SEO", "#Nextjs", "#數據分析"]
   en: ["#Tutorial", "#SEO", "#Nextjs", "#DataAnalysis"]
-  ja: ["#技術チュートリアル", "#SEO", "#Nextjs", "#データ分析"]
+  ja: ["#技術チュートリアル", "#SEO", "#Nextjs", "#數據分析"]
+published: true
 ---
+
+# 從 0 到 1：資料分析師的作品集 SEO 全指南
 
 恭喜你完成了作品集的初步建設！但網站上線只是第一步，要如何讓獵頭或潛在合作對象在 Google 搜尋「數據分析師」時一眼就看到你？這就是 **SEO (搜尋引擎最佳化)** 的功勞了。
 
@@ -24,34 +27,53 @@ tags:
 
 - **標題 (Title)**：建議控制在 **60 個字元以內**。如果太長，搜尋結果會顯示「...」，這會降低點擊率。
 - **描述 (Description)**：建議落在 **150 到 300 個字元**。太短顯得沒內容，太長則會被截斷。
-- **小撇步**：在描述的首句就放入核心關鍵字（如：數據分析、Tableau、Python），這能幫助搜尋引擎更快理解頁面重點。
 
 ## 2. H1 標籤：頁面中的唯一主角
 
 在 HTML 的結構中，標籤通常分為 `h1` 到 `h6`。
 - **原則**：每個頁面**只能有一個 `h1` 標籤**。
-- **功能**：`h1` 代表該頁面的主題。如果一個頁面有兩個 `h1`，搜尋引擎會感到混惑，不知道誰才是重點。這幾天我們將所有「服務內容」或「聯繫我」的頁面都標準化為單一 `h1`，這對排名至關重要。
+- **功能**：`h1` 代表該頁面的主題。如果一個頁面有兩個 `h1`，搜尋引擎會感到混惑，不知道誰才是重點。
 
 ## 3. 多語系環境的「語意橋接 (Semantic Bridge)」
 
-這是一個稍微進階但非常有效的技巧。如果你的網址路徑是 `/zh/services`，網址中包含英文 `services`，但內容全是中文，這時搜尋引擎可能會覺得網址與內容不匹配。
+如果你的網址路徑是 `/zh/services`，網址中包含英文 `services`，但內容全是中文，這時搜尋引擎可能會覺得網址與內容不匹配。
 
 - **解決方案**：在標題中併列顯示英文關鍵字。
 - **範例**：標題由「專業服務」改為 **「專業服務 (Services)」**。
-- **效果**：這能建立起網址與內容之間的邏輯橋樑，讓搜尋引擎覺得你的頁面非常精確。
-
-## 4. 圖片效能：讓網站跑得比別人快
-
-圖片通常是網站加載最慢的原因。我們這幾天做了兩個關鍵調整：
-- **採用新格式**：將圖片轉換為 **AVIF** 或 **WebP**。這類格式比傳統 JPG 小很多，但畫質更好。
-- **限制寬度 (Sizes)**：不要讓使用者下載 3840px 的原始大圖，而是根據螢幕大小請求合適的尺寸。
 
 ## 總結
 
 SEO 不是一門艱深的藝術，而是一系列「細心細節」的累積。透過控制字數、對齊關鍵字以及優化效能，你的作品集就不再只是一個靜態網頁，而是一個會主動幫你吸引機會的強力工具。
 
-**現在就去檢查看看你的作品集吧！**
-
 **推薦閱讀：**
-- [GA4 與 BigQuery 的資料結構說明](/zh/articles/ga4-to-bigquery-schema?utm_source=portfolio&utm_medium=internal_link&utm_campaign=recommended_reading)
-- [實戰案例：保險論壇的情緒分析指標](/zh/dashboards?utm_source=portfolio&utm_medium=internal_link&utm_campaign=recommended_reading)
+- [GA4 與 BigQuery 的資料結構說明](/zh/articles/ga4-to-bigquery-schema)
+- [綠界金流串接實戰](/zh/articles/ecpay-nextjs-payment-integration)
+
+<!-- en -->
+# Mastering Portfolio SEO: A Guide for Data Analysts
+
+Congratulations on building your portfolio! But going live is just the beginning. How do you ensure that headhunters or potential clients find you when they search for a "Data Analyst" on Google? This is where SEO (Search Engine Optimization) comes in.
+
+## 1. The Proportions of Title and Description
+Search engines look at your Title and Meta Description first.
+- **Title**: Keep it under 60 characters.
+- **Description**: Target 150 to 300 characters.
+
+## 2. H1 Tag: The One and Only Star
+Every page should have exactly one `h1` tag representing the main topic.
+
+## 3. Semantic Bridge for Multilingual Sites
+To align English URL paths (e.g., `/services`) with non-English content, use "Semantic Bridging" by including keywords in both languages in your titles.
+
+<!-- ja -->
+# ポートフォリオのSEO完全ガイド
+
+ポートフォリオの完成、おめでとうございます！しかし、サイトを公開しただけでは十分ではありません。Googleで「データアナリスト」と検索されたときに、あなたのサイトが上位に表示されるようにするにはSEO対策が必要です。
+
+## 1. タイトルとメタディス力プション
+検索エンジンは、まずタイトルとメタディスクリプションを確認します。
+- **タイトル**: 60文字以内に収めるのが理想的です。
+- **ディスクリプション**: 150〜300文字程度が推奨されます。
+
+## 2. H1タグの重要性
+1つのページには、主役となるH1タグを必ず1つだけ配置してください。これにより、検索エンジンはページのメインテーマを正確に理解できます。

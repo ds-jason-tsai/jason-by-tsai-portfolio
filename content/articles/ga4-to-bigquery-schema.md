@@ -12,13 +12,16 @@ tags:
   zh: ["#GA4", "#BigQuery", "#資料分析"]
   en: ["#GA4", "#BigQuery", "#DataAnalytics"]
   ja: ["#GA4", "#BigQuery", "#データ分析"]
+published: true
 ---
+
+# GA4 匯出至 BigQuery 的資料結構
 
 當資料從 GA4 被匯出至 BigQuery 後，便要開始思考如何進行數據清洗，以利後續針對用戶的數位軌跡進行分析。本文說明 GA4 資料表各欄位的定義，並將其分為「事件」和「使用者」兩大主軸。
 
-首先我們知道 GA4 是以「天」為單位，將資料批次匯入 BigQuery(以下簡稱 BQ) 當中。而經過筆者實測以及總結各界經驗後發現，GA4 的數據彙整需要有 2 天左右的緩衝。這邊的緩衝是基於部份使用者的數位軌跡在匯入 GA4 時會有延遲的情形，因此建議在分析時，篩選最新至 D-2 的日期較為恰當。
+首先我們知道 GA4 是以「天」為單位，將資料批次匯入 BigQuery(以下簡稱 BQ) 當中。而經過筆者實測以及總結各界經驗後發現，GA4 的數據彙整需要有 2 天左右的緩衝。這裏的緩衝是基於部份使用者的數位軌跡在匯入 GA4 時會有延遲的情形，因此建議在分析時，篩選最新至 D-2 的日期較為恰當。
 
-有了上述認知後，我們可以先看到 BQ 的 Schema，GA4 資料中的某些欄位是以 RECORD 的型態儲存、且欄位數量頗多。實際上，GA4 匯出至 BQ 的資料大致可分為事件和使用者兩類。
+有了上述認知後，我們可以先看到 BQ 的 Schema，GA4 資料中的某些欄位是以 RECORD 的型態儲存、且欄位數量頗多。實際上，GA4 匯出至 BQ 的資料大致可分為事件 and 使用者兩類。
 
 ## 事件 Event
 
@@ -30,7 +33,7 @@ tags:
 - `event_bundle_sequence_id` | INTEGER | 事件被上傳時的序列 ID
 - `event_server_timestamp_offset` | INTEGER | 事件從蒐集到上傳的時間差
 
-GA4 資料在匯入 BigQuery 後會自動以 `event_date` 來區隔資料表。透過上方敘述可知，`event_bundle_sequence_id` 和 `event_server_timestamp_offset` 兩個欄位與後續分析的關聯性較低，比較實用的可能是前幾個。
+GA4 資料在匯入 BigQuery 後會自動以 `event_date` 來區隔資料表。透過上方敘述可知，`event_bundle_sequence_id` and `event_server_timestamp_offset` 兩個欄位與後續分析的關聯性較低，比較實用的可能是前幾個。
 
 除上述欄位之外，事件的參數會以 BQ 當中的 STRUCT 格式被記錄。BQ 透過這種巢狀的資料型態將同一事件的多組 `{key(param_name): value}` 儲存在同一筆紀錄當中，具體如下：
 
@@ -90,3 +93,44 @@ GA4 以事件發生當下的 IP 位址為依據儲存使用者地理位置：
 
 **Reference**
 - [GA4] BigQuery Export schema
+
+<!-- en -->
+# GA4 BigQuery Export Schema Explained
+
+Once GA4 data is exported to BigQuery, the first challenge is understanding how to clean and analyze the raw digital footprint. This article breaks down the GA4 schema into two main pillars: "Events" and "Users."
+
+GA4 exports data in daily batches. Based on practical experience, GA4 data processing requires a buffer of about 2 days. This is because some user interactions might have a delay before appearing in GA4. Therefore, for accurate analysis, it is recommended to filter data up to D-2.
+
+## Event Data Structure
+
+- `event_date` | STRING | Date of the event (YYYYMMDD)
+- `event_timestamp` | INTEGER | Time of the event (UTC in microseconds)
+- `event_name` | STRING | Name of the event
+- `event_params`: Event parameters in STRUCT format
+
+BigQuery uses nested records to store multiple `{key: value}` pairs for a single event. For example, keywords like `page_location` are stored with their corresponding string or numeric values.
+
+## User Data Structure
+
+- `user_id`: Unique ID (collected via GTM)
+- `user_pseudo_id`: Anonymous ID (Client ID)
+- `is_active_user`: Boolean flag for activity
+
+## Summary
+Understanding the RECORD and STRUCT types in the GA4 BigQuery export is the foundation for building custom marketing attribution models or deep-dive user behavior analysis.
+
+<!-- ja -->
+# GA4からBigQueryへのエクスポートデータ構造
+
+GA4のデータがBigQueryにエクスポートされた後、最初に取り組むべき課題は、生データをどのようにクレンジングし、ユーザー行動を分析するかを理解することです。本記事では、GA4スキーマの定義を「イベント」と「ユーザー」の2つの主要な軸に分けて解説します。
+
+## イベント (Event) の構造
+
+- `event_date` | STRING | イベント発生日 (YYYYMMDD)
+- `event_timestamp` | INTEGER | UTCでのイベント発生時刻（マイクロ秒）
+- `event_name` | STRING | イベント名
+
+BigQueryでは、ネストされたデータ型を使用して、1つのイベントに関連する複数の「キーと値」のペアを保存します。
+
+## まとめ
+GA4のBigQueryエクスポートに含まれる複雑なRECORDやSTRUCT構造を理解することは、高度なデータ分析やカスタムアトリビューションモデルを構築するための第一歩です。

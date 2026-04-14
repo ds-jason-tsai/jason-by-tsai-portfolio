@@ -18,23 +18,38 @@ def analyze_and_summarize(articles, past_topics=None):
     
     genai.configure(api_key=api_key)
     
-    # Robust Model Selection for Cloud Run / Environment Compatibility
-    model_name = 'gemini-1.5-flash'
+    # Dynamic Model Discovery to avoid NotFound errors
     try:
-        # Try prioritized model names
+        available_models = [m.name for m in genai.list_models() if 'generateContent' in m.supported_generation_methods]
+        logging.info(f"Available Gemini models: {available_models}")
+        
+        # Priority mapping
+        target_models = ['models/gemini-1.5-flash-latest', 'models/gemini-1.5-flash', 'models/gemini-pro', 'gemini-1.5-flash']
+        
         model = None
-        for m in ['gemini-1.5-flash-latest', 'gemini-1.5-flash', 'models/gemini-1.5-flash', 'gemini-pro']:
+        for target in target_models:
+            if target in available_models:
+                model = genai.GenerativeModel(target)
+                logging.info(f"Successfully selected dynamic model: {target}")
+                break
+        
+        if not model and available_models:
+            model = genai.GenerativeModel(available_models[0])
+            logging.info(f"Selecting fallback model: {available_models[0]}")
+            
+    except Exception as e:
+        logging.warning(f"Dynamic model discovery failed: {e}. Falling back to hardcoded list.")
+        # Fallback to a hardcoded list with explicit prefixes as a last resort
+        model = None
+        for m in ['models/gemini-1.5-flash', 'models/gemini-1.5-flash-latest', 'models/gemini-pro']:
             try:
                 model = genai.GenerativeModel(m)
-                # Test the model with a tiny generation to ensure it actually exists
-                logging.info(f"Testing model: {m}")
                 break
             except:
                 continue
-        if not model:
-            raise ValueError("No valid Gemini models found.")
-    except Exception as e:
-        logging.error(f"Model initialization failed: {e}")
+    
+    if not model:
+        logging.error("Critical: No Gemini models could be initialized.")
         return None, None
 
     date_str = datetime.datetime.now().strftime("%Y-%m-%d")

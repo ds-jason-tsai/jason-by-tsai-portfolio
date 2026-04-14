@@ -18,11 +18,11 @@ def analyze_and_summarize(articles, past_topics=None):
     
     genai.configure(api_key=api_key)
     
-    # Priority: 2.5 (User Preferred) -> 2.0 -> 1.5 (Stable Backups)
+    # Strictly use the specified 2.5/3.1 generations
     target_models = [
         'models/gemini-2.5-flash',
-        'models/gemini-2.0-flash',
-        'models/gemini-1.5-flash'
+        'models/gemini-3.1-flash-lite',
+        'models/gemini-2.5-flash-lite'
     ]
     
     model = None

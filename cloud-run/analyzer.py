@@ -50,10 +50,15 @@ def analyze_and_summarize(text, past_topics=None, current_date=None):
     
     今天日期是：{date_context}。
     
+    ### 待分析的新聞原始數據 (AI 必須且僅能根據此內容進行事實推演)：
+    {text}
+
+    (以下為避免重複的主題，建議避開：{past_topics if past_topics else "None"})
+
     請嚴格遵守以下事實與品質規範：
     1. **限用新聞來源**：僅能根據我提供的新聞標題與內容進行分析，禁止捏造新聞或參考連結。
-    2. **連結嚴謹性**：文末延伸閱讀的連結必須「完全等同」於我提供給你的原始 URL，禁止修改或自創連結，否則會導致 404 報錯。
-    3. **時效正確性**：若文章提到「今日」或「最新」，必須確保該新聞是在 {date_context} 附近發布的事實，專注於事實敘述。
+    2. **連結嚴謹性**：文末「延伸閱讀」區塊的連結必須「完全等同」於我提供給你的原始 URL，包含所附帶的 UTM 參數。
+    3. **時效正確性**：今天日期是：{date_context}。若文章提到「今日」，必須專注於事實敘述。
     
     要求 (SEO & 內容品質核心規範碼)：
     1. **標題格式**：`[{date_context}] <吸引人的技術主題>`。
@@ -65,39 +70,28 @@ def analyze_and_summarize(text, past_topics=None, current_date=None):
        - Meta Description: 中文 150 字內，英文/日文 160 個字元內。
     
     內容架構必須包含：
-    - 前言 (取代原本的執行摘要)
+    - 前言
     - 深度技術洞察與商業應用潛力
     - 數據策略與企業轉型
     - 結論與策略建議
-    - 延伸閱讀 (取代原本的參考資料，內容必須是條列式 [標題](URL))
+    - 延伸閱讀 (必須是條列式 [標題](URL))
 
     JSON 標籤輸出格式：
     請在 JSON 的 `tags` 欄位中，確保每個語言都只有 3 個最精準的關鍵字標籤。
     6. **全方位翻譯 (核心)**：你必須提供「繁體中文」、「英文」、「日文」三種語言的完整分析內容。
 
-
-    輸出格式：請嚴格遵守以下範例，先輸出一段 JSON 元數據，接著是三個語言區塊，中間用指定的標記隔開。
-
-    ```json
-    {{
-      "title": {{ "zh": "...", "en": "...", "ja": "..." }},
-      "description": {{ "zh": "...", "en": "...", "ja": "..." }},
-      "sentiment": "...",
-      "tags": {{ "zh": ["..."], "en": ["..."], "ja": ["..."] }}
-    }}
-    ```
-
+    Output format:
     ---
-    (這是 JSON 結束後的內容區塊)
-    這裏是繁體中文的完整 1500 字深度分析內容...
-    
-    <!-- en -->
-    # English Title
-    Full 1500-word English translation and analysis here...
-
-    <!-- ja -->
-    # 日本語タイトル
-    Full 1500-word Japanese translation and analysis here...
+    JSON_START
+    {{
+      "title": {{"zh": "...", "en": "...", "ja": "..."}},
+      "description": {{"zh": "...", "en": "...", "ja": "..."}},
+      "tags": {{"zh": ["tag1", "tag2", "tag3"], "en": [...], "ja": [...]}},
+      "sentiment": "Positive/Neutral/Cautionary"
+    }}
+    JSON_END
+    ---
+    (Article content in Markdown format with ZH, EN, JA separated by <!-- en --> and <!-- ja --> markers)
     """
     
     try:

@@ -134,28 +134,5 @@ published: true
     except Exception as be:
         logging.error(f"Body Formatting Error: {be}")
         return full_text, metadata
-            frontmatter = f"""---
-title:
-  zh: "{metadata.get('title', {}).get('zh', 'AI 新聞')}"
-  en: "{metadata.get('title', {}).get('en', 'AI News')}"
-  ja: "{metadata.get('title', {}).get('ja', 'AIニュース')}"
-description:
-  zh: "{metadata.get('description', {}).get('zh', '').replace('"', "'")}"
-  en: "{metadata.get('description', {}).get('en', '').replace('"', "'")}"
-  ja: "{metadata.get('description', {}).get('ja', '').replace('"', "'")}"
-date: "{date_context}"
-tags:
-  zh: {json.dumps(metadata.get('tags', {}).get('zh', ['Tech Trends']), ensure_ascii=False)}
-  en: {json.dumps(metadata.get('tags', {}).get('en', ['Tech Trends']))}
-  ja: {json.dumps(metadata.get('tags', {}).get('ja', ['Tech Trends']), ensure_ascii=False)}
-published: true
----
 
-"""
-            full_markdown = frontmatter + body_content
-            return full_markdown, metadata
-
-    except Exception as e:
-        logging.error(f"Failed to parse AI output JSON: {e}")
-        
     return None, None

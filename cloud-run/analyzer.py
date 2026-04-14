@@ -138,7 +138,7 @@ description:
   zh: "{metadata.get('description', {}).get('zh', '').replace('"', "'")}"
   en: "{metadata.get('description', {}).get('en', '').replace('"', "'")}"
   ja: "{metadata.get('description', {}).get('ja', '').replace('"', "'")}"
-date: "{date_str}"
+date: "{date_context}"
 tags:
   zh: {json.dumps(metadata.get('tags', {}).get('zh', ['Tech Trends']), ensure_ascii=False)}
   en: {json.dumps(metadata.get('tags', {}).get('en', ['Tech Trends']))}

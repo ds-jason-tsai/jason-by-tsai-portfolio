@@ -48,7 +48,22 @@ def update_sitemap(repo, new_article_slug):
     <xhtml:link rel="alternate" hreflang="en" href="https://jason-by-tsai-portfolio.vercel.app/en/articles/{new_article_slug}" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://jason-by-tsai-portfolio.vercel.app/ja/articles/{new_article_slug}" />
     <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://jason-by-tsai-portfolio.vercel.app/en/articles/{new_article_slug}</loc>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://jason-by-tsai-portfolio.vercel.app/zh/articles/{new_article_slug}" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://jason-by-tsai-portfolio.vercel.app/en/articles/{new_article_slug}" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://jason-by-tsai-portfolio.vercel.app/ja/articles/{new_article_slug}" />
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://jason-by-tsai-portfolio.vercel.app/ja/articles/{new_article_slug}</loc>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://jason-by-tsai-portfolio.vercel.app/zh/articles/{new_article_slug}" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://jason-by-tsai-portfolio.vercel.app/en/articles/{new_article_slug}" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://jason-by-tsai-portfolio.vercel.app/ja/articles/{new_article_slug}" />
+    <priority>0.7</priority>
   </url>"""
+
         
         if f"/articles/{new_article_slug}" in content:
             logging.info(f"Article {new_article_slug} already in sitemap.")

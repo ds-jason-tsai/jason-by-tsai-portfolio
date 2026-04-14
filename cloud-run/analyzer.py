@@ -18,10 +18,9 @@ def analyze_and_summarize(articles, past_topics=None):
     
     genai.configure(api_key=api_key)
     
-    # Switch to Lite versions to bypass 2.5 Flash day limit
+    # Strictly use Gemini 2.5 Flash in 'Savings Mode'
     target_models = [
-        'models/gemini-3.1-flash-lite',
-        'models/gemini-2.5-flash-lite'
+        'models/gemini-2.5-flash'
     ]
     
     model = None
@@ -58,7 +57,7 @@ def analyze_and_summarize(articles, past_topics=None):
 
     要求 (SEO & 內容品質核心規範碼)：
     1. **標題格式**：`[{date_str}] <吸引人的技術主題>`。
-    2. **內文長度**：中文主體約 600-800 字即可，需精煉且具備深度技術分析。
+    2. **內文長度**：中文主體約 500-700 字即可，需精煉且具備高度技術含金量。
     3. **Tags 標籤**：必須且只能產出 3 個最具代表性的技術標籤。
     4. **引用文末 (References)**：必須在文末增加一個「參考資料與延伸閱讀」區塊，條列列出本次分析所參考的原始新聞連結：`[標題](URL)`。
     5. **個人品牌結語**：每篇文章結尾必須包含以下文字：

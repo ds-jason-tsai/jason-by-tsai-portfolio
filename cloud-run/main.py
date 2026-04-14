@@ -66,9 +66,9 @@ def trigger_generation():
             except Exception as bqe:
                 logging.warning(f"BQ Save Error: {bqe}")
 
-        # Step 3: AI Analysis (Focus on Top 5 items)
+        # Step 3: AI Analysis (Limit to Top 3 items to save quota)
         logging.info("Step 3: AI Generation Starting (Asking Gemini to write)...")
-        top_items = raw_items[:5]
+        top_items = raw_items[:3]
         raw_text_for_ai = "\n".join([f"- {i['source']} ({i['link']}): {i['title']}" for i in top_items])
         
         markdown_content, ai_metadata = analyze_and_summarize(raw_text_for_ai, past_topics=past_topics)

@@ -20,12 +20,13 @@ import type { Metadata } from 'next';
 
 export async function generateMetadata({ params }: { params: Promise<{ lang: string, id: string }> }): Promise<Metadata> {
   const { lang, id } = await params;
-  const articleData = await getArticleData(id);
-  
   if (!articleData) return { title: "Article Not Found | Jason Analytics" };
   
-  const title = articleData.title[lang as 'zh'|'en'|'ja'] || articleData.title['zh'];
-  const desc = articleData.description ? (articleData.description[lang as 'zh'|'en'|'ja'] || articleData.description['zh']) : "";
+  const titleObj = articleData.title || {};
+  const descriptionObj = articleData.description || {};
+  
+  const title = titleObj[lang as 'zh'|'en'|'ja'] || titleObj['zh'] || "Article";
+  const desc = descriptionObj[lang as 'zh'|'en'|'ja'] || descriptionObj['zh'] || "";
   
   return { 
     title: `${title} | Jason Analytics`,
@@ -49,10 +50,14 @@ export default async function ArticlePage({ params }: { params: Promise<{ lang: 
     return <div style={{ color: 'white', textAlign: 'center', marginTop: '5rem' }}>Article not found / 找不到文章</div>;
   }
 
-  const title = articleData.title[lang as 'zh'|'en'|'ja'] || articleData.title['zh'];
-  const tags = articleData.tags[lang as 'zh'|'en'|'ja'] || articleData.tags['zh'];
+  const titleObj = articleData.title || {};
+  const tagsObj = articleData.tags || {};
+  const descriptionObj = articleData.description || {};
+
+  const title = titleObj[lang as 'zh'|'en'|'ja'] || titleObj['zh'] || "Article";
+  const tags = tagsObj[lang as 'zh'|'en'|'ja'] || tagsObj['zh'] || [];
   const baseUrl = 'https://jason-by-tsai-portfolio.vercel.app';
-  const desc = articleData.description ? (articleData.description[lang as 'zh'|'en'|'ja'] || articleData.description['zh']) : `${title} - 數據分析、AI 與 MarTech 深度探討。`;
+  const desc = descriptionObj[lang as 'zh'|'en'|'ja'] || descriptionObj['zh'] || `${title} - 數據分析、AI 與 MarTech 深度探討。`;
 
   return (
     <article className="article-container" style={{ maxWidth: '800px', margin: '0 auto', padding: '2rem' }}>

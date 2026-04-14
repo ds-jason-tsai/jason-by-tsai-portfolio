@@ -56,26 +56,28 @@ def trigger_generation():
         raw_text_for_ai = "\n".join([f"- {i['source']}: {i['title']}" for i in raw_items])
         markdown_content, ai_metadata = analyze_and_summarize(raw_text_for_ai, past_topics=past_topics)
         
-        # Step 4: Save AI Metadata to BQ
-        if ai_metadata:
+        # Step 4: Guard and Save AI Metadata to BQ
+        if ai_metadata and markdown_content:
             bq_meta = {
                 "publish_date": date_str,
                 "slug": slug,
-                "title": ai_metadata.get("title"),
-                "description": ai_metadata.get("description"),
+                "title": ai_metadata.get("title", {}).get("zh", "AI 新聞摘要"),
+                "description": ai_metadata.get("description", {}).get("zh", ""),
                 "sentiment": ai_metadata.get("sentiment"),
-                "tags": str(ai_metadata.get("tags")), # Convert list to string if needed
+                "tags": str(ai_metadata.get("tags", {}).get("zh", [])),
                 "full_markdown": markdown_content
             }
             bq.save_article_metadata(bq_meta)
             logging.info("Stored article metadata to BigQuery.")
-        
-        # Step 5: Publish to GitHub (includes sitemap update)
-        publish_to_github(markdown_content)
+            
+            # Step 5: Publish to GitHub (ONLY IF AI SUCCEEDED)
+            publish_to_github(markdown_content)
+        else:
+            logging.error("AI Generation failed to produce valid content. Skipping GitHub publish.")
         
         return jsonify({
             "status": "success",
-            "message": f"Successfully generated, stored to BQ, and published article for {date_str}."
+            "message": f"Pipeline execution completed for {date_str}. (Check logs for generation success)"
         }), 200
         
     except Exception as e:

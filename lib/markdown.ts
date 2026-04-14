@@ -43,11 +43,30 @@ export function getSortedArticlesData(): ArticleData[] {
       const fileContents = fs.readFileSync(fullPath, 'utf8');
 
       const matterResult = matter(fileContents);
+      const data = matterResult.data;
 
-      return {
+      // Provide robust defaults for multi-lingual fields to prevent frontend crashes
+      const safeData: ArticleData = {
         id,
-        ...matterResult.data,
-      } as ArticleData;
+        date: data.date || '',
+        title: {
+          zh: data.title?.zh || data.title || '無標題',
+          en: data.title?.en || data.title || 'Untitled',
+          ja: data.title?.ja || data.title || '無題'
+        },
+        description: {
+          zh: data.description?.zh || data.description || '',
+          en: data.description?.en || data.description || '',
+          ja: data.description?.ja || data.description || ''
+        },
+        tags: {
+          zh: Array.isArray(data.tags?.zh) ? data.tags.zh : (Array.isArray(data.tags) ? data.tags : []),
+          en: Array.isArray(data.tags?.en) ? data.tags.en : (Array.isArray(data.tags) ? data.tags : []),
+          ja: Array.isArray(data.tags?.ja) ? data.tags.ja : (Array.isArray(data.tags) ? data.tags : []),
+        },
+      };
+
+      return safeData;
     });
 
   return allArticlesData.sort((a, b) => {
@@ -67,6 +86,7 @@ export async function getArticleData(id: string): Promise<ArticleData | null> {
   
   const fileContents = fs.readFileSync(fullPath, 'utf8');
   const matterResult = matter(fileContents);
+  const data = matterResult.data;
 
   const processedContent = await remark()
     .use(html)
@@ -76,7 +96,22 @@ export async function getArticleData(id: string): Promise<ArticleData | null> {
 
   return {
     id,
-    ...(matterResult.data as Omit<ArticleData, 'id' | 'contentHtml'>),
+    date: data.date || '',
+    title: {
+      zh: data.title?.zh || data.title || '無標題',
+      en: data.title?.en || data.title || 'Untitled',
+      ja: data.title?.ja || data.title || '無題'
+    },
+    description: {
+      zh: data.description?.zh || data.description || '',
+      en: data.description?.en || data.description || '',
+      ja: data.description?.ja || data.description || ''
+    },
+    tags: {
+      zh: Array.isArray(data.tags?.zh) ? data.tags.zh : (Array.isArray(data.tags) ? data.tags : []),
+      en: Array.isArray(data.tags?.en) ? data.tags.en : (Array.isArray(data.tags) ? data.tags : []),
+      ja: Array.isArray(data.tags?.ja) ? data.tags.ja : (Array.isArray(data.tags) ? data.tags : []),
+    },
     contentHtml,
   };
 }

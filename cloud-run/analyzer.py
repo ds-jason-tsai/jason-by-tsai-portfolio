@@ -1,6 +1,6 @@
 import os
-import datetime
 import logging
+import datetime
 import google.generativeai as genai
 from tenacity import retry, stop_after_attempt, wait_exponential, retry_if_exception_type
 
@@ -51,21 +51,18 @@ def analyze_and_summarize(articles, past_topics=None):
     3. **Tags**：從 ["Tech Trends", "AI News", "Generative AI", "Data Analysis", "MarTech", "Industry Insights"] 挑選。
     4. **輸出格式**：先輸出一段 JSON 格式的元數據，接著是正式的 Markdown 内容。
 
-    JSON 格式範例 (請放在內容最前方，用 ```json 標記)：
+    JSON 格式範例 (請放在內容最前方，用 ```json 標記，並確保 title/description/tags 都是包含 zh/en/ja 的物件)：
     {{
-      "title": "...",
-      "description": "...",
+      "title": {{ "zh": "...", "en": "...", "ja": "..." }},
+      "description": {{ "zh": "...", "en": "...", "ja": "..." }},
       "sentiment": "...",
-      "tags": "..."
+      "tags": {{ "zh": ["..."], "en": ["..."], "ja": ["..."] }}
     }}
 
     請直接輸出內容，不要多餘的解釋。
-    Markdown 內容需包含 FrontMatter：
+    Markdown 內容需包含 FrontMatter (這裡暫時只放日期與發布狀態，多語內容會從上面的 JSON 提取)：
     ---
-    title: "[{date_str}] <你的標題>"
-    description: "<摘要>"
     date: "{date_str}"
-    tags: ["Tech Trends", "AI News"]
     published: true
     ---
     """
@@ -73,9 +70,15 @@ def analyze_and_summarize(articles, past_topics=None):
     try:
         response = _call_gemini_with_retry(model, prompt)
         full_text = response.text
+        
+        # Validation: If output doesn't contain FrontMatter markers or JSON, it might be an error string
+        if "---" not in full_text and "```json" not in full_text:
+             logging.error(f"AI returned invalid format: {full_text[:100]}")
+             return None, None
+             
     except Exception as e:
         logging.error(f"AI Generation Failed after retries: {e}")
-        return f"AI Generation Error: {e}", None
+        return None, None
     
     # Simple extraction of JSON and Markdown
     import json
@@ -86,8 +89,30 @@ def analyze_and_summarize(articles, past_topics=None):
         if json_match:
             metadata = json.loads(json_match.group(1))
             markdown = full_text.replace(json_match.group(0), "").strip()
-            return markdown, metadata
+            
+            # Reconstruct correct title/description/tags into the markdown frontmatter for the site
+            # This ensures the generated file is actually valid for the frontend
+            frontmatter = f"""---
+title:
+  zh: "{metadata.get('title', {}).get('zh', 'AI 新聞')}"
+  en: "{metadata.get('title', {}).get('en', 'AI News')}"
+  ja: "{metadata.get('title', {}).get('ja', 'AIニュース')}"
+description:
+  zh: "{metadata.get('description', {}).get('zh', '')}"
+  en: "{metadata.get('description', {}).get('en', '')}"
+  ja: "{metadata.get('description', {}).get('ja', '')}"
+date: "{date_str}"
+tags:
+  zh: {json.dumps(metadata.get('tags', {}).get('zh', ['Tech Trends']))}
+  en: {json.dumps(metadata.get('tags', {}).get('en', ['Tech Trends']))}
+  ja: {json.dumps(metadata.get('tags', {}).get('ja', ['Tech Trends']))}
+published: true
+---
+
+"""
+            full_markdown = frontmatter + markdown.replace("---", "").strip()
+            return full_markdown, metadata
     except Exception as e:
         logging.error(f"Failed to parse AI output JSON: {e}")
         
-    return full_text, None
+    return None, None

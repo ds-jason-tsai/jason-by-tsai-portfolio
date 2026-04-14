@@ -54,9 +54,9 @@ def trigger_generation():
             bq.save_raw_headlines(bq_raw_data)
             logging.info(f"Stored {len(bq_raw_data)} raw headlines to BigQuery.")
 
-        # Step 3: AI Analysis (Vertex AI / Pro Model)
-        # Convert list to string for AI context (Including links for citations)
-        raw_text_for_ai = "\n".join([f"- {i['source']} ({i['link']}): {i['title']}" for i in raw_items])
+        # Step 3: AI Analysis (Limit to Top 5 items to save quota)
+        top_items = raw_items[:5]
+        raw_text_for_ai = "\n".join([f"- {i['source']} ({i['link']}): {i['title']}" for i in top_items])
         markdown_content, ai_metadata = analyze_and_summarize(raw_text_for_ai, past_topics=past_topics)
         
         # Step 4: Guard and Save AI Metadata to BQ

@@ -4,7 +4,7 @@ import logging
 import google.generativeai as genai
 from tenacity import retry, stop_after_attempt, wait_exponential
 
-@retry(stop=stop_after_attempt(3), wait=wait_exponential(multiplier=1, min=4, max=10))
+@retry(stop=stop_after_attempt(3), wait=wait_exponential(multiplier=2, min=10, max=30))
 def _call_gemini_with_retry(model, prompt):
     return model.generate_content(prompt)
 
@@ -72,7 +72,7 @@ def analyze_and_summarize(articles, past_topics=None):
 
     要求 (SEO & 內容品質核心規範碼)：
     1. **標題格式**：`[{date_str}] <吸引人的技術主題>`。
-    2. **內文長度**：中文主體需達到 1000 字以上，必須包含深度技術分析而非僅是新聞摘要。
+    2. **內文長度**：中文主體約 600-800 字即可，需精煉且具備深度技術分析。
     3. **引用規範 (重要)**：每一項新聞觀點必須附上原始連結，格式為 `[標題](URL)`。
     4. **SEO 結構**：必須使用 H1, H2, H3 層級標籤，並在開頭包含技術洞察總結 (Executive Summary)。
     5. **關鍵字優化**：自然地融入 AI, Data, BigQuery, MarTech 等高流量技術關鍵字。

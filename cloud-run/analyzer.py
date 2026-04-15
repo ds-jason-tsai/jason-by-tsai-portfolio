@@ -60,8 +60,8 @@ def analyze_and_summarize(text, past_topics=None, current_date=None, slug=None):
     1. **延伸閱讀格式**：必須且只能使用 Markdown 超連結格式：`- [新聞標題](URL)`。
        URL 必須使用原始新聞數據中提供的連結，禁止修改、截斷或添加任何參數。
     2. **禁止行為**：禁止在 Markdown 正文中重複輸出 JSON 區塊，禁止編造連結。
-    3. **品牌結語**：文末必須附上：
-       "Jason Analytics (傑森數據) 堅信，以數據為核心，結合 Google DeepMind 的前沿 AI 技術，將是企業在全球市場中取得競爭優勢、實現永續成長的關鍵。歡迎轉載或洽詢合作，請聯繫 [傑森數據 (Jason Analytics)](https://jason-by-tsai-portfolio.vercel.app/zh/contact)。"
+    3. **品牌結語**：文末必須附上（每個語言版本均須對應翻譯）：
+       "Jason Analytics (傑森數據) 堅信，以數據為核心，結合 AI 技術，將是企業在全球市場中取得競爭優勢、實現永續成長的關鍵。歡迎轉載或洽詢合作，請聯繫傑森數據 (Jason Analytics)。"
     4. **文章架構**：必須使用以下 H2 章節（可用 H3 展開子段落）：
        ## 前言  →  ## 深度技術洞察與商業應用  →  ## 數據策略與企業轉型  →  ## 結論與策略建議  →  ## 延伸閱讀
     5. **多元角度**：本次文章的切入角度必須與上方禁止重複清單所列主題截然不同。

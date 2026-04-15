@@ -25,26 +25,26 @@ class BigQueryManager:
         # 2. Create articles_metadata table
         meta_table_id = f"{self.project_id}.{self.dataset_id}.articles_metadata"
         schema_meta = [
-            bigquery.SchemaField("publish_date", "DATE", mode="REQUIRED"),
-            bigquery.SchemaField("slug", "STRING", mode="REQUIRED"),
-            bigquery.SchemaField("title", "STRING"),
-            bigquery.SchemaField("description", "STRING"),
-            bigquery.SchemaField("sentiment", "STRING"),
-            bigquery.SchemaField("tags", "STRING"),
-            bigquery.SchemaField("full_markdown", "STRING"),
-            bigquery.SchemaField("created_at", "TIMESTAMP"),
+            bigquery.SchemaField("publish_date", "DATE",      mode="REQUIRED"),
+            bigquery.SchemaField("slug",         "STRING",    mode="REQUIRED"),
+            bigquery.SchemaField("title",        "STRING"),
+            bigquery.SchemaField("description",  "STRING"),
+            bigquery.SchemaField("sentiment",    "STRING"),
+            bigquery.SchemaField("tags",         "STRING"),
+            bigquery.SchemaField("full_markdown","STRING"),
+            bigquery.SchemaField("created_at",   "TIMESTAMP"),
         ]
         self._ensure_table(meta_table_id, schema_meta, partition_field="publish_date")
 
         # 3. Create raw_headlines table
         raw_table_id = f"{self.project_id}.{self.dataset_id}.raw_headlines"
         schema_raw = [
-            bigquery.SchemaField("publish_date", "DATE", mode="REQUIRED"),
-            bigquery.SchemaField("slug", "STRING", mode="REQUIRED"),
+            bigquery.SchemaField("publish_date",  "DATE",      mode="REQUIRED"),
+            bigquery.SchemaField("slug",          "STRING",    mode="REQUIRED"),
             bigquery.SchemaField("source_domain", "STRING"),
-            bigquery.SchemaField("headline", "STRING"),
-            bigquery.SchemaField("url", "STRING"),
-            bigquery.SchemaField("crawled_at", "TIMESTAMP"),
+            bigquery.SchemaField("headline",      "STRING"),
+            bigquery.SchemaField("url",           "STRING"),
+            bigquery.SchemaField("crawled_at",    "TIMESTAMP"),
         ]
         self._ensure_table(raw_table_id, schema_raw, partition_field="publish_date")
 
@@ -61,35 +61,105 @@ class BigQueryManager:
             self.client.create_table(table)
             logging.info(f"Created table {table_id}")
 
-    def save_article_metadata(self, metadata):
-        """ metadata dict with matching schema keys """
+    # ─────────────────────────────────────────────
+    # WRITE helpers — both include dedup guards
+    # ─────────────────────────────────────────────
+
+    def slug_exists(self, slug: str) -> bool:
+        """Check if an article slug already exists in articles_metadata."""
         table_id = f"{self.project_id}.{self.dataset_id}.articles_metadata"
-        metadata["created_at"] = datetime.datetime.now().isoformat()
+        query = f"""
+            SELECT COUNT(1) AS cnt
+            FROM `{table_id}`
+            WHERE slug = @slug
+        """
+        job_config = bigquery.QueryJobConfig(
+            query_parameters=[bigquery.ScalarQueryParameter("slug", "STRING", slug)]
+        )
+        try:
+            result = list(self.client.query(query, job_config=job_config).result())
+            return result[0].cnt > 0
+        except Exception as e:
+            logging.error(f"BQ slug_exists check error: {e}")
+            return False  # Fail open — let it try to insert
+
+    def save_article_metadata(self, metadata: dict) -> bool:
+        """
+        Insert article metadata. Skips (no-op) if slug already exists.
+        Returns True if inserted, False if skipped or error.
+        """
+        slug = metadata.get("slug", "")
+        if slug and self.slug_exists(slug):
+            logging.warning(f"BQ: Skipping duplicate article slug '{slug}'")
+            return False
+
+        table_id = f"{self.project_id}.{self.dataset_id}.articles_metadata"
+        metadata["created_at"] = datetime.datetime.now(datetime.timezone.utc).isoformat()
         errors = self.client.insert_rows_json(table_id, [metadata])
         if errors:
             logging.error(f"BQ Metadata Insert Error: {errors}")
         return not errors
 
-    def save_raw_headlines(self, headlines_list):
-        """ list of dicts with matching schema keys """
+    def save_raw_headlines(self, headlines_list: list) -> bool:
+        """
+        Insert raw headlines, deduplicating against existing URLs in BQ
+        so the raw_headlines table never grows with redundant rows.
+        """
+        if not headlines_list:
+            return True
+
+        # Fetch already-stored URLs for today to skip exact duplicates
+        today_str = headlines_list[0].get("publish_date", "")
+        existing_urls = self._get_urls_for_date(today_str)
+
+        fresh = [h for h in headlines_list if h.get("url", "") not in existing_urls]
+        if not fresh:
+            logging.info("BQ: All headlines already stored — nothing new to insert.")
+            return True
+
         table_id = f"{self.project_id}.{self.dataset_id}.raw_headlines"
-        errors = self.client.insert_rows_json(table_id, headlines_list)
+        errors = self.client.insert_rows_json(table_id, fresh)
         if errors:
             logging.error(f"BQ Raw Headlines Insert Error: {errors}")
+        else:
+            logging.info(f"BQ: Inserted {len(fresh)} new headlines (skipped {len(headlines_list) - len(fresh)} duplicates).")
         return not errors
 
-    def get_past_article_titles(self, days=21):
+    def _get_urls_for_date(self, date_str: str) -> set:
+        """Return URLs already stored in raw_headlines for a given date."""
+        if not date_str:
+            return set()
+        table_id = f"{self.project_id}.{self.dataset_id}.raw_headlines"
+        query = f"""
+            SELECT url
+            FROM `{table_id}`
+            WHERE publish_date = '{date_str}'
+              AND url IS NOT NULL AND url != ''
         """
-        Returns titles of articles published in the last N days from BigQuery.
+        try:
+            result = self.client.query(query).result()
+            return {row.url for row in result}
+        except Exception as e:
+            logging.error(f"BQ _get_urls_for_date error: {e}")
+            return set()
+
+    # ─────────────────────────────────────────────
+    # READ helpers
+    # ─────────────────────────────────────────────
+
+    def get_past_article_titles(self, days: int = 21) -> list:
+        """
+        Returns slug + title of articles published in the last N days from BigQuery.
         Used to inject into AI prompt to prevent topic repetition.
+        Returns most-recent first.
         """
         table_id = f"{self.project_id}.{self.dataset_id}.articles_metadata"
         query = f"""
-            SELECT title
+            SELECT title, slug, publish_date
             FROM `{table_id}`
             WHERE publish_date >= DATE_SUB(CURRENT_DATE('Asia/Taipei'), INTERVAL {days} DAY)
-            ORDER BY publish_date DESC
-            LIMIT 21
+            ORDER BY publish_date DESC, created_at DESC
+            LIMIT 30
         """
         try:
             result = self.client.query(query).result()
@@ -100,10 +170,11 @@ class BigQueryManager:
             logging.error(f"BQ get_past_article_titles error: {e}")
             return []
 
-    def get_past_headline_urls(self, days=7):
+    def get_past_headline_urls(self, days: int = 14) -> set:
         """
         Returns a set of already-crawled URLs from the last N days.
         Used to filter out previously processed news from the crawler output.
+        Extended window to 14 days to better prevent re-crawling.
         """
         table_id = f"{self.project_id}.{self.dataset_id}.raw_headlines"
         query = f"""
@@ -120,3 +191,18 @@ class BigQueryManager:
         except Exception as e:
             logging.error(f"BQ get_past_headline_urls error: {e}")
             return set()
+
+    def get_todays_article_count(self, date_str: str) -> int:
+        """Returns how many articles have already been published today."""
+        table_id = f"{self.project_id}.{self.dataset_id}.articles_metadata"
+        query = f"""
+            SELECT COUNT(1) AS cnt
+            FROM `{table_id}`
+            WHERE publish_date = '{date_str}'
+        """
+        try:
+            result = list(self.client.query(query).result())
+            return result[0].cnt
+        except Exception as e:
+            logging.error(f"BQ get_todays_article_count error: {e}")
+            return 0

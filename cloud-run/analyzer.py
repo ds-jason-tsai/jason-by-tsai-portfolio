@@ -8,7 +8,7 @@ from tenacity import retry, stop_after_attempt, wait_exponential
 def _call_gemini_with_retry(model, prompt):
     return model.generate_content(prompt)
 
-def analyze_and_summarize(text, past_topics=None, current_date=None):
+def analyze_and_summarize(text, past_topics=None, current_date=None, slug=None):
     """
     Calls Gemini to summarize provided news text into a structured multilingual article.
     """
@@ -139,6 +139,7 @@ def analyze_and_summarize(text, past_topics=None, current_date=None):
         tags_zh, tags_en, tags_ja = get_tags('zh'), get_tags('en'), get_tags('ja')
 
         # 3. Assemble and Return
+        slug_line = f'slug: "{slug}"\n' if slug else ""
         frontmatter = f"""---
 title:
   zh: "{title_zh}"
@@ -149,7 +150,7 @@ description:
   en: "{desc_en}"
   ja: "{desc_ja}"
 date: "{date_context}"
-tags:
+{slug_line}tags:
   zh: {json.dumps(tags_zh, ensure_ascii=False)}
   en: {json.dumps(tags_en)}
   ja: {json.dumps(tags_ja, ensure_ascii=False)}

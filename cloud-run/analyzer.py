@@ -8,10 +8,14 @@ from tenacity import retry, stop_after_attempt, wait_exponential
 def _call_gemini_with_retry(model, prompt):
     return model.generate_content(prompt)
 
-def analyze_and_summarize(text, past_topics=None, current_date=None, slug=None):
+def analyze_and_summarize(text, past_topics=None, current_date=None, slug=None, allowed_urls=None):
     """
     Calls Gemini to summarize provided news text into a structured multilingual article.
+    Includes a post-generation link verification step to ensure 100% source integrity.
     """
+    if allowed_urls is None:
+        allowed_urls = []
+
     api_key = os.getenv("GEMINI_API_KEY")
     if not api_key:
         logging.error("GEMINI_API_KEY not set.")
@@ -182,7 +186,24 @@ published: true
 ---
 
 """
-        return frontmatter + body_content, metadata
+        # 4. Strict Link Verification (Post-Check)
+        # Prevents LLM hallucinations from creating broken or unverified links.
+        def scrub_links(content, permitted):
+            import re
+            # Find all markdown links [text](url)
+            links = re.findall(r'\[([^\]]+)\]\(([^)]+)\)', content)
+            scrubbed = content
+            for link_text, url in links:
+                # If URL is not in the allowed list, downgrade to plain text to protect SEO/UX
+                if url not in permitted:
+                    logging.warning(f"Link Scrubbed: Hallucinated URL '{url}' removed.")
+                    # Replace [text](url) with just 'text'
+                    scrubbed = scrubbed.replace(f"[{link_text}]({url})", link_text)
+            return scrubbed
+
+        final_content = frontmatter + scrub_links(body_content, allowed_urls)
+        return final_content, metadata
+
 
     except Exception as e:
         logging.error(f"Final Parsing Stage Error: {e}")

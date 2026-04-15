@@ -127,7 +127,7 @@ def fetch_latest_ai_news(used_urls: set = None):
                     other_articles.append(item)
 
                 found_count += 1
-                if found_count >= 5:  # max 5 headlines per source
+                if found_count >= 1:  # only the freshest article per source
                     break
 
         except Exception as e:

@@ -113,11 +113,15 @@ def trigger_generation():
         for i in top_items:
             raw_text_for_ai += f"- {i['source']} ({i['link']}): {i['title']}\n"
 
+        # Extract the URLs of the items going into the LLM
+        allowed_urls_list = [i['link'] for i in top_items]
+
         markdown_content, ai_metadata = analyze_and_summarize(
             raw_text_for_ai,
             past_topics=past_topics,
             current_date=date_str,
             slug=slug,
+            allowed_urls=allowed_urls_list
         )
 
         if not markdown_content or not ai_metadata:

@@ -1,7 +1,7 @@
-import feedparser
 import requests
 from bs4 import BeautifulSoup
 import logging
+import random
 
 SOURCES = [
     {"name": "OpenAI News", "url": "https://openai.com/zh-Hant/news/", "type": "web"},
@@ -20,42 +20,58 @@ SOURCES = [
     {"name": "AI Weekly", "url": "https://ai-weekly.ai/", "type": "web"}
 ]
 
-def fetch_latest_ai_news():
+def fetch_latest_ai_news(used_urls: set = None):
     """
-    Crawls the specified sources and returns a list of recent headlines and summaries.
+    Crawls the specified sources and returns a list of recent headlines.
+    - Shuffles sources each run so different sources get prioritized.
+    - Filters out URLs already stored in BigQuery (used_urls) to avoid repeats.
     """
+    if used_urls is None:
+        used_urls = set()
+
     articles = []
-    headers = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"}
-    
-    for source in SOURCES:
+    seen_titles = set()
+    headers = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"}
+
+    # Shuffle sources so each run picks a different starting point
+    shuffled_sources = random.sample(SOURCES, len(SOURCES))
+
+    for source in shuffled_sources:
         logging.info(f"Crawling {source['name']}...")
         try:
             res = requests.get(source['url'], headers=headers, timeout=15)
             soup = BeautifulSoup(res.text, 'html.parser')
-            
-            found_titles = set()
-            links = soup.find_all('a')
-            
-            for link in links:
+
+            found_count = 0
+            for link in soup.find_all('a'):
                 title = link.get_text(strip=True)
                 href = link.get('href', '')
-                
-                # Heuristic: A headline usually has > 4 words and is reasonably long.
-                word_count = len(title.split())
-                if word_count > 4 and len(title) > 20 and href:
-                    if title not in found_titles:
-                        found_titles.add(title)
-                        full_url = href if href.startswith('http') else source['url'].rstrip('/') + '/' + href.lstrip('/')
-                        articles.append({
-                            "source": source['name'],
-                            "title": title,
-                            "link": full_url
-                        })
-                
-                if len(found_titles) >= 5: # limit 5 headlines per source
+
+                if not href or len(title.split()) <= 4 or len(title) <= 20:
+                    continue
+
+                full_url = href if href.startswith('http') else source['url'].rstrip('/') + '/' + href.lstrip('/')
+
+                # Skip already-processed URLs (from BigQuery history)
+                if full_url in used_urls:
+                    logging.debug(f"  Skipping already-used URL: {full_url[:80]}")
+                    continue
+
+                if title not in seen_titles:
+                    seen_titles.add(title)
+                    articles.append({
+                        "source": source['name'],
+                        "title": title,
+                        "link": full_url
+                    })
+                    found_count += 1
+
+                if found_count >= 5:  # max 5 headlines per source
                     break
-                    
+
         except Exception as e:
             logging.error(f"Failed to crawl {source['name']}: {e}")
-            
+
+    logging.info(f"Crawler total: {len(articles)} unique new articles after dedup filter")
     return articles
+

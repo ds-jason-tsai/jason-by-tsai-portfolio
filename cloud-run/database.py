@@ -77,3 +77,46 @@ class BigQueryManager:
         if errors:
             logging.error(f"BQ Raw Headlines Insert Error: {errors}")
         return not errors
+
+    def get_past_article_titles(self, days=21):
+        """
+        Returns titles of articles published in the last N days from BigQuery.
+        Used to inject into AI prompt to prevent topic repetition.
+        """
+        table_id = f"{self.project_id}.{self.dataset_id}.articles_metadata"
+        query = f"""
+            SELECT title
+            FROM `{table_id}`
+            WHERE publish_date >= DATE_SUB(CURRENT_DATE('Asia/Taipei'), INTERVAL {days} DAY)
+            ORDER BY publish_date DESC
+            LIMIT 21
+        """
+        try:
+            result = self.client.query(query).result()
+            titles = [row.title for row in result if row.title]
+            logging.info(f"BQ: fetched {len(titles)} past article titles for dedup")
+            return titles
+        except Exception as e:
+            logging.error(f"BQ get_past_article_titles error: {e}")
+            return []
+
+    def get_past_headline_urls(self, days=7):
+        """
+        Returns a set of already-crawled URLs from the last N days.
+        Used to filter out previously processed news from the crawler output.
+        """
+        table_id = f"{self.project_id}.{self.dataset_id}.raw_headlines"
+        query = f"""
+            SELECT DISTINCT url
+            FROM `{table_id}`
+            WHERE publish_date >= DATE_SUB(CURRENT_DATE('Asia/Taipei'), INTERVAL {days} DAY)
+              AND url IS NOT NULL AND url != ''
+        """
+        try:
+            result = self.client.query(query).result()
+            urls = {row.url for row in result}
+            logging.info(f"BQ: fetched {len(urls)} past crawled URLs for dedup")
+            return urls
+        except Exception as e:
+            logging.error(f"BQ get_past_headline_urls error: {e}")
+            return set()

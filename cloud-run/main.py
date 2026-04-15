@@ -3,7 +3,7 @@ import logging
 from flask import Flask, jsonify
 from crawler import fetch_latest_ai_news
 from analyzer import analyze_and_summarize
-from publisher import publish_to_github, get_recent_article_titles, get_tw_now
+from publisher import publish_to_github, get_tw_now
 from database import BigQueryManager
 from dotenv import load_dotenv
 import datetime
@@ -31,15 +31,27 @@ def trigger_generation():
     slug = f"ai-news-{date_str}"
     
     try:
-        # Step 0: Get history to avoid duplicate topics
-        past_topics = get_recent_article_titles()
-        logging.info(f"Step 0: Past topics count: {len(past_topics)}")
+        # Step 0a: Get past article titles from BigQuery → feed into AI prompt to prevent topic repetition
+        past_topics = []
+        try:
+            past_topics = bq.get_past_article_titles(days=21)
+            logging.info(f"Step 0a: Loaded {len(past_topics)} past article titles from BigQuery")
+        except Exception as e:
+            logging.warning(f"Step 0a skipped (BQ unavailable): {e}")
 
-        # Step 1: Crawl
-        logging.info("Step 1: Fetching latest AI news...")
-        raw_items = fetch_latest_ai_news() 
+        # Step 0b: Get already-crawled URLs from BigQuery → filter duplicates in crawler
+        used_urls = set()
+        try:
+            used_urls = bq.get_past_headline_urls(days=7)
+            logging.info(f"Step 0b: Loaded {len(used_urls)} already-used URLs from BigQuery")
+        except Exception as e:
+            logging.warning(f"Step 0b skipped (BQ unavailable): {e}")
+
+        # Step 1: Crawl (with shuffle + URL dedup filter)
+        logging.info("Step 1: Fetching latest AI news (shuffled sources, dedup filtered)...")
+        raw_items = fetch_latest_ai_news(used_urls=used_urls)
         if not raw_items:
-            return jsonify({"status": "error", "message": "Crawler failure: No results found today."}), 500
+            return jsonify({"status": "error", "message": "Crawler failure: No fresh results found today."}), 500
         
         # Step 2: Save RAW to BigQuery
         bq_raw_data = []

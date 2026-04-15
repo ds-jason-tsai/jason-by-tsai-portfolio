@@ -59,15 +59,19 @@ def _build_full_url(href: str, source_url: str) -> str:
 
 def fetch_latest_ai_news(used_urls: set = None):
     """
-    Crawls sources and returns a list of recent AI/data-related headlines.
+    Crawls sources and returns exactly one fresh AI/data-related headline per source.
     - Shuffles sources each run so different sources get prioritized.
     - Filters out URLs already stored in BigQuery (used_urls) to avoid repeats.
-    - Prioritises AI/data/application related headlines.
-    - Fixes relative URL resolution using urljoin.
+    - Skips common stale patterns (archive, old years) to ensure freshness.
     """
     if used_urls is None:
         used_urls = set()
 
+    # Common stale patterns to skip (especially things from previous years)
+    STALE_PATTERNS = ["/2021/", "/2022/", "/2023/", "/2024/", "/archive/", "/tags/", "/category/"]
+    # We are currently in 2026, so anything before 2025/2026 should be treated with caution
+    # However, to be safe and "Fresh", we prefer 2026 content.
+    
     ai_articles = []    # AI/data-related (preferred)
     other_articles = [] # non-AI fallback
     seen_urls = set()
@@ -91,11 +95,13 @@ def fetch_latest_ai_news(used_urls: set = None):
             soup = BeautifulSoup(res.text, "html.parser")
 
             found_count = 0
+            # Search for the first valid link in the page
+            # Usually the most recent news appears first in the DOM
             for link in soup.find_all("a"):
                 title = link.get_text(strip=True)
                 href = link.get("href", "")
 
-                # Basic quality filters
+                # 1. Quality & Length filters
                 if not href or len(title.split()) <= 4 or len(title) <= 20:
                     continue
 
@@ -103,12 +109,25 @@ def fetch_latest_ai_news(used_urls: set = None):
                 if not full_url:
                     continue
 
-                # Skip already-processed URLs (from BigQuery history or this run)
+                # 2. Freshness check: skip older years or archive links
+                url_lower = full_url.lower()
+                if any(p in url_lower for p in STALE_PATTERNS):
+                    continue
+                
+                # Especially if it's 2025 and we are in 2026, be careful, but the user said "去年初"
+                # so we definitely skip 2025 if possible, or at least older ones.
+                if "/2025/" in url_lower and "2026" not in url_lower:
+                     # This might be too aggressive if it's early 2026, 
+                     # but the user explicitly complained about 2025 content.
+                     logging.debug(f"  Skipping likely stale URL: {full_url[:80]}")
+                     continue
+
+                # 3. Dedup: Skip already-processed URLs
                 if full_url in used_urls or full_url in seen_urls:
                     logging.debug(f"  Skipping duplicate URL: {full_url[:80]}")
                     continue
 
-                # Skip duplicate titles within this crawl run
+                # 4. Dedup: Skip duplicate titles within this crawl run
                 if title in seen_titles:
                     continue
 
@@ -127,7 +146,8 @@ def fetch_latest_ai_news(used_urls: set = None):
                     other_articles.append(item)
 
                 found_count += 1
-                if found_count >= 1:  # only the freshest article per source
+                if found_count >= 1:  # STRICT: only one latest article per source
+                    logging.info(f"  Picked latest from {source['name']}: {title[:50]}...")
                     break
 
         except Exception as e:

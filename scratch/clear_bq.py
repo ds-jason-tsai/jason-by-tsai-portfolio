@@ -27,8 +27,7 @@ def clear_bq_tables():
 
 if __name__ == "__main__":
     logging.basicConfig(level=logging.INFO)
-    confirm = input("Are you sure you want to clear ALL data in BigQuery? (y/n): ")
-    if confirm.lower() == 'y':
-        clear_bq_tables()
-    else:
-        print("Operation cancelled.")
+if __name__ == "__main__":
+    logging.basicConfig(level=logging.INFO)
+    # Automatically clear without confirmation as requested by user
+    clear_bq_tables()

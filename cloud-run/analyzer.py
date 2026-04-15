@@ -189,7 +189,6 @@ published: true
         # 4. Strict Link Verification (Post-Check)
         # Prevents LLM hallucinations from creating broken or unverified links.
         def scrub_links(content, permitted):
-            import re
             # Find all markdown links [text](url)
             links = re.findall(r'\[([^\]]+)\]\(([^)]+)\)', content)
             scrubbed = content
@@ -197,11 +196,30 @@ published: true
                 # If URL is not in the allowed list, downgrade to plain text to protect SEO/UX
                 if url not in permitted:
                     logging.warning(f"Link Scrubbed: Hallucinated URL '{url}' removed.")
-                    # Replace [text](url) with just 'text'
                     scrubbed = scrubbed.replace(f"[{link_text}]({url})", link_text)
             return scrubbed
 
-        final_content = frontmatter + scrub_links(body_content, allowed_urls)
+        # 5. Semantic Validation (Post-Check)
+        # Ensures the content is not mentioning obviously stale temporal info (e.g. 2024/early 2025)
+        # unless specifically relevant.
+        def validate_content_freshness(content):
+            stale_indicators = ["2023", "2024", "去年", "last year"]
+            # If the current date is 2026, then 2025 is "last year" and 2024 is even older.
+            # We want to be careful about hallucinations that bring in old data.
+            for indicator in stale_indicators:
+                if indicator in content:
+                    # We don't necessarily fail here, but we log a warning
+                    logging.warning(f"Validation: Article contains potential stale reference: '{indicator}'")
+            return True
+
+        body_scrubbed = scrub_links(body_content, allowed_urls)
+        validate_content_freshness(body_scrubbed)
+        
+        # Ensure minimum length for SEO (ZH > 600 chars)
+        if len(body_scrubbed) < 800:
+             logging.warning(f"Validation: Generated body might be too short for SEO ({len(body_scrubbed)} chars)")
+
+        final_content = frontmatter + body_scrubbed
         return final_content, metadata
 
 

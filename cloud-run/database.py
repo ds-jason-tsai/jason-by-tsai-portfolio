@@ -102,15 +102,15 @@ class BigQueryManager:
 
     def save_raw_headlines(self, headlines_list: list) -> bool:
         """
-        Insert raw headlines, deduplicating against existing URLs in BQ
-        so the raw_headlines table never grows with redundant rows.
+        Insert raw headlines, deduplicating against the full 14-day URL window
+        (consistent with the crawler's used_urls blacklist) so the raw_headlines
+        table never contains redundant rows across days.
         """
         if not headlines_list:
             return True
 
-        # Fetch already-stored URLs for today to skip exact duplicates
-        today_str = headlines_list[0].get("publish_date", "")
-        existing_urls = self._get_urls_for_date(today_str)
+        # Use the same 14-day window as the crawler — comprehensive cross-day guard
+        existing_urls = self.get_past_headline_urls(days=14)
 
         fresh = [h for h in headlines_list if h.get("url", "") not in existing_urls]
         if not fresh:

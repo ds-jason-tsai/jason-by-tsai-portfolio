@@ -20,10 +20,18 @@ try:
 except Exception as e:
     logging.error(f"BigQuery initialization failed at startup: {e}.")
 
-# Maximum articles allowed per day (quota guard)
-MAX_ARTICLES_PER_DAY = 5
 # Number of top AI-related items to feed the LLM each run
 TOP_ITEMS_FOR_LLM = 5
+
+# Keywords used to prioritise AI / data / application news for the LLM
+_AI_PRIORITY_KW = [
+    "ai", "artificial intelligence", "machine learning", "deep learning", "llm",
+    "large language model", "gpt", "gemini", "claude", "generative", "neural",
+    "data", "analytics", "automation", "algorithm", "model", "dataset",
+    "benchmark", "inference", "transformer", "agent", "rag", "embedding",
+    "multimodal", "openai", "deepmind", "anthropic", "foundation model",
+    "數據", "人工智慧", "機器學習", "自動化", "模型", "分析",
+]
 
 
 @app.route("/", methods=["GET", "POST"])
@@ -38,14 +46,8 @@ def trigger_generation():
     date_str = tw_now.strftime("%Y-%m-%d")
 
     try:
-        # ── Step 0a: Daily quota guard ──────────────────────────────────────
+        # ── Step 0a: Slug index (no daily cap — each trigger = 1 article) ───
         todays_count = bq.get_todays_article_count(date_str)
-        if todays_count >= MAX_ARTICLES_PER_DAY:
-            msg = f"Daily limit reached: {todays_count}/{MAX_ARTICLES_PER_DAY} articles already published today."
-            logging.warning(msg)
-            return jsonify({"status": "skipped", "message": msg}), 200
-
-        # Unique slug per article: ai-news-2026-04-15-1, -2, -3 …
         article_index = todays_count + 1
         slug = f"ai-news-{date_str}-{article_index}"
         logging.info(f"Generating article #{article_index} today → slug: {slug}")
@@ -91,10 +93,22 @@ def trigger_generation():
             except Exception as bqe:
                 logging.warning(f"BQ Save Error (non-critical): {bqe}")
 
+        # ── Step 1.5: Explicit AI / Data / Application priority filter ────────
+        ai_first = [
+            i for i in raw_items
+            if any(kw in i.get("title", "").lower() for kw in _AI_PRIORITY_KW)
+        ]
+        ai_urls = {i["link"] for i in ai_first}
+        non_ai   = [i for i in raw_items if i["link"] not in ai_urls]
+        prioritized = ai_first + non_ai
+        logging.info(
+            f"Step 1.5: {len(ai_first)} AI/data items + {len(non_ai)} other "
+            f"→ feeding top {TOP_ITEMS_FOR_LLM} to LLM"
+        )
+
         # ── Step 3: AI Analysis ───────────────────────────────────────────────
-        # Feed only the top N AI-related items — crawler already sorts AI first
-        logging.info("Step 3: AI Generation Starting...")
-        top_items = raw_items[:TOP_ITEMS_FOR_LLM]
+        top_items = prioritized[:TOP_ITEMS_FOR_LLM]
+        logging.info(f"Step 3: AI Generation Starting (slug={slug})...")
         raw_text_for_ai = ""
         for i in top_items:
             raw_text_for_ai += f"- {i['source']} ({i['link']}): {i['title']}\n"

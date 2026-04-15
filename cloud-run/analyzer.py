@@ -48,29 +48,41 @@ def analyze_and_summarize(text, past_topics=None, current_date=None, slug=None):
     """
     
     prompt = f"""
-    You are Jason Analytics (傑森數據), a world-class AI news analyst. 
+    You are Jason Analytics (傑森數據), a world-class AI news analyst.
     Create a professional MULTILINGUAL technical report (ZH, EN, JA).
 
     今日日期：{date_context}
     {past_topics_block}
     ### 原始新聞數據 (請嚴格鎖定此內容，連結必須原封不動使用) ###
     {text}
-    
+
     ### 寫作指令 (嚴格執行) ###
     1. **延伸閱讀格式**：必須且只能使用 Markdown 超連結格式：`- [新聞標題](URL)`。
        URL 必須使用原始新聞數據中提供的連結，禁止修改、截斷或添加任何參數。
     2. **禁止行為**：禁止在 Markdown 正文中重複輸出 JSON 區塊，禁止編造連結。
     3. **品牌結語**：文末必須附上：
        "Jason Analytics (傑森數據) 堅信，以數據為核心，結合 Google DeepMind 的前沿 AI 技術，將是企業在全球市場中取得競爭優勢、實現永續成長的關鍵。歡迎轉載或洽詢合作，請聯繫 [傑森數據 (Jason Analytics)](https://jason-by-tsai-portfolio.vercel.app/zh/contact)。"
-    4. **文章架構**：前言 -> 深度技術洞察與商業應用潛力 -> 數據策略與企業轉型 -> 結論與策略建議 -> 延伸閱讀。
+    4. **文章架構**：必須使用以下 H2 章節（可用 H3 展開子段落）：
+       ## 前言  →  ## 深度技術洞察與商業應用  →  ## 數據策略與企業轉型  →  ## 結論與策略建議  →  ## 延伸閱讀
     5. **多元角度**：本次文章的切入角度必須與上方禁止重複清單所列主題截然不同。
+    6. **內容深度**：每個語言版本正文不少於 600 字（ZH）/ 500 words（EN/JA），需含具體數據或案例佐證。
+
+    ### SEO 規範 (Google Search 合規，每條強制執行) ###
+    - **title**：ZH 須 20–55 字元；EN/JA 須 40–65 characters。關鍵字置於標題前端，禁止標題黨。
+    - **description**：每個語言版本**必須介於 140–300 字元**（含標點）。自然語言描述核心洞察，含主要關鍵字。
+    - **tags**：每語言恰好三個，選擇搜尋量高且與 AI/數據/應用高度相關的關鍵字。
+    - **E-E-A-T**：包含作者品牌(Jason Analytics)、今日日期、具體數據或引用來源。
+    - **Heading 結構**：使用 ## 主章節、### 子章節。H1 由系統自動生成，文章中禁止出現 # 開頭的行。
+    - **安全內容**：無廣告誘導、無詐欺、無暴力、無色情，符合 Google Safe Search 標準。
+    - **UIUX**：段落間保留空行，清單使用 `-` 開頭，避免超長不換行段落（每段不超過 150 字）。
 
     ### 輸出格式 ###
-    你必須先輸出一個 JSON 區塊，包含 title, description, tags, sentiment。
-    (注意：title 與 description 必須包含 zh, en, ja 子欄位)
-    (注意：tags 必須包含 zh, en, ja 子欄位，每個語言**恰好三個**關鍵字，不多不少)
-    接著輸入 `---` 分隔線。
-    最後輸出三語版 Markdown 正文 (ZH, EN, JA 分別用 <!-- en --> 與 <!-- ja --> 標註)。
+    先輸出一個 ```json 區塊，包含 title, description, tags, sentiment。
+    (title / description：必須含 zh, en, ja 子欄位)
+    (description：每個語言**必須 140–300 字元**，不足請補齊，超過請截短)
+    (tags：zh/en/ja 各**恰好三個**關鍵字)
+    接著輸出 `---` 分隔線。
+    最後輸出三語版 Markdown 正文 (ZH 版直接開始；EN 版前加 <!-- en -->；JA 版前加 <!-- ja -->)。
     """
     
     try:
@@ -121,9 +133,21 @@ def analyze_and_summarize(text, past_topics=None, current_date=None, slug=None):
         title_en = clean(get_lang_val(metadata, 'title', 'en')) or "AI Tech Insights"
         title_ja = clean(get_lang_val(metadata, 'title', 'ja')) or "AI 技術インサイト"
         
-        desc_zh = clean(get_lang_val(metadata, 'description', 'zh'))
-        desc_en = clean(get_lang_val(metadata, 'description', 'en'))
-        desc_ja = clean(get_lang_val(metadata, 'description', 'ja'))
+        # Ensure SEO-compliant description length: 140-300 chars
+        def _seo_desc(raw: str, lang: str) -> str:
+            s = clean(raw)
+            if len(s) > 300:
+                # Truncate at the last space before 297 to avoid cutting mid-word
+                truncated = s[:297].rsplit(' ', 1)[0]
+                s = truncated + '...'
+                logging.warning(f"SEO desc [{lang}] truncated to {len(s)} chars")
+            elif len(s) < 140:
+                logging.warning(f"SEO desc [{lang}] too short: {len(s)} chars (LLM under-generated)")
+            return s
+
+        desc_zh = _seo_desc(get_lang_val(metadata, 'description', 'zh'), 'zh')
+        desc_en = _seo_desc(get_lang_val(metadata, 'description', 'en'), 'en')
+        desc_ja = _seo_desc(get_lang_val(metadata, 'description', 'ja'), 'ja')
 
         def get_tags(lang):
             t = metadata.get('tags', {})

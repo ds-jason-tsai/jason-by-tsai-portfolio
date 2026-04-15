@@ -60,15 +60,12 @@ def trigger_generation():
             except Exception as bqe:
                 logging.warning(f"BQ Save Error (non-critical): {bqe}")
 
-        # Step 3: AI Analysis (Limit to Top 3 items + UTM tags)
-        logging.info("Step 3: AI Generation Starting (with UTM injection)...")
+        # Step 3: AI Analysis (Top 3 items, NO UTM - use clean original URLs)
+        logging.info("Step 3: AI Generation Starting...")
         top_items = raw_items[:3]
-        utm_suffix = "?utm_source=jasonanalytics&utm_medium=ai-news"
         raw_text_for_ai = ""
         for i in top_items:
-            clean_url = i['link']
-            final_url = f"{clean_url}{utm_suffix}" if "?" not in clean_url else f"{clean_url}&{utm_suffix.replace('?', '')}"
-            raw_text_for_ai += f"- {i['source']} ({final_url}): {i['title']}\n"
+            raw_text_for_ai += f"- {i['source']} ({i['link']}): {i['title']}\n"
             
         markdown_content, ai_metadata = analyze_and_summarize(raw_text_for_ai, past_topics=past_topics, current_date=date_str)
         
@@ -114,10 +111,6 @@ def trigger_generation():
             "status": "error",
             "message": f"Pipeline Orchestration Crash: {str(e)}"
         }), 500
-
-if __name__ == "__main__":
-    port = int(os.environ.get("PORT", 8080))
-    app.run(host="0.0.0.0", port=port)
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 8080))

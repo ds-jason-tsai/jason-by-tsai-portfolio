@@ -74,7 +74,22 @@ def analyze_and_summarize(text, past_topics=None, current_date=None, slug=None, 
     ### SEO 規範 (Google Search 合規，每條強制執行) ###
     - **title**：ZH 須 20–55 字元；EN/JA 須 40–65 characters。關鍵字置於標題前端，禁止標題黨。
     - **description**：每個語言版本**必須介於 140–300 字元**（含標點）。自然語言描述核心洞察，含主要關鍵字。
-    - **tags**：每語言恰好三個，選擇搜尋量高且與 AI/數據/應用高度相關的關鍵字。
+    - **tags**：每篇文章**必須恰好選擇三個標籤**，且必須從以下固定 Pool 中選擇（確保三語版本對應一致）：
+      1. MarTech (EN: MarTech, JA: MarTech)
+      2. 數據分析 (EN: Data Analysis, JA: データ分析)
+      3. AI應用 (EN: AI Applications, JA: AI活用)
+      4. 生成式AI (EN: Generative AI, JA: 生成系AI)
+      5. AI治理 (EN: AI Governance, JA: AIガバナンス)
+      6. 企業轉型 (EN: Business Transformation, JA: 企業変革)
+      7. 產業洞察 (EN: Industry Insights, JA: 業界動向)
+      8. 數據轉型 (EN: Data Transformation, JA: データトランスフォーメーション)
+      9. 技術教學 (EN: Technical Tutorial, JA: 技術チュートリアル)
+      10. SEO (EN: SEO, JA: SEO)
+      11. Next.js (EN: Next.js, JA: Next.js)
+      12. Python (EN: Python, JA: Python)
+      13. Tableau (EN: Tableau, JA: Tableau)
+      14. BigQuery (EN: BigQuery, JA: BigQuery)
+      15. AI (EN: AI, JA: AI)
     - **E-E-A-T**：包含作者品牌(Jason Analytics)、今日日期、具體數據或引用來源。
     - **Heading 結構**：使用 ## 主章節、### 子章節。H1 由系統自動生成，文章中禁止出現 # 開頭的行。
     - **安全內容**：無廣告誘導、無詐欺、無暴力、無色情，符合 Google Safe Search 標準。
@@ -84,7 +99,7 @@ def analyze_and_summarize(text, past_topics=None, current_date=None, slug=None, 
     先輸出一個 ```json 區塊，包含 title, description, tags, sentiment。
     (title / description：必須含 zh, en, ja 子欄位)
     (description：每個語言**必須 140–300 字元**，不足請補齊，超過請截短)
-    (tags：zh/en/ja 各**恰好三個**關鍵字)
+    (tags：zh/en/ja 各**恰好三個**標籤，必須取自上述 Pool 且索引對應)
     接著輸出 `---` 分隔線。
     最後輸出三語版 Markdown 正文 (ZH 版直接開始；EN 版前加 <!-- en -->；JA 版前加 <!-- ja -->)。
     """
@@ -156,12 +171,21 @@ def analyze_and_summarize(text, past_topics=None, current_date=None, slug=None, 
         def get_tags(lang):
             t = metadata.get('tags', {})
             if isinstance(t, dict):
-                tag_list = t.get(lang, ["AI", "數據分析", "科技趨勢"])
+                # Default to meaningful tags from the new pool if not found
+                fallback = {
+                    'zh': ["AI應用", "數據分析", "產業洞察"],
+                    'en': ["AI Applications", "Data Analysis", "Industry Insights"],
+                    'ja': ["AI活用", "データ分析", "業界動向"]
+                }
+                tag_list = t.get(lang, fallback.get(lang, ["AI", "數據分析", "產業洞察"]))
             else:
-                tag_list = ["AI", "數據分析", "科技趨勢"]
+                tag_list = ["AI", "數據分析", "產業洞察"]
+            
             # Enforce exactly 3 tags
             if len(tag_list) < 3:
-                tag_list = (tag_list + ["AI", "科技", "數據"])[:3]
+                # Fill missing tags from a safe set in the pool
+                safe_fill = ["AI", "數據分析", "產業洞察"]
+                tag_list = (tag_list + safe_fill)[:3]
             return tag_list[:3]  # Hard cap at exactly 3
 
         tags_zh, tags_en, tags_ja = get_tags('zh'), get_tags('en'), get_tags('ja')

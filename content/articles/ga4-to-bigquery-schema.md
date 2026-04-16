@@ -9,9 +9,9 @@ description:
   ja: "Google アナリティクス 4 (GA4) から BigQuery へのエクスポート機能は生データ分析に強力ですが、その構造は RECORD や STRUCT 等の複雑なネスト型で構成されています。本記事では、GA4 データのスキーマを「イベント」と「ユーザー」の 2 軸に分けて分かりやすく解説。データクレンジングのポイントから各フィールドの定義、実践的な分析 Tips まで現役アナリストが紹介します。BigQuery を活用して高度な顧客行動分析やマーケティング最適化を目指す方のための実践ガイドです。"
 date: "2023-11-07"
 tags:
-  zh: ["#GA4", "#BigQuery", "#資料分析"]
-  en: ["#GA4", "#BigQuery", "#DataAnalytics"]
-  ja: ["#GA4", "#BigQuery", "#データ分析"]
+  zh: ["數據分析", "BigQuery", "技術教學"]
+  en: ["Data Analysis", "BigQuery", "Technical Tutorial"]
+  ja: ["データ分析", "BigQuery", "技術チュートリアル"]
 published: true
 ---
 

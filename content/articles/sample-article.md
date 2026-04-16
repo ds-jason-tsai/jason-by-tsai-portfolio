@@ -9,9 +9,9 @@ description:
   ja: "これは Markdown 構文を使用してブログ記事を編集および管理するためのサンプル記事です。見出し、段落、リスト、引用、コードブロックなど、技術ブログに欠かせない主要な要素をどのように記述し、サイトに反映させるかを初心者の方にも分かりやすく解説しています。記事を簡単に追加する方法についても紹介しています。"
 date: "2026-04-05"
 tags:
-  zh: ["#技術教學", "#部落格", "#Markdown"]
-  en: ["#TechTutorial", "#Blog", "#Markdown"]
-  ja: ["#技術チュートリアル", "#ブログ", "#Markdown"]
+  zh: ["技術教學", "Python", "數據分析"]
+  en: ["Technical Tutorial", "Python", "Data Analysis"]
+  ja: ["技術チュートリアル", "Python", "データ分析"]
 published: true
 ---
 

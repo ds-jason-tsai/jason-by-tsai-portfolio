@@ -9,9 +9,9 @@ description:
   ja: "このガイドでは、数日間にわたるSEO改善プロジェクトで得られたベストプラクティスを初心者向けに分かりやすく解説します。タイトルの文字数制限、意味論的なHTML構造、多言語対応サイト特有の「URLとコンテンツの英日語彙マッチング」手法、さらにNext.jsを活用した画像高速化技術まで網羅。あなたの専門スキルをより多くの人に届けるための実践的な戦略を公開しています。"
 date: "2026-04-09"
 tags:
-  zh: ["#技術教學", "#SEO", "#Nextjs", "#數據分析"]
-  en: ["#Tutorial", "#SEO", "#Nextjs", "#DataAnalysis"]
-  ja: ["#技術チュートリアル", "#SEO", "#Nextjs", "#數據分析"]
+  zh: ["SEO", "技術教學", "數據分析"]
+  en: ["SEO", "Technical Tutorial", "Data Analysis"]
+  ja: ["SEO", "技術チュートリアル", "データ分析"]
 published: true
 ---
 

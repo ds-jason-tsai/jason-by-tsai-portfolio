@@ -1,8 +1,8 @@
 ---
 title:
-  zh: "GA4 匯出至 BigQuery 資料結構詳解：掌握巢狀資料 Schema 與 SQL 查詢技巧"
-  en: "GA4 BigQuery Export Schema Explainer: Mastering Nested Data & SQL Tips"
-  ja: "GA4からBigQueryへのエクスポートデータ構造詳解：ネスト型スキーマとSQL分析"
+  zh: "GA4 BigQuery 結構：掌握巢狀資料與 SQL 技巧"
+  en: "GA4 BigQuery: Nested Data & SQL Tips"
+  ja: "GA4 BigQuery 構造：ネスト型データと SQL 分析"
 description:
   zh: "當 Google Analytics 4 (GA4) 數據匯出至 BigQuery 後，理解其複雜的 RECORD 與 STRUCT 巢狀資料結構是進行進階分析的首要任務。本文深入解析 GA4 在 BigQuery 中的 Schema 架構，並將其拆解為「事件」與「使用者」兩大核心主軸。我們將說明重要欄位定義、資料清洗的緩衝機制，以及如何優化 SQL 查詢以捕捉精確的數位軌跡。這份完整的 BigQuery 資料結構指南，能幫助分析師與工程師建立可靠的數據模型並產出商業洞察。"
   en: "Mastering the GA4 BigQuery export schema is essential for advanced data analysis. This guide provides a detailed breakdown of the complex RECORD and STRUCT nested data structures, categorizing fields into 'Events' and 'Users' dimensions. Learn about key field definitions, data cleansing buffer strategies, and how to handle nested parameters for efficient SQL querying. Perfect for data analysts and engineers looking to build robust data models and unlock deep behavioral insights from raw GA4 data."

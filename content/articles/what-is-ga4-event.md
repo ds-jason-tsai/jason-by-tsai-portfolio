@@ -1,7 +1,7 @@
 ---
 title:
   zh: "GA4 數位軌跡：掌握關鍵事件與數據建模技巧"
-  en: "GA4 Events: Tracking & Data Modeling Guide"
+  en: "GA4 Events: Tracking & Modeling Guide"
   ja: "GA4 行動分析：主要イベントとデータ計測手法"
 description:
   zh: "深入探討 Google Analytics 4 (GA4) 以「事件」為核心的分析架構。本文詳細拆解 GA4 的四種關鍵事件類型：自動收集、加強型評估、建議事件及自訂事件。透過專業分析師的視告，幫助您更精確地捕捉使用者在網站上的數位軌跡，優化 Data Mart 建置與數據報表可靠性。適合所有希望從通用 GA 順利轉型至 GA4 的行銷人員與數據分析專家參考。"

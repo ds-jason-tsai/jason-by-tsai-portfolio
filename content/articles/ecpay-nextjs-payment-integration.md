@@ -1,7 +1,7 @@
 ---
 title:
   zh: "綠界金流實戰：Next.js + Vercel 高安全購買系統"
-  en: "ECPay Integration: Secure Next.js Checkout"
+  en: "ECPay Integration: Secure Next.js Setup"
   ja: "ECPay決済連携：Next.js + Vercel セキュア構築"
 description:
   zh: "本文完整記錄了從零開始串接台灣綠界 (ECPay) 金流的實戰過程，涵蓋 CheckMacValue 加密驗證、OrderResultURL 安全跳轉、HMAC 數位簽章防盜連結、Google Apps Script 自動化通知與對帳等核心技術。無論您是前端工程師、獨立開發者或是希望在自己的作品集中加入付費功能的數據分析師，都能從這份真實踩坑與除錯歷程中獲得寶貴的開發經驗與可直接套用的程式碼架構。"

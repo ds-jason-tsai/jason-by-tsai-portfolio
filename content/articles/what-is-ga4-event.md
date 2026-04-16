@@ -46,7 +46,7 @@ GA4 的建議事件是 Google 為不同產業所生成的推薦清單。
 - [GA4] About events
 
 <!-- en -->
-# GA4 Event Guide | Digital Footprint
+## GA4 Event Guide | Digital Footprint
 
 Unlike Universal Analytics, GA4 is built on an **Event-based** model. This guide explores the four core categories of events in GA4.
 
@@ -60,7 +60,7 @@ Advanced interactions like `scroll` (90% depth), `click` (outbound), and `file_d
 Recommended events are industry-specific templates (like `purchase` for retail), while Custom events offer full flexibility for unique business logic.
 
 <!-- ja -->
-# デジタル行動分析 | GA4イベントとは？
+## デジタル行動分析 | GA4イベントとは？
 
 ユニバーサルアナリティクスと異なり、GA4は「イベント」を中心に設計されています。本記事では主要な4つのイベントカテゴリーを解説します。
 

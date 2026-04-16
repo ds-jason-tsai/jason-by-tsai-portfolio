@@ -50,7 +50,7 @@ def clean_data(df):
 3. 參考這篇文章最上方的 Frontmatter 格式。
 
 <!-- en -->
-# First Post: Managing Articles via Markdown
+## First Post: Managing Articles via Markdown
 
 Welcome to your new article section! This is a demonstration of how to use **Markdown** to create content for your portfolio blog.
 
@@ -68,7 +68,7 @@ print("Hello, Data World!")
 ```
 
 <!-- ja -->
-# 初めての技術投稿：Markdownで記事を管理する
+## 初めての技術投稿：Markdownで記事を管理する
 
 あなたの新しいブログセクションへようこそ！これは、**Markdown**記法を使用してポートフォリオの記事を管理する方法を説明するサンプル記事です。
 

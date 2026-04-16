@@ -251,7 +251,7 @@ const gasRes = await fetch(GAS_URL_ECPAY, {
 - [從 0 到 1：資料分析師的作品集 SEO 全指南](/zh/articles/portfolio-seo-best-practices)
 
 <!-- en -->
-# ECPay Payment Integration: A Technical Guide
+## ECPay Payment Integration: A Technical Guide
 
 Integrating ECPay (Taiwan's leading payment gateway) into a modern Next.js application requires careful handling of security signatures and server-side notifications. This guide documents the process of building a secure digital product checkout system.
 
@@ -265,7 +265,7 @@ Using HMAC-SHA256 signatures for success pages prevents "URL guessing" and ensur
 By leveraging GAS as a lightweight webhook receiver, we automatically log sales to Google Sheets and send instant email notifications to administrators upon successful payment.
 
 <!-- ja -->
-# ECPay決済連携：技術ガイド
+## ECPay決済連携：技術ガイド
 
 Next.jsとVercel環境で台湾のECPay（緑界科技）決済ゲートウェイを統合する方法について解説します。セキュアなデジタル商品販売システムの構築プロセスを記録しています。
 

@@ -15,7 +15,7 @@ tags:
 published: true
 ---
 
-# GA4 匯出至 BigQuery 的資料結構
+## GA4 匯出至 BigQuery 的資料結構
 
 當資料從 GA4 被匯出至 BigQuery 後，便要開始思考如何進行數據清洗，以利後續針對用戶的數位軌跡進行分析。本文說明 GA4 資料表各欄位的定義，並將其分為「事件」和「使用者」兩大主軸。
 
@@ -95,7 +95,7 @@ GA4 以事件發生當下的 IP 位址為依據儲存使用者地理位置：
 - [GA4] BigQuery Export schema
 
 <!-- en -->
-# GA4 BigQuery Export Schema Explained
+## GA4 BigQuery Export Schema Explained
 
 Once GA4 data is exported to BigQuery, the first challenge is understanding how to clean and analyze the raw digital footprint. This article breaks down the GA4 schema into two main pillars: "Events" and "Users."
 
@@ -120,7 +120,7 @@ BigQuery uses nested records to store multiple `{key: value}` pairs for a single
 Understanding the RECORD and STRUCT types in the GA4 BigQuery export is the foundation for building custom marketing attribution models or deep-dive user behavior analysis.
 
 <!-- ja -->
-# GA4からBigQueryへのエクスポートデータ構造
+## GA4からBigQueryへのエクスポートデータ構造
 
 GA4のデータがBigQueryにエクスポートされた後、最初に取り組むべき課題は、生データをどのようにクレンジングし、ユーザー行動を分析するかを理解することです。本記事では、GA4スキーマの定義を「イベント」と「ユーザー」の2つの主要な軸に分けて解説します。
 

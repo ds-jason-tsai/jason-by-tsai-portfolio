@@ -5,7 +5,7 @@ title:
   ja: "ECPay決済連携：Next.js + Vercel セキュア構築"
 description:
   zh: "本文完整記錄了從零開始串接台灣綠界 (ECPay) 金流的實戰過程，涵蓋 CheckMacValue 加密驗證、OrderResultURL 安全跳轉、HMAC 數位簽章防盜連結、Google Apps Script 自動化通知與對帳等核心技術。無論您是前端工程師、獨立開發者或是希望在自己的作品集中加入付費功能的數據分析師，都能從這份真實踩坑與除錯歷程中獲得寶貴的開發經驗與可直接套用的程式碼架構。"
-  en: "A complete, battle-tested guide to integrating ECPay (Taiwan's leading payment gateway) with a Next.js application deployed on Vercel. This article covers CheckMacValue cryptographic verification, secure OrderResultURL redirects with HMAC digital signatures, anti-piracy time-limited download links, and automated Google Sheets logging via Google Apps Script. Whether you are a frontend developer, indie maker, or data analyst adding paid features to your portfolio, you will find actionable code patterns and real-world debugging insights here."
+  en: "A battle-tested guide to integrating ECPay with Next.js on Vercel. Covers CheckMacValue encryption, secure redirects, HMAC signatures, and automated logging via Google Apps Script. Perfect for developers adding secure payment features to their portfolios with actionable code patterns."
   ja: "台湾最大級の決済ゲートウェイ「ECPay (緑界)」を Next.js + Vercel 環境で統合した実践記録です。CheckMacValue 暗号検証、OrderResultURL のセキュアリダイレクト、HMAC デジタル署名による不正コピー防止、Google Apps Script を活用した自動通知・売上管理まで、実際のデバッグ経験を交えて解説します。フロントエンド開発者、個人開発者、またはポートフォリオに課金機能を追加したいデータアナリストに最適なガイドです。"
 date: "2026-04-13"
 tags:

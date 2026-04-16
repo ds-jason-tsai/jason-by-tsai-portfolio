@@ -72,7 +72,7 @@ def analyze_and_summarize(text, past_topics=None, current_date=None, slug=None, 
     6. **內容深度**：每個語言版本正文不少於 600 字（ZH）/ 500 words（EN/JA），需含具體數據或案例佐證。
 
     ### SEO 規範 (Google Search 合規，每條強制執行) ###
-    - **title**：ZH 須 20–55 字元；EN/JA 須 40–65 characters。關鍵字置於標題前端，禁止標題黨。
+    - **title**：所有語言版本 (ZH, EN, JA) **必須介於 50–60 字元**。關鍵字置於標題前端，禁止標題黨。
     - **description**：每個語言版本**必須介於 140–300 字元**（含標點）。自然語言描述核心洞察，含主要關鍵字。
     - **tags**：每篇文章**必須恰好選擇三個標籤**，且必須從以下固定 Pool 中選擇（確保三語版本對應一致）：
       1. MarTech (EN: MarTech, JA: MarTech)

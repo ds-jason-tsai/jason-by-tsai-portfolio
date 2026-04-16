@@ -1,8 +1,8 @@
 ---
 title:
-  zh: "從 0 到 1：資料分析師的作品集 SEO 全指南"
-  en: "Mastering Portfolio SEO: A Guide for Data Analysts"
-  ja: "ポートフォリオのSEO完全ガイド (Portfolio SEO Guide)"
+  zh: "從 0 到 1 深度解析：資料分析師建立專業個人作品集 SEO 全實戰指南"
+  en: "Mastering Portfolio SEO: A Comprehensive Guide for Data Analysts"
+  ja: "初心者必見！データ分析師のためのポートフォリオ SEO 対策完全ガイド"
 description:
   zh: "這是一篇專為數據分析師與個人品牌經營者設計的 SEO 實戰指南。我們總結了過去數日在優化個人作品集網站時累積的深度經驗，詳細拆解如何透過標題長度控制、語意化 HTML5 標籤、獨創的多語系「英日語意橋接」技術，以及 Next.js 圖片效能強化方案。無論你是想提升 Google 搜尋排名，還是想讓專業作品更容易被雇主看見，這份新手友善的教學都將協助你建立網站的權威性與資訊優勢。"
   en: "A definitive SEO guide for data analysts to optimize their personal portfolios. Learn how to master title lengths, heading hierarchy, multilingual semantic mapping, and next-gen image performance using React and Next.js. We explore best practices gained from real-world optimization to help you improve your search engine visibility and professional reach today."

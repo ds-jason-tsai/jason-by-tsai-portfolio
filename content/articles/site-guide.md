@@ -9,9 +9,9 @@ description:
   ja: "ジェイソン・アナリティクス公式ブログへようこそ！このガイドでは、サイトの主要なセクションを詳しく紹介します。"
 date: "2026-04-17"
 tags:
-  zh: ["站內導覽", "數據策略", "新手必讀"]
-  en: ["Site Guide", "Data Strategy", "Getting Started"]
-  ja: ["サイトガイド", "データ戦略", "初心者ガイド"]
+  zh: ["技術教學", "數據分析", "數據轉型"]
+  en: ["Technical Tutorial", "Data Analysis", "Data Transformation"]
+  ja: ["技術チュートリアル", "データ分析", "データトランスフォーメーション"]
 pinned: true
 published: true
 ---

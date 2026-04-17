@@ -3,8 +3,10 @@
 import React, { useState, useEffect } from 'react';
 
 export default function ArticleListClient({ articles, lang, t }: { articles: any[], lang: string, t: any }) {
-  // Extract unique tags for the category bar
+  // States for search and pagination
   const [activeCategory, setActiveCategory] = useState<string>('all');
+  const [searchQuery, setSearchQuery] = useState('');
+  const [visibleCount, setVisibleCount] = useState(8);
   
   // Extract all unique tags dynamically
   const uniqueTags = Array.from(new Set(
@@ -13,35 +15,87 @@ export default function ArticleListClient({ articles, lang, t }: { articles: any
   
   const categories = ['all', ...uniqueTags];
 
+  // Robust Hash & URL detection (Fixed: "點了沒用" bug)
   useEffect(() => {
-    if (typeof window !== 'undefined') {
-      let hash = window.location.hash;
+    const handleHashChange = () => {
+      const hash = window.location.hash;
       if (hash) {
         try {
-           const decodedHash = decodeURIComponent(hash.replace('#', ''));
-           if (categories.includes(decodedHash)) {
-             setActiveCategory(decodedHash);
-           }
+          const decodedHash = decodeURIComponent(hash.replace('#', ''));
+          if (categories.includes(decodedHash)) {
+            setActiveCategory(decodedHash);
+            setVisibleCount(8); // Reset pagination on category change
+          }
         } catch(e) {}
+      } else {
+        setActiveCategory('all');
       }
-    }
+    };
+
+    handleHashChange(); // Run on mount
+    window.addEventListener('hashchange', handleHashChange);
+    return () => window.removeEventListener('hashchange', handleHashChange);
   }, [categories]);
 
   const handleCategoryClick = (cat: string) => {
     setActiveCategory(cat);
+    setVisibleCount(8);
     window.history.pushState(null, '', `#${cat}`);
   };
 
-  const filteredArticles = activeCategory === 'all' 
-    ? articles 
-    : articles.filter(art => art.tags?.[lang]?.includes(activeCategory));
+  // Multiple Filter Logic: Category + Search (Fixed: "點擊後只有對應標籤")
+  let processedArticles = articles.filter(art => {
+    const matchesCategory = activeCategory === 'all' || art.tags?.[lang]?.includes(activeCategory);
+    const matchesSearch = 
+      art.title[lang].toLowerCase().includes(searchQuery.toLowerCase()) || 
+      art.description[lang].toLowerCase().includes(searchQuery.toLowerCase());
+    return matchesCategory && matchesSearch;
+  });
+
+  // Sorting Logic (Fixed: "只在全部文章置頂")
+  processedArticles = [...processedArticles].sort((a, b) => {
+    if (activeCategory === 'all' && searchQuery === '') {
+      if (a.pinned && !b.pinned) return -1;
+      if (!a.pinned && b.pinned) return 1;
+    }
+    return new Date(b.date).getTime() - new Date(a.date).getTime();
+  });
+
+  const displayedArticles = processedArticles.slice(0, visibleCount);
+  const hasMore = processedArticles.length > visibleCount;
 
   return (
     <div className="articles-client-container" style={{ maxWidth: '900px', margin: '0 auto' }}>
       
-      {/* Category Tabs: Fixed "All" button + Infinite Carousel for remaining tags */}
+      {/* 2. Search Bar Component */}
+      <div className="search-bar-container" style={{ marginBottom: '2rem', position: 'relative' }}>
+        <input
+          type="text"
+          placeholder={lang === 'zh' ? '搜尋文章關鍵字...' : (lang === 'ja' ? '記事を検索...' : 'Search articles...')}
+          value={searchQuery}
+          onChange={(e) => {
+            setSearchQuery(e.target.value);
+            setVisibleCount(8); // Reset pagination on search
+          }}
+          style={{
+            width: '100%',
+            padding: '1.2rem 1.5rem 1.2rem 3.5rem',
+            background: 'rgba(255,255,255,0.03)',
+            border: '1px solid rgba(255,255,255,0.1)',
+            borderRadius: '16px',
+            color: '#fff',
+            fontSize: '1rem',
+            outline: 'none',
+            transition: 'all 0.3s ease',
+            backdropFilter: 'blur(10px)'
+          }}
+          className="search-input"
+        />
+        <span style={{ position: 'absolute', left: '1.2rem', top: '50%', transform: 'translateY(-50%)', opacity: 0.4, fontSize: '1.2rem' }}>🔍</span>
+      </div>
+
+      {/* Category Tabs */}
       <div className="category-bar-wrapper" style={{ marginBottom: '3.5rem', display: 'flex', alignItems: 'center', gap: '0.8rem' }}>
-        {/* Fixed "All Articles" button - always visible on the left */}
         <button
           onClick={() => handleCategoryClick('all')}
           style={{
@@ -59,20 +113,13 @@ export default function ArticleListClient({ articles, lang, t }: { articles: any
             flexShrink: 0,
             zIndex: 3
           }}
-          className="category-btn fade-in"
+          className="category-btn"
         >
           {lang === 'zh' ? '全部文章' : (lang === 'ja' ? 'すべての記事' : 'All Articles')}
         </button>
 
-        {/* Scrolling marquee for remaining tag buttons */}
         <div className="category-scroll-wrapper" style={{ position: 'relative', overflow: 'hidden', flex: 1, display: 'flex', alignItems: 'center' }}>
-          <div className="category-marquee-track" style={{ 
-            display: 'flex', 
-            gap: '0.8rem', 
-            width: 'max-content',
-            alignItems: 'center',
-          }}>
-            {/* Render tags (excluding 'all') twice for seamless infinite scrolling */}
+          <div className="category-marquee-track" style={{ display: 'flex', gap: '0.8rem', width: 'max-content', alignItems: 'center' }}>
             {[...uniqueTags, ...uniqueTags].map((cat, idx) => (
               <button
                 key={`${cat}-${idx}`}
@@ -91,7 +138,7 @@ export default function ArticleListClient({ articles, lang, t }: { articles: any
                   whiteSpace: 'nowrap',
                   flexShrink: 0
                 }}
-                className="category-btn fade-in"
+                className="category-btn"
               >
                 {cat}
               </button>
@@ -101,7 +148,7 @@ export default function ArticleListClient({ articles, lang, t }: { articles: any
       </div>
 
       <div className="articles-list" style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
-        {filteredArticles.map((art, idx) => (
+        {displayedArticles.map((art, idx) => (
           <article 
             key={art.id} 
             className="article-list-card fade-in" 
@@ -113,7 +160,7 @@ export default function ArticleListClient({ articles, lang, t }: { articles: any
               borderRadius: '20px',
               padding: '2.5rem',
               transition: 'transform 0.3s ease, box-shadow 0.3s ease',
-              animationDelay: `${idx * 0.1}s`
+              animationDelay: `${idx % 8 * 0.1}s`
             }}
           >
             <div style={{ marginBottom: '1.5rem' }}>
@@ -129,7 +176,7 @@ export default function ArticleListClient({ articles, lang, t }: { articles: any
                 background: 'rgba(0, 242, 254, 0.1)',
                 borderRadius: '4px'
               }}>
-                {art.pinned ? (
+                {(activeCategory === 'all' && art.pinned) ? (
                   lang === 'zh' ? '📌 置頂' : (lang === 'ja' ? '📌 固定' : '📌 Featured')
                 ) : art.date}
               </span>
@@ -153,22 +200,43 @@ export default function ArticleListClient({ articles, lang, t }: { articles: any
                 ))}
               </div>
               
-              <a href={`/${lang}/articles/${art.id}`} className="btn-secondary" style={{ 
-                padding: '0.6rem 1.5rem', 
-                fontSize: '0.95rem',
-                whiteSpace: 'nowrap'
-              }}>
+              <a href={`/${lang}/articles/${art.id}`} className="btn-secondary" style={{ padding: '0.6rem 1.5rem', fontSize: '0.95rem', whiteSpace: 'nowrap' }}>
                 {t.readMore} →
               </a>
             </div>
           </article>
         ))}
-        {filteredArticles.length === 0 && (
+
+        {/* 1. Load More Button */}
+        {hasMore && (
+           <div style={{ textAlign: 'center', marginTop: '3rem' }}>
+             <button 
+               onClick={() => setVisibleCount(prev => prev + 8)}
+               className="load-more-btn"
+               style={{
+                 padding: '1rem 3rem',
+                 background: 'transparent',
+                 border: '1px solid var(--accent-color)',
+                 color: 'var(--accent-color)',
+                 borderRadius: '30px',
+                 fontSize: '1rem',
+                 fontWeight: '800',
+                 cursor: 'pointer',
+                 transition: 'all 0.3s ease'
+               }}
+             >
+               {lang === 'zh' ? '載入更多文章' : (lang === 'ja' ? 'もっと見る' : 'Load More')}
+             </button>
+           </div>
+        )}
+
+        {processedArticles.length === 0 && (
           <div style={{ width: '100%', padding: '4rem 0', textAlign: 'center', color: 'var(--text-secondary)' }}>
-             No articles found for this category.
+             {lang === 'zh' ? '找不到相關關鍵字的文章' : (lang === 'ja' ? '該当する記事が見つかりません' : 'No articles found matching your criteria.')}
           </div>
         )}
       </div>
+
 
       <style dangerouslySetInnerHTML={{__html: `
         .article-list-card:hover {
@@ -195,6 +263,19 @@ export default function ArticleListClient({ articles, lang, t }: { articles: any
         @keyframes marquee-scroll {
           0% { transform: translateX(0); }
           100% { transform: translateX(calc(-50% - 0.4rem)); }
+        }
+
+        .search-input:focus {
+          border-color: var(--accent-color) !important;
+          background: rgba(255,255,255,0.06) !important;
+          box-shadow: 0 0 20px rgba(0, 242, 254, 0.15);
+        }
+
+        .load-more-btn:hover {
+          background: var(--accent-color) !important;
+          color: #000 !important;
+          transform: translateY(-3px);
+          box-shadow: 0 10px 25px rgba(0, 242, 254, 0.3);
         }
 
 

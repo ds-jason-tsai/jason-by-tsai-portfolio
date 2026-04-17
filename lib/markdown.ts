@@ -72,11 +72,6 @@ export function getSortedArticlesData(): ArticleData[] {
     });
 
   return allArticlesData.sort((a, b) => {
-    // 1. Pinned articles come first
-    if (a.pinned && !b.pinned) return -1;
-    if (!a.pinned && b.pinned) return 1;
-    
-    // 2. Then sort by date (descending)
     if (a.date < b.date) {
       return 1;
     } else {

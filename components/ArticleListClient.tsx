@@ -17,7 +17,7 @@ export default function ArticleListClient({ articles, lang, t }: { articles: any
   
   const categories = useMemo(() => ['all', ...uniqueTags], [uniqueTags]);
 
-  // Terminal Fix: Robust Hash Synchronization Suite
+  // Terminal Fix: Robust Hash Synchronization Suite (+ URL Purifier)
   useEffect(() => {
     const syncStateWithUrl = () => {
       if (typeof window === 'undefined') return;
@@ -32,10 +32,16 @@ export default function ArticleListClient({ articles, lang, t }: { articles: any
       }
 
       try {
-        // Robust Extraction: Get the last tag after any number of '#'
+        // Robust Extraction & URL Cleaning
         const segments = hash.split('#').filter(Boolean);
         const lastTag = segments.pop();
         const decoded = decodeURIComponent(lastTag || '').trim();
+
+        // [URL PURIFIER] If there were multiple hashes, clean the URL immediately
+        if (segments.length > 0) {
+          const cleanUrl = window.location.pathname + window.location.search + '#' + (lastTag || '');
+          window.history.replaceState(null, '', cleanUrl);
+        }
 
         if (categories.includes(decoded)) {
           setActiveCategory(prev => {
@@ -66,12 +72,14 @@ export default function ArticleListClient({ articles, lang, t }: { articles: any
       window.removeEventListener('popstate', syncStateWithUrl);
       clearInterval(pollInterval);
     };
-  }, [categories, activeCategory]); // Dependency on activeCategory allowed since we use memoized setter
+  }, [categories, activeCategory]);
 
   const handleCategoryClick = (cat: string) => {
     if (activeCategory !== cat) {
-      window.location.hash = cat;
-      // syncStateWithUrl will handle the state update
+      // 100% Clean URL update avoiding += accumulation
+      const baseUrl = window.location.pathname + window.location.search;
+      window.history.pushState(null, '', `${baseUrl}#${cat}`);
+      // syncStateWithUrl will handle the state update via polling or hashchange
     }
   };
 

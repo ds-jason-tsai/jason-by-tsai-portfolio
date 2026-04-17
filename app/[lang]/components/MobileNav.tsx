@@ -33,10 +33,10 @@ export default function MobileNav({
     { href: `/${lang}`, label: dict.nav.home },
     { href: `/${lang}/experience`, label: dict.nav.experience },
     { href: `/${lang}/portfolio`, label: dict.nav.portfolio },
-    { href: `/${lang}/dashboards`, label: dict.nav.dashboards || 'Dashboards' },
     { href: `/${lang}/services`, label: dict.nav.services },
     { href: `/${lang}/articles`, label: dict.nav.articles },
     { href: `/${lang}/reports`, label: dict.nav.reports || 'Premium Access' },
+    { href: `/${lang}/dashboards`, label: dict.nav.dashboards || 'Dashboards' },
     { href: `/${lang}/contact`, label: dict.nav.contact },
   ];
 

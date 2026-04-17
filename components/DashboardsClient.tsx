@@ -67,7 +67,7 @@ export default function DashboardsClient({ lang }: { lang: 'zh' | 'en' | 'ja' })
     },
     en: {
       mainTitle: "Data Dashboards",
-      desc: "Transforming raw data into intuitive, dynamic dashboards. Interact, filter, and discover deep business strategies through a visual interface.",
+      desc: "Transforming raw data into dynamic dashboards for deep business insights.",
       note: "※ Desktop browser recommended for the best experience.",
       backToHome: "Back to Home",
       prev: "Prev",
@@ -76,7 +76,7 @@ export default function DashboardsClient({ lang }: { lang: 'zh' | 'en' | 'ja' })
     },
     ja: {
       mainTitle: "データダッシュボード (Dashboards)",
-      desc: "生のデータを直感的な動的ダッシュボードに変換します。視覚的なインターフェースを通じて、データの操作、フィルタリング、深いビジネス戦略の発見が可能です。",
+      desc: "データを直感的な動的ダッシュボードに変換。視覚的な操作でビジネス洞察を導き出します。",
       note: "※ PCブラウザでの閲覧を推奨します。",
       backToHome: "ホームに戻る",
       prev: "前へ",
@@ -316,8 +316,11 @@ export default function DashboardsClient({ lang }: { lang: 'zh' | 'en' | 'ja' })
             margin: 0;
           }
           .dashboards-header { margin-bottom: 2rem; padding: 0 1rem; }
-          .dashboard-main-desc { white-space: normal !important; text-align: center !important; }
+          .dashboard-main-desc { white-space: normal !important; text-align: center !important; font-size: 1rem !important; }
           .iframe-container { height: 50vh !important; border-radius: 8px !important; }
+        }
+        @media (max-width: 1300px) {
+          .dashboard-main-desc { white-space: normal !important; maxWidth: 900px !important; margin: 0 auto 1.5rem !important; }
         }
         @media (max-width: 768px) {
           .section-title { font-size: 2.2rem !important; }

@@ -116,15 +116,26 @@ export default function ArticleListClient({ articles, lang, t }: { articles: any
               animationDelay: `${idx * 0.1}s`
             }}
           >
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '1rem', marginBottom: '1rem' }}>
-              <h3 style={{ fontSize: '1.6rem', lineHeight: '1.4', fontWeight: '800', margin: 0 }}>
+            <div style={{ marginBottom: '1.5rem' }}>
+              <span style={{ 
+                display: 'inline-block', 
+                fontSize: '0.85rem', 
+                color: 'var(--accent-color)', 
+                fontWeight: '600',
+                textTransform: 'uppercase',
+                letterSpacing: '1px',
+                marginBottom: '0.8rem',
+                padding: '0.2rem 0.6rem',
+                background: 'rgba(0, 242, 254, 0.1)',
+                borderRadius: '4px'
+              }}>
+                {art.date}
+              </span>
+              <h3 style={{ fontSize: '1.8rem', lineHeight: '1.3', fontWeight: '800', margin: 0 }}>
                 <a href={`/${lang}/articles/${art.id}`} style={{ color: '#fff', textDecoration: 'none' }} className="article-title-link">
                   {art.title[lang]}
                 </a>
               </h3>
-              <span style={{ fontSize: '0.9rem', color: 'var(--accent-color)', whiteSpace: 'nowrap', paddingTop: '0.4rem' }}>
-                {art.date}
-              </span>
             </div>
             
             <p style={{ color: 'var(--text-secondary)', fontSize: '1.05rem', lineHeight: '1.8', marginBottom: '2rem' }}>

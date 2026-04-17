@@ -98,7 +98,7 @@ export default function DashboardsClient({ lang }: { lang: 'zh' | 'en' | 'ja' })
       {/* Header */}
       <div className="dashboards-header" style={{ textAlign: 'center', marginBottom: '3rem' }}>
         <h1 className="section-title" style={{ fontSize: '3rem', marginBottom: '1rem', fontWeight: '900' }}>{t.mainTitle}</h1>
-        <p style={{ color: 'var(--text-secondary)', fontSize: '1.1rem', maxWidth: '800px', margin: '0 auto 1.5rem' }}>
+        <p className="dashboard-main-desc" style={{ color: 'var(--text-secondary)', fontSize: '1.1rem', margin: '0 auto 1.5rem', whiteSpace: 'nowrap' }}>
           {t.desc}
         </p>
         <span style={{ 
@@ -316,6 +316,7 @@ export default function DashboardsClient({ lang }: { lang: 'zh' | 'en' | 'ja' })
             margin: 0;
           }
           .dashboards-header { margin-bottom: 2rem; padding: 0 1rem; }
+          .dashboard-main-desc { white-space: normal !important; text-align: center !important; }
           .iframe-container { height: 50vh !important; border-radius: 8px !important; }
         }
         @media (max-width: 768px) {

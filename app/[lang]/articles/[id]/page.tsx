@@ -106,6 +106,11 @@ export default async function ArticlePage({ params }: { params: Promise<{ lang: 
           line-height: 1.8;
           font-size: 1.1rem;
           color: var(--text-primary);
+          overflow-wrap: break-word;
+          word-break: break-word;
+        }
+        .markdown-content a {
+          word-break: break-all;
         }
         .markdown-content h1 {
           font-size: 2.2rem;

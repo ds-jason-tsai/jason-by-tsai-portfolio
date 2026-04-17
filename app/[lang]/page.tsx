@@ -38,43 +38,43 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
   const featuredPosts = [
     {
       type: 'youtube',
-      label: 'YouTube 邀請專訪',
-      title: '傑森數據：資料分析師的轉職之路',
+      label: 'YouTube | 交大 GDSC 分享',
+      title: 'Tableau 0-1：資料分析的必經之路',
       src: 'https://www.youtube.com/embed/Jci-U6_jRIw',
       link: 'https://www.youtube.com/watch?v=Jci-U6_jRIw'
     },
     {
       type: 'youtube',
-      label: 'YouTube 企業研討會',
-      title: '零壹科技：敏捷自助BI分析',
+      label: 'YouTube | 企業研討會',
+      title: '零壹科技：敏捷自助 BI 分析軟體',
       src: 'https://www.youtube.com/embed/hyVawV_2lkg',
       link: 'https://www.youtube.com/watch?v=hyVawV_2lkg'
     },
     {
       type: 'facebook',
-      label: 'Facebook 粉絲專頁',
-      title: '演講精華：台大資料分析社',
+      label: 'Facebook | 粉絲專頁',
+      title: '演講精華：臺大資料分析與決策社(NTUDAC)',
       src: 'https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2FNTUDAC%2Fposts%2Fpfbid024zWGDXEdUVaLHU24TymiTaFHfLQKPx2sMvFk9jxzSVKKaxeUnPDQuFmE2JBjAsTql&show_text=true&width=500',
       link: 'https://www.facebook.com/NTUDAC/posts/pfbid024zWGDXEdUVaLHU24TymiTaFHfLQKPx2sMvFk9jxzSVKKaxeUnPDQuFmE2JBjAsTql'
     },
     {
       type: 'facebook',
-      label: 'Facebook 粉絲專頁',
-      title: '專案實務：政大資料分析社',
+      label: 'Facebook | 粉絲專頁',
+      title: '課程精華：政大數據分析社(NCCUDA)',
       src: 'https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fnccuda%2Fposts%2Fpfbid02kL85mfA8yUgVVpoBMrgfQ1QZRzYMyxikdYNrVcEXiArBspxyTskaUduAdN3Uxpsal&show_text=true&width=500',
       link: 'https://www.facebook.com/nccuda/posts/pfbid02kL85mfA8yUgVVpoBMrgfQ1QZRzYMyxikdYNrVcEXiArBspxyTskaUduAdN3Uxpsal'
     },
     {
       type: 'instagram',
-      label: 'Instagram 社課分享',
-      title: 'Tableau視覺化：清大資料科學社',
+      label: 'Instagram | 社課分享',
+      title: 'Tableau 視覺化：清大資料科學社(NTHUDSC)',
       src: 'https://www.instagram.com/p/DOSypNMEicE/embed',
       link: 'https://www.instagram.com/p/DOSypNMEicE/'
     },
     {
       type: 'facebook',
-      label: 'Facebook 專家分享',
-      title: '專題演講：台大行銷管理顧問社 (NTU SC)',
+      label: 'Facebook 粉絲專頁',
+      title: '專題演講：臺大行銷管理顧問社(NTUSC)',
       src: 'https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fntuscmarketingclub%2Fposts%2Fpfbid0zUWYsKdJKRZE1CdAKBGiEq5ciP5kAoiPNi8RqqUTkJkMrM3AyfNfSP4RKKSHoaVtl&show_text=true&width=500',
       link: 'https://www.facebook.com/ntuscmarketingclub/posts/pfbid0zUWYsKdJKRZE1CdAKBGiEq5ciP5kAoiPNi8RqqUTkJkMrM3AyfNfSP4RKKSHoaVtl'
     },
@@ -180,7 +180,7 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
             {[...featuredPosts, ...featuredPosts].map((post, index) => (
               <div className="media-card" key={index}>
                 <div className="media-card-header">
-                  <span className="media-badge" style={{ color: 'var(--accent-color)', fontWeight: '900', border: '1px solid var(--accent-color)' }}>{post.label}</span>
+                  <span className="media-badge" style={{ color: 'var(--accent-color)', fontWeight: '900' }}>{post.label}</span>
                   <h3 className="media-title">{post.title}</h3>
                 </div>
                 <div className="media-iframe-wrapper" style={{ flex: 1, display: 'flex', alignItems: 'center', background: post.type === 'facebook' || post.type === 'instagram' ? '#fff' : 'transparent', borderRadius: '10px' }}>
@@ -350,6 +350,8 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
           min-height: 3rem; /* Force two lines worth of space to prevent layout shift */
           display: flex;
           align-items: center;
+          justify-content: center;
+          text-align: center;
         }
 
         .mobile-only-br { display: none; }

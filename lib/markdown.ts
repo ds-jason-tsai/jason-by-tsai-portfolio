@@ -25,6 +25,7 @@ export interface ArticleData {
     en: string[];
     ja: string[];
   };
+  pinned?: boolean;
   contentHtml?: string;
 }
 
@@ -64,12 +65,18 @@ export function getSortedArticlesData(): ArticleData[] {
           en: Array.isArray(data.tags?.en) ? data.tags.en : (Array.isArray(data.tags) ? data.tags : []),
           ja: Array.isArray(data.tags?.ja) ? data.tags.ja : (Array.isArray(data.tags) ? data.tags : []),
         },
+        pinned: !!data.pinned,
       };
 
       return safeData;
     });
 
   return allArticlesData.sort((a, b) => {
+    // 1. Pinned articles come first
+    if (a.pinned && !b.pinned) return -1;
+    if (!a.pinned && b.pinned) return 1;
+    
+    // 2. Then sort by date (descending)
     if (a.date < b.date) {
       return 1;
     } else {
@@ -131,6 +138,7 @@ export async function getArticleData(id: string, lang: string = 'zh'): Promise<A
       en: Array.isArray(data.tags?.en) ? data.tags.en : (Array.isArray(data.tags) ? data.tags : []),
       ja: Array.isArray(data.tags?.ja) ? data.tags.ja : (Array.isArray(data.tags) ? data.tags : []),
     },
+    pinned: !!data.pinned,
     contentHtml,
   };
 }

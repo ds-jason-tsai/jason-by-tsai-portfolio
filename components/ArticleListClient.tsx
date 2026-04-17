@@ -129,7 +129,9 @@ export default function ArticleListClient({ articles, lang, t }: { articles: any
                 background: 'rgba(0, 242, 254, 0.1)',
                 borderRadius: '4px'
               }}>
-                {art.date}
+                {art.pinned ? (
+                  lang === 'zh' ? '📌 置頂' : (lang === 'ja' ? '📌 固定' : '📌 Featured')
+                ) : art.date}
               </span>
               <h3 style={{ fontSize: '1.8rem', lineHeight: '1.3', fontWeight: '800', margin: 0 }}>
                 <a href={`/${lang}/articles/${art.id}`} style={{ color: '#fff', textDecoration: 'none' }} className="article-title-link">

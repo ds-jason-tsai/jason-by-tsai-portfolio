@@ -67,7 +67,7 @@ export default function DashboardsClient({ lang }: { lang: 'zh' | 'en' | 'ja' })
     },
     en: {
       mainTitle: "Data Dashboards",
-      desc: "Transforming raw data into dynamic dashboards for deep business insights.",
+      desc: "Transforming raw data into intuitive, dynamic dashboards. Interact, filter, and discover deep business strategies through a visual interface.",
       note: "※ Desktop browser recommended for the best experience.",
       backToHome: "Back to Home",
       prev: "Prev",
@@ -98,7 +98,7 @@ export default function DashboardsClient({ lang }: { lang: 'zh' | 'en' | 'ja' })
       {/* Header */}
       <div className="dashboards-header" style={{ textAlign: 'center', marginBottom: '3rem' }}>
         <h1 className="section-title" style={{ fontSize: '3rem', marginBottom: '1rem', fontWeight: '900' }}>{t.mainTitle}</h1>
-        <p className="dashboard-main-desc" style={{ color: 'var(--text-secondary)', fontSize: '1.1rem', margin: '0 auto 1.5rem', whiteSpace: 'nowrap' }}>
+        <p className="dashboard-main-desc" style={{ color: 'var(--text-secondary)', fontSize: '1.1rem', margin: '0 auto 1.5rem', whiteSpace: (lang === 'zh' ? 'nowrap' : 'normal'), maxWidth: '900px' }}>
           {t.desc}
         </p>
         <span style={{ 

@@ -17,7 +17,7 @@ const getDashboardData = (lang: string) => {
         ja: '保険フォーラム・トレンド追跡ダッシュボード'
       },
       desc: {
-        zh: '整合 PTT、Finfo、MY83 等各大論壇數據，即時監控保險品牌聲量、熱門險種話題與賠案討論。透過自動化數據分析，幫助品牌掌握社群趨勢並優化行銷決策。',
+        zh: '整合 PTT、Finfo、MY83 等各大論壇數據，即時監控保險品牌聲量、熱門險種話題與賠案討論。\n透過自動化數據分析，幫助品牌掌握社群趨勢並優化行銷決策。',
         en: 'Aggregates data from major forums like PTT, Finfo, and MY83 to monitor insurance brand mentions, trending insurance types, and claim discussions in real-time.',
         ja: 'PTT、Finfo、MY83などの主要フォーラムからデータを統合し、保険ブランドの露出やトレンドのトピックをリアルタイムで監視するダッシュボードです。'
       },
@@ -36,7 +36,7 @@ const getDashboardData = (lang: string) => {
         ja: '保険業界向け GEO (生成エンジン最適化) モニタリング'
       },
       desc: {
-        zh: '專為 AI 時代設計的監測工具，追蹤保險品牌在生成式引擎（如 AI 搜尋）中的曝光數、引用連結與關鍵字排名，搶佔未來搜尋先機。',
+        zh: '專為 AI 時代設計的監測工具，追蹤保險品牌在生成式引擎（如 AI 搜尋）中的曝光數、引用連結與關鍵字排名，\n搶佔未來搜尋先機。',
         en: 'A monitoring tool designed for the AI era, tracking insurance brand impressions, citation links, and keyword rankings within generative engines (e.g., AI search).',
         ja: 'AI時代のマーケティングツールとして、生成エンジンにおける保険ブランドの露出、引用リンク、およびキーワード順位を追跡し、AI回答內的表示確率を最適化します。'
       },
@@ -140,7 +140,7 @@ export default function DashboardsClient({ lang }: { lang: 'zh' | 'en' | 'ja' })
             <h2 style={{ fontSize: '1.8rem', fontWeight: '800', marginBottom: '1rem', color: '#fff', wordBreak: 'break-word' }}>
               {current.title[lang]}
             </h2>
-            <p style={{ color: 'var(--text-secondary)', lineHeight: '1.6', fontSize: '1rem', maxWidth: '900px', margin: '0 auto 1.5rem' }}>
+            <p style={{ color: 'var(--text-secondary)', lineHeight: '1.6', fontSize: '1rem', maxWidth: '900px', margin: '0 auto 1.5rem', whiteSpace: 'pre-wrap' }}>
               {current.desc[lang]}
             </p>
             <div style={{ display: 'flex', justifyContent: 'center', gap: '0.8rem', flexWrap: 'wrap' }}>

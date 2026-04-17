@@ -10,7 +10,7 @@ const reports = [
     category: 'report',
     image: '/images/case_study_sfse.png',
     title: {
-      zh: 'SaaS 策略深探：Salesforce 解決方案工程與 GTM 研究 (Case Study)',
+      zh: '個案研究：Salesforce 解決方案工程與 GTM 研究',
       en: 'Strategic Case Study: Salesforce GTM & SE Framework',
       ja: '戦略的考察：Salesforce SE と GTM 分析 (Case Study)',
     },

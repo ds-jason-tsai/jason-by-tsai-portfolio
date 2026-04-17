@@ -1,12 +1,14 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
+import { usePathname } from 'next/navigation';
 
 export default function ArticleListClient({ articles, lang, t }: { articles: any[], lang: string, t: any }) {
   // States for search and pagination
   const [activeCategory, setActiveCategory] = useState<string>('all');
   const [searchQuery, setSearchQuery] = useState('');
   const [visibleCount, setVisibleCount] = useState(8);
+  const pathname = usePathname();
   
   // Extract all unique tags dynamically
   const uniqueTags = Array.from(new Set(
@@ -15,13 +17,16 @@ export default function ArticleListClient({ articles, lang, t }: { articles: any
   
   const categories = ['all', ...uniqueTags];
 
-  // Robust Hash & URL detection (Fixed: "點了沒用" bug)
+  // Robust Hash & URL detection (Fixed: "點擊後無反應" & Next.js Hash Tracking)
   useEffect(() => {
-    const handleHashChange = () => {
+    const handleNavigationChange = () => {
+      if (typeof window === 'undefined') return;
+      
       const hash = window.location.hash;
       if (hash) {
         try {
           const decodedHash = decodeURIComponent(hash.replace('#', ''));
+          // Strict exact match for tags
           if (categories.includes(decodedHash)) {
             setActiveCategory(decodedHash);
             setVisibleCount(8); // Reset pagination on category change
@@ -32,10 +37,17 @@ export default function ArticleListClient({ articles, lang, t }: { articles: any
       }
     };
 
-    handleHashChange(); // Run on mount
-    window.addEventListener('hashchange', handleHashChange);
-    return () => window.removeEventListener('hashchange', handleHashChange);
-  }, [categories]);
+    handleNavigationChange();
+    
+    // Listen to hash changes (native) and popstate (browser navigation)
+    window.addEventListener('hashchange', handleNavigationChange);
+    window.addEventListener('popstate', handleNavigationChange);
+    
+    return () => {
+      window.removeEventListener('hashchange', handleNavigationChange);
+      window.removeEventListener('popstate', handleNavigationChange);
+    };
+  }, [categories, pathname]); // Re-run when pathname changes to catch cross-page hash nav
 
   const handleCategoryClick = (cat: string) => {
     setActiveCategory(cat);

@@ -34,13 +34,23 @@ export default function ArticleDropdown({ lang, dict, categories, latestArticle 
           fontSize: '0.95rem',
           fontWeight: '600',
           transition: 'all 0.3s ease',
-          display: 'flex',
-          alignItems: 'center',
-          gap: '6px'
+          display: 'inline-block',
+          position: 'relative',
+          marginRight: '12px' // Visual offset for the absolute arrow
         }}
       >
         {dict.nav.articles}
-        <span style={{ fontSize: '0.65rem', opacity: 0.5, transform: isOpen ? 'rotate(180deg)' : 'none', transition: 'transform 0.3s ease', display: 'inline-block' }}>▼</span>
+        <span style={{ 
+          fontSize: '0.6rem', 
+          opacity: 0.5, 
+          transform: isOpen ? 'rotate(180deg)' : 'none', 
+          transition: 'transform 0.3s ease', 
+          position: 'absolute',
+          right: '-14px',
+          top: '50%',
+          marginTop: '-4px',
+          display: 'inline-block'
+        }}>▼</span>
       </Link>
 
       {/* Mega Menu Panel */}

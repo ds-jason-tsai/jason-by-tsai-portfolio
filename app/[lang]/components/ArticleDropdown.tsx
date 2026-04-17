@@ -36,21 +36,21 @@ export default function ArticleDropdown({ lang, dict, categories, latestArticle 
           transition: 'all 0.3s ease',
           display: 'inline-block',
           position: 'relative',
-          marginRight: '12px' // Visual offset for the absolute arrow
+          paddingLeft: '1rem' // Reserve space for front-side arrow
         }}
       >
-        {dict.nav.articles}
         <span style={{ 
           fontSize: '0.6rem', 
           opacity: 0.5, 
           transform: isOpen ? 'rotate(180deg)' : 'none', 
           transition: 'transform 0.3s ease', 
           position: 'absolute',
-          right: '-14px',
+          left: 0,
           top: '50%',
-          marginTop: '-4px',
+          marginTop: '-4px', // Perfect center
           display: 'inline-block'
         }}>▼</span>
+        {dict.nav.articles}
       </Link>
 
       {/* Mega Menu Panel */}

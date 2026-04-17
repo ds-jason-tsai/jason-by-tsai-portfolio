@@ -17,7 +17,7 @@ export default function ArticleListClient({ articles, lang, t }: { articles: any
   
   const categories = ['all', ...uniqueTags];
 
-  // Robust Hash & URL detection (Fixed: "點擊後無反應" & Next.js Hash Tracking)
+  // Robust Hash & URL detection (Fixed: "點擊後無反應" & "多重標籤解析")
   useEffect(() => {
     const handleNavigationChange = () => {
       if (typeof window === 'undefined') return;
@@ -25,11 +25,13 @@ export default function ArticleListClient({ articles, lang, t }: { articles: any
       const hash = window.location.hash;
       if (hash) {
         try {
-          const decodedHash = decodeURIComponent(hash.replace('#', ''));
-          // Strict exact match for tags
+          // Fix: Handle multiple hashes or tailing strings
+          const lastTag = hash.split('#').filter(Boolean).pop();
+          const decodedHash = decodeURIComponent(lastTag || '');
+          
           if (categories.includes(decodedHash)) {
             setActiveCategory(decodedHash);
-            setVisibleCount(8); // Reset pagination on category change
+            setVisibleCount(8);
           }
         } catch(e) {}
       } else {
@@ -39,7 +41,6 @@ export default function ArticleListClient({ articles, lang, t }: { articles: any
 
     handleNavigationChange();
     
-    // Listen to hash changes (native) and popstate (browser navigation)
     window.addEventListener('hashchange', handleNavigationChange);
     window.addEventListener('popstate', handleNavigationChange);
     
@@ -47,17 +48,20 @@ export default function ArticleListClient({ articles, lang, t }: { articles: any
       window.removeEventListener('hashchange', handleNavigationChange);
       window.removeEventListener('popstate', handleNavigationChange);
     };
-  }, [categories, pathname]); // Re-run when pathname changes to catch cross-page hash nav
+  }, [categories, pathname]);
 
   const handleCategoryClick = (cat: string) => {
     setActiveCategory(cat);
     setVisibleCount(8);
-    window.history.pushState(null, '', `#${cat}`);
+    // Use location.hash to ensure a single, clean replacement
+    window.location.hash = cat;
   };
 
-  // Multiple Filter Logic: Category + Search (Fixed: "點擊後只有對應標籤")
+  // Multiple Filter Logic: Category + Search (Fixed: "真的有標籤才出現")
   let processedArticles = articles.filter(art => {
-    const matchesCategory = activeCategory === 'all' || art.tags?.[lang]?.includes(activeCategory);
+    // Precise string matching for tags array
+    const matchesCategory = activeCategory === 'all' || (art.tags?.[lang] || []).some((t: string) => t === activeCategory);
+    
     const matchesSearch = 
       art.title[lang].toLowerCase().includes(searchQuery.toLowerCase()) || 
       art.description[lang].toLowerCase().includes(searchQuery.toLowerCase());
@@ -111,8 +115,8 @@ export default function ArticleListClient({ articles, lang, t }: { articles: any
         <button
           onClick={() => handleCategoryClick('all')}
           style={{
-            padding: '0.5rem 1.4rem',
-            borderRadius: '30px',
+            padding: '0.6rem 2rem', // Sync with Reports
+            borderRadius: '50px', // Sync with Reports
             border: '1px solid rgba(255,255,255,0.1)',
             background: activeCategory === 'all' ? 'var(--accent-color)' : 'rgba(255,255,255,0.05)',
             color: activeCategory === 'all' ? '#000' : '#fff',
@@ -137,8 +141,8 @@ export default function ArticleListClient({ articles, lang, t }: { articles: any
                 key={`${cat}-${idx}`}
                 onClick={() => handleCategoryClick(cat)}
                 style={{
-                  padding: '0.5rem 1.4rem',
-                  borderRadius: '30px',
+                  padding: '0.6rem 2rem', // Sync with Reports
+                  borderRadius: '50px', // Sync with Reports
                   border: '1px solid rgba(255,255,255,0.1)',
                   background: activeCategory === cat ? 'var(--accent-color)' : 'rgba(255,255,255,0.05)',
                   color: activeCategory === cat ? '#000' : '#fff',

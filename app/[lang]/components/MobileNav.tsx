@@ -7,10 +7,12 @@ import ShareButton from './ShareButton';
 
 export default function MobileNav({ 
   lang, 
-  dict 
+  dict,
+  categories
 }: { 
   lang: string; 
-  dict: any 
+  dict: any;
+  categories: any;
 }) {
   const [isOpen, setIsOpen] = useState(false);
   const pathname = usePathname();
@@ -87,23 +89,73 @@ export default function MobileNav({
 
         <nav className="mobile-nav-links">
           {navLinks.map((link) => (
-            <Link 
-              key={link.href} 
-              href={link.href}
-              className={pathname === link.href ? 'active' : ''}
-              onClick={() => setIsOpen(false)}
-              style={{ 
-                color: '#ffffff',
-                fontSize: '1.1rem',
-                fontWeight: '600',
-                textDecoration: 'none',
-                display: 'block',
-                marginBottom: '1.2rem',
-                letterSpacing: '1px'
-              }}
-            >
-              {link.label}
-            </Link>
+            <div key={link.href}>
+              {link.href.includes('/articles') ? (
+                <div className="mobile-articles-section">
+                  <Link 
+                    href={link.href}
+                    className={pathname === link.href ? 'active' : ''}
+                    onClick={() => setIsOpen(false)}
+                    style={{ 
+                      color: '#ffffff',
+                      fontSize: '1.5rem',
+                      fontWeight: '800',
+                      textDecoration: 'none',
+                      display: 'block',
+                      marginBottom: '1rem',
+                      letterSpacing: '1px'
+                    }}
+                  >
+                    {link.label}
+                  </Link>
+                  <div className="mobile-tags-nested" style={{ paddingLeft: '1rem', marginBottom: '1.5rem', display: 'flex', flexDirection: 'column', gap: '0.8rem' }}>
+                    {Object.values(categories || {}).map((cat: any) => (
+                      <div key={cat.label} style={{ marginBottom: '0.5rem' }}>
+                        <span style={{ fontSize: '0.75rem', color: 'var(--accent-color)', textTransform: 'uppercase', letterSpacing: '1px', fontWeight: 'bold', display: 'block', marginBottom: '0.4rem' }}>
+                          {cat.label}
+                        </span>
+                        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem' }}>
+                          {cat.tags.slice(0, 4).map((tag: string) => (
+                            <Link 
+                              key={tag}
+                              href={`/${lang}/articles#${tag}`}
+                              onClick={() => setIsOpen(false)}
+                              style={{ 
+                                fontSize: '0.85rem', 
+                                color: 'rgba(255,255,255,0.6)', 
+                                textDecoration: 'none',
+                                background: 'rgba(255,255,255,0.05)',
+                                padding: '0.2rem 0.6rem',
+                                borderRadius: '4px'
+                              }}
+                            >
+                              {tag}
+                            </Link>
+                          ))}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              ) : (
+                <Link 
+                  href={link.href}
+                  className={pathname === link.href ? 'active' : ''}
+                  onClick={() => setIsOpen(false)}
+                  style={{ 
+                    color: '#ffffff',
+                    fontSize: pathname === link.href ? '1.5rem' : '1.5rem',
+                    fontWeight: '800',
+                    textDecoration: 'none',
+                    display: 'block',
+                    marginBottom: '1.2rem',
+                    letterSpacing: '1px'
+                  }}
+                >
+                  {link.label}
+                </Link>
+              )}
+            </div>
           ))}
         </nav>
 

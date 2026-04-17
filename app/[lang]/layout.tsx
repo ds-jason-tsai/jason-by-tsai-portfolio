@@ -63,6 +63,8 @@ import NavLink from './components/NavLink';
 import MobileNav from './components/MobileNav';
 import ShareButton from './components/ShareButton';
 import Image from 'next/image';
+import { getLatestArticle, getCategorizedTags } from '@/lib/markdown';
+import ArticleDropdown from './components/ArticleDropdown';
 
 export default async function RootLayout({
   children,
@@ -166,7 +168,15 @@ export default async function RootLayout({
               <NavLink lang={lang} href={`/${lang}/experience`}>{dict.nav.experience}</NavLink>
               <NavLink lang={lang} href={`/${lang}/portfolio`}>{dict.nav.portfolio}</NavLink>
               <NavLink lang={lang} href={`/${lang}/services`}>{dict.nav.services}</NavLink>
-              <NavLink lang={lang} href={`/${lang}/articles`}>{dict.nav.articles}</NavLink>
+              
+              {/* Categorized Dropdown for Articles */}
+              <ArticleDropdown 
+                lang={lang} 
+                dict={dict} 
+                categories={getCategorizedTags(lang)} 
+                latestArticle={getLatestArticle()} 
+              />
+              
               <NavLink lang={lang} href={`/${lang}/reports`}>{dict.nav.reports || 'Premium Access'}</NavLink>
               <NavLink lang={lang} href={`/${lang}/dashboards`}>{dict.nav.dashboards || 'Dashboards'}</NavLink>
               <NavLink lang={lang} href={`/${lang}/contact`}>{dict.nav.contact}</NavLink>
@@ -206,7 +216,11 @@ export default async function RootLayout({
           </div>
 
           <div className="mobile-only">
-            <MobileNav lang={lang} dict={dict} />
+            <MobileNav 
+              lang={lang} 
+              dict={dict} 
+              categories={getCategorizedTags(lang)} 
+            />
           </div>
         </nav>
 

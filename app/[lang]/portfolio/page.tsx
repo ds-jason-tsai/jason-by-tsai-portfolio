@@ -39,6 +39,22 @@ export default async function Portfolio({ params }: { params: Promise<{ lang: st
 
   const projects = [
     { 
+      title: { zh: "行銷科技 | MarTech | 技術精華", en: "MarTech Mastery: Technical Essence", ja: "MarTech ｜ マーケティングテクノロジー ｜ 技術精華" }, 
+      type: 2, 
+      image: "/images/martech_cover.png",
+      url: "https://drive.google.com/file/d/1Em8A5DdZS5jiLyRMvyIDSfSD-aIr83kj/view?usp=sharing",
+      description: {
+        zh: "匯集橫跨 CDP、行銷自動化與 AI 驅動轉型的技術精華。深入分析 MarTech 產業地圖與數位工具整合架構，旨在協助企業從數據採集到自動化應用建立完整的增長引擎。",
+        en: "A comprehensive essence of MarTech, covering CDP, marketing automation, and AI-driven growth models. Detailed analysis of digital tool integration and technical architectures to build complete data engines.",
+        ja: "CDP、マーケティングオートメーション、AI主導の変革を網羅した技術の精華。データ収集から自動化まで、企業が完全な成長エンジンを構築するためのデジタルツール統合アーキテクチャを詳説。"
+      },
+      tags: {
+        zh: ["#MarTech", "#行銷科技", "#CDP", "#自動化", "#技術架構"],
+        en: ["#MarTech", "#MarketingTech", "#CDP", "#Automation", "#Architecture"],
+        ja: ["#MarTech", "#マーケティングテック", "#CDP", "#自動化", "#技術構成"]
+      }
+    },
+    { 
       title: { zh: "保險公司研究 (Aflac)", en: "Aflac Insurance Research", ja: "Aflac 保険会社戦略研究" }, 
       type: 1, 
       image: "/images/aflac_cover.png",

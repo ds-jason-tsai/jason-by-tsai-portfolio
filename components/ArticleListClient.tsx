@@ -10,66 +10,76 @@ export default function ArticleListClient({ articles, lang, t }: { articles: any
   const [visibleCount, setVisibleCount] = useState(8);
   const pathname = usePathname();
   
-  // Memoize unique tags and categories to prevent unnecessary effect triggers
+  // Memoize unique tags and categories for stability
   const uniqueTags = useMemo(() => Array.from(new Set(
-    articles.flatMap(art => art.tags ? art.tags[lang] : [])
+    articles.flatMap(art => art.tags ? (art.tags[lang] || []) : [])
   )), [articles, lang]);
   
   const categories = useMemo(() => ['all', ...uniqueTags], [uniqueTags]);
 
-  // Robust Hash & URL detection (Fixed: "多重標籤解析" & Reset Bug)
+  // Terminal Fix: Robust Hash Synchronization Suite
   useEffect(() => {
-    const handleNavigationChange = () => {
+    const syncStateWithUrl = () => {
       if (typeof window === 'undefined') return;
       
       const hash = window.location.hash;
-      if (hash) {
-        try {
-          const lastTag = hash.split('#').filter(Boolean).pop();
-          const decodedHash = decodeURIComponent(lastTag || '');
-          
-          if (categories.includes(decodedHash)) {
-            setActiveCategory(prev => {
-              if (prev !== decodedHash) {
-                setVisibleCount(8);
-              }
-              return decodedHash;
-            });
-          }
-        } catch(e) {}
-      } else {
-        setActiveCategory(prev => {
-          if (prev !== 'all') {
-            setVisibleCount(8);
-          }
-          return 'all';
-        });
+      if (!hash) {
+        if (activeCategory !== 'all') {
+          setActiveCategory('all');
+          setVisibleCount(8);
+        }
+        return;
+      }
+
+      try {
+        // Robust Extraction: Get the last tag after any number of '#'
+        const segments = hash.split('#').filter(Boolean);
+        const lastTag = segments.pop();
+        const decoded = decodeURIComponent(lastTag || '').trim();
+
+        if (categories.includes(decoded)) {
+          setActiveCategory(prev => {
+            if (prev !== decoded) {
+              setVisibleCount(8); // Reset on real change
+              return decoded;
+            }
+            return prev;
+          });
+        }
+      } catch (e) {
+        console.error("Hash sync failed", e);
       }
     };
 
-    handleNavigationChange();
+    // 1. Initial Sync
+    syncStateWithUrl();
     
-    window.addEventListener('hashchange', handleNavigationChange);
-    window.addEventListener('popstate', handleNavigationChange);
+    // 2. Event-based listeners
+    window.addEventListener('hashchange', syncStateWithUrl);
+    window.addEventListener('popstate', syncStateWithUrl);
+    
+    // 3. Last-Resort Polling (Safety Net for Mega-Menu same-path nav)
+    const pollInterval = setInterval(syncStateWithUrl, 300);
     
     return () => {
-      window.removeEventListener('hashchange', handleNavigationChange);
-      window.removeEventListener('popstate', handleNavigationChange);
+      window.removeEventListener('hashchange', syncStateWithUrl);
+      window.removeEventListener('popstate', syncStateWithUrl);
+      clearInterval(pollInterval);
     };
-  }, [categories, pathname]);
+  }, [categories, activeCategory]); // Dependency on activeCategory allowed since we use memoized setter
 
   const handleCategoryClick = (cat: string) => {
     if (activeCategory !== cat) {
-      setActiveCategory(cat);
-      setVisibleCount(8);
       window.location.hash = cat;
+      // syncStateWithUrl will handle the state update
     }
   };
 
-  // Multiple Filter Logic: Category + Search (Fixed: "真的有標籤才出現")
+  // Multiple Filter Logic: Category + Search (TERMINAL STRICTNESS)
   let processedArticles = articles.filter(art => {
-    // Precise string matching for tags array
-    const matchesCategory = activeCategory === 'all' || (art.tags?.[lang] || []).some((t: string) => t === activeCategory);
+    // Exact string match for categories
+    const articleTags = art.tags?.[lang] || [];
+    const matchesCategory = activeCategory === 'all' || articleTags.some((t: string) => t === activeCategory);
     
     const matchesSearch = 
       art.title[lang].toLowerCase().includes(searchQuery.toLowerCase()) || 

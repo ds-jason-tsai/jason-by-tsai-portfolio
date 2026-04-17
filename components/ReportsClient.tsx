@@ -34,7 +34,7 @@ const reports = [
     category: 'video',
     image: '/images/notebooklm_cover.jpg',
     title: {
-      zh: 'NotebookLM 實戰應用：第一章 (全五章指南)',
+      zh: 'NotebookLM 實戰應用：第一章 (快速上手)',
       en: 'NotebookLM Applied: Chapter 1 (Ultimate Guide)',
       ja: 'NotebookLM活用術：第1章 (完全ガイド)',
     },

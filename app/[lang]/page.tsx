@@ -131,14 +131,14 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
             <h2 className="jason-name" style={{ marginTop: '1.5rem', fontSize: '2.5rem', fontWeight: 800, background: 'var(--accent-grad)', WebkitBackgroundClip: 'text', backgroundClip: 'text', WebkitTextFillColor: 'transparent', letterSpacing: '2px' }}>
               Jason Tsai
             </h2>
-            <p style={{ textAlign: 'center', fontSize: '1rem', color: 'var(--text-secondary)', marginTop: '1rem', fontWeight: 500, lineHeight: '1.6', maxWidth: '650px' }}>
-               {lang === 'zh' ? 'MarTech/金融業資料分析師、多個數位學習平台 AI/資料分析導師、臺清交政等大學社團資料視覺化講師' : (lang === 'ja' ? 'MarTech / 金融データアナリスト / AI・データ分析講師 / トップ大学データ視覚化講師' : 'MarTech & Financial Data Analyst / AI & Data Analysis Instructor / Top Universities Data Viz Lecturer')}
+            <p className="hero-tagline" style={{ textAlign: 'center', fontSize: '1rem', color: 'var(--text-secondary)', marginTop: '1rem', fontWeight: 500, lineHeight: '1.6', maxWidth: '650px', whiteSpace: 'nowrap' }}>
+               {lang === 'zh' ? '資料分析師、多個數位學習平台 AI 導師、臺清交政等大學社團講師' : (lang === 'ja' ? 'データアナリスト / AI 講師 / トップ大学データ視覚化講師' : 'Data Analyst / AI Instructor / Top Universities Lecturer')}
             </p>
 
             <div className="hero-links-integration" style={{ marginTop: '2.5rem', width: '100%', display: 'flex', flexDirection: 'column', gap: '2.5rem', alignItems: 'center' }}>
               
               <div className="paid-links-subsection">
-                <p className="social-label" style={{ marginBottom: '1.2rem', color: '#00f2fe', fontSize: '1.1rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '1px' }}>
+                <p className="social-label" style={{ marginBottom: '0.5rem', color: '#00f2fe', fontSize: '1.1rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '1px' }}>
                   {(dict.home as any).featured_courses || '專業數據洞察 (付費專區)'}
                 </p>
                 <div className="course-links" style={{ display: 'flex', gap: '2.5rem', justifyContent: 'center' }}>
@@ -156,7 +156,7 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
               </div>
 
               <div className="social-links-subsection">
-                <p className="social-label" style={{ marginBottom: '1.2rem', color: '#00f2fe', fontSize: '1.1rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '1px' }}>
+                <p className="social-label" style={{ marginBottom: '0.5rem', color: '#00f2fe', fontSize: '1.1rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '1px' }}>
                   {dict.home.social_label || (lang === 'zh' ? '追蹤我的數據洞察' : 'Follow my Data Insights')}
                 </p>
                 <div className="social-icons" style={{ gap: '2.5rem', display: 'flex', justifyContent: 'center' }}>
@@ -357,6 +357,7 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
         @media (max-width: 768px) {
           .hero { padding: 4rem 0.5rem; }
           .hero-title { font-size: 2.1rem !important; line-height: 1.35; word-break: break-word; }
+          .hero-tagline { white-space: normal !important; font-size: 0.9rem !important; }
           .hero-subtitle { font-size: 1.5rem !important; margin-top: 0.5rem; display: block; line-height: 1.4; }
           .hero-desc { padding: 0; font-size: 0.95rem !important; }
           .hero-btns { flex-direction: column; align-items: center; gap: 1rem !important; }

@@ -49,9 +49,9 @@ export default async function Portfolio({ params }: { params: Promise<{ lang: st
         ja: "CDP、マーケティングオートメーション、AI主導の変革を網羅した技術の精華。データ収集から自動化まで、企業が完全な成長エンジンを構築するためのデジタルツール統合アーキテクチャを詳説。"
       },
       tags: {
-        zh: ["#MarTech", "#行銷科技", "#CDP", "#自動化", "#技術架構"],
-        en: ["#MarTech", "#MarketingTech", "#CDP", "#Automation", "#Architecture"],
-        ja: ["#MarTech", "#マーケティングテック", "#CDP", "#自動化", "#技術構成"]
+        zh: ["#MarTech", "#CDP", "#技術架構"],
+        en: ["#MarTech", "#CDP", "#Architecture"],
+        ja: ["#MarTech", "#CDP", "#技術構成"]
       }
     },
     { 
@@ -65,9 +65,9 @@ export default async function Portfolio({ params }: { params: Promise<{ lang: st
         ja: "グローバル補完的健康・生命保険市場におけるAflacの成功要因の徹底研究。独自の代理店モデルと、NAYYA（AIレコメンデーション）、SKYGEN、EmpathyなどのInsurTechパートナーとの統合によるデジタルトランスフォーメーションを分析。"
       },
       tags: {
-        zh: ["#國泰人壽", "#InsurTech", "#保險科技", "#財務建模", "#CDP"],
-        en: ["#CathayLife", "#InsurTech", "#InsuranceTech", "#FinancialModeling", "#CDP"],
-        ja: ["#國泰人寿", "#インシュアテック", "#保険テック", "#財務モデリング", "#CDP"]
+        zh: ["#InsurTech", "#財務建模", "#CDP"],
+        en: ["#InsurTech", "#FinancialModeling", "#CDP"],
+        ja: ["#インシュアテック", "#財務モデリング", "#CDP"]
       }
     },
     { 
@@ -81,9 +81,9 @@ export default async function Portfolio({ params }: { params: Promise<{ lang: st
         ja: "ビジネス分析に不可欠な40以上のチャートを厳選。基本的なトレンドから高度な技術的管理図まで、データ分析者が即座に最適な視覚化ツールを選択するための明確な基準を提供します。"
       },
       tags: {
-        zh: ["#ChartBar", "#數據視覺化", "#Tableau", "#視覺敘事", "#分析工具"],
-        en: ["#ChartBar", "#DataViz", "#Tableau", "#VisualStorytelling", "#AnalyticsTool"],
-        ja: ["#ChartBar", "#データ可視化", "#Tableau", "#ストーリーテリング", "#分析ツール"]
+        zh: ["#數據視覺化", "#Tableau", "#分析工具"],
+        en: ["#DataViz", "#Tableau", "#AnalyticsTool"],
+        ja: ["#データ可視化", "#Tableau", "#分析ツール"]
       }
     },
     { 
@@ -97,9 +97,9 @@ export default async function Portfolio({ params }: { params: Promise<{ lang: st
         ja: "機械学習とアソシエーション分析を用いて、顧客の購買行動と商品組み合わせを分析。LTVと利益構造に基づき、客単価と全体収益を最大化する最適な送料無料ラインを算出・提案しました。"
       },
       tags: {
-        zh: ["#鮮乳坊", "#購物籃分析", "#關聯規則", "#營銷策略", "#營收優化"],
-        en: ["#RetailAnalytics", "#MarketBasket", "#AssociationRules", "#PricingStrategy", "#RevenueOptimization"],
-        ja: ["#小売分析", "#バスケット分析", "#アソシエーション", "#価格戦略", "#収益最適化"]
+        zh: ["#購物籃分析", "#關聯規則", "#營收優化"],
+        en: ["#RetailAnalytics", "#AssociationRules", "#RevenueOptimization"],
+        ja: ["#小売分析", "#アソシエーション", "#収益最適化"]
       }
     },
     { 
@@ -113,9 +113,9 @@ export default async function Portfolio({ params }: { params: Promise<{ lang: st
         ja: "時空間データと気象変数に基づき、シェアサイクルの需要予測モデルを構築。ピーク時・オフピーク時の利用パターンを分析し、運営チームへ車両の最適な再配置（リバランス）やステーション拡張案を提案しました。"
       },
       tags: {
-        zh: ["#共享單車", "#需求預測", "#時空分析", "#營運優化", "#機器學習"],
-        en: ["#BikeShare", "#DemandForecasting", "#SpatialAnalysis", "#OperationsOptimization", "#MachineLearning"],
-        ja: ["#シェアサイクル", "#需要予測", "#時空間分析", "#オペレーション最適化", "#機械学習"]
+        zh: ["#需求預測", "#營運優化", "#機器學習"],
+        en: ["#DemandForecasting", "#OperationsOptimization", "#MachineLearning"],
+        ja: ["#需要予測", "#オペレーション最適化", "#機械學習"]
       }
     }
   ];

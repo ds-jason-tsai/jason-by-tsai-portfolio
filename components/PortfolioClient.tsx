@@ -168,7 +168,7 @@ export default function PortfolioClient({ projects, lang, t }: { projects: any[]
                     {proj.description[lang]}
                   </p>
 
-                  <div className="tags-container" style={{ justifyContent: 'flex-start', marginBottom: '2rem', flexWrap: 'wrap' }}>
+                  <div className="tags-container" style={{ justifyContent: 'flex-start', marginBottom: '1.5rem', flexWrap: 'nowrap', overflow: 'hidden', gap: '0.5rem' }}>
                     {proj.tags[lang].map((tag: any, tIdx: number) => (
                       <span key={tIdx} className="tag" style={{ border: '1px solid rgba(255,255,255,0.1)', background: 'rgba(0,0,0,0.3)', padding: '0.3rem 0.8rem', fontSize: '0.85rem', borderRadius: '6px' }}>{tag}</span>
                     ))}

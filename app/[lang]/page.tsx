@@ -132,7 +132,7 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
               Jason Tsai
             </h2>
             <p style={{ textAlign: 'center', fontSize: '1rem', color: 'var(--text-secondary)', marginTop: '1rem', fontWeight: 500, lineHeight: '1.6', maxWidth: '650px' }}>
-               {lang === 'zh' ? '金融業資料分析師、多個數位學習平台 AI/資料分析導師、臺清交政等社團資料視覺化講師' : (lang === 'ja' ? '金融データアナリスト / AI・データ分析講師 / トップ大学データ視覚化講師' : 'Financial Data Analyst / AI & Data Analysis Instructor / Top Universities Data Viz Lecturer')}
+               {lang === 'zh' ? 'MarTech/金融業資料分析師、多個數位學習平台 AI/資料分析導師、臺清交政等大學社團資料視覺化講師' : (lang === 'ja' ? 'MarTech / 金融データアナリスト / AI・データ分析講師 / トップ大学データ視覚化講師' : 'MarTech & Financial Data Analyst / AI & Data Analysis Instructor / Top Universities Data Viz Lecturer')}
             </p>
 
             <div className="hero-links-integration" style={{ marginTop: '2.5rem', width: '100%', display: 'flex', flexDirection: 'column', gap: '2.5rem', alignItems: 'center' }}>

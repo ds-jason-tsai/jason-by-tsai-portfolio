@@ -7,7 +7,7 @@ export default function ArticleListClient({ articles, lang, t }: { articles: any
   // States for search and pagination
   const [activeCategory, setActiveCategory] = useState<string>('all');
   const [searchQuery, setSearchQuery] = useState('');
-  const [visibleCount, setVisibleCount] = useState(8);
+  const [visibleCount, setVisibleCount] = useState(5);
   const pathname = usePathname();
   
   // Memoize unique tags and categories for stability
@@ -26,7 +26,7 @@ export default function ArticleListClient({ articles, lang, t }: { articles: any
       if (!hash) {
         if (activeCategory !== 'all') {
           setActiveCategory('all');
-          setVisibleCount(8);
+          setVisibleCount(5);
         }
         return;
       }
@@ -46,7 +46,7 @@ export default function ArticleListClient({ articles, lang, t }: { articles: any
         if (categories.includes(decoded)) {
           setActiveCategory(prev => {
             if (prev !== decoded) {
-              setVisibleCount(8); // Reset on real change
+              setVisibleCount(5); // Reset on real change
               return decoded;
             }
             return prev;
@@ -118,7 +118,7 @@ export default function ArticleListClient({ articles, lang, t }: { articles: any
           value={searchQuery}
           onChange={(e) => {
             setSearchQuery(e.target.value);
-            setVisibleCount(8); // Reset pagination on search
+            setVisibleCount(5); // Reset pagination on search
           }}
           style={{
             width: '100%',
@@ -186,6 +186,9 @@ export default function ArticleListClient({ articles, lang, t }: { articles: any
                 {cat}
               </button>
             ))}
+          </div>
+        </div>
+      </div>            ))}
           </div>
         </div>
       </div>

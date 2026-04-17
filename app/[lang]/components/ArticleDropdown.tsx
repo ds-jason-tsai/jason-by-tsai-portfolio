@@ -42,58 +42,58 @@ export default function ArticleDropdown({ lang, dict, categories, latestArticle 
         <span style={{ 
           fontSize: '0.6rem', 
           opacity: 0.5, 
-          transform: isOpen ? 'rotate(180deg)' : 'none', 
+          transform: `translateY(-50%) ${isOpen ? 'rotate(180deg)' : ''}`, 
           transition: 'transform 0.3s ease', 
           position: 'absolute',
           left: 0,
           top: '50%',
-          marginTop: '-4px', // Perfect center
-          display: 'inline-block'
+          display: 'inline-block',
+          lineHeight: '1'
         }}>▼</span>
         {dict.nav.articles}
       </Link>
-
-      {/* Mega Menu Panel */}
-      <div 
-        className={`mega-menu ${isOpen ? 'visible' : ''}`}
-        style={{
-          position: 'absolute',
-          top: '100%',
-          left: '50%',
-          transform: `translateX(-50%) translateY(${isOpen ? '15px' : '25px'})`,
-          width: '700px',
-          background: 'rgba(10, 10, 10, 0.98)',
-          backdropFilter: 'blur(30px)',
-          WebkitBackdropFilter: 'blur(30px)',
-          border: '1px solid rgba(255, 255, 255, 0.08)',
-          borderRadius: '24px',
-          padding: '2.5rem 3rem',
-          boxShadow: '0 40px 100px rgba(0,0,0,0.9)',
-          opacity: isOpen ? 1 : 0,
-          pointerEvents: isOpen ? 'auto' : 'none',
-          transition: 'all 0.4s cubic-bezier(0.16, 1, 0.3, 1)',
-          display: 'grid',
-          gridTemplateColumns: 'repeat(3, 1fr)',
-          gap: '3rem',
-          zIndex: 100
-        }}
-      >
+ 
+       {/* Mega Menu Panel */}
+       <div 
+         className={`mega-menu ${isOpen ? 'visible' : ''}`}
+         style={{
+           position: 'absolute',
+           top: '100%',
+           left: '50%',
+           transform: `translateX(-50%) translateY(${isOpen ? '15px' : '25px'})`,
+           width: '550px', // Reduced from 700px
+           background: 'rgba(10, 10, 10, 0.98)',
+           backdropFilter: 'blur(30px)',
+           WebkitBackdropFilter: 'blur(30px)',
+           border: '1px solid rgba(255, 255, 255, 0.08)',
+           borderRadius: '24px',
+           padding: '1.5rem 2rem', // Reduced from 2.5rem 3rem
+           boxShadow: '0 40px 100px rgba(0,0,0,0.9)',
+           opacity: isOpen ? 1 : 0,
+           pointerEvents: isOpen ? 'auto' : 'none',
+           transition: 'all 0.4s cubic-bezier(0.16, 1, 0.3, 1)',
+           display: 'grid',
+           gridTemplateColumns: 'repeat(3, 1fr)',
+           gap: '2rem', // Reduced from 3rem
+           zIndex: 100
+         }}
+       >
         {/* Category Columns */}
         {Object.entries(categories).map(([key, cat]) => (
           <div key={key} className="mega-menu-col">
             <h4 style={{ 
               color: 'var(--accent-color)', 
-              fontSize: '0.8rem', 
+              fontSize: '0.75rem', // Slightly smaller
               textTransform: 'uppercase', 
-              letterSpacing: '2px',
-              marginBottom: '1.5rem',
+              letterSpacing: '1.5px',
+              marginBottom: '1rem', // Reduced from 1.5rem
               fontWeight: '800',
               borderLeft: '2px solid var(--accent-color)',
               paddingLeft: '10px'
             }}>
               {cat.label}
             </h4>
-            <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '0.8rem' }}>
+            <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '0.6rem' }}>
               {cat.tags.map((tag) => (
                 <li key={tag}>
                   <Link 
@@ -101,7 +101,7 @@ export default function ArticleDropdown({ lang, dict, categories, latestArticle 
                     style={{
                       color: 'var(--text-secondary)',
                       textDecoration: 'none',
-                      fontSize: '0.95rem',
+                      fontSize: '0.9rem', // Slightly smaller
                       transition: 'all 0.2s ease',
                       display: 'block'
                     }}
@@ -125,8 +125,9 @@ export default function ArticleDropdown({ lang, dict, categories, latestArticle 
           content: '';
           position: absolute;
           top: -30px;
-          left: 0;
-          width: 100%;
+          left: 50%;
+          transform: translateX(-50%);
+          width: 120px; /* Bridge only the area between trigger and panel */
           height: 30px;
           background: transparent;
         }

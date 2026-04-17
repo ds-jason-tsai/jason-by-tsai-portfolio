@@ -188,9 +188,6 @@ export default function ArticleListClient({ articles, lang, t }: { articles: any
             ))}
           </div>
         </div>
-      </div>            ))}
-          </div>
-        </div>
       </div>
 
       <div className="articles-list" style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>

@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { usePathname } from 'next/navigation';
 
 export default function ArticleListClient({ articles, lang, t }: { articles: any[], lang: string, t: any }) {
@@ -10,14 +10,14 @@ export default function ArticleListClient({ articles, lang, t }: { articles: any
   const [visibleCount, setVisibleCount] = useState(8);
   const pathname = usePathname();
   
-  // Extract all unique tags dynamically
-  const uniqueTags = Array.from(new Set(
+  // Memoize unique tags and categories to prevent unnecessary effect triggers
+  const uniqueTags = useMemo(() => Array.from(new Set(
     articles.flatMap(art => art.tags ? art.tags[lang] : [])
-  ));
+  )), [articles, lang]);
   
-  const categories = ['all', ...uniqueTags];
+  const categories = useMemo(() => ['all', ...uniqueTags], [uniqueTags]);
 
-  // Robust Hash & URL detection (Fixed: "點擊後無反應" & "多重標籤解析")
+  // Robust Hash & URL detection (Fixed: "多重標籤解析" & Reset Bug)
   useEffect(() => {
     const handleNavigationChange = () => {
       if (typeof window === 'undefined') return;
@@ -25,17 +25,25 @@ export default function ArticleListClient({ articles, lang, t }: { articles: any
       const hash = window.location.hash;
       if (hash) {
         try {
-          // Fix: Handle multiple hashes or tailing strings
           const lastTag = hash.split('#').filter(Boolean).pop();
           const decodedHash = decodeURIComponent(lastTag || '');
           
           if (categories.includes(decodedHash)) {
-            setActiveCategory(decodedHash);
-            setVisibleCount(8);
+            setActiveCategory(prev => {
+              if (prev !== decodedHash) {
+                setVisibleCount(8);
+              }
+              return decodedHash;
+            });
           }
         } catch(e) {}
       } else {
-        setActiveCategory('all');
+        setActiveCategory(prev => {
+          if (prev !== 'all') {
+            setVisibleCount(8);
+          }
+          return 'all';
+        });
       }
     };
 
@@ -51,10 +59,11 @@ export default function ArticleListClient({ articles, lang, t }: { articles: any
   }, [categories, pathname]);
 
   const handleCategoryClick = (cat: string) => {
-    setActiveCategory(cat);
-    setVisibleCount(8);
-    // Use location.hash to ensure a single, clean replacement
-    window.location.hash = cat;
+    if (activeCategory !== cat) {
+      setActiveCategory(cat);
+      setVisibleCount(8);
+      window.location.hash = cat;
+    }
   };
 
   // Multiple Filter Logic: Category + Search (Fixed: "真的有標籤才出現")

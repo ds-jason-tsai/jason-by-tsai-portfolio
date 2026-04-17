@@ -41,7 +41,7 @@ export default async function Portfolio({ params }: { params: Promise<{ lang: st
     { 
       title: { zh: "行銷科技 | MarTech | 技術精華", en: "MarTech Mastery: Technical Essence", ja: "MarTech ｜ マーケティングテクノロジー ｜ 技術精華" }, 
       type: 2, 
-      image: "/images/martech_cover.png",
+      image: "/images/martech_cover.webp",
       url: "https://drive.google.com/file/d/1Em8A5DdZS5jiLyRMvyIDSfSD-aIr83kj/view?usp=sharing",
       description: {
         zh: "匯集橫跨 CDP、行銷自動化與 AI 驅動轉型的技術精華。深入分析 MarTech 產業地圖與數位工具整合架構，旨在協助企業從數據採集到自動化應用建立完整的增長引擎。",
@@ -57,7 +57,7 @@ export default async function Portfolio({ params }: { params: Promise<{ lang: st
     { 
       title: { zh: "保險公司研究 (Aflac)", en: "Aflac Insurance Research", ja: "Aflac 保険会社戦略研究" }, 
       type: 1, 
-      image: "/images/aflac_cover.png",
+      image: "/images/aflac_cover.jpg",
       url: "https://drive.google.com/file/d/1EQiMMQfrRplLjNljCLiQWHUxQ121xxDL/view?usp=drive_link",
       description: {
         zh: "深入研究 Aflac 在全球意外與健康險市場的成功要素。分析其獨特的代理商模式，並探討如何透過整合 NAYYA (AI 推薦)、SKYGEN 與 Empathy 等 InsurTech 合作夥伴來強化數位轉型與客戶體驗。",

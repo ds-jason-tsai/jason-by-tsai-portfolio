@@ -83,7 +83,7 @@ export default function ArticleDropdown({ lang, dict, categories, latestArticle 
           <div key={key} className="mega-menu-col">
             <h4 style={{ 
               color: 'var(--accent-color)', 
-              fontSize: '0.75rem', // Slightly smaller
+              fontSize: '1rem',
               textTransform: 'uppercase', 
               letterSpacing: '1.5px',
               marginBottom: '1rem', // Reduced from 1.5rem
@@ -101,7 +101,7 @@ export default function ArticleDropdown({ lang, dict, categories, latestArticle 
                     style={{
                       color: 'var(--text-secondary)',
                       textDecoration: 'none',
-                      fontSize: '1.1rem',
+                      fontSize: '1rem',
                       transition: 'all 0.2s ease',
                       display: 'block'
                     }}

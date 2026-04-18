@@ -169,8 +169,9 @@ export function getCategorizedTags(lang: string = 'zh') {
 
   // Specific Lists based on user request (Sort Order)
   const aiOrder = ['AI 趨勢', 'AI 應用', 'AI 治理'];
-  const bizOrder = ['SEO', 'MarTech', '成長策略', '數據分析', '產業洞察', '數位轉型', '企業轉型'];
-  const techKeywords = ['Python', 'SQL', 'BigQuery', 'Next.js', 'GA4', '技術實務'];
+  const bizOrder = ['成長策略', '數據分析', '產業洞察', '數位轉型', '企業轉型'];
+  const techOrder = ['SEO', 'MarTech', 'Python', 'SQL', 'BigQuery', 'Next.js', 'GA4', '技術實務'];
+  const techKeywords = ['Python', 'SQL', 'BigQuery', 'Next.js', 'GA4', '技術實務', 'SEO', 'MarTech'];
 
   // 1. Distribute all discovered tags into categories first
   tags.forEach(tag => {
@@ -179,14 +180,16 @@ export function getCategorizedTags(lang: string = 'zh') {
     // Explicit match checks
     if (aiOrder.includes(tag)) {
       categories.ai.tags.push(tag);
+    } else if (techOrder.includes(tag)) {
+      categories.tech.tags.push(tag);
     } else if (bizOrder.includes(tag)) {
       categories.biz.tags.push(tag);
-    } else if (techKeywords.some(k => lowerTag.includes(k.toLowerCase()))) {
-      categories.tech.tags.push(tag);
     } 
     // Heuristic fallbacks
     else if (['ai', '趨勢', '應用', '治理', 'llm', 'crawler', 'n8n', '自動化'].some(k => lowerTag.includes(k))) {
       categories.ai.tags.push(tag);
+    } else if (['python', 'sql', 'query', 'next', 'ga4'].some(k => lowerTag.includes(k))) {
+       categories.tech.tags.push(tag);
     } else {
       categories.biz.tags.push(tag);
     }
@@ -208,7 +211,7 @@ export function getCategorizedTags(lang: string = 'zh') {
 
   categories.ai.tags = sortTags(categories.ai.tags, aiOrder);
   categories.biz.tags = sortTags(categories.biz.tags, bizOrder);
-  categories.tech.tags = sortTags(categories.tech.tags, []); // Discovery order for tech
+  categories.tech.tags = sortTags(categories.tech.tags, techOrder);
 
   return categories;
 }

@@ -9,7 +9,7 @@ description:
   ja: "Google アナリティクス 4 (GA4) の分析構造は、従来のユニバーサル アナリティクスとは根本的に異なり「イベント」を基盤としています。本記事では、自動収集イベント、拡張計測機能イベント、推奨イベント、カスタムイベントという 4 つの主要なイベントタイプについて解説します。"
 date: "2023-10-10"
 tags:
-  zh: ["數據分析", "MarTech", "數據轉型"]
+  zh: ["數據分析", "MarTech", "數位轉型"]
   en: ["Data Analysis", "MarTech", "Data Transformation"]
   ja: ["データ分析", "MarTech", "データトランスフォーメーション"]
 published: true

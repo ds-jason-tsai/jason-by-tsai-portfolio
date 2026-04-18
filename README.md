@@ -63,7 +63,7 @@ A look into the professional journey and academic background of Jason Tsai.
 
 ### 8. 📩 Contact (聯絡我 / お問い合わせ)
 Direct channel for project collaboration and service inquiries.
-- **ZH**: [聯絡我](https://jason-by-tsai-portfolio.vercel.app/zh/contact) - 啟動您的數據轉型第一步，立即聯繫進行專業諮詢。
+- **ZH**: [聯絡我](https://jason-by-tsai-portfolio.vercel.app/zh/contact) - 啟動您的數位轉型第一步，立即聯繫進行專業諮詢。
 - **EN**: [Contact](https://jason-by-tsai-portfolio.vercel.app/en/contact) - Start your data transformation journey with a direct inquiry.
 - **JA**: [お問い合わせ](https://jason-by-tsai-portfolio.vercel.app/ja/contact) - データ駆動型の成長を実現するための相談窓口。
 

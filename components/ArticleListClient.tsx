@@ -161,18 +161,9 @@ export default function ArticleListClient({ articles, lang, t }: { articles: any
           {lang === 'zh' ? '全部 »' : (lang === 'ja' ? 'すべて »' : 'All »')}
         </button>
 
-        <div className="category-scroll-wrapper" style={{ 
-          position: 'relative', 
-          overflowX: 'auto', 
-          flex: 1, 
-          display: 'flex', 
-          alignItems: 'center',
-          msOverflowStyle: 'none',
-          scrollbarWidth: 'none',
-          WebkitOverflowScrolling: 'touch'
-        }}>
-          <div className="category-manual-track" style={{ display: 'flex', gap: '0.8rem', alignItems: 'center', paddingRight: '4rem' }}>
-            {uniqueTags.map((cat, idx) => (
+        <div className="category-scroll-wrapper" style={{ position: 'relative', overflow: 'hidden', flex: 1, display: 'flex', alignItems: 'center' }}>
+          <div className="category-marquee-track" style={{ display: 'flex', gap: '0.8rem', width: 'max-content', alignItems: 'center' }}>
+            {[...uniqueTags, ...uniqueTags].map((cat, idx) => (
               <button
                 key={`${cat}-${idx}`}
                 onClick={() => handleCategoryClick(cat)}
@@ -304,8 +295,18 @@ export default function ArticleListClient({ articles, lang, t }: { articles: any
           transform: scale(1.05);
         }
         
-        .category-scroll-wrapper::-webkit-scrollbar {
-          display: none;
+        /* Slow Marquee Animation (60s as requested) */
+        .category-marquee-track {
+          animation: marquee-scroll 60s linear infinite;
+        }
+        .category-marquee-track:active,
+        .category-marquee-track:hover {
+          animation-play-state: paused;
+        }
+
+        @keyframes marquee-scroll {
+          0% { transform: translateX(0); }
+          100% { transform: translateX(calc(-50% - 0.4rem)); }
         }
 
         .category-scroll-wrapper {

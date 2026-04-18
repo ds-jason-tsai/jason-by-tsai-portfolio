@@ -152,33 +152,45 @@ export function getAllTagsByLanguage(lang: string = 'zh'): string[] {
 export function getCategorizedTags(lang: string = 'zh') {
   const tags = getAllTagsByLanguage(lang);
   
-  // Categorization Logic
   const categories: Record<string, { label: string, tags: string[] }> = {
     ai: {
       label: { zh: 'AI 趨勢與自動化', en: 'AI & Automation', ja: 'AIとオートメーション' }[lang] || 'AI',
       tags: [] as string[]
     },
-    tech: {
-      label: { zh: '數據分析與技術實務', en: 'Data & Analytics', ja: 'データと分析技術' }[lang] || 'Tech',
-      tags: [] as string[]
-    },
     biz: {
       label: { zh: '商務成長與策略洞察', en: 'Business Strategy', ja: 'ビジネス戦略' }[lang] || 'Business',
+      tags: [] as string[]
+    },
+    tech: {
+      label: { zh: '數據分析與技術實務 (Tech)', en: 'Data & Analytics', ja: 'データと分析技術' }[lang] || 'Tech',
       tags: [] as string[]
     }
   };
 
-  const aiKeywords = ['AI', '生成式', 'LLM', 'Crawler', 'n8n', '自動化', '趨勢', '趨勢記事'];
+  // Specific Lists based on user request
+  const aiList = ['AI', 'AI應用', 'AI治理', '生成式AI'];
+  const bizList = ['SEO', 'MarTech', '數據分析', '產業洞察', '數位轉型', '企業轉型'];
   const techKeywords = ['Python', 'SQL', 'BigQuery', 'Next.js', 'GA4', '技術教學', '技術實務'];
 
   tags.forEach(tag => {
-    const lowerTag = tag.toLowerCase();
-    if (aiKeywords.some(k => lowerTag.includes(k.toLowerCase()))) {
+    // 1. Check exact match for AI list
+    if (aiList.includes(tag)) {
       categories.ai.tags.push(tag);
-    } else if (techKeywords.some(k => lowerTag.includes(k.toLowerCase()))) {
-      categories.tech.tags.push(tag);
-    } else {
+    } 
+    // 2. Check exact match for Biz list
+    else if (bizList.includes(tag)) {
       categories.biz.tags.push(tag);
+    }
+    // 3. Fallback to keyword matching for the rest
+    else {
+      const lowerTag = tag.toLowerCase();
+      if (techKeywords.some(k => lowerTag.includes(k.toLowerCase()))) {
+        categories.tech.tags.push(tag);
+      } else if (['ai', '生成式', 'llm', 'crawler', 'n8n', '自動化'].some(k => lowerTag.includes(k))) {
+        categories.ai.tags.push(tag);
+      } else {
+        categories.biz.tags.push(tag);
+      }
     }
   });
 

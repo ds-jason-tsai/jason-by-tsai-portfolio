@@ -9,7 +9,7 @@ description:
   ja: "台湾最大級の決済ゲートウェイ「ECPay (緑界)」を Next.js + Vercel 環境で統合した実践記録です。CheckMacValue 暗号検証、OrderResultURL のセキュアリダイレクト、HMAC デジタル署名による不正コピー防止、Google Apps Script を活用した自動通知・売上管理まで、実際のデバッグ経験を交えて解説します。フロントエンド開発者、個人開発者、またはポートフォリオに課金機能を追加したいデータアナリストに最適なガイドです。"
 date: "2026-04-13"
 tags:
-  zh: ["技術教學", "Next.js", "數據轉型"]
+  zh: ["技術教學", "Next.js", "數位轉型"]
   en: ["Technical Tutorial", "Next.js", "Data Transformation"]
   ja: ["技術チュートリアル", "Next.js", "データトランスフォーメーション"]
 ---

@@ -83,7 +83,7 @@ def analyze_and_summarize(text, past_topics=None, current_date=None, slug=None, 
       5. AI治理 (EN: AI Governance, JA: AIガバナンス)
       6. 企業轉型 (EN: Business Transformation, JA: 企業変革)
       7. 產業洞察 (EN: Industry Insights, JA: 業界動向)
-      8. 數據轉型 (EN: Data Transformation, JA: データトランスフォーメーション)
+      8. 數位轉型 (EN: Data Transformation, JA: データトランスフォーメーション)
       9. 技術教學 (EN: Technical Tutorial, JA: 技術チュートリアル)
       10. SEO (EN: SEO, JA: SEO)
       11. Next.js (EN: Next.js, JA: Next.js)

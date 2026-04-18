@@ -87,96 +87,31 @@ export default function MobileNav({
           </div>
         </div>
 
-        <nav className="mobile-nav-links">
+        <nav className="mobile-nav-links" style={{ 
+          display: 'flex', 
+          flexDirection: 'column', 
+          gap: '1.2rem',
+          padding: '0 0.5rem'
+        }}>
           {navLinks.map((link) => (
-            <div key={link.href}>
-              {link.href.includes('/articles') ? (
-                <div className="mobile-articles-section" style={{ marginBottom: '2rem' }}>
-                  <Link 
-                    href={link.href}
-                    className={pathname === link.href ? 'active' : ''}
-                    onClick={() => setIsOpen(false)}
-                    style={{ 
-                      color: '#ffffff',
-                      fontSize: '1.5rem',
-                      fontWeight: '800',
-                      textDecoration: 'none',
-                      display: 'block',
-                      marginBottom: '1.2rem',
-                      letterSpacing: '1px'
-                    }}
-                  >
-                    {link.label}
-                  </Link>
-                  
-                  {/* Compact Horizontal Category Scroll inside Drawer */}
-                  <div className="drawer-category-scroll" style={{ 
-                    display: 'flex', 
-                    gap: '0.8rem', 
-                    overflowX: 'auto', 
-                    paddingBottom: '0.5rem',
-                    msOverflowStyle: 'none',
-                    scrollbarWidth: 'none',
-                    WebkitOverflowScrolling: 'touch'
-                  }}>
-                    {Object.entries(categories || {}).map(([key, cat]: [string, any]) => (
-                      <Link 
-                        key={key}
-                        href={`/${lang}/articles#${cat.tags[0] || ''}`}
-                        onClick={() => setIsOpen(false)}
-                        style={{ 
-                          fontSize: '0.85rem', 
-                          color: '#fff', 
-                          textDecoration: 'none',
-                          background: 'rgba(255,255,255,0.08)',
-                          padding: '0.5rem 1rem',
-                          borderRadius: '50px',
-                          whiteSpace: 'nowrap',
-                          border: '1px solid rgba(255,255,255,0.1)',
-                          fontWeight: '600'
-                        }}
-                      >
-                        {cat.label}
-                      </Link>
-                    ))}
-                    <Link 
-                      href={`/${lang}/articles`}
-                      onClick={() => setIsOpen(false)}
-                      style={{ 
-                        fontSize: '0.85rem', 
-                        color: 'var(--accent-color)', 
-                        textDecoration: 'none',
-                        background: 'rgba(0, 242, 254, 0.1)',
-                        padding: '0.5rem 1rem',
-                        borderRadius: '50px',
-                        whiteSpace: 'nowrap',
-                        border: '1px solid rgba(0, 242, 254, 0.2)',
-                        fontWeight: '800'
-                      }}
-                    >
-                      {lang === 'zh' ? '查看全部 »' : (lang === 'ja' ? 'すべて見る »' : 'View All »')}
-                    </Link>
-                  </div>
-                </div>
-              ) : (
-                <Link 
-                  href={link.href}
-                  className={pathname === link.href ? 'active' : ''}
-                  onClick={() => setIsOpen(false)}
-                  style={{ 
-                    color: '#ffffff',
-                    fontSize: pathname === link.href ? '1.5rem' : '1.5rem',
-                    fontWeight: '800',
-                    textDecoration: 'none',
-                    display: 'block',
-                    marginBottom: '1.2rem',
-                    letterSpacing: '1px'
-                  }}
-                >
-                  {link.label}
-                </Link>
-              )}
-            </div>
+            <Link 
+              key={link.href}
+              href={link.href}
+              className={pathname === link.href ? 'active' : ''}
+              onClick={() => setIsOpen(false)}
+              style={{ 
+                color: '#ffffff',
+                fontSize: '1.15rem',
+                fontWeight: '700',
+                textDecoration: 'none',
+                display: 'block',
+                letterSpacing: '0.5px',
+                padding: '0.5rem 0',
+                transition: 'all 0.2s ease'
+              }}
+            >
+              {link.label}
+            </Link>
           ))}
         </nav>
 
@@ -194,10 +129,6 @@ export default function MobileNav({
       </div>
 
       <style jsx>{`
-        .drawer-category-scroll::-webkit-scrollbar {
-          display: none;
-        }
-
         .mobile-menu-toggle {
           display: none;
           flex-direction: column;
@@ -280,11 +211,11 @@ export default function MobileNav({
         }
 
         .mobile-nav-links a, .mobile-nav-links a:visited {
-          font-size: 1.5rem;
-          font-weight: 800;
-          color: var(--accent-color) !important;
+          font-size: 1.2rem;
+          font-weight: 700;
+          color: #ffffff !important;
           text-decoration: none;
-          transition: color 0.3s ease;
+          transition: all 0.3s ease;
         }
 
         .mobile-nav-links a.active, .mobile-nav-links a.active:visited {

@@ -157,9 +157,6 @@ export default function MobileNav({
                       {lang === 'zh' ? '查看全部 »' : (lang === 'ja' ? 'すべて見る »' : 'View All »')}
                     </Link>
                   </div>
-                  <style jsx>{`
-                    .drawer-category-scroll::-webkit-scrollbar { display: none; }
-                  `}</style>
                 </div>
               ) : (
                 <Link 
@@ -197,6 +194,10 @@ export default function MobileNav({
       </div>
 
       <style jsx>{`
+        .drawer-category-scroll::-webkit-scrollbar {
+          display: none;
+        }
+
         .mobile-menu-toggle {
           display: none;
           flex-direction: column;

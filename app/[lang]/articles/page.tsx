@@ -59,7 +59,9 @@ export default async function Articles({ params }: { params: Promise<{ lang: str
     <section className="articles fade-in" style={{ padding: '0 1rem' }}>
       <style dangerouslySetInnerHTML={{__html: `
         @media (max-width: 768px) {
-          .articles { padding: 0 0.5rem !important; }
+          .articles { 
+            padding: 1.5rem 0.8rem !important; 
+          }
         }
       `}} />
       <h1 className="section-title">{t.title}</h1>

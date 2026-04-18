@@ -40,7 +40,7 @@ export default function ArticleDropdown({ lang, dict, categories, latestArticle 
         }}
       >
         <span style={{ 
-          fontSize: '0.6rem', 
+          fontSize: '0.8rem', 
           opacity: 0.5, 
           transform: `translateY(-50%) ${isOpen ? 'rotate(180deg)' : ''}`, 
           transition: 'transform 0.3s ease', 
@@ -101,7 +101,7 @@ export default function ArticleDropdown({ lang, dict, categories, latestArticle 
                     style={{
                       color: 'var(--text-secondary)',
                       textDecoration: 'none',
-                      fontSize: '0.9rem', // Slightly smaller
+                      fontSize: '1.1rem',
                       transition: 'all 0.2s ease',
                       display: 'block'
                     }}

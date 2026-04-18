@@ -167,32 +167,48 @@ export function getCategorizedTags(lang: string = 'zh') {
     }
   };
 
-  // Specific Lists based on user request
-  const aiList = ['AI 趨勢', 'AI 應用', 'AI 治理'];
-  const bizList = ['SEO', 'MarTech', '成長策略', '數據分析', '產業洞察', '數位轉型', '企業轉型'];
+  // Specific Lists based on user request (Sort Order)
+  const aiOrder = ['AI 趨勢', 'AI 應用', 'AI 治理'];
+  const bizOrder = ['SEO', 'MarTech', '成長策略', '數據分析', '產業洞察', '數位轉型', '企業轉型'];
   const techKeywords = ['Python', 'SQL', 'BigQuery', 'Next.js', 'GA4', '技術實務'];
 
+  // 1. Distribute all discovered tags into categories first
   tags.forEach(tag => {
-    // 1. Check exact match for AI list
-    if (aiList.includes(tag)) {
+    const lowerTag = tag.toLowerCase();
+    
+    // Explicit match checks
+    if (aiOrder.includes(tag)) {
       categories.ai.tags.push(tag);
+    } else if (bizOrder.includes(tag)) {
+      categories.biz.tags.push(tag);
+    } else if (techKeywords.some(k => lowerTag.includes(k.toLowerCase()))) {
+      categories.tech.tags.push(tag);
     } 
-    // 2. Check exact match for Biz list
-    else if (bizList.includes(tag)) {
+    // Heuristic fallbacks
+    else if (['ai', '趨勢', '應用', '治理', 'llm', 'crawler', 'n8n', '自動化'].some(k => lowerTag.includes(k))) {
+      categories.ai.tags.push(tag);
+    } else {
       categories.biz.tags.push(tag);
     }
-    // 3. Fallback to keyword matching for the rest
-    else {
-      const lowerTag = tag.toLowerCase();
-      if (techKeywords.some(k => lowerTag.includes(k.toLowerCase()))) {
-        categories.tech.tags.push(tag);
-      } else if (['ai', '生成式', 'llm', 'crawler', 'n8n', '自動化'].some(k => lowerTag.includes(k))) {
-        categories.ai.tags.push(tag);
-      } else {
-        categories.biz.tags.push(tag);
-      }
-    }
   });
+
+  // 2. Perform STRICT sorting on each category based on the requested order
+  const sortTags = (tagList: string[], order: string[]) => {
+    return [...new Set(tagList)].sort((a, b) => {
+      const indexA = order.indexOf(a);
+      const indexB = order.indexOf(b);
+      // If both not in order, keep discovery order (alphabetical)
+      if (indexA === -1 && indexB === -1) return a.localeCompare(b);
+      // If only one in order, that one comes first
+      if (indexA === -1) return 1;
+      if (indexB === -1) return -1;
+      return indexA - indexB;
+    });
+  };
+
+  categories.ai.tags = sortTags(categories.ai.tags, aiOrder);
+  categories.biz.tags = sortTags(categories.biz.tags, bizOrder);
+  categories.tech.tags = sortTags(categories.tech.tags, []); // Discovery order for tech
 
   return categories;
 }

@@ -154,7 +154,7 @@ export function getCategorizedTags(lang: string = 'zh') {
   
   const categories: Record<string, { label: string, tags: string[] }> = {
     ai: {
-      label: { zh: 'AI 趨勢與自動化', en: 'AI & Automation', ja: 'AIとオートメーション' }[lang] || 'AI',
+      label: { zh: 'AI 相關', en: 'AI Related', ja: 'AI 関連' }[lang] || 'AI',
       tags: [] as string[]
     },
     biz: {
@@ -168,7 +168,7 @@ export function getCategorizedTags(lang: string = 'zh') {
   };
 
   // Specific Lists based on user request
-  const aiList = ['AI', 'AI應用', 'AI治理', '生成式AI'];
+  const aiList = ['AI 趨勢', 'AI 應用', 'AI 治理'];
   const bizList = ['SEO', 'MarTech', '數據分析', '產業洞察', '數位轉型', '企業轉型'];
   const techKeywords = ['Python', 'SQL', 'BigQuery', 'Next.js', 'GA4', '技術教學', '技術實務'];
 

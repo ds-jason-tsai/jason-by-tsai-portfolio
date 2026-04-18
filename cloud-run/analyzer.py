@@ -78,9 +78,9 @@ def analyze_and_summarize(text, past_topics=None, current_date=None, slug=None, 
     - **tags**：每篇文章**必須恰好選擇三個標籤**，且必須從以下固定 Pool 中選擇（確保三語版本對應一致）：
       1. MarTech (EN: MarTech, JA: MarTech)
       2. 數據分析 (EN: Data Analysis, JA: データ分析)
-      3. AI應用 (EN: AI Applications, JA: AI活用)
-      4. 生成式AI (EN: Generative AI, JA: 生成系AI)
-      5. AI治理 (EN: AI Governance, JA: AIガバナンス)
+      3. AI 應用 (EN: AI Applications, JA: AI活用)
+      4. AI 趨勢 (EN: AI Trends, JA: AIトレンド)
+      5. AI 治理 (EN: AI Governance, JA: AIガバナンス)
       6. 企業轉型 (EN: Business Transformation, JA: 企業変革)
       7. 產業洞察 (EN: Industry Insights, JA: 業界動向)
       8. 數位轉型 (EN: Data Transformation, JA: データトランスフォーメーション)
@@ -90,7 +90,6 @@ def analyze_and_summarize(text, past_topics=None, current_date=None, slug=None, 
       12. Python (EN: Python, JA: Python)
       13. Tableau (EN: Tableau, JA: Tableau)
       14. BigQuery (EN: BigQuery, JA: BigQuery)
-      15. AI (EN: AI, JA: AI)
     - **E-E-A-T**：包含作者品牌(Jason Analytics)、今日日期、具體數據或引用來源。
     - **Heading 結構**：使用 ## 主章節、### 子章節。H1 由系統自動生成，文章中禁止出現 # 開頭的行。
     - **安全內容**：無廣告誘導、無詐欺、無暴力、無色情，符合 Google Safe Search 標準。
@@ -174,11 +173,11 @@ def analyze_and_summarize(text, past_topics=None, current_date=None, slug=None, 
             if isinstance(t, dict):
                 # Default to meaningful tags from the new pool if not found
                 fallback = {
-                    'zh': ["AI應用", "數據分析", "產業洞察"],
+                    'zh': ["AI 應用", "數據分析", "產業洞察"],
                     'en': ["AI Applications", "Data Analysis", "Industry Insights"],
                     'ja': ["AI活用", "データ分析", "業界動向"]
                 }
-                tag_list = t.get(lang, fallback.get(lang, ["AI", "數據分析", "產業洞察"]))
+                tag_list = t.get(lang, fallback.get(lang, ["AI 趨勢", "數據分析", "產業洞察"]))
             else:
                 tag_list = ["AI", "數據分析", "產業洞察"]
             

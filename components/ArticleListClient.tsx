@@ -58,8 +58,13 @@ export default function ArticleListClient({
 
         // 1. Check if hash matches a category ID directly (e.g., #ai)
         if (categoryIds.includes(decoded)) {
-          setActiveCategory(prev => (prev !== decoded ? decoded : prev));
-          setVisibleCount(5);
+          setActiveCategory(prev => {
+            if (prev !== decoded) {
+              setVisibleCount(5);
+              return decoded;
+            }
+            return prev;
+          });
         } 
         // 2. Check if hash matches a tag within a category (support global tag links)
         else {
@@ -67,8 +72,14 @@ export default function ArticleListClient({
             data.tags.includes(decoded)
           );
           if (foundCatEntry) {
-            setActiveCategory(foundCatEntry[0]);
-            setVisibleCount(5);
+            const catKey = foundCatEntry[0];
+            setActiveCategory(prev => {
+              if (prev !== catKey) {
+                setVisibleCount(5);
+                return catKey;
+              }
+              return prev;
+            });
           }
         }
       } catch (e) {

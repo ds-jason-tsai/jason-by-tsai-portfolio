@@ -91,7 +91,7 @@ export default function ArticleListClient({
       window.removeEventListener('popstate', syncStateWithUrl);
       clearInterval(pollInterval);
     };
-  }, [categories, activeCategory]);
+  }, [categoryData, categoryIds, activeCategory]);
 
   const handleCategoryClick = (cat: string) => {
     if (activeCategory !== cat) {

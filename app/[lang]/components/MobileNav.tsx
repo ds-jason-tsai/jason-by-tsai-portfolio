@@ -91,7 +91,7 @@ export default function MobileNav({
           {navLinks.map((link) => (
             <div key={link.href}>
               {link.href.includes('/articles') ? (
-                <div className="mobile-articles-section">
+                <div className="mobile-articles-section" style={{ marginBottom: '2rem' }}>
                   <Link 
                     href={link.href}
                     className={pathname === link.href ? 'active' : ''}
@@ -102,40 +102,64 @@ export default function MobileNav({
                       fontWeight: '800',
                       textDecoration: 'none',
                       display: 'block',
-                      marginBottom: '1rem',
+                      marginBottom: '1.2rem',
                       letterSpacing: '1px'
                     }}
                   >
                     {link.label}
                   </Link>
-                  <div className="mobile-tags-nested" style={{ paddingLeft: '1rem', marginBottom: '1.5rem', display: 'flex', flexDirection: 'column', gap: '0.8rem' }}>
-                    {Object.values(categories || {}).map((cat: any) => (
-                      <div key={cat.label} style={{ marginBottom: '0.5rem' }}>
-                        <span style={{ fontSize: '0.75rem', color: 'var(--accent-color)', textTransform: 'uppercase', letterSpacing: '1px', fontWeight: 'bold', display: 'block', marginBottom: '0.4rem' }}>
-                          {cat.label}
-                        </span>
-                        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem' }}>
-                          {cat.tags.slice(0, 4).map((tag: string) => (
-                            <Link 
-                              key={tag}
-                              href={`/${lang}/articles#${tag}`}
-                              onClick={() => setIsOpen(false)}
-                              style={{ 
-                                fontSize: '0.85rem', 
-                                color: 'rgba(255,255,255,0.6)', 
-                                textDecoration: 'none',
-                                background: 'rgba(255,255,255,0.05)',
-                                padding: '0.2rem 0.6rem',
-                                borderRadius: '4px'
-                              }}
-                            >
-                              {tag}
-                            </Link>
-                          ))}
-                        </div>
-                      </div>
+                  
+                  {/* Compact Horizontal Category Scroll inside Drawer */}
+                  <div className="drawer-category-scroll" style={{ 
+                    display: 'flex', 
+                    gap: '0.8rem', 
+                    overflowX: 'auto', 
+                    paddingBottom: '0.5rem',
+                    msOverflowStyle: 'none',
+                    scrollbarWidth: 'none',
+                    WebkitOverflowScrolling: 'touch'
+                  }}>
+                    {Object.entries(categories || {}).map(([key, cat]: [string, any]) => (
+                      <Link 
+                        key={key}
+                        href={`/${lang}/articles#${cat.tags[0] || ''}`}
+                        onClick={() => setIsOpen(false)}
+                        style={{ 
+                          fontSize: '0.85rem', 
+                          color: '#fff', 
+                          textDecoration: 'none',
+                          background: 'rgba(255,255,255,0.08)',
+                          padding: '0.5rem 1rem',
+                          borderRadius: '50px',
+                          whiteSpace: 'nowrap',
+                          border: '1px solid rgba(255,255,255,0.1)',
+                          fontWeight: '600'
+                        }}
+                      >
+                        {cat.label}
+                      </Link>
                     ))}
+                    <Link 
+                      href={`/${lang}/articles`}
+                      onClick={() => setIsOpen(false)}
+                      style={{ 
+                        fontSize: '0.85rem', 
+                        color: 'var(--accent-color)', 
+                        textDecoration: 'none',
+                        background: 'rgba(0, 242, 254, 0.1)',
+                        padding: '0.5rem 1rem',
+                        borderRadius: '50px',
+                        whiteSpace: 'nowrap',
+                        border: '1px solid rgba(0, 242, 254, 0.2)',
+                        fontWeight: '800'
+                      }}
+                    >
+                      {lang === 'zh' ? '查看全部 »' : (lang === 'ja' ? 'すべて見る »' : 'View All »')}
+                    </Link>
                   </div>
+                  <style jsx>{`
+                    .drawer-category-scroll::-webkit-scrollbar { display: none; }
+                  `}</style>
                 </div>
               ) : (
                 <Link 

@@ -88,28 +88,44 @@ export default function PortfolioClient({ projects, lang, t }: { projects: any[]
   return (
     <div className="portfolio-client-container" style={{ maxWidth: '1400px', margin: '0 auto', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
       
-      {/* Category Tabs */}
-      <div style={{ display: 'flex', justifyContent: 'center', gap: '0.8rem', marginBottom: isMobile ? '2rem' : '4rem', flexWrap: 'wrap' }}>
-        {categories.map((cat) => (
-          <button
-            key={cat}
-            onClick={() => handleCategoryClick(cat)}
-            style={{
-              padding: '0.8rem 2rem',
-              borderRadius: '50px',
-              border: '1px solid rgba(255,255,255,0.1)',
-              background: activeCategory === cat ? 'var(--accent-color)' : 'rgba(255,255,255,0.05)',
-              color: activeCategory === cat ? '#000' : '#fff',
-              fontSize: '1rem',
-              fontWeight: activeCategory === cat ? '800' : '500',
-              cursor: 'pointer',
-              transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)'
-            }}
-            className="category-btn fade-in"
-          >
-            {catLabels[cat]}
-          </button>
-        ))}
+      {/* Category Tabs - Horizontal Scroll for Mobile Consistency */}
+      <div className="category-bar-wrapper" style={{ display: 'flex', justifyContent: 'center', gap: '0.8rem', marginBottom: isMobile ? '2rem' : '4rem', width: '100%' }}>
+        <div className="category-scroll-container" style={{ 
+          display: 'flex', 
+          gap: '0.8rem', 
+          overflowX: 'auto', 
+          padding: '0.5rem',
+          scrollbarWidth: 'none',
+          msOverflowStyle: 'none',
+          WebkitOverflowScrolling: 'touch',
+          justifyContent: isMobile ? 'flex-start' : 'center',
+          width: isMobile ? '100%' : 'auto',
+          maskImage: isMobile ? 'linear-gradient(to right, black 85%, transparent 100%)' : 'none',
+          WebkitMaskImage: isMobile ? 'linear-gradient(to right, black 85%, transparent 100%)' : 'none'
+        }}>
+          {categories.map((cat) => (
+            <button
+              key={cat}
+              onClick={() => handleCategoryClick(cat)}
+              style={{
+                padding: '0.8rem 2rem',
+                borderRadius: '50px',
+                border: '1px solid rgba(255,255,255,0.1)',
+                background: activeCategory === cat ? 'var(--accent-color)' : 'rgba(255,255,255,0.05)',
+                color: activeCategory === cat ? '#000' : '#fff',
+                fontSize: '1rem',
+                fontWeight: activeCategory === cat ? '800' : '500',
+                cursor: 'pointer',
+                transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+                whiteSpace: 'nowrap',
+                flexShrink: 0
+              }}
+              className="category-btn fade-in"
+            >
+              {catLabels[cat]}
+            </button>
+          ))}
+        </div>
       </div>
 
       {/* Mobile Navigation Buttons Moved to Top Area */}
@@ -246,6 +262,7 @@ export default function PortfolioClient({ projects, lang, t }: { projects: any[]
           box-shadow: 0 0 20px rgba(0, 242, 254, 0.2);
           transform: scale(1.05);
         }
+        .category-scroll-container::-webkit-scrollbar { display: none; }
         .carousel-nav-btn {
           position: absolute;
           top: 40%;

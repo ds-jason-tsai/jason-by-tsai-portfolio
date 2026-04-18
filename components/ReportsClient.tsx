@@ -284,32 +284,48 @@ export default function ReportsClient({ lang }: { lang: 'zh' | 'en' | 'ja' }) {
         {t.desc}
       </p>
 
-      {/* Category Tabs */}
-      <div style={{ display: 'flex', justifyContent: 'center', gap: '1rem', marginBottom: '3rem', flexWrap: 'wrap' }}>
-        {(['all', 'video', 'report', 'data'] as const).map(cat => (
-          <button
-            key={cat}
-            onClick={() => {
-              setActiveCategory(cat);
-              setCurrentIndex(0);
-              window.history.pushState(null, '', `#${cat}`);
-            }}
-            style={{
-              padding: '0.6rem 2rem',
-              borderRadius: '50px',
-              border: '1px solid rgba(255,255,255,0.1)',
-              background: activeCategory === cat ? 'var(--accent-color)' : 'rgba(255,255,255,0.05)',
-              color: activeCategory === cat ? '#000' : '#fff',
-              fontSize: '0.9rem',
-              fontWeight: activeCategory === cat ? '800' : '500',
-              cursor: 'pointer',
-              transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)'
-            }}
-            className="category-btn"
-          >
-            {t.categories[cat]}
-          </button>
-        ))}
+      {/* Category Tabs - Horizontal Scroll for Mobile Consistency */}
+      <div className="category-bar-wrapper" style={{ display: 'flex', justifyContent: 'center', gap: '1rem', marginBottom: '3rem' }}>
+        <div className="category-scroll-container" style={{ 
+          display: 'flex', 
+          gap: '1rem', 
+          overflowX: 'auto', 
+          padding: '0.5rem',
+          scrollbarWidth: 'none',
+          msOverflowStyle: 'none',
+          WebkitOverflowScrolling: 'touch',
+          justifyContent: isMobile ? 'flex-start' : 'center',
+          width: isMobile ? '100%' : 'auto',
+          maskImage: isMobile ? 'linear-gradient(to right, black 85%, transparent 100%)' : 'none',
+          WebkitMaskImage: isMobile ? 'linear-gradient(to right, black 85%, transparent 100%)' : 'none'
+        }}>
+          {(['all', 'video', 'report', 'data'] as const).map(cat => (
+            <button
+              key={cat}
+              onClick={() => {
+                setActiveCategory(cat);
+                setCurrentIndex(0);
+                window.history.pushState(null, '', `#${cat}`);
+              }}
+              style={{
+                padding: '0.6rem 2rem',
+                borderRadius: '50px',
+                border: '1px solid rgba(255,255,255,0.1)',
+                background: activeCategory === cat ? 'var(--accent-color)' : 'rgba(255,255,255,0.05)',
+                color: activeCategory === cat ? '#000' : '#fff',
+                fontSize: '0.9rem',
+                fontWeight: activeCategory === cat ? '800' : '500',
+                cursor: 'pointer',
+                transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+                whiteSpace: 'nowrap',
+                flexShrink: 0
+              }}
+              className="category-btn"
+            >
+              {t.categories[cat]}
+            </button>
+          ))}
+        </div>
       </div>
 
       <div className="reports-outer-container" style={{ position: 'relative', width: '100%', maxWidth: '1000px', margin: '0 auto' }}>
@@ -484,6 +500,8 @@ export default function ReportsClient({ lang }: { lang: 'zh' | 'en' | 'ja' }) {
         
         .card-body-scrollable::-webkit-scrollbar { width: 4px; }
         .card-body-scrollable::-webkit-scrollbar-thumb { background: var(--accent-color); border-radius: 10px; }
+
+        .category-scroll-container::-webkit-scrollbar { display: none; }
 
         .report-card:hover {
           transform: translateY(-8px);

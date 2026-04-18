@@ -142,13 +142,13 @@ export default function ArticleListClient({ articles, lang, t }: { articles: any
         <button
           onClick={() => handleCategoryClick('all')}
           style={{
-            padding: '0.6rem 2rem', // Sync with Reports
-            borderRadius: '50px', // Sync with Reports
+            padding: '0.6rem 2rem',
+            borderRadius: '50px',
             border: '1px solid rgba(255,255,255,0.1)',
             background: activeCategory === 'all' ? 'var(--accent-color)' : 'rgba(255,255,255,0.05)',
             color: activeCategory === 'all' ? '#000' : '#fff',
             fontSize: '0.9rem',
-            fontWeight: activeCategory === 'all' ? '800' : '500',
+            fontWeight: activeCategory === 'all' ? '800' : '600',
             lineHeight: '1',
             cursor: 'pointer',
             transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
@@ -158,18 +158,27 @@ export default function ArticleListClient({ articles, lang, t }: { articles: any
           }}
           className="category-btn"
         >
-          {lang === 'zh' ? '全部文章' : (lang === 'ja' ? 'すべての記事' : 'All Articles')}
+          {lang === 'zh' ? '全部 »' : (lang === 'ja' ? 'すべて »' : 'All »')}
         </button>
 
-        <div className="category-scroll-wrapper" style={{ position: 'relative', overflow: 'hidden', flex: 1, display: 'flex', alignItems: 'center' }}>
-          <div className="category-marquee-track" style={{ display: 'flex', gap: '0.8rem', width: 'max-content', alignItems: 'center' }}>
-            {[...uniqueTags, ...uniqueTags].map((cat, idx) => (
+        <div className="category-scroll-wrapper" style={{ 
+          position: 'relative', 
+          overflowX: 'auto', 
+          flex: 1, 
+          display: 'flex', 
+          alignItems: 'center',
+          msOverflowStyle: 'none',
+          scrollbarWidth: 'none',
+          WebkitOverflowScrolling: 'touch'
+        }}>
+          <div className="category-manual-track" style={{ display: 'flex', gap: '0.8rem', alignItems: 'center', paddingRight: '4rem' }}>
+            {uniqueTags.map((cat, idx) => (
               <button
                 key={`${cat}-${idx}`}
                 onClick={() => handleCategoryClick(cat)}
                 style={{
-                  padding: '0.6rem 2rem', // Sync with Reports
-                  borderRadius: '50px', // Sync with Reports
+                  padding: '0.6rem 2rem',
+                  borderRadius: '50px',
                   border: '1px solid rgba(255,255,255,0.1)',
                   background: activeCategory === cat ? 'var(--accent-color)' : 'rgba(255,255,255,0.05)',
                   color: activeCategory === cat ? '#000' : '#fff',
@@ -294,18 +303,14 @@ export default function ArticleListClient({ articles, lang, t }: { articles: any
           box-shadow: 0 0 20px rgba(0, 242, 254, 0.2);
           transform: scale(1.05);
         }
-        /* Unified Marquee Animation for all screens if needed */
-        .category-marquee-track {
-          animation: marquee-scroll 40s linear infinite;
-        }
-        .category-marquee-track:active,
-        .category-marquee-track:hover {
-          animation-play-state: paused;
+        
+        .category-scroll-wrapper::-webkit-scrollbar {
+          display: none;
         }
 
-        @keyframes marquee-scroll {
-          0% { transform: translateX(0); }
-          100% { transform: translateX(calc(-50% - 0.4rem)); }
+        .category-scroll-wrapper {
+          mask-image: linear-gradient(to right, black 85%, transparent 100%);
+          -webkit-mask-image: linear-gradient(to right, black 85%, transparent 100%);
         }
 
         .search-input:focus {
@@ -321,24 +326,7 @@ export default function ArticleListClient({ articles, lang, t }: { articles: any
           box-shadow: 0 10px 25px rgba(0, 242, 254, 0.3);
         }
 
-
-
-
         @media (max-width: 768px) {
-          .category-marquee-track {
-            animation-duration: 25s; /* Faster on mobile */
-          }
-          .category-scroll-wrapper::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            right: 0;
-            height: 100%;
-            width: 40px;
-            background: linear-gradient(to left, var(--bg-color, #0a0a0a), transparent);
-            pointer-events: none;
-            z-index: 2;
-          }
           .articles-client-container { padding: 0 !important; }
           .article-list-card { 
             padding: 1.5rem !important; 

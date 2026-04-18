@@ -169,7 +169,7 @@ export function getCategorizedTags(lang: string = 'zh') {
 
   // Specific Lists based on user request
   const aiList = ['AI 趨勢', 'AI 應用', 'AI 治理'];
-  const bizList = ['數據分析', '產業洞察', '數位轉型', '企業轉型', 'SEO', 'MarTech'];
+  const bizList = ['SEO', 'MarTech', '成長策略', '數據分析', '產業洞察', '數位轉型', '企業轉型'];
   const techKeywords = ['Python', 'SQL', 'BigQuery', 'Next.js', 'GA4', '技術實務'];
 
   tags.forEach(tag => {

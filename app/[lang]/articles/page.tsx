@@ -1,4 +1,4 @@
-import { getSortedArticlesData } from '../../../lib/markdown';
+import { getSortedArticlesData, getCategorizedTags } from '../../../lib/markdown';
 import ArticleListClient from '../../../components/ArticleListClient';
 import type { Metadata } from 'next';
 
@@ -53,6 +53,7 @@ export default async function Articles({ params }: { params: Promise<{ lang: str
   };
   const t = content[lang];
   const articles = getSortedArticlesData();
+  const categories = getCategorizedTags(lang);
 
   return (
     <section className="articles fade-in" style={{ padding: '0 1rem' }}>
@@ -63,7 +64,7 @@ export default async function Articles({ params }: { params: Promise<{ lang: str
       `}} />
       <h1 className="section-title">{t.title}</h1>
       <p style={{ textAlign: 'center', marginBottom: '4rem', color: 'var(--text-secondary)' }}>{t.desc}</p>
-      <ArticleListClient articles={articles} lang={lang} t={t} />
+      <ArticleListClient articles={articles} lang={lang} t={t} categories={categories} />
     </section>
   );
 }

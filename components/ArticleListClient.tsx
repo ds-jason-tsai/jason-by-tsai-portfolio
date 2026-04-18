@@ -3,19 +3,38 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { usePathname } from 'next/navigation';
 
-export default function ArticleListClient({ articles, lang, t }: { articles: any[], lang: string, t: any }) {
+export default function ArticleListClient({ 
+  articles, 
+  lang, 
+  t, 
+  categories: categoryData 
+}: { 
+  articles: any[], 
+  lang: string, 
+  t: any,
+  categories: any
+}) {
   // States for search and pagination
   const [activeCategory, setActiveCategory] = useState<string>('all');
   const [searchQuery, setSearchQuery] = useState('');
   const [visibleCount, setVisibleCount] = useState(5);
-  const pathname = usePathname();
-  
-  // Memoize unique tags and categories for stability
-  const uniqueTags = useMemo(() => Array.from(new Set(
-    articles.flatMap(art => art.tags ? (art.tags[lang] || []) : [])
-  )), [articles, lang]);
-  
-  const categories = useMemo(() => ['all', ...uniqueTags], [uniqueTags]);
+  const [isMobile, setIsMobile] = useState(false);
+  useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth < 768);
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  // Category Names mapping (consistent with Mega Menu)
+  const catNames: Record<string, string> = {
+    'all': lang === 'zh' ? '全部內容' : (lang === 'ja' ? 'すべて' : 'All Articles'),
+    'ai': categoryData.ai.label,
+    'biz': categoryData.biz.label,
+    'tech': categoryData.tech.label
+  };
+
+  const categoryIds = useMemo(() => Object.keys(catNames), [catNames]);
 
   // Terminal Fix: Robust Hash Synchronization Suite (+ URL Purifier)
   useEffect(() => {
@@ -34,23 +53,23 @@ export default function ArticleListClient({ articles, lang, t }: { articles: any
       try {
         // Robust Extraction & URL Cleaning
         const segments = hash.split('#').filter(Boolean);
-        const lastTag = segments.pop();
-        const decoded = decodeURIComponent(lastTag || '').trim();
+        const lastHash = segments.pop();
+        const decoded = decodeURIComponent(lastHash || '').trim();
 
-        // [URL PURIFIER] If there were multiple hashes, clean the URL immediately
-        if (segments.length > 0) {
-          const cleanUrl = window.location.pathname + window.location.search + '#' + (lastTag || '');
-          window.history.replaceState(null, '', cleanUrl);
-        }
-
-        if (categories.includes(decoded)) {
-          setActiveCategory(prev => {
-            if (prev !== decoded) {
-              setVisibleCount(5); // Reset on real change
-              return decoded;
-            }
-            return prev;
-          });
+        // 1. Check if hash matches a category ID directly (e.g., #ai)
+        if (categoryIds.includes(decoded)) {
+          setActiveCategory(prev => (prev !== decoded ? decoded : prev));
+          setVisibleCount(5);
+        } 
+        // 2. Check if hash matches a tag within a category (support global tag links)
+        else {
+          const foundCatEntry = Object.entries(categoryData).find(([_, data]: any) => 
+            data.tags.includes(decoded)
+          );
+          if (foundCatEntry) {
+            setActiveCategory(foundCatEntry[0]);
+            setVisibleCount(5);
+          }
         }
       } catch (e) {
         console.error("Hash sync failed", e);
@@ -83,11 +102,15 @@ export default function ArticleListClient({ articles, lang, t }: { articles: any
     }
   };
 
-  // Multiple Filter Logic: Category + Search (TERMINAL STRICTNESS)
+  // Category-based filtering logic
   let processedArticles = articles.filter(art => {
-    // Exact string match for categories
     const articleTags = art.tags?.[lang] || [];
-    const matchesCategory = activeCategory === 'all' || articleTags.some((t: string) => t === activeCategory);
+    let matchesCategory = activeCategory === 'all';
+    
+    if (!matchesCategory) {
+      const allowedTags = categoryData[activeCategory]?.tags || [];
+      matchesCategory = articleTags.some((t: string) => allowedTags.includes(t));
+    }
     
     const matchesSearch = 
       art.title[lang].toLowerCase().includes(searchQuery.toLowerCase()) || 
@@ -137,57 +160,42 @@ export default function ArticleListClient({ articles, lang, t }: { articles: any
         <span style={{ position: 'absolute', left: '1.2rem', top: '50%', transform: 'translateY(-50%)', opacity: 0.4, fontSize: '1.2rem' }}>🔍</span>
       </div>
 
-      {/* Category Tabs */}
-      <div className="category-bar-wrapper" style={{ marginBottom: '3.5rem', display: 'flex', alignItems: 'center', gap: '0.8rem' }}>
-        <button
-          onClick={() => handleCategoryClick('all')}
-          style={{
-            padding: '0.6rem 2rem',
-            borderRadius: '50px',
-            border: '1px solid rgba(255,255,255,0.1)',
-            background: activeCategory === 'all' ? 'var(--accent-color)' : 'rgba(255,255,255,0.05)',
-            color: activeCategory === 'all' ? '#000' : '#fff',
-            fontSize: '1rem',
-            fontWeight: activeCategory === 'all' ? '800' : '600',
-            lineHeight: '1',
-            cursor: 'pointer',
-            transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
-            whiteSpace: 'nowrap',
-            flexShrink: 0,
-            zIndex: 3
-          }}
-          className="category-btn"
-        >
-          {lang === 'zh' ? '全部 »' : (lang === 'ja' ? 'すべて »' : 'All »')}
-        </button>
-
-        <div className="category-scroll-wrapper" style={{ position: 'relative', overflow: 'hidden', flex: 1, display: 'flex', alignItems: 'center' }}>
-          <div className="category-marquee-track" style={{ display: 'flex', gap: '0.8rem', width: 'max-content', alignItems: 'center' }}>
-            {[...uniqueTags, ...uniqueTags].map((cat, idx) => (
-              <button
-                key={`${cat}-${idx}`}
-                onClick={() => handleCategoryClick(cat)}
-                style={{
-                  padding: '0.6rem 2rem',
-                  borderRadius: '50px',
-                  border: '1px solid rgba(255,255,255,0.1)',
-                  background: activeCategory === cat ? 'var(--accent-color)' : 'rgba(255,255,255,0.05)',
-                  color: activeCategory === cat ? '#000' : '#fff',
-                  fontSize: '1rem',
-                  fontWeight: activeCategory === cat ? '800' : '600',
-                  lineHeight: '1',
-                  cursor: 'pointer',
-                  transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
-                  whiteSpace: 'nowrap',
-                  flexShrink: 0
-                }}
-                className="category-btn"
-              >
-                {cat}
-              </button>
-            ))}
-          </div>
-        </div>
+      {/* Category Tabs (Structured Style) */}
+      <div className="category-bar-wrapper" style={{ 
+        display: 'flex', 
+        justifyContent: isMobile ? 'flex-start' : 'center', 
+        gap: '1rem', 
+        marginBottom: '3.5rem', 
+        width: '100%',
+        overflowX: isMobile ? 'auto' : 'visible',
+        paddingBottom: isMobile ? '1rem' : '0',
+        scrollbarWidth: 'none',
+        msOverflowStyle: 'none',
+        WebkitOverflowScrolling: 'touch'
+      }}>
+        {categoryIds.map((id) => (
+          <button
+            key={id}
+            onClick={() => handleCategoryClick(id)}
+            style={{
+              padding: '0.8rem 2.2rem',
+              borderRadius: '50px',
+              border: '1px solid rgba(255,255,255,0.1)',
+              background: activeCategory === id ? 'var(--accent-color)' : 'rgba(255,255,255,0.05)',
+              color: activeCategory === id ? '#000' : '#fff',
+              fontSize: '1rem',
+              fontWeight: activeCategory === id ? '800' : '600',
+              lineHeight: '1',
+              cursor: 'pointer',
+              transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+              whiteSpace: 'nowrap',
+              flexShrink: 0
+            }}
+            className="category-btn"
+          >
+            {catNames[id]}
+          </button>
+        ))}
       </div>
 
       <div className="articles-list" style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
@@ -295,23 +303,15 @@ export default function ArticleListClient({ articles, lang, t }: { articles: any
           transform: scale(1.05);
         }
         
-        /* Slow Marquee Animation (60s as requested) */
-        .category-marquee-track {
-          animation: marquee-scroll 60s linear infinite;
-        }
-        .category-marquee-track:active,
-        .category-marquee-track:hover {
-          animation-play-state: paused;
-        }
-
-        @keyframes marquee-scroll {
-          0% { transform: translateX(0); }
-          100% { transform: translateX(calc(-50% - 0.4rem)); }
-        }
-
+        /* slow marquee removed */
         .category-scroll-wrapper {
           mask-image: linear-gradient(to right, black 85%, transparent 100%);
           -webkit-mask-image: linear-gradient(to right, black 85%, transparent 100%);
+          scrollbar-width: none;
+          -ms-overflow-style: none;
+        }
+        .category-scroll-wrapper::-webkit-scrollbar {
+          display: none;
         }
 
         .search-input:focus {

@@ -158,19 +158,19 @@ export function getCategorizedTags(lang: string = 'zh') {
       tags: [] as string[]
     },
     biz: {
-      label: { zh: '商務成長與策略洞察', en: 'Business Strategy', ja: 'ビジネス戦略' }[lang] || 'Business',
+      label: { zh: '成長策略', en: 'Growth Strategy', ja: '成長戦略' }[lang] || 'Strategy',
       tags: [] as string[]
     },
     tech: {
-      label: { zh: '數據分析與技術實務 (Tech)', en: 'Data & Analytics', ja: 'データと分析技術' }[lang] || 'Tech',
+      label: { zh: '技術實務', en: 'Tech Practice', ja: '技術実務' }[lang] || 'Tech',
       tags: [] as string[]
     }
   };
 
   // Specific Lists based on user request
   const aiList = ['AI 趨勢', 'AI 應用', 'AI 治理'];
-  const bizList = ['SEO', 'MarTech', '數據分析', '產業洞察', '數位轉型', '企業轉型'];
-  const techKeywords = ['Python', 'SQL', 'BigQuery', 'Next.js', 'GA4', '技術教學', '技術實務'];
+  const bizList = ['數據分析', '產業洞察', '數位轉型', '企業轉型', 'SEO', 'MarTech'];
+  const techKeywords = ['Python', 'SQL', 'BigQuery', 'Next.js', 'GA4', '技術實務'];
 
   tags.forEach(tag => {
     // 1. Check exact match for AI list

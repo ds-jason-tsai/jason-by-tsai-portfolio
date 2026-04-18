@@ -7,12 +7,10 @@ import ShareButton from './ShareButton';
 
 export default function MobileNav({ 
   lang, 
-  dict,
-  categories
+  dict
 }: { 
   lang: string; 
   dict: any;
-  categories: any;
 }) {
   const [isOpen, setIsOpen] = useState(false);
   const pathname = usePathname();

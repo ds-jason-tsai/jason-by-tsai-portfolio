@@ -213,7 +213,6 @@ export default async function RootLayout({
             <MobileNav 
               lang={lang} 
               dict={dict} 
-              categories={getCategorizedTags(lang)} 
             />
           </div>
         </nav>

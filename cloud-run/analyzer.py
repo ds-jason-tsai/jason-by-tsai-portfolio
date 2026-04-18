@@ -84,11 +84,12 @@ def analyze_and_summarize(text, past_topics=None, current_date=None, slug=None, 
       6. 企業轉型 (EN: Business Transformation, JA: 企業変革)
       7. 產業洞察 (EN: Industry Insights, JA: 業界動向)
       8. 數位轉型 (EN: Data Transformation, JA: データトランスフォーメーション)
-      9. SEO (EN: SEO, JA: SEO)
-      10. Next.js (EN: Next.js, JA: Next.js)
-      11. Python (EN: Python, JA: Python)
-      12. Tableau (EN: Tableau, JA: Tableau)
+      10. SEO (EN: SEO, JA: SEO)
+      11. Next.js (EN: Next.js, JA: Next.js)
+      12. Python (EN: Python, JA: Python)
       13. BigQuery (EN: BigQuery, JA: BigQuery)
+      14. GA4 (EN: GA4, JA: GA4)
+      15. 成長策略 (EN: Growth Strategy, JA: 成長戦略)
     - **E-E-A-T**：包含作者品牌(Jason Analytics)、今日日期、具體數據或引用來源。
     - **Heading 結構**：使用 ## 主章節、### 子章節。H1 由系統自動生成，文章中禁止出現 # 開頭的行。
     - **安全內容**：無廣告誘導、無詐欺、無暴力、無色情，符合 Google Safe Search 標準。

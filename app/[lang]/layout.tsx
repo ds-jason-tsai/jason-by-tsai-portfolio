@@ -6,6 +6,11 @@ import { getDictionary } from '../dictionaries';
 import Script from 'next/script';
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
+import Image from 'next/image';
+import NavLink from './components/NavLink';
+import MobileNav from './components/MobileNav';
+import ShareButton from './components/ShareButton';
+import { getLatestArticle } from '@/lib/markdown';
 
 const geistSans = Geist({ variable: "--font-geist-sans", subsets: ["latin"] });
 const geistMono = Geist_Mono({ variable: "--font-geist-mono", subsets: ["latin"] });
@@ -59,12 +64,7 @@ export async function generateStaticParams() {
    return [{ lang: 'zh' }, { lang: 'en' }, { lang: 'ja' }];
 }
 
-import NavLink from './components/NavLink';
-import MobileNav from './components/MobileNav';
-import ShareButton from './components/ShareButton';
-import Image from 'next/image';
-import { getLatestArticle, getCategorizedTags } from '@/lib/markdown';
-import ArticleDropdown from './components/ArticleDropdown';
+
 
 export default async function RootLayout({
   children,
@@ -169,13 +169,7 @@ export default async function RootLayout({
               <NavLink lang={lang} href={`/${lang}/portfolio`}>{dict.nav.portfolio}</NavLink>
               <NavLink lang={lang} href={`/${lang}/services`}>{dict.nav.services}</NavLink>
               
-              {/* Categorized Dropdown for Articles */}
-              <ArticleDropdown 
-                lang={lang} 
-                dict={dict} 
-                categories={getCategorizedTags(lang)} 
-                latestArticle={getLatestArticle()} 
-              />
+              <NavLink lang={lang} href={`/${lang}/articles`}>{dict.nav.articles}</NavLink>
               
               <NavLink lang={lang} href={`/${lang}/reports`}>{dict.nav.reports || 'Premium Access'}</NavLink>
               <NavLink lang={lang} href={`/${lang}/dashboards`}>{dict.nav.dashboards || 'Dashboards'}</NavLink>

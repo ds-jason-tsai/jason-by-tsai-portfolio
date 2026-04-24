@@ -129,6 +129,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ lang: 
           font-size: 1.4rem;
           margin-top: 2rem;
           margin-bottom: 1rem;
+          color: var(--accent-color);
         }
         .markdown-content p {
           margin-bottom: 1.5rem;

@@ -23,7 +23,7 @@ pinned: true
 
 <br>
 
-### <span style="color: #00f2fe;">1. 首頁 (Home)：數據洞察的入口與技術櫥窗</span>
+### 1. 首頁 (Home)：數據洞察的入口與技術櫥窗
 
 首頁是本站的數位門面。在現代化的 Dark Mode 視覺框架下，我們不僅展示了專業身份，更展現了背後的技術底氣。
 
@@ -35,7 +35,7 @@ pinned: true
 
 <br>
 
-### <span style="color: #00f2fe;">2. 經歷區 (Experience)：專業歷程與職涯里程碑</span>
+### 2. 經歷區 (Experience)：專業歷程與職涯里程碑
 
 這裡詳細記錄了我在數據領域的專業成長與實戰累積。
 
@@ -46,7 +46,7 @@ pinned: true
 
 <br>
 
-### <span style="color: #00f2fe;">3. 作品集區 (Portfolio)：實戰能力的具體證明</span>
+### 3. 作品集區 (Portfolio)：實戰能力的具體證明
 
 以專案為中心，將抽象的技術能力具象化。
 
@@ -58,7 +58,7 @@ pinned: true
 
 <br>
 
-### <span style="color: #00f2fe;">4. 數據儀表板 (Dashboards)：視覺化的說服力</span>
+### 4. 數據儀表板 (Dashboards)：視覺化的說服力
 
 數據只有在被直觀「看見」時，才能迅速轉化為決策行動。
 
@@ -69,7 +69,7 @@ pinned: true
 
 <br>
 
-### <span style="color: #00f2fe;">5. 文章與知識庫 (Articles)：自動化新聞與技術筆記</span>
+### 5. 文章與知識庫 (Articles)：自動化新聞與技術筆記
 
 本站最有技術含量的內容核心，分為三大知識維度：
 
@@ -81,7 +81,7 @@ pinned: true
 
 <br>
 
-### <span style="color: #00f2fe;">6. 專業報告 (Reports)：數據價值的深度挖掘</span>
+### 6. 專業報告 (Reports)：數據價值的深度挖掘
 
 專為高階經理人與創業家設計的 Premium 深度內容。
 
@@ -93,7 +93,7 @@ pinned: true
 
 <br>
 
-### <span style="color: #00f2fe;">7. 服務方案與聯絡中心 (Services & Contact)</span>
+### 7. 服務方案與聯絡中心 (Services & Contact)
 
 如果您面臨數據孤島、AI 轉型焦慮或數位增長瓶頸，我們提供：
 
@@ -118,7 +118,7 @@ I firmly believe that the value of technology lies in how precisely it solves re
 
 <br>
 
-### <span style="color: #00f2fe;">1. Home Page: Gateway to Data Insights & Tech Showcase</span>
+### 1. Home Page: Gateway to Data Insights & Tech Showcase
 
 The Home page is our digital facade. Within a modern Dark Mode visual framework, we showcase our professional identity and technical foundation.
 
@@ -130,7 +130,7 @@ The Home page is our digital facade. Within a modern Dark Mode visual framework,
 
 <br>
 
-### <span style="color: #00f2fe;">2. Experience Page: Professional Journey & Milestones</span>
+### 2. Experience Page: Professional Journey & Milestones
 
 This section details my professional growth and practical accumulation in the data field.
 
@@ -141,7 +141,7 @@ This section details my professional growth and practical accumulation in the da
 
 <br>
 
-### <span style="color: #00f2fe;">3. Portfolio Page: Concrete Proof of Capabilities</span>
+### 3. Portfolio Page: Concrete Proof of Capabilities
 
 Project-centric displays that materialize abstract technical skills.
 
@@ -153,7 +153,7 @@ Project-centric displays that materialize abstract technical skills.
 
 <br>
 
-### <span style="color: #00f2fe;">4. Dashboards Page: The Persuasive Power of Visualization</span>
+### 4. Dashboards Page: The Persuasive Power of Visualization
 
 Data only transforms into action when it can be intuitively "seen."
 
@@ -164,7 +164,7 @@ Data only transforms into action when it can be intuitively "seen."
 
 <br>
 
-### <span style="color: #00f2fe;">5. Articles Page: Automated News & Knowledge Base</span>
+### 5. Articles Page: Automated News & Knowledge Base
 
 The most technically rich core of this site, divided into three knowledge dimensions:
 
@@ -176,7 +176,7 @@ The most technically rich core of this site, divided into three knowledge dimens
 
 <br>
 
-### <span style="color: #00f2fe;">6. Reports Page: Deep Mining of Data Value</span>
+### 6. Reports Page: Deep Mining of Data Value
 
 Premium content designed for senior managers and entrepreneurs.
 
@@ -188,7 +188,7 @@ Premium content designed for senior managers and entrepreneurs.
 
 <br>
 
-### <span style="color: #00f2fe;">7. Services & Contact Pages</span>
+### 7. Services & Contact Pages
 
 If you face data silos, AI transformation anxiety, or digital growth bottlenecks, we offer:
 
@@ -213,7 +213,7 @@ If you face data silos, AI transformation anxiety, or digital growth bottlenecks
 
 <br>
 
-### <span style="color: #00f2fe;">1. ホーム (Home)：データインサイトへの入り口と技術ショーケース</span>
+### 1. ホーム (Home)：データインサイトへの入り口と技術ショーケース
 
 ホーム画面は当サイトのデジタルな顔です。モダンなダークモードの視覚フレームワークの中で、プロフェッショナルなアイデンティティと技術的な裏付けを展示しています。
 
@@ -225,7 +225,7 @@ If you face data silos, AI transformation anxiety, or digital growth bottlenecks
 
 <br>
 
-### <span style="color: #00f2fe;">2. 経歴ページ (Experience)：プロフェッショナルな歩みとマイルストーン</span>
+### 2. 経歴ページ (Experience)：プロフェッショナルな歩みとマイルストーン
 
 データ分野での専門的な成長と実戦の積み重ねを記録しています。
 
@@ -236,7 +236,7 @@ If you face data silos, AI transformation anxiety, or digital growth bottlenecks
 
 <br>
 
-### <span style="color: #00f2fe;">3. ポートフォリオ (Portfolio)：実戦能力の具体的な証明</span>
+### 3. ポートフォリオ (Portfolio)：実戦能力の具体的な証明
 
 プロジェクトを中心に、抽象的な技術能力を具現化します。
 
@@ -248,7 +248,7 @@ If you face data silos, AI transformation anxiety, or digital growth bottlenecks
 
 <br>
 
-### <span style="color: #00f2fe;">4. データダッシュボード (Dashboards)：視覚的な説得力</span>
+### 4. データダッシュボード (Dashboards)：視覚的な説得力
 
 データは直感的に「見えた」ときに初めて迅速な意思決定行動に変わります。
 
@@ -259,7 +259,7 @@ If you face data silos, AI transformation anxiety, or digital growth bottlenecks
 
 <br>
 
-### <span style="color: #00f2fe;">5. 記事専区 (Articles)：自動化ニュースとナレッジベース</span>
+### 5. 記事専区 (Articles)：自動化ニュースとナレッジベース
 
 サイト内で最も技術力の高いコンテンツの核心であり、3 つの知識次元に分かれています。
 
@@ -271,7 +271,7 @@ If you face data silos, AI transformation anxiety, or digital growth bottlenecks
 
 <br>
 
-### <span style="color: #00f2fe;">6. 専門レポート (Reports)：データ価値の深堀り</span>
+### 6. 専門レポート (Reports)：データ価値の深堀り
 
 経営幹部や起業家向けに設計されたプレミアムな深いコンテンツです。
 
@@ -283,7 +283,7 @@ If you face data silos, AI transformation anxiety, or digital growth bottlenecks
 
 <br>
 
-### <span style="color: #00f2fe;">7. サービスプランと連絡先 (Services & Contact)</span>
+### 7. サービスプランと連絡先 (Services & Contact)
 
 データサイロ、AI 転換への不安、デジタル成長の停滞に直面している場合、以下を提供します：
 

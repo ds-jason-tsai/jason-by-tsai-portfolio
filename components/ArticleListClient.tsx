@@ -273,7 +273,7 @@ export default function ArticleListClient({
         {hasMore && (
            <div style={{ textAlign: 'center', marginTop: '3rem' }}>
              <button 
-               onClick={() => setVisibleCount(prev => prev + 8)}
+               onClick={() => setVisibleCount(prev => prev + 5)}
                className="load-more-btn"
                style={{
                  padding: '1rem 3rem',

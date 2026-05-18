@@ -1107,4 +1107,27 @@
     <xhtml:link rel="alternate" hreflang="ja" href="https://jason-by-tsai-portfolio.vercel.app/ja/articles/ai-news-2026-05-18-1" />
     <priority>0.7</priority>
   </url>
+
+  <!-- ai-news-2026-05-19-1 -->
+  <url>
+    <loc>https://jason-by-tsai-portfolio.vercel.app/zh/articles/ai-news-2026-05-19-1</loc>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://jason-by-tsai-portfolio.vercel.app/zh/articles/ai-news-2026-05-19-1" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://jason-by-tsai-portfolio.vercel.app/en/articles/ai-news-2026-05-19-1" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://jason-by-tsai-portfolio.vercel.app/ja/articles/ai-news-2026-05-19-1" />
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://jason-by-tsai-portfolio.vercel.app/en/articles/ai-news-2026-05-19-1</loc>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://jason-by-tsai-portfolio.vercel.app/zh/articles/ai-news-2026-05-19-1" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://jason-by-tsai-portfolio.vercel.app/en/articles/ai-news-2026-05-19-1" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://jason-by-tsai-portfolio.vercel.app/ja/articles/ai-news-2026-05-19-1" />
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://jason-by-tsai-portfolio.vercel.app/ja/articles/ai-news-2026-05-19-1</loc>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://jason-by-tsai-portfolio.vercel.app/zh/articles/ai-news-2026-05-19-1" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://jason-by-tsai-portfolio.vercel.app/en/articles/ai-news-2026-05-19-1" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://jason-by-tsai-portfolio.vercel.app/ja/articles/ai-news-2026-05-19-1" />
+    <priority>0.7</priority>
+  </url>
 </urlset>

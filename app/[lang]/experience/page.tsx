@@ -38,17 +38,17 @@ export default async function Experience({ params }: { params: Promise<{ lang: s
           issuedBy: "頒發單位",
           exp: [
             { date: "2026.06 - 至今", role: "資深解決方案工程師 (Senior Solution Engineer)", company: "Salesforce", url: "https://www.salesforce.com/", logo: "/assets/icons/Salesforce.png", desc: "主導 20+ 企業客戶(涵蓋金融、製造、科技、零售)的解決方案顧問與技術探索，將業務需求轉化為 Sales Cloud、Service Cloud、Data 360、Marketing Cloud、Slack 與 Agentforce 的導入方案；負責產業客製化 Demo 與價值故事設計，並打造 AI 賦能的售前顧問流程，協助業務團隊建置客製化展示環境。" },
-            { date: "2023.07 - 2026.06", role: "資料分析師 → 副理 (Data Analyst → Assistant Manager，2026.04 升任)", company: "國泰人壽 (Cathay Life Insurance)", url: "", logo: "/assets/icons/國泰人壽.png", desc: "主導跨部門策略盤點，將 800 萬+ 保戶生態圈需求轉化為三年數位藍圖；主導企業級 CDP 供應商評估與導入(比較 Appier、beBit、Insider、Salesforce)，將行銷活動執行時間從 7 天縮短至 1 天；主導 Celebrus Exit 專案，以 GA4/GCP 重構 30+ 數位平台的數據蒐集架構；協助 2 萬+ 保險業務員，推動線上保單貸款成效成長 20%+。" },
+            { date: "2023.07 - 2026.06", role: "資料分析師(襄理)", company: "國泰人壽 (Cathay Life Insurance)", url: "", logo: "/assets/icons/國泰人壽.png", desc: "主導跨部門策略盤點，將 800 萬+ 保戶生態圈需求轉化為三年數位藍圖；主導企業級 CDP 供應商評估與導入(比較 Appier、beBit、Insider、Salesforce)，將行銷活動執行時間從 7 天縮短至 1 天；主導 Celebrus Exit 專案，以 GA4/GCP 重構 30+ 數位平台的數據蒐集架構；協助 2 萬+ 保險業務員，推動線上保單貸款成效成長 20%+。" },
             {
               date: "2026.01 - 至今",
               role: "合作講師",
               companies: [
                 { name: "nSchool", url: "https://kkschool.kolable.app/", logo: "/assets/icons/nSchool.png" },
-                { name: "無限學院", url: "https://www.ooschool.cc/", logo: "/assets/icons/無限學院.png" }
+                { name: "無限學院", url: "https://www.ooschool.cc/", logo: "/assets/icons/無限學院.png" },
+                { name: "X Platform", url: "https://www.xplatform.world/", logo: "/assets/icons/XPlatform.png" }
               ],
-              desc: "協助學員完成 Python 資料分析、AI 建模、n8n 自動化等專案。"
+              desc: "協助近 100 位學員完成 Python 資料分析、AI 建模、n8n 自動化等專案。"
             },
-            { date: "2026.01 - 2026.05", role: "合作講師", company: "X Platform", url: "https://www.xplatform.world/", logo: "/assets/icons/XPlatform.png", desc: "設計個人化 Python 與 AI 學習路徑，並提供實作專案顧問，帶領 50+ 位付費學員完成端到端專案。" },
             { date: "2024.08 - 2026.05", role: "合作講師", company: "聯成電腦 (菜鳥救星)", url: "https://live.rookiesavior.net/", logo: "/assets/icons/菜鳥救星.png", desc: "開發從零到一的 Tableau 完整課程；累積 300+ 小時教學，培訓超過 150 位業界人士。成功協助多位學員轉職商業分析師(BA)、數據分析師(DA)，並獲得學員們的高滿意度回饋。" },
             { date: "2023.03 - 2023.06", role: "資料分析師 (Data Analyst)", company: "iKala Interactive Media Inc.", url: "", logo: "/assets/icons/iKala.png", desc: "參與 KOL 網紅影響力分析專案，量化行銷效益並優化網紅選擇策略。優化 Tableau 儀表板並實作自動化排程寄送系統，提升整體營運效率 5 倍以上(500%)。" },
             { date: "2023.01", role: "企業專案 | 蝦皮店到店擴張策略", company: "NTUDAC 臺大資料分析社 x 蝦皮 (Shopee Xpress)", url: "", logo: "/assets/icons/Shopee.png", desc: "負責空間智能與策略規劃，拆解物流痛點並追蹤設點關鍵指標。結合爬蟲、分群與地理空間分析建立互動式儀表板，優化整體營運網點評估規劃。" },
@@ -106,17 +106,17 @@ export default async function Experience({ params }: { params: Promise<{ lang: s
           issuedBy: "Issued by",
           exp: [
             { date: "2026.06 - Present", role: "Senior Solution Engineer", company: "Salesforce", url: "https://www.salesforce.com/", logo: "/assets/icons/Salesforce.png", desc: "Supported opportunities across 20+ enterprise accounts spanning financial services, manufacturing, technology, and retail, translating requirements into Salesforce solutions across Sales Cloud, Service Cloud, Data 360, Marketing Cloud, Slack, and Agentforce. Led industry-specific solution design and customer-facing demos, and pioneered AI-powered presales workflows enabling AEs to build customized demo environments." },
-            { date: "2023.07 - 2026.06", role: "Data Analyst → Assistant Manager (Promoted Apr 2026)", company: "Cathay Life Insurance", url: "", logo: "/assets/icons/國泰人壽.png", desc: "Led cross-functional discovery translating requirements for an 8M+ policyholder ecosystem into a 3-year digital roadmap. Led enterprise CDP vendor evaluation and implementation (Appier, beBit, Insider, Salesforce), reducing marketing campaign execution time from 7 days to 1 day. Spearheaded the Celebrus Exit Project re-architecting data collection across 30+ digital platforms with GA4/GCP, and drove 20%+ growth in online policy loan performance." },
+            { date: "2023.07 - 2026.06", role: "Data Analyst (Assistant Manager)", company: "Cathay Life Insurance", url: "", logo: "/assets/icons/國泰人壽.png", desc: "Led cross-functional discovery translating requirements for an 8M+ policyholder ecosystem into a 3-year digital roadmap. Led enterprise CDP vendor evaluation and implementation (Appier, beBit, Insider, Salesforce), reducing marketing campaign execution time from 7 days to 1 day. Spearheaded the Celebrus Exit Project re-architecting data collection across 30+ digital platforms with GA4/GCP, and drove 20%+ growth in online policy loan performance." },
             {
               date: "2026.01 - Present",
               role: "Partner Instructor",
               companies: [
                 { name: "nSchool", url: "https://kkschool.kolable.app/", logo: "/assets/icons/nSchool.png" },
-                { name: "無限學院", url: "https://www.ooschool.cc/", logo: "/assets/icons/無限學院.png" }
+                { name: "無限學院", url: "https://www.ooschool.cc/", logo: "/assets/icons/無限學院.png" },
+                { name: "X Platform", url: "https://www.xplatform.world/", logo: "/assets/icons/XPlatform.png" }
               ],
-              desc: "Assisted students in completing Python data analysis, AI modeling, and n8n automation projects."
+              desc: "Assisted nearly 100 students in completing Python data analysis, AI modeling, and n8n automation projects."
             },
-            { date: "2026.01 - 2026.05", role: "Partner Instructor", company: "X Platform", url: "https://www.xplatform.world/", logo: "/assets/icons/XPlatform.png", desc: "Designed personalized Python and AI learning roadmaps and provided hands-on project consulting, guiding 50+ paid students through end-to-end project implementation." },
             { date: "2024.08 - 2026.05", role: "Partner Instructor", company: "Lien Cheng Computer", url: "https://live.rookiesavior.net/", logo: "/assets/icons/菜鳥救星.png", desc: "Developed end-to-end Tableau curriculum. Accumulated 300+ teaching hours, empowering 150+ professionals to transition into BA/DA roles." },
             { date: "2023.03 - 2023.06", role: "Data Analyst", company: "iKala Interactive Media Inc.", url: "", logo: "/assets/icons/iKala.png", desc: "KOL influence analysis. Optimized Tableau dashboards and implemented automated scheduling systems, achieving a 5x (500%) improvement in operational efficiency." },
             { date: "2023.01", role: "Corporate Project | Shopee Xpress Expansion Strategy", company: "NTUDAC x Shopee Xpress", url: "", logo: "/assets/icons/Shopee.png", desc: "Specialized in Location Intelligence & Strategic Planning. Built interactive dashboards using scraping and geospatial analysis." },
@@ -174,17 +174,17 @@ export default async function Experience({ params }: { params: Promise<{ lang: s
           issuedBy: "発行元",
           exp: [
             { date: "2026.06 - 現在", role: "シニア・ソリューションエンジニア (Senior Solution Engineer)", company: "Salesforce", url: "https://www.salesforce.com/", logo: "/assets/icons/Salesforce.png", desc: "金融・製造・テクノロジー・小売業界にまたがる20社以上のエンタープライズ案件を担当し、Sales Cloud、Service Cloud、Data 360、Marketing Cloud、Slack、Agentforce のソリューション設計を主導。業界特化型デモとAI活用のプリセールス業務を推進。" },
-            { date: "2023.07 - 2026.06", role: "資料分析師 → 副理 (2026年4月昇進)", company: "國泰人壽 (Cathay Life Insurance)", url: "", logo: "/assets/icons/國泰人壽.png", desc: "800万+の保険契約者エコシステムに向けた3年間のデジタルロードマップを策定。CDPベンダー評価・導入(Appier、beBit、Insider、Salesforce)を主導し、マーケティング施行時間を7日から1日に短縮。GA4/GCPによる30以上のプラットフォームのデータ基盤刷新、オンライン保険契約者向けローン実績20%+成長にも貢献。" },
+            { date: "2023.07 - 2026.06", role: "資料分析師(襄理)", company: "國泰人壽 (Cathay Life Insurance)", url: "", logo: "/assets/icons/國泰人壽.png", desc: "800万+の保険契約者エコシステムに向けた3年間のデジタルロードマップを策定。CDPベンダー評価・導入(Appier、beBit、Insider、Salesforce)を主導し、マーケティング施行時間を7日から1日に短縮。GA4/GCPによる30以上のプラットフォームのデータ基盤刷新、オンライン保険契約者向けローン実績20%+成長にも貢献。" },
             {
               date: "2026.01 - 現在",
               role: "パートナー講師",
               companies: [
                 { name: "nSchool", url: "https://kkschool.kolable.app/", logo: "/assets/icons/nSchool.png" },
-                { name: "無限學院", url: "https://www.ooschool.cc/", logo: "/assets/icons/無限學院.png" }
+                { name: "無限學院", url: "https://www.ooschool.cc/", logo: "/assets/icons/無限學院.png" },
+                { name: "X Platform", url: "https://www.xplatform.world/", logo: "/assets/icons/XPlatform.png" }
               ],
-              desc: "受講生のPythonデータ分析、AIモデリング、n8n自動化などのプロジェクトを支援。"
+              desc: "100名近い受講生のPythonデータ分析、AIモデリング、n8n自動化などのプロジェクトを支援。"
             },
-            { date: "2026.01 - 2026.05", role: "パートナー講師", company: "X Platform", url: "https://www.xplatform.world/", logo: "/assets/icons/XPlatform.png", desc: "個人向けPython・AI学習ロードマップを設計し、実践的なプロジェクト指導を提供。50名以上の有料受講生をエンドツーエンドで支援。" },
             { date: "2024.08 - 2026.05", role: "パートナー講師", company: "聯成電腦 (Rookie Savior)", url: "https://live.rookiesavior.net/", logo: "/assets/icons/菜鳥救星.png", desc: "Tableau総合カリキュラムを開発。300時間以上の指導を通じて150名以上の専門家を育成し、BA/DAへの転職を支援。" },
             { date: "2023.03 - 2023.06", role: "データアナリスト", company: "iKala Interactive Media Inc.", url: "", logo: "/assets/icons/iKala.png", desc: "KOLインフルエンサーの影響力分析。Tableauダッシュボードの最適化と自動レポート送信システムを構築し、運用効率を5倍(500%)向上。" },
             { date: "2023.01", role: "企業プロジェクト | 蝦皮 (Shopee) 店舗拡大戦略", company: "NTUDAC x Shopee Xpress", url: "", logo: "/assets/icons/Shopee.png", desc: "位置情報インテリジェンスと戦略立案を担当。スクレイピングと空間分析でダッシュボードを構築。" },
@@ -238,6 +238,7 @@ export default async function Experience({ params }: { params: Promise<{ lang: s
   };
 
   const t = content[lang];
+  const certsList = (t as any).certs || [];
 
   return (
     <section className="experience fade-in" style={{ padding: '0 2rem' }}>
@@ -283,14 +284,9 @@ export default async function Experience({ params }: { params: Promise<{ lang: s
       {/* Certifications Section */}
       <div className="certifications-section" style={{ marginTop: '6rem', marginBottom: '4rem' }}>
         <h2 className="section-title" style={{ fontSize: '2.5rem', marginBottom: '3.5rem' }}>{t.certsTitle}</h2>
-        <div className="certs-grid" style={{ 
-          display: 'grid', 
-          gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', 
-          gap: '2rem',
-          maxWidth: '1000px',
-          margin: '0 auto'
-        }}>
-          {(t as any).certs?.map((cert: any, idx: number) => (
+        <div className="certs-carousel-container">
+          <div className="certs-carousel-track">
+          {[...certsList, ...certsList].map((cert: any, idx: number) => (
             <div key={idx} className="cert-card">
               <div style={{ display: 'flex', alignItems: 'center', gap: '1.2rem' }}>
                 <Image src={cert.logo} alt={`${cert.issuer} Logo`} width={48} height={48} style={{ borderRadius: '10px', objectFit: 'contain', background: 'white', padding: '5px' }} />
@@ -329,6 +325,7 @@ export default async function Experience({ params }: { params: Promise<{ lang: s
               </a>
             </div>
           ))}
+          </div>
         </div>
       </div>
 
@@ -369,11 +366,29 @@ export default async function Experience({ params }: { params: Promise<{ lang: s
              color: var(--accent-color);
              transform: translateY(-2px);
           }
+          .certs-carousel-container {
+             width: 100%;
+             overflow: hidden;
+             position: relative;
+             padding: 1rem 0;
+          }
+          .certs-carousel-track {
+             display: flex;
+             width: max-content;
+             gap: 2rem;
+             animation: certsScroll 36s linear infinite;
+          }
+          @keyframes certsScroll {
+             0% { transform: translateX(0); }
+             100% { transform: translateX(calc(-50% - 1rem)); }
+          }
           .cert-card {
              background: var(--glass-bg);
              border: 1px solid var(--glass-border);
              border-radius: 24px;
              padding: 2rem;
+             width: 320px;
+             flex-shrink: 0;
              display: flex;
              flex-direction: column;
              transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);

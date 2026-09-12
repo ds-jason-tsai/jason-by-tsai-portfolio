@@ -118,14 +118,24 @@ export default async function RootLayout({
                 },
                 {
                   "@type": "Person",
-                  "id": `${baseUrl}/${lang}/#person`,
+                  "@id": `${baseUrl}/${lang}/#person`,
                   "name": "Jason Tsai (蔡傑森)",
                   "alternateName": "Jason Analytics",
                   "jobTitle": "Data / AI / CRM / MarTech Consultant",
                   "description": descriptions[lang as keyof typeof descriptions] || descriptions.zh,
                   "url": baseUrl,
                   "image": `${baseUrl}/profile.jpg`, // Adjust if a standard profile image exists
+                  "worksFor": { "@id": `${baseUrl}/#organization` },
                   "knowsAbout": ["Data Analysis", "AI Modeling", "CRM", "Salesforce", "MarTech", "FinTech", "Tableau", "Python", "SQL", "n8n"]
+                },
+                {
+                  "@type": "Organization",
+                  "@id": `${baseUrl}/#organization`,
+                  "name": "傑森科技",
+                  "alternateName": "Jason Tech",
+                  "url": baseUrl,
+                  "logo": `${baseUrl}/logo.png`,
+                  "founder": { "@id": `${baseUrl}/${lang}/#person` }
                 }
               ]
             })
@@ -238,7 +248,7 @@ export default async function RootLayout({
                  <Link href={`/${lang}/contact?utm_source=internal&utm_medium=button&utm_campaign=footer_nav_contact`} className="footer-link">Contact</Link>
               </div>
               <div style={{ borderTop: '1px solid #222', width: '100%', marginTop: '2rem', paddingTop: '2rem', fontSize: '0.85rem', color: '#555', letterSpacing: '1px' }}>
-                © {new Date().getFullYear()} Jason Tsai. All rights reserved.
+                © {new Date().getFullYear()} 傑森科技 Jason Tech. All rights reserved.
               </div>
             </div>
             <style dangerouslySetInnerHTML={{__html: `

@@ -4,19 +4,24 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import ShareButton from './ShareButton';
+import type { Dictionary } from '../../dictionaries';
 
-export default function MobileNav({ 
-  lang, 
+export default function MobileNav({
+  lang,
   dict
-}: { 
-  lang: string; 
-  dict: any;
+}: {
+  lang: string;
+  dict: Dictionary;
 }) {
   const [isOpen, setIsOpen] = useState(false);
   const pathname = usePathname();
 
-  // Close the menu when the path changes
+  // Close the menu when the path changes. This intentionally sets state
+  // directly in the effect: pathname changes are a navigation from an
+  // external source (the router), not something derivable during render,
+  // so there isn't a "don't need an effect" alternative here.
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setIsOpen(false);
   }, [pathname]);
 

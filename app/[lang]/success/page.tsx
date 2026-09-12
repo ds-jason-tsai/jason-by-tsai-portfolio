@@ -114,6 +114,12 @@ export default async function SuccessPage({
     if (hashKey) {
       const expectedSig = crypto.createHmac('sha256', hashKey).update(`${productId}:${token}`).digest('hex');
       if (expectedSig === signature) {
+        // This is a Server Component: it runs once per request on the
+        // server to produce static HTML and is never re-executed on the
+        // client, so there's no hydration-mismatch or re-render risk from
+        // reading the current time here — it's the correct place to check
+        // token freshness for this payment-link verification.
+        // eslint-disable-next-line react-hooks/purity
         const now = Date.now();
         const tokenTime = parseInt(token, 10);
         // 時效設定：30分鐘 (30 * 60 * 1000 = 1800000 毫秒)
@@ -125,7 +131,7 @@ export default async function SuccessPage({
   }
 
   // 若安全驗證未通過，強制不顯示商品
-  let accessData: any = '';
+  let accessData: (string | { url: string; label?: string })[] | '' = '';
   let reportName = '';
   if (isValid) {
     accessData = productId ? ACCESS_LINKS[productId] : '';

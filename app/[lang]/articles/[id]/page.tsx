@@ -38,6 +38,7 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
         'zh': `https://jason-by-tsai-portfolio.vercel.app/zh/articles/${id}`,
         'en': `https://jason-by-tsai-portfolio.vercel.app/en/articles/${id}`,
         'ja': `https://jason-by-tsai-portfolio.vercel.app/ja/articles/${id}`,
+        'x-default': `https://jason-by-tsai-portfolio.vercel.app/zh/articles/${id}`,
       },
     }
   };

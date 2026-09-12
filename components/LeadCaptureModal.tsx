@@ -94,9 +94,9 @@ export default function LeadCaptureModal({ isOpen, onClose, onSuccess, lang, pro
         const errorData = await resp.json();
         throw new Error(errorData.error || 'Failed to submit');
       }
-    } catch (err: any) {
+    } catch (err: unknown) {
       setStatus('error');
-      setErrorMsg(err.message || t.error);
+      setErrorMsg((err instanceof Error ? err.message : '') || t.error);
     }
   };
 

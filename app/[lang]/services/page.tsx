@@ -90,7 +90,7 @@ export default async function Services({ params }: { params: Promise<{ lang: str
         { icon: <ReportIcon />, name: "客製化分析報告", desc: "以嚴謹的商業思維，轉化冰冷數據為戰略級深入洞察報告。", price: "請聯絡討論" },
         { icon: <ChartIcon />, name: "客製化儀表板", desc: "使用 Tableau、Looker Studio 建立互動式視覺化架構，輔助決策。", price: "請聯絡討論" },
         { icon: <IntegrationIcon />, name: "MarTech 技術導入", desc: "包含 GA4 網站事件追蹤、CDP (如 Celebrus) 顧客數據平台生態組合。", price: "請聯絡討論" },
-        { icon: <EducationIcon />, name: "專案指導", desc: "大學、研究所求職作品集 (Focus: 數據/商業分析師、資料科學、AI)。", price: "1,200 TWD / hr" },
+        { icon: <EducationIcon />, name: "專案指導", desc: "大學、研究所求職作品集 (Focus: 數據/商業分析師、資料科學、AI)。", price: "請聯絡討論" },
       ]
     },
     en: {
@@ -103,7 +103,7 @@ export default async function Services({ params }: { params: Promise<{ lang: str
         { icon: <ReportIcon />, name: "Custom Analytics Reports", desc: "Transforming raw data into strategic, business-driven insight reports.", price: "Contact for Pricing" },
         { icon: <ChartIcon />, name: "Custom Dashboards", desc: "Interactive visualization using Tableau and Looker Studio tailored to your needs.", price: "Contact for Pricing" },
         { icon: <IntegrationIcon />, name: "MarTech Integration", desc: "Implementation of GA4 event tracking and CDP platforms (e.g. Celebrus).", price: "Contact for Pricing" },
-        { icon: <EducationIcon />, name: "Mentorship & Guidance", desc: "Portfolio guidance for college/grad students (DA/BA/DS/AI Engineer).", price: "1,200 TWD / hr" },
+        { icon: <EducationIcon />, name: "Mentorship & Guidance", desc: "Portfolio guidance for college/grad students (DA/BA/DS/AI Engineer).", price: "Contact for Pricing" },
       ]
     },
     ja: {
@@ -116,7 +116,7 @@ export default async function Services({ params }: { params: Promise<{ lang: str
         { icon: <ReportIcon />, name: "カスタム分析レポート", desc: "独自のビジネス思考を活用し、データを戦略レベルの洞察レポートへ変換。", price: "要相談 (Contact)" },
         { icon: <ChartIcon />, name: "カスタムダッシュボード", desc: "Tableau、Looker Studioを使用した対話型ダッシュボード環境の構築。", price: "要相談 (Contact)" },
         { icon: <IntegrationIcon />, name: "MarTech 導入", desc: "GA4イベントトラッキング、CDPなどのマーケティングエコシステム統合。", price: "要相談 (Contact)" },
-        { icon: <EducationIcon />, name: "プロジェクトメンター", desc: "大学生・大学院生向けポートフォリオ作成指導（DA/BA/DS/AIエンジニア）。", price: "1,200 TWD / hr" }
+        { icon: <EducationIcon />, name: "プロジェクトメンター", desc: "大学生・大学院生向けポートフォリオ作成指導（DA/BA/DS/AIエンジニア）。", price: "要相談 (Contact)" }
       ]
     }
   };

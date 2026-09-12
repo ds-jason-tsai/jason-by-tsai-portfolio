@@ -1,378 +1,413 @@
-import Image from "next/image";
-import Link from "next/link";
-import { getDictionary } from '../dictionaries';
-import StatSection from './components/StatSection';
 import type { Metadata } from 'next';
+import Link from 'next/link';
+import Image from 'next/image';
 
 export async function generateMetadata({ params }: { params: Promise<{ lang: string }> }): Promise<Metadata> {
   const lang = (await params).lang;
   const titles = {
-    zh: "傑森數據 Jason Analytics | 數據分析、AI 與 MarTech 專家",
-    en: "Jason Analytics | Data Analysis, AI & MarTech Expert",
-    ja: "ジェイソン・アナリティクス | データ分析・AI・MarTech エキスパート"
+    zh: "職涯經歷｜數據/AI/CRM顧問 Jason Analytics",
+    en: "Experience | Data/AI/CRM Consultant - Jason Analytics",
+    ja: "職務経歴｜データ/AI/CRM コンサルタント Jason Analytics"
   };
   const descriptions = {
-    zh: "傑森數據 Jason Analytics 官方作品集。由數據專家 Jason Tsai 創辦，深耕數據分析與數位轉型。專注於 AI、MarTech 導入與 FinTech 數據專案實務。提供專業商業分析、數據工程顧問服務，並協助企業透過數據驅動決策轉化為實質營收。立即探索數據驅動的無限可能。",
-    en: "Official portfolio of Jason Analytics, led by data expert Jason Tsai. Providing comprehensive solutions in Data Analysis, AI/ML Modeling, MarTech, and Data Engineering to help businesses unlock value through data-driven insights.",
-    ja: "データ専門家 Jason Tsai が主宰する Jason Analytics 公式ポートフォリオ。Python、SQL、Tableau を駆使し、データ分析、AI機械学習モデリング、MarTech 導入、FinTech プロジェクトを包括的に支援します。ビジネスインテリジェンスとデータエンジニアリングを通じて、企業の意思決定を最適化し、価値創出を加速させます。"
+    zh: "探索 Jason Tsai 的顧問職涯實績：從資料分析、CDP 導入到 Salesforce CRM 解決方案設計，橫跨金融、科技與零售產業。具備豐富企業端教學經驗，立即查看完整資歷軌跡與專業證照。",
+    en: "Explore Jason Tsai's consulting career: from data analysis and CDP implementation to Salesforce CRM solution design, across finance, tech, and retail. View the full career timeline and certifications.",
+    ja: "Jason Tsai の職務経歴：データ分析・CDP導入から Salesforce CRM ソリューション設計まで、金融・テクノロジー・小売業界を横断。豊富な企業研修経験も。詳しい経歴と資格をご紹介します。"
   };
-
-  return {
-    title: titles[lang as 'zh'|'en'|'ja'] || titles.zh,
-    description: descriptions[lang as 'zh'|'en'|'ja'] || descriptions.zh,
+  return { 
+    title: titles[lang as 'zh'|'en'|'ja'] || titles['zh'],
+    description: descriptions[lang as 'zh'|'en'|'ja'] || descriptions['zh'],
     alternates: {
-      canonical: `https://jason-by-tsai-portfolio.vercel.app/${lang}`,
+      canonical: `https://jason-by-tsai-portfolio.vercel.app/${lang}/experience`,
       languages: {
-        'zh': 'https://jason-by-tsai-portfolio.vercel.app/zh',
-        'en': 'https://jason-by-tsai-portfolio.vercel.app/en',
-        'ja': 'https://jason-by-tsai-portfolio.vercel.app/ja',
+        'zh': 'https://jason-by-tsai-portfolio.vercel.app/zh/experience',
+        'en': 'https://jason-by-tsai-portfolio.vercel.app/en/experience',
+        'ja': 'https://jason-by-tsai-portfolio.vercel.app/ja/experience',
       },
-    },
+    }
   };
 }
 
-export default async function Home({ params }: { params: Promise<{ lang: string }> }) {
+export default async function Experience({ params }: { params: Promise<{ lang: string }> }) {
   const lang = (await params).lang as 'zh' | 'en' | 'ja';
-  const dict = await getDictionary(lang);
+  const content = {
+    zh: { title: "完整經歷", 
+          desc: "從技術實作到高階戰略規劃，持續創造數據價值。",
+          certsTitle: "專業證照",
+          viewCert: "顯示證照",
+          issuedBy: "頒發單位",
+          exp: [
+            { date: "2026.06 - 至今", role: "資深解決方案工程師 (Senior Solution Engineer)", company: "Salesforce", url: "https://www.salesforce.com/", logo: "/assets/icons/Salesforce.png", desc: "主導 20+ 企業客戶(涵蓋金融、製造、科技、零售)的解決方案顧問與技術探索，將業務需求轉化為 Sales Cloud、Service Cloud、Data 360、Marketing Cloud、Slack 與 Agentforce 的導入方案；負責產業客製化 Demo 與價值故事設計，並打造 AI 賦能的售前顧問流程，協助業務團隊建置客製化展示環境。" },
+            { date: "2023.07 - 2026.06", role: "資料分析師(襄理)", company: "國泰人壽 (Cathay Life Insurance)", url: "", logo: "/assets/icons/國泰人壽.png", desc: "主導跨部門策略盤點，將 800 萬+ 保戶生態圈需求轉化為三年數位藍圖；主導企業級 CDP 供應商評估與導入(比較 Appier、beBit、Insider、Salesforce)，將行銷活動執行時間從 7 天縮短至 1 天；主導 Celebrus Exit 專案，以 GA4/GCP 重構 30+ 數位平台的數據蒐集架構；協助 2 萬+ 保險業務員，推動線上保單貸款成效成長 20%+。" },
+            {
+              date: "2026.01 - 至今",
+              role: "合作講師",
+              companies: [
+                { name: "nSchool", url: "https://kkschool.kolable.app/", logo: "/assets/icons/nSchool.png" },
+                { name: "無限學院", url: "https://www.ooschool.cc/", logo: "/assets/icons/無限學院.png" },
+                { name: "X Platform", url: "https://www.xplatform.world/", logo: "/assets/icons/XPlatform.png" }
+              ],
+              desc: "協助近 100 位學員完成 Python 資料分析、AI 建模、n8n 自動化等專案。"
+            },
+            { date: "2024.08 - 2026.05", role: "合作講師", company: "聯成電腦 (菜鳥救星)", url: "https://live.rookiesavior.net/", logo: "/assets/icons/菜鳥救星.png", desc: "開發從零到一的 Tableau 完整課程；累積 300+ 小時教學，培訓超過 150 位業界人士。成功協助多位學員轉職商業分析師(BA)、數據分析師(DA)，並獲得學員們的高滿意度回饋。" },
+            { date: "2023.03 - 2023.06", role: "資料分析師 (Data Analyst)", company: "iKala Interactive Media Inc.", url: "", logo: "/assets/icons/iKala.png", desc: "參與 KOL 網紅影響力分析專案，量化行銷效益並優化網紅選擇策略。優化 Tableau 儀表板並實作自動化排程寄送系統，提升整體營運效率 5 倍以上(500%)。" },
+            { date: "2023.01", role: "企業專案 | 蝦皮店到店擴張策略", company: "NTUDAC 臺大資料分析社 x 蝦皮 (Shopee Xpress)", url: "", logo: "/assets/icons/Shopee.png", desc: "負責空間智能與策略規劃，拆解物流痛點並追蹤設點關鍵指標。結合爬蟲、分群與地理空間分析建立互動式儀表板，優化整體營運網點評估規劃。" },
+            { date: "2022.10", role: "數發部 Data Station 數據競賽 | 冠軍", company: "家樂福 (Carrefour)", url: "", logo: "/assets/icons/Carrefour.png", desc: "透過分群、關聯式演算法和其他機器學習演算法開發顧客購買預測模型，並深入規劃商品搭售策略。在規模龐大的全國專案競賽中脫穎而出，贏得冠軍與最佳模型獎。" },
+            { date: "2022.01 - 2023.01", role: "資料工程師 (Data Engineer)", company: "零壹科技 (Zero One Technology)", url: "", logo: "/assets/icons/zerone.png", desc: "擔任技術培訓講師，累積 30+ 場次企業授課。為財政部、台灣證交所等高階政經單位提供架構建議與數據視覺化儀表板設計。" },
+            { date: "2021.09 - 2023.06", role: "企業管理碩士 (MBA)", company: "國立陽明交通大學 (NYCU)", url: "", logo: "/assets/icons/陽明交通大學.png", desc: "專注於商業管理、數據決策與營運策略分析等進階領域。" },
+            { date: "2019.09 - 2021.06", role: "企業管理理學士 (BBA)", company: "國立臺北商業大學 (NTUB)", url: "", logo: "/assets/icons/NTUB.png", desc: "奠定商業分析基礎。期間取得 TOEIC 金色證書、JLPT N3 日語檢定、GA 認證以及 ERP 專業證照。" }
+          ],
+          certs: [
+            {
+              title: "Salesforce 平台管理員認證 (Platform Administrator)",
+              issuer: "Salesforce",
+              logo: "/assets/icons/Salesforce.png",
+              url: "https://www.salesforce.com/trailblazer/jason-tsai"
+            },
+            {
+              title: "Marketing Cloud Engagement Foundations",
+              issuer: "Salesforce",
+              logo: "/assets/icons/Salesforce.png",
+              url: "https://www.salesforce.com/trailblazer/jason-tsai"
+            },
+            {
+              title: "Platform Foundations",
+              issuer: "Salesforce",
+              logo: "/assets/icons/Salesforce.png",
+              url: "https://www.salesforce.com/trailblazer/jason-tsai"
+            },
+            {
+              title: "Agentblazer Innovator",
+              issuer: "Salesforce",
+              logo: "/assets/icons/Salesforce.png",
+              url: "https://www.salesforce.com/trailblazer/jason-tsai"
+            },
+            {
+              title: "ChatGPT 教育者基礎認證",
+              issuer: "OpenAI",
+              date: "2025年12月",
+              logo: "/assets/icons/openai_logo.png",
+              url: "https://www.credly.com/badges/95a39d40-346f-4e1a-9090-f8aaf729a1b0/linked_in_profile"
+            },
+            {
+              title: "Gemini 認證教育者",
+              issuer: "Google",
+              date: "2025年9月",
+              id: "160793457",
+              logo: "/assets/icons/google_logo.png",
+              url: "https://edu.google.accredible.com/344a67ad-adf1-4366-9d3e-337dc26e3ff5#acc.QnLCxWVD"
+            }
+          ]
+    },
+    en: { title: "Experience", 
+          desc: "From technical implementations to high-level strategic planning, driving data impact.",
+          certsTitle: "Certifications",
+          viewCert: "View Certificate",
+          issuedBy: "Issued by",
+          exp: [
+            { date: "2026.06 - Present", role: "Senior Solution Engineer", company: "Salesforce", url: "https://www.salesforce.com/", logo: "/assets/icons/Salesforce.png", desc: "Supported opportunities across 20+ enterprise accounts spanning financial services, manufacturing, technology, and retail, translating requirements into Salesforce solutions across Sales Cloud, Service Cloud, Data 360, Marketing Cloud, Slack, and Agentforce. Led industry-specific solution design and customer-facing demos, and pioneered AI-powered presales workflows enabling AEs to build customized demo environments." },
+            { date: "2023.07 - 2026.06", role: "Data Analyst (Assistant Manager)", company: "Cathay Life Insurance", url: "", logo: "/assets/icons/國泰人壽.png", desc: "Led cross-functional discovery translating requirements for an 8M+ policyholder ecosystem into a 3-year digital roadmap. Led enterprise CDP vendor evaluation and implementation (Appier, beBit, Insider, Salesforce), reducing marketing campaign execution time from 7 days to 1 day. Spearheaded the Celebrus Exit Project re-architecting data collection across 30+ digital platforms with GA4/GCP, and drove 20%+ growth in online policy loan performance." },
+            {
+              date: "2026.01 - Present",
+              role: "Partner Instructor",
+              companies: [
+                { name: "nSchool", url: "https://kkschool.kolable.app/", logo: "/assets/icons/nSchool.png" },
+                { name: "無限學院", url: "https://www.ooschool.cc/", logo: "/assets/icons/無限學院.png" },
+                { name: "X Platform", url: "https://www.xplatform.world/", logo: "/assets/icons/XPlatform.png" }
+              ],
+              desc: "Assisted nearly 100 students in completing Python data analysis, AI modeling, and n8n automation projects."
+            },
+            { date: "2024.08 - 2026.05", role: "Partner Instructor", company: "Lien Cheng Computer", url: "https://live.rookiesavior.net/", logo: "/assets/icons/菜鳥救星.png", desc: "Developed end-to-end Tableau curriculum. Accumulated 300+ teaching hours, empowering 150+ professionals to transition into BA/DA roles." },
+            { date: "2023.03 - 2023.06", role: "Data Analyst", company: "iKala Interactive Media Inc.", url: "", logo: "/assets/icons/iKala.png", desc: "KOL influence analysis. Optimized Tableau dashboards and implemented automated scheduling systems, achieving a 5x (500%) improvement in operational efficiency." },
+            { date: "2023.01", role: "Corporate Project | Shopee Xpress Expansion Strategy", company: "NTUDAC x Shopee Xpress", url: "", logo: "/assets/icons/Shopee.png", desc: "Specialized in Location Intelligence & Strategic Planning. Built interactive dashboards using scraping and geospatial analysis." },
+            { date: "2022.10", role: "Data Station Data Competition | Champion", company: "Carrefour", url: "", logo: "/assets/icons/Carrefour.png", desc: "Developed customer purchase prediction models using clustering and associative algorithms. Won National Championship." },
+            { date: "2022.01 - 2023.01", role: "Data Engineer", company: "Zero One Technology", url: "", logo: "/assets/icons/zerone.png", desc: "Served as technical trainer for 30+ corporate sessions. Delivered architecture advice and dashboards for high-level government & financial institutions." },
+            { date: "2021.09 - 2023.06", role: "Master of Business Administration (MBA)", company: "NYCU", url: "", logo: "/assets/icons/陽明交通大學.png", desc: "Focused on business management, data-driven decision making, and operational strategy analysis." },
+            { date: "2019.09 - 2021.06", role: "Bachelor of Business Administration (BBA)", company: "NTUB", url: "", logo: "/assets/icons/NTUB.png", desc: "Obtained TOEIC Gold (860), JLPT N3, GA Certification, and ERP professional licenses." }
+          ],
+          certs: [
+            {
+              title: "Salesforce Certified Platform Administrator",
+              issuer: "Salesforce",
+              logo: "/assets/icons/Salesforce.png",
+              url: "https://www.salesforce.com/trailblazer/jason-tsai"
+            },
+            {
+              title: "Marketing Cloud Engagement Foundations",
+              issuer: "Salesforce",
+              logo: "/assets/icons/Salesforce.png",
+              url: "https://www.salesforce.com/trailblazer/jason-tsai"
+            },
+            {
+              title: "Platform Foundations",
+              issuer: "Salesforce",
+              logo: "/assets/icons/Salesforce.png",
+              url: "https://www.salesforce.com/trailblazer/jason-tsai"
+            },
+            {
+              title: "Agentblazer Innovator",
+              issuer: "Salesforce",
+              logo: "/assets/icons/Salesforce.png",
+              url: "https://www.salesforce.com/trailblazer/jason-tsai"
+            },
+            {
+              title: "ChatGPT Foundations for Teachers",
+              issuer: "OpenAI",
+              date: "Dec 2025",
+              logo: "/assets/icons/openai_logo.png",
+              url: "https://www.credly.com/badges/95a39d40-346f-4e1a-9090-f8aaf729a1b0/linked_in_profile"
+            },
+            {
+              title: "Gemini Certified Educator",
+              issuer: "Google",
+              date: "Sep 2025",
+              id: "160793457",
+              logo: "/assets/icons/google_logo.png",
+              url: "https://edu.google.accredible.com/344a67ad-adf1-4366-9d3e-337dc26e3ff5#acc.QnLCxWVD"
+            }
+          ]
+    },
+    ja: { title: "職歴",
+          desc: "技術的な実装から高度な戦略立案まで、常にデータの価値を最大化し続けています。",
+          certsTitle: "専門資格・認定",
+          viewCert: "認定証を表示",
+          issuedBy: "発行元",
+          exp: [
+            { date: "2026.06 - 現在", role: "シニア・ソリューションエンジニア (Senior Solution Engineer)", company: "Salesforce", url: "https://www.salesforce.com/", logo: "/assets/icons/Salesforce.png", desc: "金融・製造・テクノロジー・小売業界にまたがる20社以上のエンタープライズ案件を担当し、Sales Cloud、Service Cloud、Data 360、Marketing Cloud、Slack、Agentforce のソリューション設計を主導。業界特化型デモとAI活用のプリセールス業務を推進。" },
+            { date: "2023.07 - 2026.06", role: "資料分析師(襄理)", company: "國泰人壽 (Cathay Life Insurance)", url: "", logo: "/assets/icons/國泰人壽.png", desc: "800万+の保険契約者エコシステムに向けた3年間のデジタルロードマップを策定。CDPベンダー評価・導入(Appier、beBit、Insider、Salesforce)を主導し、マーケティング施行時間を7日から1日に短縮。GA4/GCPによる30以上のプラットフォームのデータ基盤刷新、オンライン保険契約者向けローン実績20%+成長にも貢献。" },
+            {
+              date: "2026.01 - 現在",
+              role: "パートナー講師",
+              companies: [
+                { name: "nSchool", url: "https://kkschool.kolable.app/", logo: "/assets/icons/nSchool.png" },
+                { name: "無限學院", url: "https://www.ooschool.cc/", logo: "/assets/icons/無限學院.png" },
+                { name: "X Platform", url: "https://www.xplatform.world/", logo: "/assets/icons/XPlatform.png" }
+              ],
+              desc: "100名近い受講生のPythonデータ分析、AIモデリング、n8n自動化などのプロジェクトを支援。"
+            },
+            { date: "2024.08 - 2026.05", role: "パートナー講師", company: "聯成電腦 (Rookie Savior)", url: "https://live.rookiesavior.net/", logo: "/assets/icons/菜鳥救星.png", desc: "Tableau総合カリキュラムを開発。300時間以上の指導を通じて150名以上の専門家を育成し、BA/DAへの転職を支援。" },
+            { date: "2023.03 - 2023.06", role: "データアナリスト", company: "iKala Interactive Media Inc.", url: "", logo: "/assets/icons/iKala.png", desc: "KOLインフルエンサーの影響力分析。Tableauダッシュボードの最適化と自動レポート送信システムを構築し、運用効率を5倍(500%)向上。" },
+            { date: "2023.01", role: "企業プロジェクト | 蝦皮 (Shopee) 店舗拡大戦略", company: "NTUDAC x Shopee Xpress", url: "", logo: "/assets/icons/Shopee.png", desc: "位置情報インテリジェンスと戦略立案を担当。スクレイピングと空間分析でダッシュボードを構築。" },
+            { date: "2022.10", role: "数位発展部 Data Station データコンテスト | 優勝", company: "Carrefour (家樂福)", url: "", logo: "/assets/icons/Carrefour.png", desc: "クラスタリング、レコメンデーション、およびその他の機械学習アルゴリズムを用いた顧客購買予測モデルの開発。全国コンテストで優勝。" },
+            { date: "2022.01 - 2023.01", role: "データエンジニア", company: "Zero One Technology (零壹科技)", url: "", logo: "/assets/icons/zerone.png", desc: "技術研修講師として30回以上の法人向けセッションを実施。政府機関等にアーキテクチャ提案を提供。" },
+            { date: "2021.09 - 2023.06", role: "経営学修士 (MBA)", company: "国立陽明交通大学 (NYCU)", url: "", logo: "/assets/icons/陽明交通大學.png", desc: "経営管理、データドリブンな意思決定、運営戦略分析を専攻。" },
+            { date: "2019.09 - 2021.06", role: "経営学学士 (BBA)", company: "国立台北商業大学 (NTUB)", url: "", logo: "/assets/icons/NTUB.png", desc: "TOEIC Gold (860)、JLPT N3、GA認定、ERP専門資格を取得。" }
+          ],
+          certs: [
+            {
+              title: "Salesforce 認定プラットフォーム管理者 (Platform Administrator)",
+              issuer: "Salesforce",
+              logo: "/assets/icons/Salesforce.png",
+              url: "https://www.salesforce.com/trailblazer/jason-tsai"
+            },
+            {
+              title: "Marketing Cloud Engagement Foundations",
+              issuer: "Salesforce",
+              logo: "/assets/icons/Salesforce.png",
+              url: "https://www.salesforce.com/trailblazer/jason-tsai"
+            },
+            {
+              title: "Platform Foundations",
+              issuer: "Salesforce",
+              logo: "/assets/icons/Salesforce.png",
+              url: "https://www.salesforce.com/trailblazer/jason-tsai"
+            },
+            {
+              title: "Agentblazer Innovator",
+              issuer: "Salesforce",
+              logo: "/assets/icons/Salesforce.png",
+              url: "https://www.salesforce.com/trailblazer/jason-tsai"
+            },
+            {
+              title: "ChatGPT 教育者向け基礎認證",
+              issuer: "OpenAI",
+              date: "2025年12月",
+              logo: "/assets/icons/openai_logo.png",
+              url: "https://www.credly.com/badges/95a39d40-346f-4e1a-9090-f8aaf729a1b0/linked_in_profile"
+            },
+            {
+              title: "Gemini 認定教育者",
+              issuer: "Google",
+              date: "2025年9月",
+              id: "160793457",
+              logo: "/assets/icons/google_logo.png",
+              url: "https://edu.google.accredible.com/344a67ad-adf1-4366-9d3e-337dc26e3ff5#acc.QnLCxWVD"
+            }
+          ]
+    }
+  };
 
-  const featuredPosts = [
-    {
-      type: 'youtube',
-      label: 'YouTube | 社課分享',
-      title: 'Tableau 0-1：資料分析的必經之路',
-      src: 'https://www.youtube.com/embed/Jci-U6_jRIw',
-      link: 'https://www.youtube.com/watch?v=Jci-U6_jRIw'
-    },
-    {
-      type: 'youtube',
-      label: 'YouTube | 企業研討會',
-      title: '零壹科技：敏捷自助 BI 分析軟體',
-      src: 'https://www.youtube.com/embed/hyVawV_2lkg',
-      link: 'https://www.youtube.com/watch?v=hyVawV_2lkg'
-    },
-    {
-      type: 'facebook',
-      label: 'Facebook | 社課分享',
-      title: '演講精華：臺大資料分析與決策社(NTUDAC)',
-      src: 'https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2FNTUDAC%2Fposts%2Fpfbid024zWGDXEdUVaLHU24TymiTaFHfLQKPx2sMvFk9jxzSVKKaxeUnPDQuFmE2JBjAsTql&show_text=true&width=500',
-      link: 'https://www.facebook.com/NTUDAC/posts/pfbid024zWGDXEdUVaLHU24TymiTaFHfLQKPx2sMvFk9jxzSVKKaxeUnPDQuFmE2JBjAsTql'
-    },
-    {
-      type: 'facebook',
-      label: 'Facebook | 社課分享',
-      title: '課程精華：政大數據分析社(NCCUDA)',
-      src: 'https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fnccuda%2Fposts%2Fpfbid02kL85mfA8yUgVVpoBMrgfQ1QZRzYMyxikdYNrVcEXiArBspxyTskaUduAdN3Uxpsal&show_text=true&width=500',
-      link: 'https://www.facebook.com/nccuda/posts/pfbid02kL85mfA8yUgVVpoBMrgfQ1QZRzYMyxikdYNrVcEXiArBspxyTskaUduAdN3Uxpsal'
-    },
-    {
-      type: 'instagram',
-      label: 'Instagram | 社課分享',
-      title: 'Tableau 視覺化：清大資料科學社(NTHUDSC)',
-      src: 'https://www.instagram.com/p/DOSypNMEicE/embed',
-      link: 'https://www.instagram.com/p/DOSypNMEicE/'
-    },
-    {
-      type: 'facebook',
-      label: 'Facebook | 社課分享',
-      title: '專題演講：臺大行銷管理顧問社(NTUSC)',
-      src: 'https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fntuscmarketingclub%2Fposts%2Fpfbid0zUWYsKdJKRZE1CdAKBGiEq5ciP5kAoiPNi8RqqUTkJkMrM3AyfNfSP4RKKSHoaVtl&show_text=true&width=500',
-      link: 'https://www.facebook.com/ntuscmarketingclub/posts/pfbid0zUWYsKdJKRZE1CdAKBGiEq5ciP5kAoiPNi8RqqUTkJkMrM3AyfNfSP4RKKSHoaVtl'
-    },
-  ];
+  const t = content[lang];
+  const certsList = (t as any).certs || [];
 
   return (
-    <>
-      <section className="hero">
-        <div className="hero-content">
-          <h1 className="hero-title">
-            {dict.home.title}
-            <br />
-            <span className="hero-subtitle">
-              {dict.home.subtitle.split('\n').map((line: string, i: number) => (
-                <span key={i} style={{ display: 'block' }}>
-                  {line}
-                </span>
-              ))}
-            </span>
-          </h1>
-          <p className="hero-desc" style={{ whiteSpace: 'pre-wrap', lineHeight: '1.8' }}>
-            {dict.home.description.split('[mb]').map((part: string, idx: number, arr: string[]) => (
-              <span key={idx}>
-                {part}
-                {idx < arr.length - 1 && <br className="mobile-only-br" />}
-              </span>
-            ))}
-          </p>
-          
-          <div className="hero-btns" style={{ display: 'flex', gap: '1.5rem', marginBottom: '3rem', justifyContent: 'center' }}>
-            <a href={`/${lang}/portfolio?utm_source=internal&utm_medium=button&utm_campaign=home_hero_portfolio`} className="btn-primary" style={{ minWidth: '180px', textAlign: 'center' }}>{dict.home.cta}</a>
-            <a href={`/${lang}/contact?utm_source=internal&utm_medium=button&utm_campaign=home_hero_contact`} className="btn-primary btn-secondary" style={{ minWidth: '180px', textAlign: 'center' }}>
-              {dict.home.contact_cta}
-            </a>
-          </div>
-        </div>
-
-        <div className="hero-image-outer">
-          <div className="hero-image-container" style={{ flexDirection: 'column', alignItems: 'center' }}>
-            <div className="image-wrapper-glow">
-              <Link href={`/${lang}/experience?utm_source=internal&utm_medium=image&utm_campaign=home_profile_image`} style={{ display: 'block', borderRadius: '50%' }}>
-                <Image 
-                  src="/images/Jason6.jpg" 
-                  alt="Jason Tsai" 
-                  width={380} 
-                  height={380} 
-                  className="hero-image"
-                  sizes="(max-width: 768px) 300px, 400px"
-                  style={{ objectPosition: 'center top', objectFit: 'cover', borderRadius: '50%', border: '4px solid rgba(0, 242, 254, 0.3)', position: 'relative', zIndex: 1, transition: 'transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)', cursor: 'pointer' }}
-                  priority
-                />
-              </Link>
-            </div>
-            <h2 className="jason-name" style={{ marginTop: '1.5rem', fontSize: '2.5rem', fontWeight: 800, background: 'var(--accent-grad)', WebkitBackgroundClip: 'text', backgroundClip: 'text', WebkitTextFillColor: 'transparent', letterSpacing: '2px' }}>
-              Jason Tsai
-            </h2>
-            <p className="hero-tagline" style={{ textAlign: 'center', fontSize: '1rem', color: 'var(--text-secondary)', marginTop: '1rem', fontWeight: 500, lineHeight: '1.6', maxWidth: '650px', whiteSpace: 'nowrap' }}>
-               {lang === 'zh' ? '資料分析師、多個數位學習平台 AI 導師、臺清交政等大學社團講師' : (lang === 'ja' ? 'データアナリスト / AI 講師 / トップ大学データ視覚化講師' : 'Data Analyst / AI Instructor / Top Universities Lecturer')}
-            </p>
-
-            <div className="hero-links-integration" style={{ marginTop: '2.5rem', width: '100%', display: 'flex', flexDirection: 'column', gap: '2.5rem', alignItems: 'center' }}>
-              
-              <div className="paid-links-subsection">
-                <p className="social-label" style={{ marginBottom: '0.5rem', color: '#00f2fe', fontSize: '1.1rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '1px' }}>
-                  {(dict.home as any).featured_courses || '專業數據洞察 (付費專區)'}
-                </p>
-                <div className="course-links" style={{ display: 'flex', gap: '2.5rem', justifyContent: 'center' }}>
-                  {(dict.home as any).featured_items?.map((item: any) => (
-                    <a 
-                      key={item.id}
-                      href={`/${lang}/reports?utm_source=internal&utm_medium=button&utm_campaign=home_featured_reports&utm_content=${item.id}#${item.id}`} 
-                      className="social-icon-link"
-                      style={{ fontSize: '1rem', fontWeight: 600 }}
-                    >
-                      {item.label}
-                    </a>
-                  ))}
-                </div>
+    <section className="experience fade-in" style={{ padding: '0 2rem' }}>
+      <h1 className="section-title">{t.title}</h1>
+      <p style={{ textAlign: 'center', marginBottom: '4rem', color: 'var(--text-secondary)' }}>{t.desc}</p>
+      <div className="timeline">
+        {(t.exp as any[]).map((item, idx) => (
+          <div className="timeline-item" key={idx}>
+            <div className="timeline-dot"></div>
+            <div className="timeline-content">
+              <div className="timeline-date">{item.date}</div>
+              <h3 className="timeline-role">{item.role}</h3>
+              <div className="timeline-company" style={{ display: 'flex', alignItems: 'center', gap: '0.8rem', marginTop: '0.5rem', flexWrap: 'wrap' }}>
+                {item.companies ? (
+                  item.companies.map((c: any, cIdx: number) => (
+                    <span key={cIdx} style={{ display: 'inline-flex', alignItems: 'center', gap: '0.4rem' }}>
+                      {c.logo && <Image src={c.logo} alt={`${c.name} Logo`} width={28} height={28} style={{ borderRadius: '4px', objectFit: 'contain', background: 'white', padding: '1px' }} />}
+                      <a href={`${c.url}${c.url.includes('?') ? '&' : '?'}utm_source=jason-by-tsai-portfolio.vercel.app&utm_medium=referral&utm_campaign=exp_timeline_partner`} target="_blank" rel="noopener noreferrer" style={{ color: 'var(--accent-color)', textDecoration: 'none', borderBottom: '1px dotted var(--accent-color)', paddingBottom: '1px' }}>
+                        {c.name}
+                      </a>
+                      {cIdx < item.companies.length - 1 && " / "}
+                    </span>
+                  ))
+                ) : (
+                  <span style={{ display: 'inline-flex', alignItems: 'center', gap: '0.4rem' }}>
+                    {item.logo && <Image src={item.logo} alt={`${item.company} Logo`} width={28} height={28} style={{ borderRadius: '4px', objectFit: 'contain', background: 'white', padding: '1px' }} />}
+                    {item.url ? (
+                      <a href={`${item.url}${item.url.includes('?') ? '&' : '?'}utm_source=jason-by-tsai-portfolio.vercel.app&utm_medium=referral&utm_campaign=exp_timeline_partner`} target="_blank" rel="noopener noreferrer" style={{ color: 'var(--accent-color)', textDecoration: 'none', borderBottom: '1px dotted var(--accent-color)', paddingBottom: '1px' }}>
+                        {item.company}
+                      </a>
+                    ) : (
+                      <span style={{ color: 'var(--accent-color)' }}>{item.company}</span>
+                    )}
+                  </span>
+                )}
               </div>
-
-              <div className="social-links-subsection">
-                <p className="social-label" style={{ marginBottom: '0.5rem', color: '#00f2fe', fontSize: '1.1rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '1px' }}>
-                  {dict.home.social_label || (lang === 'zh' ? '追蹤我的數據洞察' : 'Follow my Data Insights')}
-                </p>
-                <div className="social-icons" style={{ gap: '2.5rem', display: 'flex', justifyContent: 'center' }}>
-                  <a href="https://tw.linkedin.com/in/jasonb0604?utm_source=jason-by-tsai-portfolio.vercel.app&utm_medium=referral&utm_campaign=home_social_linkedin" target="_blank" rel="noopener noreferrer" className="social-icon-link">LinkedIn</a>
-                  <a href="https://www.instagram.com/chartbar0713/?utm_source=jason-by-tsai-portfolio.vercel.app&utm_medium=referral&utm_campaign=home_social_instagram" target="_blank" rel="noopener noreferrer" className="social-icon-link">Instagram</a>
-                  <a href="https://medium.com/@jasonb0604?utm_source=jason-by-tsai-portfolio.vercel.app&utm_medium=referral&utm_campaign=home_social_medium" target="_blank" rel="noopener noreferrer" className="social-icon-link">Medium</a>
-                </div>
-              </div>
-
+              <p className="service-desc" style={{ marginTop: '1rem' }}>{item.desc}</p>
             </div>
           </div>
-        </div>
-      </section>
+        ))}
+      </div>
 
-      <StatSection dict={dict} />
-
-      <section className="featured-media" style={{ padding: '6rem 0', textAlign: 'center', width: '100%', overflow: 'hidden' }}>
-        <h2 className="section-title">{dict.home.featured_highlights || (lang === 'zh' ? '精選特輯' : 'Featured Highlights')}</h2>
-        <div className="carousel-container">
-          <div className="carousel-track">
-            {[...featuredPosts, ...featuredPosts].map((post, index) => (
-              <div className="media-card" key={index}>
-                <div className="media-card-header">
-                  <span className="media-badge" style={{ color: 'var(--accent-color)', fontWeight: '900' }}>{post.label}</span>
-                  <h3 className="media-title">{post.title}</h3>
-                </div>
-                <div className="media-iframe-wrapper" style={{ flex: 1, display: 'flex', alignItems: 'center', background: post.type === 'facebook' || post.type === 'instagram' ? '#fff' : 'transparent', borderRadius: '10px' }}>
-                  <iframe 
-                    src={`${post.src}${post.src.includes('?') ? '&' : '?'}utm_source=jason-by-tsai-portfolio.vercel.app&utm_medium=referral&utm_campaign=home_featured_media_iframe`} 
-                    width="100%" 
-                    height={post.type === 'youtube' ? '315' : '480'} 
-                    style={{ border: 'none', overflow: 'hidden', borderRadius: '10px' }} 
-                    scrolling="no" 
-                    allowFullScreen={true} 
-                    allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
-                    loading="lazy"
-                    title={post.title}
-                  ></iframe>
-                </div>
-                <div style={{ padding: '0 1.5rem 1.5rem' }}>
-                  <a href={`${post.link}${post.link.includes('?') ? '&' : '?'}utm_source=jason-by-tsai-portfolio.vercel.app&utm_medium=referral&utm_campaign=home_featured_media`} target="_blank" rel="noopener noreferrer" className="btn-primary" style={{ display: 'block', fontSize: '0.9rem', padding: '0.8rem' }}>
-                    {lang === 'zh' ? '前往原文觀看' : 'View Original Post'} ↗
-                  </a>
+      {/* Certifications Section */}
+      <div className="certifications-section" style={{ marginTop: '6rem', marginBottom: '4rem' }}>
+        <h2 className="section-title" style={{ fontSize: '2.5rem', marginBottom: '3.5rem' }}>{t.certsTitle}</h2>
+        <div className="certs-carousel-container">
+          <div className="certs-carousel-track">
+          {[...certsList, ...certsList].map((cert: any, idx: number) => (
+            <div key={idx} className="cert-card">
+              <div style={{ display: 'flex', alignItems: 'center', gap: '1.2rem' }}>
+                <Image src={cert.logo} alt={`${cert.issuer} Logo`} width={48} height={48} style={{ borderRadius: '10px', objectFit: 'contain', background: 'white', padding: '5px' }} />
+                <div>
+                  <h3 style={{ fontSize: '1.2rem', marginBottom: '0.2rem', lineHeight: '1.3' }}>{cert.title}</h3>
+                  <p style={{ color: 'var(--accent-color)', fontWeight: '700', fontSize: '0.9rem', textTransform: 'uppercase', letterSpacing: '1px' }}>{cert.issuer}</p>
                 </div>
               </div>
-            ))}
+              <div style={{ color: 'var(--text-secondary)', fontSize: '0.95rem', margin: '1.5rem 0' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.6rem', borderBottom: '1px solid var(--glass-border)', paddingBottom: '0.6rem' }}>
+                  <span>{t.issuedBy}</span>
+                  <span style={{ color: 'var(--text-primary)', fontWeight: '600' }}>{cert.issuer}</span>
+                </div>
+                {cert.date && (
+                  <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: cert.id ? '0.6rem' : '0', borderBottom: cert.id ? '1px solid var(--glass-border)' : 'none', paddingBottom: cert.id ? '0.6rem' : '0' }}>
+                    <span>{lang === 'zh' ? '頒發日期' : (lang === 'ja' ? '発行日' : 'Issued Date')}</span>
+                    <span style={{ color: 'var(--text-primary)', fontWeight: '600' }}>{cert.date}</span>
+                  </div>
+                )}
+                {cert.id && (
+                  <div style={{ display: 'flex', justifyContent: 'space-between', paddingTop: '0.6rem' }}>
+                    <span>{lang === 'zh' ? '證照編號' : (lang === 'ja' ? '認定番号' : 'Credential ID')}</span>
+                    <span style={{ color: 'var(--text-primary)', fontWeight: '600', fontSize: '0.85rem' }}>{cert.id}</span>
+                  </div>
+                )}
+              </div>
+              <a href={cert.url} target="_blank" rel="noopener noreferrer" className="btn-primary" style={{ 
+                textAlign: 'center', 
+                padding: '0.8rem', 
+                fontSize: '0.95rem',
+                marginTop: 'auto',
+                width: '100%',
+                borderRadius: '12px'
+              }}>
+                {t.viewCert}
+              </a>
+            </div>
+          ))}
           </div>
         </div>
-      </section>
+      </div>
 
-      <style dangerouslySetInnerHTML={{__html: `
-        .hero-image:hover {
-          transform: scale(1.08) rotate(1deg);
-          box-shadow: 0 0 40px rgba(0, 242, 254, 0.4);
-          border-color: rgba(0, 242, 254, 0.8) !important;
-        }
-        .social-icon-link {
-          transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), color 0.3s ease;
-          display: inline-block;
-        }
-        .social-icon-link:hover {
-          transform: translateY(-5px) scale(1.1);
-          color: var(--accent-color) !important;
-          text-shadow: 0 0 15px rgba(0, 242, 254, 0.5);
-        }
-        .hero {
-          min-height: auto;
-          padding: 4rem 2rem;
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          justify-content: center;
-          gap: 3rem;
-          text-align: center;
-        }
-        .hero-content {
-          max-width: 950px;
-          width: 100%;
-          z-index: 2;
-        }
-        .hero-title {
-          font-size: 3.5rem;
-          font-weight: 800;
-          line-height: 1.2;
-          margin-bottom: 1.5rem;
-        }
-        .hero-subtitle {
-          background: var(--accent-grad);
-          -webkit-background-clip: text;
-          background-clip: text;
-          -webkit-text-fill-color: transparent;
-        }
-        .hero-desc {
-          font-size: 1.15rem;
-          color: var(--text-secondary);
-          margin-bottom: 2.5rem;
-          max-width: 950px;
-          margin-left: auto;
-          margin-right: auto;
-        }
-        .hero-btns {
-          display: flex;
-          gap: 1.5rem;
-          margin-bottom: 3rem;
-          justify-content: center;
-        }
-        .btn-secondary {
-          background: transparent !important;
-          border: 1px solid var(--accent-color) !important;
-          color: var(--accent-color) !important;
-        }
-        .social-icons {
-          display: flex;
-          gap: 2rem;
-          align-items: center;
-          justify-content: center;
-        }
-        .social-icon-link {
-          color: var(--text-primary);
-          text-decoration: none;
-          font-weight: 600;
-          font-size: 1rem;
-          transition: all 0.3s ease;
-        }
-        .hero-image-outer {
-          position: relative;
-          width: 100%;
-          max-width: 1200px;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          margin-top: 2rem;
-          overflow: visible;
-          min-height: 520px;
-        }
-        @media (max-width: 768px) {
-          .hero-image-outer { min-height: 350px; }
-        }
-        .hero-image-container {
-          display: flex;
-          justify-content: center;
-          position: relative;
-          z-index: 10;
-        }
-        .image-wrapper-glow {
-          position: relative;
-          padding: 10px;
-          border-radius: 50%;
-        }
-        .image-wrapper-glow::after {
-          content: '';
-          position: absolute;
-          inset: -10px;
-          border-radius: 50%;
-          background: var(--accent-grad);
-          opacity: 0.15;
-          filter: blur(20px);
-          z-index: -1;
-        }
-        .carousel-container {
-          width: 100%;
-          overflow: hidden;
-          position: relative;
-          padding: 2rem 0;
-        }
-        .carousel-track {
-          display: flex;
-          width: max-content;
-          gap: 2.5rem;
-          animation: scroll 80s linear infinite;
-        }
-        .media-card {
-          width: 500px;
-          flex-shrink: 0;
-          background: var(--glass-bg);
-          padding: 1.5rem;
-          border-radius: 20px;
-          border: 1px solid var(--glass-border);
-          transition: transform 0.3s ease, border-color 0.3s ease;
-          display: flex;
-          flex-direction: column;
-          gap: 1rem;
-        }
-        @keyframes scroll {
-          0% { transform: translateX(0); }
-          100% { transform: translateX(calc(-50% - 1.25rem)); }
-        }
-        
-        .media-title {
-          font-size: 1.2rem;
-          min-height: 3rem; /* Force two lines worth of space to prevent layout shift */
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          text-align: center;
-        }
-
-        .mobile-only-br { display: none; }
-
-        @media (max-width: 768px) {
-          .hero { padding: 4rem 0.5rem; }
-          .hero-title { font-size: 2.1rem !important; line-height: 1.35; word-break: break-word; }
-          .hero-tagline { white-space: normal !important; font-size: 0.9rem !important; }
-          .hero-subtitle { font-size: 1.5rem !important; margin-top: 0.5rem; display: block; line-height: 1.4; }
-          .hero-desc { padding: 0; font-size: 0.95rem !important; }
-          .hero-btns { flex-direction: column; align-items: center; gap: 1rem !important; }
-          .btn-primary { width: 100%; max-width: 280px; }
-          .mobile-only-br { display: block; }
-          .media-card { width: calc(100vw - 40px); max-width: 400px; }
-          .jason-name { font-size: 2rem !important; }
-        }
-        @media (max-width: 480px) {
-          .hero-title { font-size: 1.6rem !important; }
-          .jason-name { font-size: 1.8rem !important; }
-        }
-      `}}/>
-    </>
+      <div className="trusted-by-section" style={{ marginTop: '5rem', marginBottom: '4rem', textAlign: 'center' }}>
+        <h3 style={{ fontSize: '1.1rem', color: 'var(--text-secondary)', marginBottom: '3rem', textTransform: 'uppercase', letterSpacing: '2px' }}>
+           Partner Platforms & Multi-Brand Collaboration
+        </h3>
+        <div style={{ display: 'flex', gap: '3rem', justifyContent: 'center', flexWrap: 'wrap', alignItems: 'center', maxWidth: '900px', margin: '0 auto' }}>
+          <a href="https://kkschool.kolable.app/?utm_source=jason-by-tsai-portfolio.vercel.app&utm_medium=referral&utm_campaign=exp_footer_partner" target="_blank" rel="noopener follow" className="partner-logo">
+             <Image src="/assets/icons/nSchool.png" alt="nSchool Logo - Data Analysis & AI Education Partner" width={24} height={24} style={{ marginRight: '8px', borderRadius: '4px', background: 'transparent' }} /> nSchool
+          </a>
+          <a href="https://www.xplatform.world/?utm_source=jason-by-tsai-portfolio.vercel.app&utm_medium=referral&utm_campaign=exp_footer_partner" target="_blank" rel="noopener follow" className="partner-logo">
+             <Image src="/assets/icons/XPlatform.png" alt="X Platform Logo - Global Web3 Collaboration" width={24} height={24} style={{ marginRight: '8px', borderRadius: '4px', background: 'transparent' }} /> X Platform
+          </a>
+          <a href="https://www.ooschool.cc/?utm_source=jason-by-tsai-portfolio.vercel.app&utm_medium=referral&utm_campaign=exp_footer_partner" target="_blank" rel="noopener follow" className="partner-logo">
+             <Image src="/assets/icons/無限學院.png" alt="OOSchool (無限學院) Logo - Professional Skills Training" width={24} height={24} style={{ marginRight: '8px', borderRadius: '4px', background: 'transparent' }} /> 無限學院
+          </a>
+          <a href={`https://live.rookiesavior.net/?utm_source=jason-by-tsai-portfolio.vercel.app&utm_medium=referral&utm_campaign=exp_footer_partner`} target="_blank" rel="noopener follow" className="partner-logo">
+             <Image src="/assets/icons/菜鳥救星.png" alt="Rookie Savior (菜鳥救星) Logo - IT Career Training" width={24} height={24} style={{ marginRight: '8px', borderRadius: '4px', background: 'transparent' }} />
+             {lang === 'zh' ? '聯成電腦(菜鳥救星)' : (lang === 'ja' ? '聯成電腦' : 'Lien Cheng (Rookie Savior)')}
+          </a>
+        </div>
+        <style dangerouslySetInnerHTML={{__html: `
+          .partner-logo {
+             font-size: 1.4rem;
+             font-weight: 900;
+             color: #fff;
+             opacity: 0.5;
+             text-decoration: none;
+             transition: all 0.3s ease;
+             letter-spacing: 1px;
+             font-family: var(--font-geist-sans), sans-serif;
+             display: flex;
+             align-items: center;
+          }
+          .partner-logo:hover {
+             opacity: 1;
+             color: var(--accent-color);
+             transform: translateY(-2px);
+          }
+          .certs-carousel-container {
+             width: 100%;
+             overflow: hidden;
+             position: relative;
+             padding: 1rem 0;
+          }
+          .certs-carousel-track {
+             display: flex;
+             width: max-content;
+             gap: 2rem;
+             animation: certsScroll 36s linear infinite;
+          }
+          @keyframes certsScroll {
+             0% { transform: translateX(0); }
+             100% { transform: translateX(calc(-50% - 1rem)); }
+          }
+          .cert-card {
+             background: var(--glass-bg);
+             border: 1px solid var(--glass-border);
+             border-radius: 24px;
+             padding: 2rem;
+             width: 320px;
+             flex-shrink: 0;
+             display: flex;
+             flex-direction: column;
+             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+          }
+          .cert-card:hover {
+             transform: translateY(-10px) scale(1.02);
+             border-color: var(--accent-color);
+             box-shadow: 0 20px 40px rgba(0, 242, 254, 0.1);
+          }
+          @media (max-width: 768px) {
+            .certs-grid {
+              grid-template-columns: 1fr !important;
+            }
+            .cert-card {
+              padding: 1.5rem;
+            }
+          }
+        `}} />
+      </div>
+    </section>
   );
 }

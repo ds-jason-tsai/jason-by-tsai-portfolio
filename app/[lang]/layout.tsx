@@ -20,15 +20,15 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
   const baseUrl = 'https://jason-by-tsai-portfolio.vercel.app';
   
   const titles = {
-    zh: "傑森數據 Jason Analytics | 資料分析教學、商業儀表板與 MarTech 轉型專家",
-    en: "Jason Analytics | Data Analysis Teaching, Business Dashboards & MarTech Consultant",
-    ja: "ジェイソン・アナリティクス | データ分析教育、ビジネスダッシュボード、MarTech 導入エキスパート"
+    zh: "傑森數據 Jason Analytics｜數據 × AI × CRM 顧問",
+    en: "Jason Analytics | Data, AI & CRM Consultant",
+    ja: "ジェイソン・アナリティクス｜データ×AI×CRM コンサルタント"
   };
 
   const descriptions = {
-    zh: "傑森數據 Jason Analytics 官方作品集。由數據專家 Jason Tsai 創立，提供專業資料分析教學、客製商業報告與各類 BI 儀表板建置、作品集與專案深度指導，以及 MarTech 數位行銷科技與自動化技術導入解決方案。致力於協助個人與企業從海量數據中挖掘最高商業價值，透過數據驅動決策提升整體營運效率與競爭力。",
-    en: "Official portfolio of Jason Analytics by Jason Tsai. We provide professional Data Analysis teaching, customized business reports and BI dashboard construction, in-depth portfolio/project guidance, and MarTech digital marketing automation solutions. We empower individuals and businesses to uncover maximum value from data and improve operational efficiency through data-driven decisions.",
-    ja: "データ専門家 Jason Tsai が率いる Jason Analytics の公式ポートフォリオ。高度なデータ分析教育、カスタムビジネスレポート、BIダッシュボード構築、ポートフォリオ・プロジェクト指導、MarTech 導入、自動化ソリューションを包括的に提供します。企業のデータを価値あるインサイトに変え、データ駆動型の意思決定を通じて成長と競争力強化を支援します。"
+    zh: "傑森數據 Jason Analytics 由 Jason Tsai 創辦，具備金融、科技與零售產業顧問實戰經驗，提供數據/AI 顧問、CRM 與 MarTech 系統導入(Salesforce)、客製商業報告與企業教學等服務，協助企業將數據與系統轉化為實質商業成長。",
+    en: "Jason Analytics, founded by Jason Tsai, offers Data/AI consulting, CRM & MarTech implementation (Salesforce), custom business reporting, and corporate training — turning data and systems into real business growth across finance, tech, and retail.",
+    ja: "Jason Tsai が創業した Jason Analytics は、金融・テクノロジー・小売業界での実務経験を活かし、データ/AI コンサルティング、CRM・MarTech 導入(Salesforce)、カスタムレポート、企業研修を提供し、データとシステムを実質的な事業成長へと繋げます。"
   };
 
   return {
@@ -45,17 +45,6 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
         'ja': `${baseUrl}/ja`,
         'x-default': `${baseUrl}/zh`,
       },
-    },
-    icons: {
-      icon: [
-        { url: '/logo.png', sizes: '32x32', type: 'image/png' },
-        { url: '/logo.png', sizes: '192x192', type: 'image/png' },
-        { url: '/logo.png', sizes: '512x512', type: 'image/png' },
-      ],
-      shortcut: '/logo.png',
-      apple: [
-        { url: '/logo.png', sizes: '180x180', type: 'image/png' },
-      ],
     },
   };
 }
@@ -78,9 +67,9 @@ export default async function RootLayout({
   const baseUrl = 'https://jason-by-tsai-portfolio.vercel.app';
   
   const descriptions = {
-    zh: "傑森數據 Jason Analytics 官方作品集。由數據專家 Jason Tsai 創立，提供專業資料分析教學、客製商業報告與各類 BI 儀表板建置、作品集與專案深度指導，以及 MarTech 數位行銷科技與自動化技術導入解決方案。致力於協助個人與企業從海量數據中挖掘最高商業價值。",
-    en: "Official portfolio of Jason Analytics by Jason Tsai. Providing professional Data Analysis teaching, customized BI dashboards, project guidance, and MarTech automation solutions to unlock maximum value from data.",
-    ja: "データ専門家 Jason Tsai が率いる Jason Analytics の公式ポートフォリオ。高度なデータ分析教育、カスタム BI ダッシュボード構築、プロジェクト指導、MarTech 導入ソリューションを提供し、データの価値を最大化します。"
+    zh: "傑森數據 Jason Analytics 由 Jason Tsai 創辦，具備金融、科技與零售產業顧問實戰經驗，提供數據/AI 顧問、CRM 與 MarTech 系統導入(Salesforce)、客製商業報告與企業教學等服務，協助企業將數據與系統轉化為實質商業成長。",
+    en: "Jason Analytics, founded by Jason Tsai, offers Data/AI consulting, CRM & MarTech implementation (Salesforce), custom business reporting, and corporate training — turning data and systems into real business growth across finance, tech, and retail.",
+    ja: "Jason Tsai が創業した Jason Analytics は、金融・テクノロジー・小売業界での実務経験を活かし、データ/AI コンサルティング、CRM・MarTech 導入(Salesforce)、カスタムレポート、企業研修を提供し、データとシステムを実質的な事業成長へと繋げます。"
   };
 
   return (
@@ -95,7 +84,6 @@ export default async function RootLayout({
         <link rel="dns-prefetch" href="https://www.youtube.com" />
         <link rel="dns-prefetch" href="https://www.facebook.com" />
         <link rel="dns-prefetch" href="https://www.instagram.com" />
-        <link rel="icon" href="/logo.png" sizes="any" />
 
         <style dangerouslySetInnerHTML={{ __html: `
           .mobile-drawer {
@@ -130,14 +118,24 @@ export default async function RootLayout({
                 },
                 {
                   "@type": "Person",
-                  "id": `${baseUrl}/${lang}/#person`,
+                  "@id": `${baseUrl}/${lang}/#person`,
                   "name": "Jason Tsai (蔡傑森)",
                   "alternateName": "Jason Analytics",
-                  "jobTitle": "Data Analyst & AI/MarTech Consultant",
+                  "jobTitle": "Data / AI / CRM / MarTech Consultant",
                   "description": descriptions[lang as keyof typeof descriptions] || descriptions.zh,
                   "url": baseUrl,
                   "image": `${baseUrl}/profile.jpg`, // Adjust if a standard profile image exists
-                  "knowsAbout": ["Data Analysis", "AI Modeling", "MarTech", "FinTech", "Tableau", "Python", "SQL", "n8n"]
+                  "worksFor": { "@id": `${baseUrl}/#organization` },
+                  "knowsAbout": ["Data Analysis", "AI Modeling", "CRM", "Salesforce", "MarTech", "FinTech", "Tableau", "Python", "SQL", "n8n"]
+                },
+                {
+                  "@type": "Organization",
+                  "@id": `${baseUrl}/#organization`,
+                  "name": "傑森科技",
+                  "alternateName": "Jason Tech",
+                  "url": baseUrl,
+                  "logo": `${baseUrl}/logo.png`,
+                  "founder": { "@id": `${baseUrl}/${lang}/#person` }
                 }
               ]
             })
@@ -250,7 +248,7 @@ export default async function RootLayout({
                  <Link href={`/${lang}/contact?utm_source=internal&utm_medium=button&utm_campaign=footer_nav_contact`} className="footer-link">Contact</Link>
               </div>
               <div style={{ borderTop: '1px solid #222', width: '100%', marginTop: '2rem', paddingTop: '2rem', fontSize: '0.85rem', color: '#555', letterSpacing: '1px' }}>
-                © {new Date().getFullYear()} Jason Tsai. All rights reserved.
+                © {new Date().getFullYear()} 傑森科技 Jason Tech. All rights reserved.
               </div>
             </div>
             <style dangerouslySetInnerHTML={{__html: `

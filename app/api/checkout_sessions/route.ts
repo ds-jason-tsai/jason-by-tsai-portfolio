@@ -10,16 +10,6 @@ import crypto from 'crypto';
 const ECPAY_PROD_URL  = 'https://payment.ecpay.com.tw/Cashier/AioCheckOut/V5';
 const ECPAY_STAGE_URL = 'https://payment-stage.ecpay.com.tw/Cashier/AioCheckOut/V5';
 
-const REPORT_CATALOG: Record<string, { name: string; price: number }> = {
-  salesforce_se: { name: 'Salesforce SE Pitch', price: 498 },
-  notebooklm_series: { name: 'NotebookLM Guide', price: 898 },
-  notebooklm_ja_learning: { name: 'NotebookLM Japanese', price: 898 },
-  notebooklm_biz_analysis: { name: 'NotebookLM Biz Analysis', price: 898 },
-  notebooklm_chat_summary: { name: 'NotebookLM Chat Summary', price: 898 },
-  notebooklm_finance_stock: { name: 'NotebookLM Finance', price: 898 },
-  insurance_raw_data: { name: 'Insurance Social Raw Data (20yr)', price: 298 },
-};
-
 /** 
  * 絕對校準版 URL Encode 
  * 根據官方開發者文件 (2904) 規範進行代換
@@ -112,8 +102,9 @@ export async function POST(request: Request) {
       params: params
     });
 
-  } catch (err: any) {
-    console.error('[ECPay Final API Error]', err.message);
-    return NextResponse.json({ error: err.message }, { status: 500 });
+  } catch (err: unknown) {
+    const message = err instanceof Error ? err.message : String(err);
+    console.error('[ECPay Final API Error]', message);
+    return NextResponse.json({ error: message }, { status: 500 });
   }
 }

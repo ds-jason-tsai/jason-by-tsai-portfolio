@@ -29,9 +29,6 @@ function generateCheckMacValue(params: Record<string, string>, hashKey: string, 
   return hash.toUpperCase();
 }
 
-/** 請替換成您新的 GAS Web App 網址 */
-const GAS_URL_ECPAY = process.env.GAS_URL_ECPAY || '請將網址設定在環境變數或直接貼在這裡';
-
 export async function POST(request: Request) {
   try {
     // 綠界是以 application/x-www-form-urlencoded 傳送
@@ -84,8 +81,9 @@ export async function POST(request: Request) {
       headers: { 'Content-Type': 'text/plain' }
     });
 
-  } catch (err: any) {
-    console.error('[ECPay Callback API Error]', err.message);
+  } catch (err: unknown) {
+    const message = err instanceof Error ? err.message : String(err);
+    console.error('[ECPay Callback API Error]', message);
     return new NextResponse('0|Internal Server Error', { status: 500 });
   }
 }

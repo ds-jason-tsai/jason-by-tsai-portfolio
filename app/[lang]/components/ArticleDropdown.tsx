@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
+import type { Dictionary } from '../../dictionaries';
 
 interface CategoryData {
   label: string;
@@ -10,12 +11,13 @@ interface CategoryData {
 
 interface ArticleDropdownProps {
   lang: string;
-  dict: any;
+  dict: Dictionary;
   categories: Record<string, CategoryData>;
-  latestArticle: any;
+  // Accepted for caller compatibility; not currently rendered here.
+  latestArticle?: unknown;
 }
 
-export default function ArticleDropdown({ lang, dict, categories, latestArticle }: ArticleDropdownProps) {
+export default function ArticleDropdown({ lang, dict, categories }: ArticleDropdownProps) {
   const [isOpen, setIsOpen] = useState(false);
 
   return (

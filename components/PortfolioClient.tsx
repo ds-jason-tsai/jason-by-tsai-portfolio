@@ -4,7 +4,24 @@ import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import LeadCaptureModal from './LeadCaptureModal';
 
-export default function PortfolioClient({ projects, lang, t }: { projects: any[], lang: string, t: any }) {
+interface PortfolioProject {
+  title: Record<'zh' | 'en' | 'ja', string>;
+  type: number;
+  image?: string;
+  url?: string;
+  description: Record<'zh' | 'en' | 'ja', string>;
+  tags: Record<'zh' | 'en' | 'ja', string[]>;
+}
+
+interface PortfolioText {
+  title: string;
+  desc: string;
+  type: string[];
+  btn: string;
+  pending: string;
+}
+
+export default function PortfolioClient({ projects, lang, t }: { projects: PortfolioProject[], lang: 'zh' | 'en' | 'ja', t: PortfolioText }) {
   const categories = ['all', 'dashboards', 'proposals', 'research'];
   const catLabels: Record<string, string> = {
     'all': lang === 'zh' ? '全部內容' : (lang === 'ja' ? 'すべて' : 'All'),
@@ -18,10 +35,14 @@ export default function PortfolioClient({ projects, lang, t }: { projects: any[]
   const [isLeadModalOpen, setIsLeadModalOpen] = useState(false);
   const [pendingProject, setPendingProject] = useState<{name: string, url: string} | null>(null);
 
+  // Reads the initial category from the URL hash on mount. This genuinely
+  // needs an effect: window.location isn't available during SSR, so the
+  // hash can only be read client-side after mount.
   useEffect(() => {
     if (typeof window !== 'undefined') {
       const hash = window.location.hash.replace('#', '');
       if (['all', 'dashboards', 'proposals', 'research'].includes(hash)) {
+        // eslint-disable-next-line react-hooks/set-state-in-effect
         setActiveCategory(hash);
       }
     }
@@ -148,7 +169,7 @@ export default function PortfolioClient({ projects, lang, t }: { projects: any[]
         {/* Display Wrapper: Shows 2 projects side by side if possible */}
         <div className="portfolio-carousel-wrapper" style={{ minHeight: '600px', display: 'flex', alignItems: 'stretch', justifyContent: 'center', gap: '2rem' }}>
           {currentProj ? (
-             [currentProj, nextProj].filter(Boolean).map((proj, arrIdx) => (
+             [currentProj, nextProj].filter((p): p is PortfolioProject => p !== null).map((proj, arrIdx) => (
               <div className="service-card carousel-card fade-in-fast" key={`${activeCategory}-${currentIndex}-${arrIdx}`} style={{ 
                 display: 'flex', 
                 flexDirection: 'column', 
@@ -185,24 +206,27 @@ export default function PortfolioClient({ projects, lang, t }: { projects: any[]
                   </p>
 
                   <div className="tags-container" style={{ justifyContent: 'flex-start', marginBottom: '1.5rem', flexWrap: 'nowrap', overflow: 'hidden', gap: '0.5rem' }}>
-                    {proj.tags[lang].map((tag: any, tIdx: number) => (
+                    {proj.tags[lang].map((tag: string, tIdx: number) => (
                       <span key={tIdx} className="tag" style={{ border: '1px solid rgba(255,255,255,0.1)', background: 'rgba(0,0,0,0.3)', padding: '0.3rem 0.8rem', fontSize: '0.85rem', borderRadius: '6px' }}>{tag}</span>
                     ))}
                   </div>
 
                   <div style={{ display: 'flex', gap: '1rem', flexDirection: 'column', marginTop: 'auto' }}>
-                    {proj.url ? (
-                      <a 
-                        href={`${proj.url}${proj.url.includes('?') ? '&' : '?'}utm_source=jason-by-tsai-portfolio.vercel.app&utm_medium=referral&utm_campaign=portfolio_card_external`} 
-                        target="_blank" 
-                        rel="noopener noreferrer" 
-                        className="btn-primary" 
+                    {proj.url ? (() => {
+                      const url = proj.url as string;
+                      return (
+                      <a
+                        href={`${url}${url.includes('?') ? '&' : '?'}utm_source=jason-by-tsai-portfolio.vercel.app&utm_medium=referral&utm_campaign=portfolio_card_external`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="btn-primary"
                         style={{ display: 'block', textAlign: 'center', padding: '0.8rem 1rem', fontSize: '1rem' }}
-                        onClick={(e) => handleProjectClick(e, proj.title[lang], proj.url)}
+                        onClick={(e) => handleProjectClick(e, proj.title[lang], url)}
                       >
                         {t.btn}
                       </a>
-                    ) : (
+                      );
+                    })() : (
                       <button className="btn-primary" style={{ display: 'block', width: '100%', textAlign: 'center', padding: '0.8rem 1rem', fontSize: '1rem', opacity: 0.5, cursor: 'not-allowed' }} disabled>
                         {t.pending}
                       </button>

@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect, useRef } from 'react';
+import type { Dictionary } from '../../dictionaries';
 
 interface CounterProps {
   value: number;
@@ -76,7 +77,7 @@ const Counter = ({ value, label, suffix = '', duration = 800 }: CounterProps) =>
   );
 };
 
-export default function StatSection({ dict }: { dict: any }) {
+export default function StatSection({ dict }: { dict: Dictionary }) {
   if (!dict?.home?.stats) return null;
 
   return (

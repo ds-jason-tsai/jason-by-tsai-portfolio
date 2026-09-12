@@ -10,9 +10,9 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
     ja: "データコンサルティング (Services) ・ n8n自動化 ・ MarTech顧問 | ジェイソン・アナリティクス" 
   };
   const descriptions = {
-    zh: "傑森數據 Jason Analytics 提供全方位的數據解決方案。包含專業的 Python 與 SQL 數據工程開發、GA4 與 CDP 客戶數據平台等 MarTech 系統導入，以及高效的 n8n 業務流程自動化顧問服務。透過深度商業分析與 AI 技術的彈性運用，協助企業從零建立數位營運體系並優化專案決策效率。提供具備高度商業價值的數據驅動建議，歡迎立即洽詢各類合作項目。",
+    zh: "傑森數據 Jason Analytics 提供 Python/SQL 數據工程、MarTech 系統導入與 n8n 自動化顧問服務。",
     en: "Jason Analytics offers data solutions: Python/SQL engineering, MarTech, and n8n automation. We use AI to help organizations optimize decision-making. Contact us for expert data-driven strategy and consulting services.",
-    ja: "ジェイソン・アナリティクス (Jason Analytics) が提供するデータコンサルティング (Services)。n8nを用いた業務自動化、GA4やCDPなどのMarTech環境構築、AIを活用したビジネス分析で企業の意思決定を最適化します。データ駆動型の成長戦略を強力に支援します。お問い合わせはこちらまで。"
+    ja: "Jason Analytics は Python/SQL データ開発、MarTech 環境構築、n8n 業務自動化コンサルティングを提供します。"
   };
   return { 
     title: titles[lang as 'zh'|'en'|'ja'] || titles['zh'],
@@ -23,6 +23,7 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
         'zh': 'https://jason-by-tsai-portfolio.vercel.app/zh/services',
         'en': 'https://jason-by-tsai-portfolio.vercel.app/en/services',
         'ja': 'https://jason-by-tsai-portfolio.vercel.app/ja/services',
+        'x-default': 'https://jason-by-tsai-portfolio.vercel.app/zh/services',
       },
     }
   };

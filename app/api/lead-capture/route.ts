@@ -31,7 +31,7 @@ export async function POST(request: Request) {
     let result;
     try {
       result = JSON.parse(responseText);
-    } catch (e) {
+    } catch {
       console.error('[Lead Capture] GAS returned non-JSON response:', responseText.substring(0, 200));
       throw new Error('Invalid response from data store (likely a permission or deployment issue).');
     }
@@ -44,8 +44,9 @@ export async function POST(request: Request) {
       throw new Error(result.message || 'Data store failed to save.');
     }
 
-  } catch (err: any) {
-    console.error('[Lead Capture API Error]', err.message);
-    return NextResponse.json({ error: err.message }, { status: 500 });
+  } catch (err: unknown) {
+    const message = err instanceof Error ? err.message : String(err);
+    console.error('[Lead Capture API Error]', message);
+    return NextResponse.json({ error: message }, { status: 500 });
   }
 }

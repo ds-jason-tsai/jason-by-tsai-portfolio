@@ -17,3 +17,8 @@ const defaultLocale = 'zh'
 // the default locale keeps the page rendering instead of 500ing.
 export const getDictionary = async (locale: 'en' | 'zh' | 'ja') =>
   (dictionaries[locale] ?? dictionaries[defaultLocale])()
+
+// Shared type for the dictionary object returned by getDictionary(),
+// used across components/pages instead of `any` so nav/content lookups
+// stay type-checked. The three locale JSON files share the same shape.
+export type Dictionary = Awaited<ReturnType<typeof getDictionary>>

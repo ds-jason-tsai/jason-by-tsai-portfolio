@@ -175,10 +175,14 @@ export default function ReportsClient({ lang }: { lang: 'zh' | 'en' | 'ja' }) {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
+  // Reads the initial category from the URL hash on mount. This genuinely
+  // needs an effect: window.location isn't available during SSR, so the
+  // hash can only be read client-side after mount.
   useEffect(() => {
     if (typeof window !== 'undefined') {
-      const hash = window.location.hash.replace('#', '') as any;
-      if (['all', 'video', 'report', 'data'].includes(hash)) {
+      const hash = window.location.hash.replace('#', '');
+      if (hash === 'all' || hash === 'video' || hash === 'report' || hash === 'data') {
+        // eslint-disable-next-line react-hooks/set-state-in-effect
         setActiveCategory(hash);
       }
     }
@@ -432,7 +436,7 @@ export default function ReportsClient({ lang }: { lang: 'zh' | 'en' | 'ja' }) {
                       {report.chapters.map((ch, i) => (
                         <div key={i} style={{ display: 'flex', alignItems: 'center', gap: '0.8rem' }}>
                           <div style={{ width: '6px', height: '6px', borderRadius: '50%', background: 'var(--accent-color)', opacity: 0.8 }}></div>
-                          <span style={{ fontSize: '0.85rem', color: 'rgba(255,255,255,0.7)' }}>{(ch as any)[lang]}</span>
+                          <span style={{ fontSize: '0.85rem', color: 'rgba(255,255,255,0.7)' }}>{ch[lang]}</span>
                         </div>
                       ))}
                     </div>

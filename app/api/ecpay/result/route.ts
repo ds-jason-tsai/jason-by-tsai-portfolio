@@ -91,8 +91,9 @@ export async function POST(request: Request) {
             })
           });
           console.log('[ECPay Result] GAS Sync Response Status:', gasRes.status);
-        } catch (err: any) {
-          console.error('[ECPay Result] Error syncing with GAS:', err.message);
+        } catch (err: unknown) {
+          const message = err instanceof Error ? err.message : String(err);
+          console.error('[ECPay Result] Error syncing with GAS:', message);
         }
       }
 
@@ -108,8 +109,9 @@ export async function POST(request: Request) {
       const failedUrl = new URL(`/${lang}/failed?msg=${encodeURIComponent(data.RtnMsg || '授權失敗')}`, request.url);
       return NextResponse.redirect(failedUrl, 303);
     }
-  } catch (err: any) {
-    console.error('[ECPay Result API Error]', err.message);
+  } catch (err: unknown) {
+    const message = err instanceof Error ? err.message : String(err);
+    console.error('[ECPay Result API Error]', message);
     return NextResponse.redirect(new URL(`/${lang}/failed?msg=server_error`, request.url), 303);
   }
 }

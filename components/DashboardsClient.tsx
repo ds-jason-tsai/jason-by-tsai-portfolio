@@ -1,12 +1,11 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { use } from 'react';
 
 // Data definitions for the dashboards
-const getDashboardData = (lang: string) => {
+const getDashboardData = () => {
   const dashboards = [
     {
       id: 'sentiment_forum',
@@ -52,7 +51,7 @@ const getDashboardData = (lang: string) => {
 
 export default function DashboardsClient({ lang }: { lang: 'zh' | 'en' | 'ja' }) {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const dashboards = getDashboardData(lang);
+  const dashboards = getDashboardData();
   const current = dashboards[currentIndex];
 
   const t = {

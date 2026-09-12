@@ -12,9 +12,9 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
     ja: "ジェイソン・アナリティクス｜データ×AI×CRM コンサルタント"
   };
   const descriptions = {
-    zh: "傑森數據 Jason Analytics 由 Jason Tsai 創辦，具備金融、科技與零售產業顧問實戰經驗，提供數據/AI 顧問、CRM 與 MarTech 系統導入(Salesforce)、客製商業報告與企業教學等服務，協助企業將數據與系統轉化為實質商業成長。",
+    zh: "傑森數據 Jason Analytics：提供數據/AI 顧問、CRM 與 MarTech 系統導入，協助企業將數據轉化為實質商業成長。",
     en: "Jason Analytics, founded by Jason Tsai, offers Data/AI consulting, CRM & MarTech implementation (Salesforce), custom business reporting, and corporate training — turning data and systems into real business growth across finance, tech, and retail.",
-    ja: "Jason Tsai が創業した Jason Analytics は、金融・テクノロジー・小売業界での実務経験を活かし、データ/AI コンサルティング、CRM・MarTech 導入(Salesforce)、カスタムレポート、企業研修を提供し、データとシステムを実質的な事業成長へと繋げます。"
+    ja: "Jason Analytics は、データ/AI コンサルティング、CRM・MarTech 導入(Salesforce)を提供し、事業成長へと繋げます。"
   };
 
   return {
@@ -26,6 +26,7 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
         'zh': 'https://jason-by-tsai-portfolio.vercel.app/zh',
         'en': 'https://jason-by-tsai-portfolio.vercel.app/en',
         'ja': 'https://jason-by-tsai-portfolio.vercel.app/ja',
+        'x-default': 'https://jason-by-tsai-portfolio.vercel.app/zh',
       },
     },
   };
@@ -142,10 +143,10 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
               
               <div className="paid-links-subsection">
                 <p className="social-label" style={{ marginBottom: '0.5rem', color: '#00f2fe', fontSize: '1.1rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '1px' }}>
-                  {(dict.home as any).featured_courses || '專業數據洞察 (付費專區)'}
+                  {dict.home.featured_courses || '專業數據洞察 (付費專區)'}
                 </p>
                 <div className="course-links" style={{ display: 'flex', gap: '2.5rem', justifyContent: 'center' }}>
-                  {(dict.home as any).featured_items?.map((item: any) => (
+                  {dict.home.featured_items?.map((item) => (
                     <a 
                       key={item.id}
                       href={`/${lang}/reports?utm_source=internal&utm_medium=button&utm_campaign=home_featured_reports&utm_content=${item.id}#${item.id}`} 

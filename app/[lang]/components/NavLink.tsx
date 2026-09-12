@@ -3,14 +3,15 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
-export default function NavLink({ 
-  href, 
-  lang, 
-  children 
-}: { 
-  href: string; 
-  lang: string; 
-  children: React.ReactNode 
+export default function NavLink({
+  href,
+  children
+}: {
+  href: string;
+  // Accepted for caller symmetry with other nav components; href already
+  // carries the language prefix, so it isn't needed inside NavLink itself.
+  lang?: string;
+  children: React.ReactNode
 }) {
   const pathname = usePathname();
   // Ensure the active detection handles the language prefix properly

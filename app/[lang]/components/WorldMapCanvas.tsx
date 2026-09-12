@@ -45,13 +45,11 @@ const WorldMapCanvas: React.FC = () => {
 
       if (mapImage.complete) {
         const imgAspect = mapImage.width / mapImage.height;
-        const canvasAspect = width / height;
-        let drawW, drawH, drawX, drawY;
 
-        drawW = width;
-        drawH = width / imgAspect;
-        drawX = 0;
-        drawY = (height - drawH) / 2;
+        const drawW = width;
+        const drawH = width / imgAspect;
+        const drawX = 0;
+        const drawY = (height - drawH) / 2;
 
         ctx.globalAlpha = 0.5;
         ctx.drawImage(mapImage, drawX, drawY, drawW, drawH);

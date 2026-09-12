@@ -10,7 +10,6 @@ import Image from 'next/image';
 import NavLink from './components/NavLink';
 import MobileNav from './components/MobileNav';
 import ShareButton from './components/ShareButton';
-import { getLatestArticle } from '@/lib/markdown';
 
 const geistSans = Geist({ variable: "--font-geist-sans", subsets: ["latin"] });
 const geistMono = Geist_Mono({ variable: "--font-geist-mono", subsets: ["latin"] });
@@ -194,9 +193,9 @@ export default async function RootLayout({
                      width: '120px', zIndex: 50, overflow: 'hidden'
                    }}
                 >
-                  <a href="/zh" style={{ display: 'block', padding: '10px', color: '#fff', textDecoration: 'none' }}>繁體中文</a>
-                  <a href="/en" style={{ display: 'block', padding: '10px', color: '#fff', textDecoration: 'none' }}>English</a>
-                  <a href="/ja" style={{ display: 'block', padding: '10px', color: '#fff', textDecoration: 'none' }}>日本語</a>
+                  <Link href="/zh" style={{ display: 'block', padding: '10px', color: '#fff', textDecoration: 'none' }}>繁體中文</Link>
+                  <Link href="/en" style={{ display: 'block', padding: '10px', color: '#fff', textDecoration: 'none' }}>English</Link>
+                  <Link href="/ja" style={{ display: 'block', padding: '10px', color: '#fff', textDecoration: 'none' }}>日本語</Link>
                 </div>
               </details>
 

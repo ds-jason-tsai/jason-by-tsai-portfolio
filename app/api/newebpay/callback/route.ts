@@ -1,4 +1,3 @@
-import { NextResponse } from 'next/server';
 import crypto from 'crypto';
 
 // 藍新金流付款完成後，會 POST 到這個 endpoint (NotifyURL)
@@ -61,8 +60,9 @@ export async function POST(req: Request) {
     // TODO: 可寫入資料庫或發 Email
 
     return new Response('OK', { status: 200, headers: { 'Content-Type': 'text/plain' } });
-  } catch (err: any) {
-    console.error('[NewebPay Callback Error]', err.message);
+  } catch (err: unknown) {
+    const message = err instanceof Error ? err.message : String(err);
+    console.error('[NewebPay Callback Error]', message);
     return new Response('Error', { status: 200 });
   }
 }

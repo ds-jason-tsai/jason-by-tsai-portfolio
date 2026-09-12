@@ -143,13 +143,13 @@ export function getLatestArticle(): ArticleData | null {
   return articles.length > 0 ? articles[0] : null;
 }
 
-export function getAllTagsByLanguage(lang: string = 'zh'): string[] {
+export function getAllTagsByLanguage(lang: 'zh' | 'en' | 'ja' = 'zh'): string[] {
   const articles = getSortedArticlesData();
-  const allTags = articles.flatMap(art => (art.tags as any)[lang] || []);
+  const allTags = articles.flatMap(art => art.tags[lang] || []);
   return Array.from(new Set(allTags));
 }
 
-export function getCategorizedTags(lang: string = 'zh') {
+export function getCategorizedTags(lang: 'zh' | 'en' | 'ja' = 'zh') {
   const tags = getAllTagsByLanguage(lang);
   
   const categories: Record<string, { label: string, tags: string[] }> = {
@@ -171,7 +171,6 @@ export function getCategorizedTags(lang: string = 'zh') {
   const aiOrder = ['AI 趨勢', 'AI 應用', 'AI 治理'];
   const bizOrder = ['成長策略', '數據分析', '產業洞察', '數位轉型', '企業轉型'];
   const techOrder = ['SEO', 'MarTech', 'Python', 'SQL', 'BigQuery', 'Next.js', 'GA4', '技術實務'];
-  const techKeywords = ['Python', 'SQL', 'BigQuery', 'Next.js', 'GA4', '技術實務', 'SEO', 'MarTech'];
 
   // 1. Distribute all discovered tags into categories first
   tags.forEach(tag => {

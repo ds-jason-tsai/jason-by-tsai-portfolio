@@ -1,18 +1,29 @@
 'use client';
 
 import React, { useState, useEffect, useMemo } from 'react';
-import { usePathname } from 'next/navigation';
+import type { ArticleData } from '../lib/markdown';
 
-export default function ArticleListClient({ 
-  articles, 
-  lang, 
-  t, 
-  categories: categoryData 
-}: { 
-  articles: any[], 
-  lang: string, 
-  t: any,
-  categories: any
+interface ArticleListText {
+  readMore: string;
+}
+
+interface ArticleCategory {
+  label: string;
+  tags: string[];
+}
+
+type ArticleCategories = Record<string, ArticleCategory>;
+
+export default function ArticleListClient({
+  articles,
+  lang,
+  t,
+  categories: categoryData
+}: {
+  articles: ArticleData[],
+  lang: 'zh' | 'en' | 'ja',
+  t: ArticleListText,
+  categories: ArticleCategories
 }) {
   // States for search and pagination
   const [activeCategory, setActiveCategory] = useState<string>('all');
@@ -27,12 +38,12 @@ export default function ArticleListClient({
   }, []);
 
   // Category Names mapping (consistent with Mega Menu)
-  const catNames: Record<string, string> = {
+  const catNames: Record<string, string> = useMemo(() => ({
     'all': lang === 'zh' ? '全部內容' : (lang === 'ja' ? 'すべて' : 'All Articles'),
     'ai': categoryData.ai.label,
     'biz': categoryData.biz.label,
     'tech': categoryData.tech.label
-  };
+  }), [lang, categoryData]);
 
   const categoryIds = useMemo(() => Object.keys(catNames), [catNames]);
 
@@ -68,7 +79,7 @@ export default function ArticleListClient({
         } 
         // 2. Check if hash matches a tag within a category (support global tag links)
         else {
-          const foundCatEntry = Object.entries(categoryData).find(([_, data]: any) => 
+          const foundCatEntry = Object.entries(categoryData).find(([, data]) =>
             data.tags.includes(decoded)
           );
           if (foundCatEntry) {

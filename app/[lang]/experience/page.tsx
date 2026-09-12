@@ -1,6 +1,40 @@
 import type { Metadata } from 'next';
-import Link from 'next/link';
 import Image from 'next/image';
+
+interface ExpCompany {
+  name: string;
+  url: string;
+  logo: string;
+}
+
+interface ExpItem {
+  date: string;
+  role: string;
+  company?: string;
+  companies?: ExpCompany[];
+  url?: string;
+  logo?: string;
+  desc: string;
+}
+
+interface CertItem {
+  title: string;
+  issuer: string;
+  date?: string;
+  id?: string;
+  logo: string;
+  url: string;
+}
+
+interface ExperienceContent {
+  title: string;
+  desc: string;
+  certsTitle: string;
+  viewCert: string;
+  issuedBy: string;
+  exp: ExpItem[];
+  certs: CertItem[];
+}
 
 export async function generateMetadata({ params }: { params: Promise<{ lang: string }> }): Promise<Metadata> {
   const lang = (await params).lang;
@@ -23,6 +57,7 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
         'zh': 'https://jason-by-tsai-portfolio.vercel.app/zh/experience',
         'en': 'https://jason-by-tsai-portfolio.vercel.app/en/experience',
         'ja': 'https://jason-by-tsai-portfolio.vercel.app/ja/experience',
+        'x-default': 'https://jason-by-tsai-portfolio.vercel.app/zh/experience',
       },
     }
   };
@@ -30,7 +65,7 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
 
 export default async function Experience({ params }: { params: Promise<{ lang: string }> }) {
   const lang = (await params).lang as 'zh' | 'en' | 'ja';
-  const content = {
+  const content: Record<'zh' | 'en' | 'ja', ExperienceContent> = {
     zh: { title: "完整經歷", 
           desc: "從技術實作到高階戰略規劃，持續創造數據價值。",
           certsTitle: "專業證照",
@@ -238,14 +273,14 @@ export default async function Experience({ params }: { params: Promise<{ lang: s
   };
 
   const t = content[lang];
-  const certsList = (t as any).certs || [];
+  const certsList = t.certs;
 
   return (
     <section className="experience fade-in" style={{ padding: '0 2rem' }}>
       <h1 className="section-title">{t.title}</h1>
       <p style={{ textAlign: 'center', marginBottom: '4rem', color: 'var(--text-secondary)' }}>{t.desc}</p>
       <div className="timeline">
-        {(t.exp as any[]).map((item, idx) => (
+        {t.exp.map((item, idx) => (
           <div className="timeline-item" key={idx}>
             <div className="timeline-dot"></div>
             <div className="timeline-content">
@@ -253,15 +288,18 @@ export default async function Experience({ params }: { params: Promise<{ lang: s
               <h3 className="timeline-role">{item.role}</h3>
               <div className="timeline-company" style={{ display: 'flex', alignItems: 'center', gap: '0.8rem', marginTop: '0.5rem', flexWrap: 'wrap' }}>
                 {item.companies ? (
-                  item.companies.map((c: any, cIdx: number) => (
-                    <span key={cIdx} style={{ display: 'inline-flex', alignItems: 'center', gap: '0.4rem' }}>
-                      {c.logo && <Image src={c.logo} alt={`${c.name} Logo`} width={28} height={28} style={{ borderRadius: '4px', objectFit: 'contain', background: 'white', padding: '1px' }} />}
-                      <a href={`${c.url}${c.url.includes('?') ? '&' : '?'}utm_source=jason-by-tsai-portfolio.vercel.app&utm_medium=referral&utm_campaign=exp_timeline_partner`} target="_blank" rel="noopener noreferrer" style={{ color: 'var(--accent-color)', textDecoration: 'none', borderBottom: '1px dotted var(--accent-color)', paddingBottom: '1px' }}>
-                        {c.name}
-                      </a>
-                      {cIdx < item.companies.length - 1 && " / "}
-                    </span>
-                  ))
+                  (() => {
+                    const companies = item.companies as ExpCompany[];
+                    return companies.map((c: ExpCompany, cIdx: number) => (
+                      <span key={cIdx} style={{ display: 'inline-flex', alignItems: 'center', gap: '0.4rem' }}>
+                        {c.logo && <Image src={c.logo} alt={`${c.name} Logo`} width={28} height={28} style={{ borderRadius: '4px', objectFit: 'contain', background: 'white', padding: '1px' }} />}
+                        <a href={`${c.url}${c.url.includes('?') ? '&' : '?'}utm_source=jason-by-tsai-portfolio.vercel.app&utm_medium=referral&utm_campaign=exp_timeline_partner`} target="_blank" rel="noopener noreferrer" style={{ color: 'var(--accent-color)', textDecoration: 'none', borderBottom: '1px dotted var(--accent-color)', paddingBottom: '1px' }}>
+                          {c.name}
+                        </a>
+                        {cIdx < companies.length - 1 && " / "}
+                      </span>
+                    ));
+                  })()
                 ) : (
                   <span style={{ display: 'inline-flex', alignItems: 'center', gap: '0.4rem' }}>
                     {item.logo && <Image src={item.logo} alt={`${item.company} Logo`} width={28} height={28} style={{ borderRadius: '4px', objectFit: 'contain', background: 'white', padding: '1px' }} />}
@@ -286,7 +324,7 @@ export default async function Experience({ params }: { params: Promise<{ lang: s
         <h2 className="section-title" style={{ fontSize: '2.5rem', marginBottom: '3.5rem' }}>{t.certsTitle}</h2>
         <div className="certs-carousel-container">
           <div className="certs-carousel-track">
-          {[...certsList, ...certsList].map((cert: any, idx: number) => (
+          {[...certsList, ...certsList].map((cert: CertItem, idx: number) => (
             <div key={idx} className="cert-card">
               <div style={{ display: 'flex', alignItems: 'center', gap: '1.2rem' }}>
                 <Image src={cert.logo} alt={`${cert.issuer} Logo`} width={48} height={48} style={{ borderRadius: '10px', objectFit: 'contain', background: 'white', padding: '5px' }} />

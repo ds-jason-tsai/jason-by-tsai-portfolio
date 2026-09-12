@@ -9,11 +9,11 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
     ja: "分析プロジェクト集 | ジェイソン・アナリティクス - Tableau, AI と FinTech の実績" 
   };
   const descriptions = {
-    zh: "傑森數據 Jason Analytics 精選數據分析作品集。由 Jason Tsai 主導，涵蓋 Python 進階數據建模、Tableau 商業動態視覺化儀表板、NotebookLM 與多種 AI 技術應用實績。深耕大型數據工程開發與 MarTech 技術架構，展示多元產業的數據決策透明化與流程自動化成果，協助您深度理解數據在商業實務中的關鍵價值。立即點擊看更多專案詳情。",
+    zh: "傑森數據精選作品集，涵蓋 Python 數據建模、Tableau 視覺化儀表板與 AI 技術應用實績，立即查看專案詳情。",
     en: "Explore Jason Analytics' data portfolio. Projects include Python modeling, Tableau dashboards, and AI applications. We transform raw data into strategic value through advanced engineering and visualization. See our latest analytics cases here.",
-    ja: "Jason Analytics のデータ分析ポートフォリオ。Python データモデリング、動的な Tableau ダッシュボード、AI（NotebookLM）のビジネス活用、大規模データエンジニアリングの実績を公開。多角的な視点から産業データの可視化と自動化を推進し、データがビジネスに不可欠な価値を生むプロセスを紹介します。詳細なプロジェクト一覧はこちら。"
+    ja: "Jason Analytics のポートフォリオ。Python データモデリング、Tableau ダッシュボード、AI 活用実績を公開。"
   };
-  return { 
+  return {
     title: titles[lang as 'zh'|'en'|'ja'] || titles['zh'],
     description: descriptions[lang as 'zh'|'en'|'ja'] || descriptions['zh'],
     alternates: {
@@ -22,6 +22,7 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
         'zh': 'https://jason-by-tsai-portfolio.vercel.app/zh/portfolio',
         'en': 'https://jason-by-tsai-portfolio.vercel.app/en/portfolio',
         'ja': 'https://jason-by-tsai-portfolio.vercel.app/ja/portfolio',
+        'x-default': 'https://jason-by-tsai-portfolio.vercel.app/zh/portfolio',
       },
     }
   };

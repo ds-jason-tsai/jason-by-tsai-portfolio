@@ -13,15 +13,23 @@
     "contact": "連絡"
   },
   "home": {
-    "title": "複雑なデータを直感的な意思決定に変える",
-    "subtitle": "Jason Tsai、あなたのための専屬データアナリスト",
-    "description": "多様な分野での深い実務経験を有しています。データアナリストとしてだけでなく、【データ分析教育】、【カスタムビジネスレポート/ダッシュボード】、【ポートフォリオ・プロジェクト指導】、および【MarTech・自動化技術導入】などの専門サービスを提供し、膨大なデータから最高の価値を引き出します。",
+    "title": "データ×AI×CRM導入で、企業の成長を後押し",
+    "subtitle": "私は Jason Tsai、あなたのデータ/AI/CRMコンサルタント",
+    "description": "金融・テクノロジー・小売業界を横断するコンサルティング実務経験。【データ/AIコンサルティング】、【CRM・MarTech導入(Salesforce)】、【企業研修】などを提供し、データとシステムを実質的な事業成長へと繋げます。",
     "cta": "ポートフォリオを探索",
     "contact_cta": "お問い合わせ",
     "featured_courses": "💎 プレミアム・データ・インサイト",
     "featured_items": [
-      { "icon": "🎬", "label": "動画講座", "id": "video" },
-      { "icon": "📄", "label": "実務レポート", "id": "report" }
+      {
+        "icon": "🎬",
+        "label": "動画講座",
+        "id": "video"
+      },
+      {
+        "icon": "📄",
+        "label": "実務レポート",
+        "id": "report"
+      }
     ],
     "social_label": "データインサイトをフォロー",
     "featured_highlights": "特集ハイライト",

@@ -7,14 +7,14 @@ import type { Metadata } from 'next';
 export async function generateMetadata({ params }: { params: Promise<{ lang: string }> }): Promise<Metadata> {
   const lang = (await params).lang;
   const titles = {
-    zh: "傑森數據 Jason Analytics | 數據分析、AI 與 MarTech 專家",
-    en: "Jason Analytics | Data Analysis, AI & MarTech Expert",
-    ja: "ジェイソン・アナリティクス | データ分析・AI・MarTech エキスパート"
+    zh: "傑森數據 Jason Analytics｜數據 × AI × CRM 顧問",
+    en: "Jason Analytics | Data, AI & CRM Consultant",
+    ja: "ジェイソン・アナリティクス｜データ×AI×CRM コンサルタント"
   };
   const descriptions = {
-    zh: "傑森數據 Jason Analytics 官方作品集。由數據專家 Jason Tsai 創辦，深耕數據分析與數位轉型。專注於 AI、MarTech 導入與 FinTech 數據專案實務。提供專業商業分析、數據工程顧問服務，並協助企業透過數據驅動決策轉化為實質營收。立即探索數據驅動的無限可能。",
-    en: "Official portfolio of Jason Analytics, led by data expert Jason Tsai. Providing comprehensive solutions in Data Analysis, AI/ML Modeling, MarTech, and Data Engineering to help businesses unlock value through data-driven insights.",
-    ja: "データ専門家 Jason Tsai が主宰する Jason Analytics 公式ポートフォリオ。Python、SQL、Tableau を駆使し、データ分析、AI機械学習モデリング、MarTech 導入、FinTech プロジェクトを包括的に支援します。ビジネスインテリジェンスとデータエンジニアリングを通じて、企業の意思決定を最適化し、価値創出を加速させます。"
+    zh: "傑森數據 Jason Analytics 由 Jason Tsai 創辦，具備金融、科技與零售產業顧問實戰經驗，提供數據/AI 顧問、CRM 與 MarTech 系統導入(Salesforce)、客製商業報告與企業教學等服務，協助企業將數據與系統轉化為實質商業成長。",
+    en: "Jason Analytics, founded by Jason Tsai, offers Data/AI consulting, CRM & MarTech implementation (Salesforce), custom business reporting, and corporate training — turning data and systems into real business growth across finance, tech, and retail.",
+    ja: "Jason Tsai が創業した Jason Analytics は、金融・テクノロジー・小売業界での実務経験を活かし、データ/AI コンサルティング、CRM・MarTech 導入(Salesforce)、カスタムレポート、企業研修を提供し、データとシステムを実質的な事業成長へと繋げます。"
   };
 
   return {

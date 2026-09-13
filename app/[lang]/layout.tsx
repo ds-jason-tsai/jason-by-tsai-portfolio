@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
 import "../globals.css";
 import Link from 'next/link';
 import { getDictionary } from '../dictionaries';
@@ -10,9 +9,6 @@ import Image from 'next/image';
 import NavLink from './components/NavLink';
 import MobileNav from './components/MobileNav';
 import ShareButton from './components/ShareButton';
-
-const geistSans = Geist({ variable: "--font-geist-sans", subsets: ["latin"] });
-const geistMono = Geist_Mono({ variable: "--font-geist-mono", subsets: ["latin"] });
 
 export async function generateMetadata({ params }: { params: Promise<{ lang: string }> }): Promise<Metadata> {
   const lang = (await params).lang;
@@ -72,7 +68,7 @@ export default async function RootLayout({
   };
 
   return (
-    <html lang={lang} className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}>
+    <html lang={lang} className="h-full antialiased">
       <head>
         {/* TTFB & Performance Optimization: Resource Hints */}
         <link rel="preconnect" href="https://www.googletagmanager.com" />
@@ -118,7 +114,7 @@ export default async function RootLayout({
                 {
                   "@type": "Person",
                   "@id": `${baseUrl}/${lang}/#person`,
-                  "name": "Jason Tsai (蔡傑森)",
+                  "name": "Jason Tsai (蔡秉諺)",
                   "alternateName": "Jason Analytics",
                   "jobTitle": "Data / AI / CRM / MarTech Consultant",
                   "description": descriptions[lang as keyof typeof descriptions] || descriptions.zh,

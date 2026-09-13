@@ -34,11 +34,13 @@ export function middleware(request: NextRequest) {
   if (pathnameIsMissingLocale) {
     const locale = getLocale(request);
 
-    // e.g. incoming is /products
-    // The new URL is now /zh/products
-    return NextResponse.redirect(
-      new URL(`/${locale}${pathname.startsWith('/') ? '' : '/'}${pathname}`, request.url)
-    );
+    // e.g. incoming is /products -> new URL is /zh/products
+    // Root path is a special case: pathname is "/", so naively appending it
+    // (e.g. `/${locale}${pathname}`) produced "/zh/" with a trailing slash,
+    // which Next.js then had to redirect again to "/zh" (an extra hop).
+    // Building the root case explicitly collapses this to a single redirect.
+    const newPath = pathname === '/' ? `/${locale}` : `/${locale}${pathname}`;
+    return NextResponse.redirect(new URL(newPath, request.url));
   }
 }
 
